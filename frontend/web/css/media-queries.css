@@ -1,0 +1,44 @@
+#dest-type-icons-from{
+	
+	float: right;
+	position: absolute;
+	top: 39px;
+	right: 26px;
+}
+
+#dest-type-icons-from-chaffeur{
+	position: absolute;
+	top: 39px;
+	left: 260px;
+}
+	
+#dest-type-icons-to{
+	
+	float: right;
+	position: absolute;
+	top: 39px;
+	right: 28px;
+}
+
+@media only screen and (min-width: 1200px){
+	.destination-choice input[type="text"]{
+		
+	}
+	#dest-type-icons-from{
+		
+	}
+	
+	#dest-type-icons-from-chaffeur{
+		position: absolute;
+		top: 39px;
+		left: 290px;
+	}
+	
+	#dest-type-icons-to{
+		
+		float: right;
+		position: absolute;
+		top: 39px;
+		right: 70px;
+	}
+}
