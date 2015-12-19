@@ -32,7 +32,17 @@ function initAutocomplete() {
 
 $(document).ready(function (){
 	
-	
+	function rotate(d, elem){
+		$({deg:0}).animate({deg:d}, {
+			duration: 250,
+			step: function(now){
+				elem.css({
+					transform: "rotate(" + now +"deg)"	
+					
+				});
+			}
+		});
+	}
 		
 	//datetimepicker widget
 	
@@ -50,15 +60,26 @@ $(document).ready(function (){
 // 	
 	$.getScript("destination_fields_swap_and_disable.js");
 	
-	$('.car-class-button > ul').hide();
+	$('.car-class').siblings('ul').hide();
 	
-	$('.car-class-button > button').click(function (){
-		$(this).siblings('ul').toggle();
-		if ($(this).siblings('ul').css('display') !== "none"){
-			$(this).parent().siblings().children('ul').css('display','none');
+	$('.car-class > button').click(function(){
+		
+		var i = $(this).find('i');
+		
+		if($(this).parent().siblings('ul').css('display') == 'none'){
+			rotate(90, i);
+		}else {
+			rotate(0, i);
 		}
 		
+		$(this).parent().siblings('ul').toggle('slow');
 		
+		
+		if($(this).parent().siblings('ul').css('display') !== 'none'){
+			$(this).parent().parent().siblings().children('ul').hide('fast');
+			var ii = $(this).parent().parent().siblings().find('i');
+			rotate(0, ii);
+		}
 	});
 	
 
