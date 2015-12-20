@@ -1,5 +1,5 @@
 <?php
-
+use kartik\icons\Icon;
 /* @var $this yii\web\View */
 
 $this->title = 'My Yii Application';
@@ -102,18 +102,19 @@ $this->title = 'My Yii Application';
 	</div>
 </div>
 				
-<div class="container car-class">
+<div class="container">
 			<div class="row">
 				<ul>
-					<li class="car-class-button">
-						<button class="col-xs-12" name="button" type="button">
+					<li>
+						<div class="car-class">
+							<button class="col-xs-12" name="button" type="button">
 				
 							<div class="row">
 								<div class="col-xs-2">
 									ICON
 								</div>
 								<div class="col-xs-3">
-									CLASS
+									ECONOM
 								</div>
 								<div class="col-xs-3">
 									FEATURES
@@ -122,25 +123,27 @@ $this->title = 'My Yii Application';
 									PRICE
 								</div>
 								<div class="col-xs-1">
-									ARROW
+									<i class="fa fa-caret-right fa-3x"></i>
 								</div>
 							</div>
 						</button>
+						</div>
+						
 						<ul>
-							<li>first</li>
-							<li>second</li>
-							<li>third</li>
+							<li><button>first</button></li>
+							<li><button>first</button></li>
 						</ul>
 					</li>
-					<li class="car-class-button">
-						<button class="col-xs-12" name="button" type="button">
+					<li>
+						<div class="car-class">
+							<button class="col-xs-12" name="button" type="button">
 				
 							<div class="row">
 								<div class="col-xs-2">
 									ICON
 								</div>
 								<div class="col-xs-3">
-									CLASS
+									BUSINESS
 								</div>
 								<div class="col-xs-3">
 									FEATURES
@@ -149,14 +152,44 @@ $this->title = 'My Yii Application';
 									PRICE
 								</div>
 								<div class="col-xs-1">
-									ARROW
+									<i class="fa fa-caret-right fa-3x"></i>
 								</div>
 							</div>
 						</button>
+						</div>
+						
 						<ul>
-							<li>first</li>
-							<li>second</li>
-							<li>third</li>
+							<li><button>Lifan 620</button></li>
+							<li><button>Daewoo Gentra</button></li>
+						</ul>
+					</li>
+					<li>
+						<div class="car-class">
+							<button class="col-xs-12" name="button" type="button">
+				
+							<div class="row">
+								<div class="col-xs-2">
+									ICON
+								</div>
+								<div class="col-xs-3">
+									LUXURY
+								</div>
+								<div class="col-xs-3">
+									FEATURES
+								</div>
+								<div class="col-xs-3">
+									PRICE
+								</div>
+								<div class="col-xs-1">
+									<i class="fa fa-caret-right fa-3x"></i>
+								</div>
+							</div>
+						</button>
+						</div>
+						
+						<ul>
+							<li><button>first</button></li>
+							<li><button>first</button></li>
 						</ul>
 					</li>
 				</ul>

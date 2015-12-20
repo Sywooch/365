@@ -1,5 +1,5 @@
 @import url("media-queries.css");
-
+@import url("car-class-choice.css");
 
 html {
 }
@@ -125,30 +125,7 @@ ul:first-child {
 	margin-left: -39px;
 }
 
-.car-class button{
-	border: solid 1px #bdc6be;
-	cursor: pointer;
-	display: block;
-	box-shadow: -1px 3px 8px -2px rgba(0,0,0,0.7);
-	width: 100%;
-	height: 71px;
-	padding-top: 7px;
-	margin-top: 20px;
-	font-size: 12px;
-	color: #697165;
-	
-	-webkit-border-radius: 7px;
-	-moz-border-radius: 7px;
-	border-radius: 7px;
-	
-	background: linear-gradient(to bottom, #f2f2f2 50%, #a6a6a6);
-}
 
-.car-class button:hover{
-	background-position: left bottom;
-	border: solid 1px #d3d9d3;
-	box-shadow: -1px 2px 5px -2px rgba(0,0,0,0.7);
-}
 
 .num-icon{
 	text-align: center;
@@ -200,6 +177,10 @@ ul:first-child {
 
 .notes-field{
 	width: 80%;
+}
+
+.car-class-arrow {
+	color: #697165;
 }
 
 /* passenger form*/
