@@ -33,7 +33,7 @@ class Auto extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['idcat', 'name', 'photo'], 'required'],
+            [['idcat', 'name'], 'required'],
             [['idcat'], 'integer'],
             [['name', 'photo', 'carnumber'], 'string', 'max' => 45]
         ];
