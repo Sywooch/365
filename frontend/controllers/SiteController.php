@@ -211,4 +211,9 @@ class SiteController extends Controller
             'model' => $model,
         ]);
     }
+	
+	//passenger form render
+	public function actionForm(){
+		return $this->render('form');
+	}
 }
