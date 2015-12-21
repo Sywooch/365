@@ -4,6 +4,7 @@ use kartik\icons\Icon;
 
 $this->title = 'My Yii Application';
 ?>
+<?php $lang = 'name_'.Yii::$app->language;?>
 
 <div class="destination-choice-wrap">
 	<div class="container">
@@ -104,7 +105,12 @@ $this->title = 'My Yii Application';
 				
 <div class="container">
 			<div class="row">
-				<ul>
+				<ul>    <?php 
+  $from_Currency = urlencode('AZN');
+  $to_Currency = urlencode('USD');
+  
+  ?>
+                                    <?php foreach($auto as $cats): ?>
 					<li>
 						<div class="car-class">
 							<button class="col-xs-12" name="button" type="button">
@@ -114,13 +120,20 @@ $this->title = 'My Yii Application';
 									ICON
 								</div>
 								<div class="col-xs-3">
-									ECONOM
+									<?= $cats[$lang] ?>
 								</div>
 								<div class="col-xs-3">
 									FEATURES
 								</div>
 								<div class="col-xs-3">
-									PRICE
+                                                                    <?php 
+                                                                    $amount = urldecode($cats['price']);
+                                                                    $get = file_get_contents("https://www.google.com/finance/converter?a=$amount&from=$from_Currency&to=$to_Currency");
+                                                                    $get = explode("<span class=bld>",$get);
+                                                                    $get = explode("</span>",$get[1]);
+                                                                    $converted_amount = preg_replace("/[^0-9\.]/", null, $get[0]);
+                                                                    ?>
+									<?=substr($converted_amount, 0 , -2) ?>
 								</div>
 								<div class="col-xs-1">
 									<i class="fa fa-caret-right fa-3x"></i>
@@ -130,68 +143,12 @@ $this->title = 'My Yii Application';
 						</div>
 						
 						<ul>
-							<li><button>first</button></li>
-							<li><button>first</button></li>
+                                                    <?php foreach($cats['autos'] as $autos): ?>
+							<li><button><?=$autos['name']?></button></li>
+                                                        <?php endforeach ?>
 						</ul>
 					</li>
-					<li>
-						<div class="car-class">
-							<button class="col-xs-12" name="button" type="button">
-				
-							<div class="row">
-								<div class="col-xs-2">
-									ICON
-								</div>
-								<div class="col-xs-3">
-									BUSINESS
-								</div>
-								<div class="col-xs-3">
-									FEATURES
-								</div>
-								<div class="col-xs-3">
-									PRICE
-								</div>
-								<div class="col-xs-1">
-									<i class="fa fa-caret-right fa-3x"></i>
-								</div>
-							</div>
-						</button>
-						</div>
-						
-						<ul>
-							<li><button>Lifan 620</button></li>
-							<li><button>Daewoo Gentra</button></li>
-						</ul>
-					</li>
-					<li>
-						<div class="car-class">
-							<button class="col-xs-12" name="button" type="button">
-				
-							<div class="row">
-								<div class="col-xs-2">
-									ICON
-								</div>
-								<div class="col-xs-3">
-									LUXURY
-								</div>
-								<div class="col-xs-3">
-									FEATURES
-								</div>
-								<div class="col-xs-3">
-									PRICE
-								</div>
-								<div class="col-xs-1">
-									<i class="fa fa-caret-right fa-3x"></i>
-								</div>
-							</div>
-						</button>
-						</div>
-						
-						<ul>
-							<li><button>first</button></li>
-							<li><button>first</button></li>
-						</ul>
-					</li>
+                                        <?php endforeach ?>
 				</ul>
 			</div>
 		</div>
