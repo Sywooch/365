@@ -12,7 +12,8 @@ use yii\web\BadRequestHttpException;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
-
+use common\models\Autocat;
+use common\models\Auto;
 /**
  * Site controller
  */
@@ -73,7 +74,9 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        return $this->render('index');
+        $auto = Autocat::find()->all();
+        
+        return $this->render('index',['auto' => $auto]);
     }
 
     /**
@@ -216,4 +219,6 @@ class SiteController extends Controller
 	public function actionForm(){
 		return $this->render('form');
 	}
+        
+        
 }
