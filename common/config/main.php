@@ -5,6 +5,7 @@ return [
         'cache' => [
             'class' => 'yii\caching\FileCache',
         ],
+        
            /* 'urlManager'=>array(
             'class' => 'yii\web\UrlManager',
             'enablePrettyUrl' => true,
@@ -18,6 +19,9 @@ return [
             ],
 
         )*/
+    ],
+    'params' => [
+        	'icon-framework' => 'fa',
     ],
 ];
 
