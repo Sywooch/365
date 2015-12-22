@@ -1,11 +1,21 @@
 <?php
 return [
     'vendorPath' => dirname(dirname(__DIR__)) . '/vendor',
+    'bootstrap' => ['languagepicker'],
     'components' => [
+         
+        'languagepicker' => [
+        'class' => 'lajax\languagepicker\Component',
+        'languages' => ['az' => 'AZ','en' => 'EN', 'ru' => 'RU'],     // List of available languages
+        'cookieName' => 'language',                     // Name of the cookie.
+        // 'cookieDomain' => 'e-tap.az',                // Domain of the cookie.
+        'expireDays' => 64,                             // The expiration time of the cookie is 64 days.
+           
+       ],
         'cache' => [
             'class' => 'yii\caching\FileCache',
         ],
-           /* 'urlManager'=>array(
+           /* 'urlManager'=>array( 
             'class' => 'yii\web\UrlManager',
             'enablePrettyUrl' => true,
             'showScriptName' => false,
