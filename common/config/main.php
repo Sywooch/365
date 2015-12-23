@@ -15,24 +15,19 @@ return [
         'cache' => [
             'class' => 'yii\caching\FileCache',
         ],
-
-        
-           /* 'urlManager'=>array(
-=======
-           /* 'urlManager'=>array( 
->>>>>>> 7d0ff676cfca147c4f4840ca86f605c4cdaebe6e
+            'urlManager'=>array( 
             'class' => 'yii\web\UrlManager',
             'enablePrettyUrl' => true,
             'showScriptName' => false,
+            
             'rules' => [
                 
                 '<controller:\w+>/<id:\d+>' => '<controller>/view',
                 '<controller:\w+>/<action:\w+>/<id:\d+>' => '<controller>/<action>',
                 '<controller:\w+>/<action:\w+>' => '<controller>/<action>',
-                'module/<module:\w+>/<controller:\w+>/<action:\w+>' => '<module>/<controller>/<action>',
             ],
 
-        )*/
+        )
     ],
     'params' => [
         	'icon-framework' => 'fa',
