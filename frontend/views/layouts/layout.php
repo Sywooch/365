@@ -18,7 +18,7 @@ use kartik\icons\Icon;
 		<script src="scripts/jquery.min.js"></script>
 		<script src="scripts/moment.min.js"></script>
 		<script src="scripts/bootstrap-datetimepicker.min.js"></script>		
-		<script src="scripts/script.js"></script>
+		
 	
 		<?php $this->head() ?>
 	</head>
@@ -29,7 +29,8 @@ use kartik\icons\Icon;
 				<div class="col-md-5">
 					<div class="logo">
 						<h1>Transfer<span>365</span><h1>
-							
+						<img src="css/Flat.png" />
+						<img src="css/l73q8272rg.png" />							
 
 					</div>
 				</div>
@@ -96,6 +97,7 @@ use kartik\icons\Icon;
 		</div>
 		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBB19cyGLWQeSz1amgo9wJN6ZeXlQtHZCU&libraries=places&callback=initAutocomplete"
          async defer></script>
+         <script src="scripts/script.js"></script>
 		<?php $this->endBody() ?>
 	</body>
 </html>
