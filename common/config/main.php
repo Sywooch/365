@@ -15,7 +15,7 @@ return [
         'cache' => [
             'class' => 'yii\caching\FileCache',
         ],
-<<<<<<< HEAD
+
         
            /* 'urlManager'=>array(
 =======
