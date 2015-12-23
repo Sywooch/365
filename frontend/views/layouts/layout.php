@@ -11,14 +11,21 @@ use kartik\icons\Icon;
 		<meta name="viewport" content="width=device-width, 
 			initial-scale=1">
 		
-		<link rel="stylesheet" href="css/bootstrap-datetimepicker.min.css" />
-		<link rel="stylesheet" href="css/bootstrap.min.css" />
-		<link rel="stylesheet" href="css/style.css" />
+		<link rel="stylesheet" href="/css/bootstrap-datetimepicker.min.css" />
+		<link rel="stylesheet" href="/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="/css/style.css" />
 		
+<<<<<<< HEAD
 		<script src="scripts/jquery.min.js"></script>
 		<script src="scripts/moment.min.js"></script>
 		<script src="scripts/bootstrap-datetimepicker.min.js"></script>		
 		
+=======
+		<script src="/scripts/jquery.min.js"></script>
+		<script src="/scripts/moment.min.js"></script>
+		<script src="/scripts/bootstrap-datetimepicker.min.js"></script>		
+		<script src="/scripts/script.js"></script>
+>>>>>>> 09df27d04dd81c7b3c170aa3049863e54143087b
 	
 		<?php $this->head() ?>
 	</head>
@@ -53,7 +60,7 @@ use kartik\icons\Icon;
 			</div>
 			<div class="row">
 				<div class="col-md-12 head-description">
-					Онлайн-бронирование трансфера
+					Онлайн-бронирование трансфера  
 				</div>
 			</div>
 			</div>
