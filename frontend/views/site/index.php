@@ -1,5 +1,8 @@
 <?php
 use kartik\icons\Icon;
+use yii\helpers\Html;
+use yii\helpers\Url;
+use yii\widgets\ActiveForm;
 /* @var $this yii\web\View */
 
 $this->title = 'My Yii Application';
@@ -61,12 +64,16 @@ $this->title = 'My Yii Application';
 							
 							
 						</div>
+                                            
+                                            <?= Html::beginForm(['site/form'], 'get', ['enctype' => 'multipart/form-data']) ?>
 						<div class="transfer">
 							<div class="col-md-5 input-from">
 							<label for="from">
 								<span>From</span>
-								<input type="text" id="pac-input-from" class="controls" name="destination-from" 
-								autofocus=true/>
+								
+                                                                
+                       
+                                                                <?= Html::activeInput('text', $model, 'from', ['id'=>'pac-input-from' ,'class' => 'controls' ,'autofocus' => 'true/']) ?>
 								<div id="dest-type-icons-from" class="dest-type-icons">
 									<i class="fa fa-plane fa-lg"></i>
 									<i class="fa fa-train fa-lg"></i>
@@ -79,8 +86,8 @@ $this->title = 'My Yii Application';
 						<div class="col-md-5 input-to">
 							<label for="to">
 								<span>To</span>
-								<input type="text" id="pac-input-to" class="controls" name="destination-to" 
-								disabled=true/>
+								
+								<?= Html::activeInput('text', $model, 'to', ['id'=>'pac-input-to' ,'class' => 'controls' ,'autofocus' => 'true/', 'disabled' => 'true/']) ?>
 								
 								<div id="dest-type-icons-to" class="dest-type-icons">
 									<i class="fa fa-plane fa-lg"></i>
@@ -91,7 +98,8 @@ $this->title = 'My Yii Application';
 						<div class="col-md-1">
 							<label for="return">
 							return
-							<input type="checkbox" id="return" name="return-check" />
+							
+                                                        
 							</label>
 						</div>
 						</div>
@@ -110,6 +118,7 @@ $this->title = 'My Yii Application';
   $to_Currency = urlencode('USD');
   
   ?>
+                                    
                                     <?php foreach($auto as $cats): ?>
 					<li>
 						<div class="car-class">
@@ -128,10 +137,10 @@ $this->title = 'My Yii Application';
 								<div class="col-xs-3">
                                                                     <?php 
                                                                     $amount = urldecode($cats['price']);
-                                                                    $get = file_get_contents("https://www.google.com/finance/converter?a=$amount&from=$from_Currency&to=$to_Currency");
-                                                                    $get = explode("<span class=bld>",$get);
-                                                                    $get = explode("</span>",$get[1]);
-                                                                    $converted_amount = preg_replace("/[^0-9\.]/", null, $get[0]);
+                                                                    //$get = file_get_contents("https://www.google.com/finance/converter?a=$amount&from=$from_Currency&to=$to_Currency");
+                                                                    //$get = explode("<span class=bld>",$get);
+                                                                    //$get = explode("</span>",$get[1]);
+                                                                    $converted_amount = 5;//preg_replace("/[^0-9\.]/", null, $get[0]);
                                                                     ?>
 									<?=substr($converted_amount, 0 , -2) ?>
 								</div>
@@ -144,11 +153,15 @@ $this->title = 'My Yii Application';
 						
 						<ul>
                                                     <?php foreach($cats['autos'] as $autos): ?>
-							<li><button><?=$autos['name']?></button></li>
+							<?= Html::button($autos['name'], ['name'=>'Sifarish[car]','value'=>$autos['name'], 'type' => 'submit' ]); ?>
+                                                  
+                                                    
+                                                        
                                                         <?php endforeach ?>
 						</ul>
 					</li>
                                         <?php endforeach ?>
 				</ul>
+                            
 			</div>
-		</div>
+		</div><?= Html::endForm() ?>
