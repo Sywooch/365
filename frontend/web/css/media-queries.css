@@ -6,6 +6,11 @@
 	right: 26px;
 }
 
+#swap-icon img{
+	position: relative;
+	top: 7px;
+}
+
 #dest-type-icons-from-chaffeur{
 	position: absolute;
 	top: 39px;
@@ -40,5 +45,11 @@
 		position: absolute;
 		top: 39px;
 		right: 87px;
+	}
+	
+	#swap-icon img{
+		position: inherit;
+		transform: rotate(90deg);
+		top: 0px;
 	}
 }

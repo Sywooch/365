@@ -5,6 +5,7 @@
 		<title>Passenger form for Transfer365</title>
 		<script src="scripts/greeting-sign.js"></script>	
 		<script src="scripts/add-destination.js"></script>
+		<script src="scripts/side-box.js"></script>
 		
 
 	
@@ -47,7 +48,7 @@
 												<!-- Number of options must change according to car class -->
 												<select name="pass-num" id="pass-num" class="cpanel-input">
 													<option value="1">1</option>
-													<option value="1">2</option>
+													<option value="2">2</option>
 												</select>
 											</div>
 										</div>
@@ -59,7 +60,8 @@
 												<label for="chair">Add special child seats</label>
 											</div>
 											<div class="col-md-1">
-												<input type="checkbox" id="chair" class="cpanel-input"/>
+												<input type="checkbox" id="chair" class="cpanel-input"
+												 value="unchecked"/>
 											</div>
 										</div>
 										
@@ -73,26 +75,14 @@
 								<div class="row">
 								<div class="cpanel-item">
 									<div class="col-md-2">
-										<label for="flight_number">Flight number</label>
+										<label for="flight-number">Flight number</label>
 									</div>
 									<div class="col-md-2">
-										<input id="flight_number" type="text" class="cpanel-input"/>	
+										<input id="flight-number" type="text" class="cpanel-input"/>	
 									</div>
 								</div>
 							</div>
-								<div class="row">
-									<div class="cpanel-item">
-									<div class="col-md-2">
-										<label for="flight_terminal">Terminal</label>
-									</div>
-									<div class="col-md-2">
-										<select name="terminal" id="flight_terminal" class="cpanel-input">
-											<option value="value1">Value1</option>
-											<option value="value2">Value2</option>
-										</select>	
-									</div>
-								</div>
-								</div>
+						
 								<div class="row">
 									<div class="cpanel-item">
 									<div class="col-md-2">
@@ -261,7 +251,9 @@
 								Airport and arrival time
 							</div>
 							<div class="fixed-box-section-body">
-								<div class="fb-section-line">Heathrow(London)</div>
+								<div class="fb-section-line">Heathrow(London)
+									<span id="fn-fixed"></span> <!-- flight number -->
+									</div>
 								<div class="fb-section-line">At 14:00</div>
 							</div>
 						</div>
@@ -271,6 +263,7 @@
 							</div>
 							<div class="fixed-box-section-body">
 								<div class="fb-section-line">London</div>
+								<div class="fb-section-line" id="dest_fixed"></div>
 							</div>
 						</div>
 						<div class="fixed-box-section">
@@ -278,10 +271,34 @@
 								Transfer type
 							</div>
 							<div class="fixed-box-section-body">
-								<div class="fb-section-line">Tarrif Economy</div>
+								<div class="fb-section-line">Tarrif <span id="tariff-fixed">Economy</span></div>
 								<div class="fb-section-line">1-4 passengers,up to 3 lagguage places</div>
+								<div class="fb-section-line">Passengers: <span id="pass-num-fixed"></span></div>
+								<div class="fb-section-line" id="chair-side"></div>
 							</div>
 						</div>
+						<div id="contacts-fixed" class="fixed-box-section hide">
+							<div class="fixed-box-section-heading">
+								Contact information
+							</div>
+							<div class="fixed-box-section-body">
+								<div class="fb-section-line">
+									<span id="first-name-fixed"></span>
+									<span id="last-name-fixed"></span>
+								</div>
+								<div class="fb-section-line" id="phone-fixed"></div>
+								<div class="fb-section-line" id="email-fixed"></div>
+							</div>
+						</div>
+						<div id="nfixed" class="fixed-box-section hide">
+							<div class = "fixed-box-section-heading">
+								Notes
+							</div>
+							<div class="fixed-box-section-body" id="notes-fixed">
+								
+							</div>
+						</div>
+						
 					</div>
 					<div class="fixed-box-footer">
 						<div class="fixed-box-heading">
