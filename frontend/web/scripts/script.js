@@ -6,8 +6,7 @@ function initAutocomplete() {
   var inputTo = document.getElementById('pac-input-to');
   var inputFormOrder = document.getElementById('pac-input-order-form');
   var test = document.getElementById("pac-input-test");
-  console.log(test);
-  
+
   var options = {
   
   componentRestrictions: {country: 'az'}
@@ -16,10 +15,7 @@ function initAutocomplete() {
   var searchBoxFrom = new google.maps.places.Autocomplete(inputFrom, options);
   var searchBoxChaffeur = new google.maps.places.Autocomplete(inputFromChaffeur, options);
   var searchBoxTo = new google.maps.places.Autocomplete(inputTo, options);
-  var searchBoxFormOrder = new google.maps.places.Autocomplete(inputFormOrder, options); 
-  
-  
-  
+  var searchBoxFormOrder = new google.maps.places.Autocomplete(inputFormOrder, options);
 
   // [START region_getplaces]
   // Listen for the event fired when the user selects a prediction and retrieve
