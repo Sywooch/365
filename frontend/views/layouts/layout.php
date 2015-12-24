@@ -32,6 +32,7 @@ use kartik\icons\Icon;
 							
 
 					</div>
+					
 				</div>
 				
 				<div class="col-md-7 header-num-phone">

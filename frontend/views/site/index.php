@@ -73,8 +73,8 @@ $this->title = 'My Yii Application';
 								</div>
 							</label>
 						</div>
-						<div class="col-md-1 swap-icon">
-							<span id="swap-icon" class="glyphicon glyphicon-transfer"></span>
+						<div id="swap-icon-col" class="col-md-1 swap-icon">
+							<span id="swap-icon"><img src="/uploads/Flat.png"</span>
 						</div>
 						<div class="col-md-5 input-to">
 							<label for="to">
@@ -128,10 +128,10 @@ $this->title = 'My Yii Application';
 								<div class="col-xs-3">
                                     <?php 
                                       $amount = urldecode($cats['price']);
-                                      $get = file_get_contents("https://www.google.com/finance/converter?a=$amount&from=$from_Currency&to=$to_Currency");
-                                      $get = explode("<span class=bld>",$get);
-                                      $get = explode("</span>",$get[1]);
-                                      $converted_amount = preg_replace("/[^0-9\.]/", null, $get[0]);
+                                      // $get = file_get_contents("https://www.google.com/finance/converter?a=$amount&from=$from_Currency&to=$to_Currency");
+                                      // $get = explode("<span class=bld>",$get);
+                                      // $get = explode("</span>",$get[1]);
+                                      $converted_amount = 5; //preg_replace("/[^0-9\.]/", null, $get[0]);
                                     ?>
 									<?=substr($converted_amount, 0 , -2) ?>
 								</div>
