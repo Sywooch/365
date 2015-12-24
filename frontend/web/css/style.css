@@ -184,6 +184,10 @@ ul:first-child {
 	color: #697165;
 }
 
+.hide {
+	display: none;
+}
+
 /* passenger form*/
 .cpanel {
 	color: #444d3e;
