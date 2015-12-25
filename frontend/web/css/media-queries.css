@@ -1,52 +1,11 @@
-#dest-type-icons-from{
-	
-	float: right;
-	position: absolute;
-	top: 39px;
-	right: 26px;
-}
-
 #swap-icon img{
 	position: relative;
 	top: 7px;
 }
 
-#dest-type-icons-from-chaffeur{
-	position: absolute;
-	top: 39px;
-	left: 260px;
-}
-	
-#dest-type-icons-to{
-	
-	float: right;
-	position: absolute;
-	top: 39px;
-	right: 42px;
-}
-
 @media only screen and (min-width: 1200px){
 	.destination-choice input[type="text"]{
 		
-	}
-	#dest-type-icons-from{
-		
-	}
-	
-	#dest-type-icons-from-chaffeur{
-		position: absolute;
-		top: 39px;
-		left: 290px;
-	}
-	
-	#dest-type-icons-to{
-		
-		float: right;
-		position: absolute;
-		top: 39px;
-		right: 87px;
-	}
-	
 	#swap-icon img{
 		position: inherit;
 		transform: rotate(90deg);

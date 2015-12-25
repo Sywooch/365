@@ -38,10 +38,6 @@ $this->title = 'My Yii Application';
 								<span>From</span>
 								<input type="text" id="pac-input-from-chaffeur" class="controls" name="destination-from" 
 								autofocus=true/>
-								<div id="dest-type-icons-from-chaffeur" class="dest-type-icons">
-									<i class="fa fa-plane fa-lg"></i>
-									<i class="fa fa-train fa-lg"></i>
-								</div>
 								</label>
 								</div>
 							<div class="col-md-3">
@@ -67,10 +63,6 @@ $this->title = 'My Yii Application';
 								<span>From</span>
 								<input type="text" id="pac-input-from" class="controls" name="destination-from" 
 								autofocus=true/>
-								<div id="dest-type-icons-from" class="dest-type-icons">
-									<i class="fa fa-plane fa-lg"></i>
-									<i class="fa fa-train fa-lg"></i>
-								</div>
 							</label>
 						</div>
 						<div id="swap-icon-col" class="col-md-1 swap-icon">
