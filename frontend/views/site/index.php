@@ -72,12 +72,7 @@ $this->title = 'My Yii Application';
 							<label for="to">
 								<span>To</span>
 								<input type="text" id="pac-input-to" class="controls" name="destination-to" 
-								disabled=true/>
-								
-								<div id="dest-type-icons-to" class="dest-type-icons">
-									<i class="fa fa-plane fa-lg"></i>
-									<i class="fa fa-train fa-lg"></i>
-								</div>
+								disabled=true/>					
 							</label>
 						</div>
 						<div class="col-md-1">
