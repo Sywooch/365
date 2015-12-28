@@ -77,4 +77,11 @@ window.onload = function () {
 		addPassenger(pindex);
 		
 	});
+	
+	var myDate = new Date("now");
+  	$('#date-arrival').datepicker({
+	    setDate: myDate,
+    	numberOfMonths: 2,
+    	showOtherMonths: true
+  	});
 };
