@@ -1,17 +1,6 @@
-<!DOCTYPE html>
-<html>
-	<head>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=devide-width, 
-			initial-scale=1">
-		<title>Passenger form for Transfer365</title>
-		<script src="scripts/greeting-sign.js"></script>	
-		<script src="scripts/add-destination.js"></script>
-		<script src="scripts/side-box.js"></script>
-		
-
-	</head>
-	<body>
+<?
+	use yii\helpers\Html;
+?>
 			<div class="container"> <!-- Passenger form container -->
 			<div class="row">
 				
@@ -21,55 +10,6 @@
 							<h4>Heathrow - London<br>
 							Standard 100 RUB</h4>
 										
-						</div>
-						<div class="cpanel-section">
-							<fieldset>
-								<legend id="tariff">Tariff</legend>
-									<div class="row">
-										<div class="cpanel-item">
-											<div class="col-md-4">
-												<select name="tariff" id="tariff-select" class="cpanel-input">
-													<option value="economy">Economy: price</option>
-													<option value="standard">Standard: price</option>
-													<option value="Premium">Premium: price</option>
-													<option value="Business">Business: price</option>
-													<option value="Luxury">Luxury: price</option>
-													<option value="SUV">SUV: price</option>
-													<option value="Minivan">Minivan: price</option>
-													<option value="Minibus">Minibus: price</option>
-													<option value="Bus">Bus: price</option>
-												</select>
-											</div>
-										</div>
-									</div>
-									<div class="row">
-										<div class="cpanel-item">
-											<div class="col-md-3">
-												<label for="pass-num">Number of passengers</label>
-											</div>
-											<div class="col-md-1">
-												<!-- Number of options must change according to car class -->
-												<select name="pass-num" id="pass-num" class="cpanel-input">
-													<option value="1">1</option>
-													<option value="2">2</option>
-												</select>
-											</div>
-										</div>
-										
-									</div>
-									<div class="row">
-										<div class="cpanel-item">
-											<div class="col-md-3">
-												<label for="chair">Add special child seats</label>
-											</div>
-											<div class="col-md-1">
-												<input type="checkbox" id="chair" class="cpanel-input"
-												 value="unchecked"/>
-											</div>
-										</div>
-										
-									</div>
-							</fieldset>
 						</div>
 							
 						<div class="cpanel-section">
@@ -92,7 +32,10 @@
 										<label for="arrival_time">Arrival time</label>
 									</div>
 									<div class="col-md-3">
-										<input type="text" id="datetimepicker3" class="cpanel-input"/>
+										<input type="text" id="date-arrival" class="cpanel-input"/>
+									</div>
+									<div class="col-md-2">
+										<input type="text" class="cpanel-input time-arrival"/>
 									</div>
 									
 								</div>
@@ -103,8 +46,11 @@
 											<div class="col-md-2" style="text-align: right">
 												<label for="destination_address">Destination address</label>
 											</div>
-											<div class="col-md-7">
+											<div class="col-md-5">
 												<input type="text" id="pac-input-order-form" class="cpanel-input"/>
+											</div>
+											<div class="col-md-5">
+												<input type="text" class="cpanel-input" placeholder="Specify adress(i.e. street, house etc.)"/>
 											</div>
 										</div>
 									</div>
@@ -144,6 +90,16 @@
 					<div class="cpanel">
 						<div class="cpanel-heading">
 							<h4>Passengers data</h4>
+						</div>
+						<div class="cpanel-section">
+							<div class="row">
+								<div cpanel="cpanel-item">
+									<div class="col-md-3">
+										<label for="pass-amount">Amount of passengers</label>
+									</div>
+									
+								</div>
+							</div>
 						</div>
 						<div id="add-pass-anchor">
 							<div class="cpanel-section">
@@ -340,6 +296,8 @@
 				</div>
 			</div>
 		
-
-	</body>
-</html>
+		
+		<script src="/scripts/add-destination.js"></script>
+		<script src="/scripts/side-box.js"></script>
+		
+		

@@ -30,7 +30,7 @@ $this->title = 'My Yii Application';
 					</div>
 				</div>
 				
-<div class="col-md-9 destination-choice">
+				<div class="col-md-9 destination-choice">
 					<div class="row">
 						<div class="chaffeur">
 							<div id="input-from-chaffeur" class="col-md-6">
@@ -43,42 +43,40 @@ $this->title = 'My Yii Application';
 							<div class="col-md-3">
 								<label for="time-from">
 									Time from
-									<input type="text" id="datetimepicker1" />
+									<input type="text" />
 								</label>
 								</div>
 								<div class="col-md-3">
 								<label for="time-to">
 									Time to
-									<input type="text" id="datetimepicker2" />
+									<input type="text" />
 								</label>
 								</div>
-							
-							
-							
-							
 						</div>
+						
 						<div class="transfer">
-							<div class="col-md-5 input-from">
+							<div class="col-md-4 input-from">
 							<label for="from">
 								<span>From</span>
 								<input type="text" id="pac-input-from" class="controls" name="destination-from" 
 								autofocus=true/>
 							</label>
-						</div>
+							</div>
 						<div id="swap-icon-col" class="col-md-1 swap-icon">
 							<span id="swap-icon"><img src="/uploads/Flat.png"</span>
 						</div>
-						<div class="col-md-5 input-to">
+						<div class="col-md-4 input-to">
 							<label for="to">
 								<span>To</span>
 								<input type="text" id="pac-input-to" class="controls" name="destination-to" 
 								disabled=true/>					
 							</label>
 						</div>
-						<div class="col-md-1">
+						<div class="col-md-3">
+							<div class="row placeholder">placeholder</div>
+							<div class="row placeholder">placeholder</div>
 							<label for="return">
-							return
-							<input type="checkbox" id="return" name="return-check" />
+								<span>Return</span><input type="checkbox" id="return" name="return-check" />
 							</label>
 						</div>
 						</div>
@@ -91,25 +89,26 @@ $this->title = 'My Yii Application';
 </div>
 				
 <div class="container">
+	
 			<div class="row">
-				<ul>    <?php 
+				<div id="accordion">    <?php 
   $from_Currency = urlencode('AZN');
   $to_Currency = urlencode('USD');
   
   ?>
                                     <?php foreach($auto as $cats): ?>
-					<li>
-						<div class="car-class">
+					
+						
 							<button class="col-xs-12" name="button" type="button">
 				
 							<div class="row">
 								<div class="col-xs-2">
-									ICON
+									<img src="/uploads/swap.png" />
 								</div>
 								<div class="col-xs-3">
 									<?= $cats[$lang] ?>
 								</div>
-								<div class="col-xs-3">
+								<div class="col-xs-4">
 									FEATURES
 								</div>
 								<div class="col-xs-3">
@@ -122,20 +121,17 @@ $this->title = 'My Yii Application';
                                     ?>
 									<?=substr($converted_amount, 0 , -2) ?>
 								</div>
-								<div class="col-xs-1">
-									<i class="fa fa-caret-right fa-3x"></i>
-								</div>
+								
 							</div>
 						</button>
-						</div>
 						
 						<ul>
                                                     <?php foreach($cats['autos'] as $autos): ?>
-							<li><button><?=$autos['name']?></button></li>
+							<li><button class="car-class"><?=$autos['name']?></button></li>
                                                         <?php endforeach ?>
 						</ul>
-					</li>
+					
                                         <?php endforeach ?>
-				</ul>
+				</div>
 			</div>
 		</div>
