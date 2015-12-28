@@ -12,34 +12,26 @@ $(document).ready(function (){
 		foo(flight_number, flight_number_side);
 	});
 	
-	//tariff
-	var tariff_select = document.getElementById("tariff-select");
-	var tariff_select_side = document.getElementById("tariff-fixed");
-	
-	tariff_select.addEventListener("change", function(){
-		foo(tariff_select, tariff_select_side);
-	});
-	
-	//number of passengers
-	var pass_num = document.getElementById("pass-num");
-	var pass_num_side = document.getElementById("pass-num-fixed");
-	
-	pass_num.addEventListener("change", function(){
-		foo(pass_num, pass_num_side);
-	});
-	
-	//child seat
-	var child_seat = document.getElementById("chair");
-	var child_seat_side = document.getElementById("chair-side"); 
+	// //number of passengers
+	// var pass_num = document.getElementById("pass-num");
+	// var pass_num_side = document.getElementById("pass-num-fixed");
+// 	
+	// pass_num.addEventListener("change", function(){
+		// foo(pass_num, pass_num_side);
+	// });
+// 	
+	// //child seat
+	// var child_seat = document.getElementById("chair");
+	// var child_seat_side = document.getElementById("chair-side"); 
 	
 	
-	child_seat.addEventListener("click", function(){
-		if (child_seat.checked === true){
-			child_seat_side.innerHTML = " + child seat";
-		}else{
-			child_seat_side.innerHTML = "";
-		}
-	});
+	// child_seat.addEventListener("click", function(){
+		// if (child_seat.checked === true){
+			// child_seat_side.innerHTML = " + child seat";
+		// }else{
+			// child_seat_side.innerHTML = "";
+		// }
+	// });
 	
 	//destination
 	var destination_input = document.getElementById("pac-input-order-form");
@@ -89,5 +81,28 @@ $(document).ready(function (){
 			$("#nfixed").removeClass("hide");
 			notes_fixed.innerHTML = this.value;
 		}
+	});
+	
+	//greeting sign
+	console.log("greeting sign");
+	var firstNameInput = document.getElementById("pass-name");
+	var lastNameInput = document.getElementById("pass-lastname");
+	var greetingField = document.getElementById("greeting-sign");
+	var greetingValue = [];
+	 
+	function setGreeting(first, last){
+		greetingField.value = first + " " + last;
+	}
+	
+	firstNameInput.addEventListener("change", function(){
+		var firstName = firstNameInput.value;
+		greetingValue[0] = firstName;
+		greetingField.value = greetingValue[0] + " " + greetingValue[1];
+	});
+	
+	lastNameInput.addEventListener("change", function(){
+		var lastName = lastNameInput.value;
+		greetingValue[1] = lastName;
+		greetingField.value = greetingValue[0] + " " + greetingValue[1];
 	});
 });
