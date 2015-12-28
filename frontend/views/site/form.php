@@ -1,14 +1,16 @@
+
 <?
 	use yii\helpers\Html;
 ?>
+
 			<div class="container"> <!-- Passenger form container -->
 			<div class="row">
 				
 				<div class="col-md-10">
 					<div class="cpanel">
 						<div class="cpanel-heading">
-							<h4>Heathrow - London<br>
-							Standard 100 RUB</h4>
+                                                    
+							<h4><?= Yii::$app->request->get('Sifarish')['from'] ?>  - <?= Yii::$app->request->get('Sifarish')['to'] ?><br></h4>
 										
 						</div>
 							
@@ -285,6 +287,7 @@
 								<button>Go To Payment</button>
 							</div>
 						</div>
+                                            
 						<div class="row">
 							<div class="col-md-12">
 							</div>
@@ -296,8 +299,8 @@
 				</div>
 			</div>
 		
+
 		
 		<script src="/scripts/add-destination.js"></script>
 		<script src="/scripts/side-box.js"></script>
-		
-		
+
