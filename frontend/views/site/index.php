@@ -68,10 +68,6 @@ $this->title = 'My Yii Application';
                                                                 
                        
                                 <?= Html::activeInput('text', $model, 'from', ['id'=>'pac-input-from' ,'class' => 'controls' ,'autofocus' => 'true/']) ?>
-								<div id="dest-type-icons-from" class="dest-type-icons">
-									<i class="fa fa-plane fa-lg"></i>
-									<i class="fa fa-train fa-lg"></i>
-								</div>
 
 							</label>
 							</div>
@@ -85,11 +81,7 @@ $this->title = 'My Yii Application';
 
 								
 								<?= Html::activeInput('text', $model, 'to', ['id'=>'pac-input-to' ,'class' => 'controls' ,'autofocus' => 'true/', 'disabled' => 'true/']) ?>
-								
-								<div id="dest-type-icons-to" class="dest-type-icons">
-									<i class="fa fa-plane fa-lg"></i>
-									<i class="fa fa-train fa-lg"></i>
-								</div>
+		
 							</label>
 						</div>
 						<div class="col-md-3">
