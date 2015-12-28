@@ -1,6 +1,7 @@
 <?php
 use yii\helpers\Html;
 use kartik\icons\Icon;
+use yii\jui\DatePicker;
 ?>
 <?php Icon::map($this) ?>
 <?php $this->beginPage() ?>
@@ -12,13 +13,21 @@ use kartik\icons\Icon;
 			initial-scale=1">
 		
 		<link rel="stylesheet" href="/css/bootstrap-datetimepicker.min.css" />
-		<link rel="stylesheet" href="/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="/css/bootstrap.css" />
+		<link rel="stylesheet" href="/css/custom365/jquery-ui.min.css" />
 		<link rel="stylesheet" href="/css/style.css" />
 		
 		<script src="/scripts/jquery.min.js"></script>
-		<script src="/scripts/moment.min.js"></script>
-		<script src="/scripts/bootstrap-datetimepicker.min.js"></script>		
-		<script src="/scripts/script.js"></script>
+		<script src="/scripts/jquery-ui.min.js"></script>
+		
+		
+		
+		
+		
+		
+		<!--<script src="/scripts/moment.min.js"></script>
+		<script src="/scripts/bootstrap-datetimepicker.min.js"></script>-->		
+		
 	
 		<?php $this->head() ?>
 	</head>
@@ -97,6 +106,9 @@ use kartik\icons\Icon;
 		</div>
 		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBB19cyGLWQeSz1amgo9wJN6ZeXlQtHZCU&libraries=places&callback=initAutocomplete"
          async defer></script>
+        <!-- <script src="/scripts/date-time-pickers.js"></script> -->
+		<script src="/scripts/script.js"></script>
+         
 		<?php $this->endBody() ?>
 	</body>
 </html>
