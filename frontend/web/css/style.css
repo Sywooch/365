@@ -7,10 +7,10 @@ html {
 body {
 	height: 100%;
 	font-size:14px;
-	color: #444d3e;
+	color: #ffffff !important;
 	margin: 0;
 	padding: 0;
-	font-family: "PT Sans Caption", "verdana", sans-serif;
+	font-family: "PT Sans Caption", "verdana", sans-serif ;
 	overflow-x: scroll;
 }
 
@@ -28,14 +28,35 @@ label {
 	
 }
 
+.logo h1{
+	color: #000000;
+}
+
 .logo span {
 	font-weight: bold;
-	color: #99ffbb;
+	color: #990031;
 }
 
 .destination-choice-wrap {
 	width: 100%;
-	background-color: #99ffbb;
+	
+	padding-top: 15px;
+	padding-bottom: 20px;
+	margin-bottom: 20px;
+	/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#a90329+51,8f0222+65,6d0019+100;Brown+Red+3D */
+/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#ff3019+0,cf0404+100 */
+/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#1e5799+27,207cca+50,1e5799+100,7db9e8+100 */
+/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#6d0019+35,8f0222+90 */
+background: #6d0019; /* Old browsers */
+background: -moz-linear-gradient(left,  #6d0019 35%, #4d0026 90%); /* FF3.6-15 */
+background: -webkit-linear-gradient(left,  #6d0019 35%,#4d0026 90%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(to right,  #6d0019 35%,#4d0026 90%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#6d0019', endColorstr='#4d0026',GradientType=1 ); /* IE6-9 */
+
+
+
+#6d0019
+#ffb3b3	
 }
 
 .footer-wrap {
@@ -76,19 +97,16 @@ label {
 	font-size: 18px;
 }
 
-.destination-choice label{
-	float: right;
-}
-
 .destination-choice input[type="text"]{
 	height: 50px;
 	-webkit-border-radius: 4px;
 	-moz-border-radius: 4px;
 	border-radius: 4px;
 	width:100%;
-	padding-right: 56px;
+	padding-right: 5px;
 	padding-left:5px;
 	text-overflow: ellipsis;
+	color: #8F948B;
 }
 
 .input-from label{
@@ -130,15 +148,11 @@ ul:first-child {
 	font-weight: bold;
 }
 
-
-
 .header-num-phone{
 	color: #c6c9c5;
 	font-weight: bold;
 	
 }
-
-
 
 .header-num-phone{
 	margin-top: 10px;
@@ -194,8 +208,12 @@ ul:first-child {
 }
 
 .cpanel-heading {
-	background:#99ffbb;
-	color: #2a2e3f;
+	background: #6d0019;
+	background: -moz-linear-gradient(left, #6d0019 35%, #4d0026 90%);
+	background: -webkit-linear-gradient(left, #6d0019 35%,#4d0026 90%);
+	background: linear-gradient(to right, #6d0019 35%,#4d0026 90%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#6d0019', endColorstr='#4d0026',GradientType=1 );
+	color: #ffffff;
 	border-bottom: 2px solid #fff;
 	border-top: 2px solid #fff;
 	border-radius: 8px 8px 0px 0px;
@@ -263,6 +281,23 @@ ul:first-child {
 
 .row i{
 	cursor: pointer;
+}
+
+#date-arrival{
+	background: url("images/el_date.png") no-repeat scroll -20px 9px #fff;	
+	float: left;
+	padding-left: 35px;
+	vertical-align: top;
+	white-space: normal;
+	cursor: pointer;
+}
+
+.time-arrival{
+	background: url("images/el_date.png") no-repeat scroll 8px -41px #fff;
+	float: left;
+	padding-left: 35px;
+	vertical-align: top;
+	white-space: normal;
 }
 
 /* button-box (box with a title and a big button) */
@@ -344,4 +379,14 @@ ul:first-child {
 .fixed-box-price{
 	float: right;
 }
+
+.placeholder {
+	visibility: hidden;
+}
+
+
+/* allow fa icons in jquery ui*/
+ /* Allow Font Awesome Icons in lieu of jQuery UI and only apply when using a FA icon */
+
+
 

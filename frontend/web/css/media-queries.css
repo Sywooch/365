@@ -3,10 +3,22 @@
 	top: 7px;
 }
 
+.destination-choice label{
+	float: none;
+}
+
+.destination-choice label span{
+	margin-right: 5px;
+}
+
 @media only screen and (min-width: 1200px){
 	#swap-icon img{
 		position: inherit;
 		transform: rotate(90deg);
 		top: 0px;
+	}
+	
+	.destination-choice label{
+		float: left;
 	}
 }
