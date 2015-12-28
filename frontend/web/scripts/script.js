@@ -1,32 +1,38 @@
 function initAutocomplete() {
 
   // Create the search box and link it to the UI element.
-  var inputFrom = document.getElementById('pac-input-from');
-  var inputFromChaffeur = document.getElementById('pac-input-from-chaffeur');
-  var inputTo = document.getElementById('pac-input-to');
-  var inputFormOrder = document.getElementById('pac-input-order-form');
-  var test = document.getElementById("pac-input-test");
-
-  var options = {
+  jQuery.fn.exists = function(){return this.length>0;}; // function to check if element exists
   
-  componentRestrictions: {country: 'az'}
-};
-
-  var searchBoxFrom = new google.maps.places.Autocomplete(inputFrom, options);
-  var searchBoxChaffeur = new google.maps.places.Autocomplete(inputFromChaffeur, options);
-  var searchBoxTo = new google.maps.places.Autocomplete(inputTo, options);
-  var searchBoxFormOrder = new google.maps.places.Autocomplete(inputFormOrder, options);
+  var options = {
+  	componentRestrictions: {country: 'az'}
+  };
+  
+  //check if elements exist. workaround to fix unexistent elements problem on the pages
+  if($('#pac-input-from').exists() && $('#pac-input-from-chaffeur').exists() && $('#pac-input-to').exists()){
+  	var inputFrom = document.getElementById('pac-input-from');
+  	var inputFromChaffeur = document.getElementById('pac-input-from-chaffeur');
+  	var inputTo = document.getElementById('pac-input-to');
+  	
+  	var searchBoxFrom = new google.maps.places.Autocomplete(inputFrom, options);
+  	var searchBoxChaffeur = new google.maps.places.Autocomplete(inputFromChaffeur, options);
+  	var searchBoxTo = new google.maps.places.Autocomplete(inputTo, options);
+  }else if($('#pac-input-order-form').exists()){
+  	var inputFormOrder = document.getElementById('pac-input-order-form');
+  	var searchBoxFormOrder = new google.maps.places.Autocomplete(inputFormOrder, options);
+  }
 
   // [START region_getplaces]
   // Listen for the event fired when the user selects a prediction and retrieve
   // more details for that place.
   
   // [END region_getplaces]
+  
 }
 
 /* Main scripts */
 
 $(document).ready(function (){
+	jQuery.fn.exists = function(){return this.length>0;}; //function to check if element exists
 	
 	function rotate(d, elem){
 		$({deg:0}).animate({deg:d}, {
@@ -56,28 +62,33 @@ $(document).ready(function (){
 // 	
 	$.getScript("destination_fields_swap_and_disable.js");
 	
-	$('.car-class').siblings('ul').hide();
+	//$('.car-class').siblings('ul').hide();
 	
-	$('.car-class > button').click(function(){
-		
-		var i = $(this).find('i');
-		
-		if($(this).parent().siblings('ul').css('display') == 'none'){
-			rotate(90, i);
-		}else {
-			rotate(0, i);
-		}
-		
-		$(this).parent().siblings('ul').toggle('slow');
-		
-		
-		if($(this).parent().siblings('ul').css('display') !== 'none'){
-			$(this).parent().parent().siblings().children('ul').hide('fast');
-			var ii = $(this).parent().parent().siblings().find('i');
-			rotate(0, ii);
-		}
-	});
 	
+
+	// $('.car-class > button').click(function(){
+// 		
+		// var i = $(this).find('i');
+// 		
+		// if($(this).parent().siblings('ul').css('display') == 'none'){
+			// rotate(90, i);
+		// }else {
+			// rotate(0, i);
+		// }
+// 		
+		// $(this).parent().siblings('ul').toggle('blind','fast');
+// 		
+// 		
+		// if($(this).parent().siblings('ul').css('display') !== 'none'){
+			// $(this).parent().parent().siblings().children('ul').hide('blind', 'fast');
+			// var ii = $(this).parent().parent().siblings().find('i');
+			// rotate(0, ii);
+		// }
+	// });
+	
+	$('#accordion').accordion({
+		collapsible: true
+	}); //jquery ui accordion
 
 //main page destination choice fields. swap icon and disabled field functionalities	
 function changeEventHandler(){
@@ -105,17 +116,12 @@ function swapFieldValues(){
 	
 };
 
-
-document.getElementById("pac-input-from").addEventListener("change", changeEventHandler);
-
-
-document.getElementsByClassName("swap-icon")[0].addEventListener("click", swapFieldValues);
-// почему если добавлять событие через addEventListener, то надо писать
-// "change", а если нет, то "onchange"?
-
-//main page input field. transfer and chaffeur toggles
-var transferForm = document.getElementsByClassName('transfer')[0];
-var chaffeurForm = document.getElementsByClassName('chaffeur')[0];
+if ($("#pac-input-from").exists()){
+	document.getElementById("pac-input-from").addEventListener("change", changeEventHandler);
+	document.getElementsByClassName("swap-icon")[0].addEventListener("click", swapFieldValues);
+	
+	var transferForm = document.getElementsByClassName('transfer')[0];
+	var chaffeurForm = document.getElementsByClassName('chaffeur')[0];
 	
 	if	(document.getElementById('transfer').checked){
 		transferForm.style.display = "block";
@@ -132,9 +138,18 @@ var chaffeurForm = document.getElementsByClassName('chaffeur')[0];
 	document.getElementById('chaffeur').addEventListener("change", function () {
 		transferForm.style.display = "none";
 		chaffeurForm.style.display = "block";
-	});	
-	
-	
+	});		
+}
+
+
+
+
+// почему если добавлять событие через addEventListener, то надо писать
+// "change", а если нет, то "onchange"?
+
+//main page input field. transfer and chaffeur toggles
+
+
 });
 
 
