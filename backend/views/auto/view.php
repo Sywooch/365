@@ -33,6 +33,8 @@ $this->params['breadcrumbs'][] = $this->title;
             'name',
             'photo',
             'carnumber',
+            'price',
+            'maxpas',
         ],
     ]) ?>
 

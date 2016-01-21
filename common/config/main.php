@@ -3,7 +3,17 @@ return [
     'vendorPath' => dirname(dirname(__DIR__)) . '/vendor',
     'bootstrap' => ['languagepicker'],
     'components' => [
-         
+         'formatter' => 
+            [
+               'defaultTimeZone' => 'UTC+4',
+               'timeZone' => 'Asia/Baku',
+               'dateFormat' => 'php:d-m-Y',
+               'datetimeFormat'=>'php:d-M-Y',
+               'datetimeFormat'=>'php:d-M-Y H:i:s'
+            ],
+        'cache' => [
+            'class' => 'yii\caching\FileCache',
+        ],
         'languagepicker' => [
         'class' => 'lajax\languagepicker\Component',
         'languages' => ['az' => 'AZ','en' => 'EN', 'ru' => 'RU'],     // List of available languages
@@ -25,6 +35,7 @@ return [
                 '<controller:\w+>/<id:\d+>' => '<controller>/view',
                 '<controller:\w+>/<action:\w+>/<id:\d+>' => '<controller>/<action>',
                 '<controller:\w+>/<action:\w+>' => '<controller>/<action>',
+                'module/<module:\w+>/<controller:\w+>/<action:\w+>' => '<module>/<controller>/<action>',
             ],
 
         )

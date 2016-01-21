@@ -2,112 +2,151 @@
 use yii\helpers\Html;
 use kartik\icons\Icon;
 use yii\jui\DatePicker;
+use frontend\assets\AppAsset;
+use frontend\assets\SemanticUiDropdownAsset;
+AppAsset::register($this);
+SemanticUiDropdownAsset::register($this);
 ?>
 <?php Icon::map($this) ?>
+
 <?php $this->beginPage() ?>
-<!DOCTYPE html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html>
-	<head>
+	<head><meta name="google-site-verification" content="QXFokgLn-W7fJUIjZpaX6LKJCpInEIho5DaV5pvYqeQ" />
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, 
 			initial-scale=1">
-		
-		<link rel="stylesheet" href="/css/bootstrap-datetimepicker.min.css" />
-		<link rel="stylesheet" href="/css/bootstrap.css" />
-		<link rel="stylesheet" href="/css/custom365/jquery-ui.min.css" />
-		<link rel="stylesheet" href="/css/style.css" />
-		
-		<script src="/scripts/jquery.min.js"></script>
-		<script src="/scripts/jquery-ui.min.js"></script>
-		
-		
-		
-		
-		
-		
-		<!--<script src="/scripts/moment.min.js"></script>
-		<script src="/scripts/bootstrap-datetimepicker.min.js"></script>-->		
-		
-	
 		<?php $this->head() ?>
 	</head>
 	<body>
-		<?php $this->beginBody() ?>
-			<div class="container">
-				<div class="row header">
-				<div class="col-md-5">
-					<div class="logo">
-						<h1>Transfer<span>365</span><h1>
-							
+        <?php $this->beginBody() ?>
+            <div class="container">
+                <div class="row header">
+                    <div class="col-sm-6 col-md-4">
+                        <a href="/" alt="Transfer365 logo">
+                            <div class="logo"></div>
+                        </a>
+                    </div>
 
-					</div>
-					
-				</div>
-				
-				<div class="col-md-7 header-num-phone">
-					
-					<div class="row">
-						<div id="text-above-phone">
-							круглосуточная поддержка
-						</div>
-					</div>
-					<div class="row">
-						<div>
-							<?= Icon::show('phone', ['class'=>'num-icon'], Icon::FA); ?>+99450 333 33 33
-						</div>
-					</div>
-					
-				</div>
-				
-			</div>
-			<div class="row">
-				<div class="col-md-12 head-description">
-					Онлайн-бронирование трансфера  
-				</div>
-			</div>
-			</div>
+                    <div class="col-sm-6 col-md-8 header-num-phone">
+
+                            <div class="row">
+                                <div id="text-above-phone" class="col-md-12">
+                                    круглосуточная поддержка
+                                </div>
+                            </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <span><?=Html::img('@web/css/images/phoneico.png', ['class'=>'phoneico'])?></span>
+                                <div class="row phone-number">
+                                    <div class="col-md-12">+994 50 999 0 365</div></div>
+                                <div class="row phone-number">
+                                    <div class="col-md-12">
+                                        +994 70 555 0 365
+                                    </div>
+                                    </div>
+                            </div>
+                        </div>
+
+                        </div>
+
+
+                    </div>
+
+                <div class="row">
+                    <div class="col-xs-12 col-md-8 head-description">
+                            Онлайн-бронирование трансфера  
+                    </div>
+                    <div class="col-xs-8 col-md-3 language-picker-wrap">
+                        <?= \lajax\languagepicker\widgets\LanguagePicker::widget([
+                            'skin' => \lajax\languagepicker\widgets\LanguagePicker::SKIN_BUTTON,
+                            'size' => \lajax\languagepicker\widgets\LanguagePicker::SIZE_LARGE
+                        ]); ?>
+                    </div>
+                    <div  class="col-xs-4 col-md-1 currency-converter">
+                        <select id="currency-converter" name="currency">
+                            <option value = "AZN">AZN</option>
+                            <option value = "RUB">RUB</option>
+                            <option value = "USD">USD</option>
+                        </select>
+                    </div>
+                    </div>
+
+                    </div>
 			
-					<?= $content ?>
-				
-			
+                            
+			</div>
+ 
+		<?= $content ?>
+
 			<div class="footer-wrap">
 		<div class="container footer">
-			<div class="row">
-				<div class="col-md-5">
-					<div class="row">
-						<div class="col-md-12">
-							+99450 333 33 33
-						</div>
-						
-					</div>
-					<div class="row">
-						<div class="col-md-12">
-							info@transfer365.az
-						</div>
-						
-					</div>
-				</div>
-				<div class="col-md-7">
-					<div class="row">
-						<div class="col-md-4">
-							test
-						</div>
-						<div class="col-md-4">
-							test
-						</div>
-						<div class="col-md-4">
-							test
-						</div>
-					</div>
-				</div>
-			</div>
+                    
+                    <div class="row" >
+                        <div class="col-xs-12 col-sm-6 col-lg-3">
+                            <div class="row"><div class="col-xs-12">+994 50 999 0 365</div></div>
+                            <div class="row"><div class="col-xs-12">+994 70 555 0 365</div></div>
+                            <div class="row"><div class="col-xs-12">support@transfer.az</div></div>
+                        </div>
+                        <div class="col-xs-12 col-sm-6 col-lg-3">
+                            <div class="row"><a class="footer-link" href="#">
+                                    <div class="col-xs-12">
+                                        About
+                                    </div>
+                                    </a></div>
+                            <div class="row"><a class="footer-link" href="#">
+                                    <div class="col-xs-12">
+                                        Fleet
+                                    </div>
+                                    </a></div>
+                            <div class="row"><a class="footer-link" href="#">
+                                    <div class="col-xs-12">
+                                        For corporate customers
+                                    </div>
+                                    </a></div>
+                        </div>
+                        <div class="col-xs-7 col-lg-3 footer-socials">
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <?= Icon::show('facebook-official',['class' => 'fa-2x'], Icon::FA); ?>
+                                </div>
+                                <div class="col-xs-1">
+                                    <?= Icon::show('instagram',['class' => 'fa-2x'], Icon::FA); ?>
+                                </div>
+                                <script type="text/javascript" src="http://www.skypeassets.com/i/scom/js/skype-uri.js"></script>
+                                <div class="skype">
+                                  <div id="SkypeButton_Call_transfer365.az_1">
+                                     <script type="text/javascript">
+                                     Skype.ui({
+                                     "name": "call",
+                                     "element": "SkypeButton_Call_transfer365.az_1",
+                                     "participants": ["transfer365.az"],
+                                     "imageColor": "white",
+                                     "imageSize": 32
+                                     });
+                                     </script>  
+                                </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-6 col-lg-3 footer-credit-cards">
+                            
+                        </div>
+                        
+                        
+                        
+                    </div>
 			
 		</div>
 		</div>
-		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBB19cyGLWQeSz1amgo9wJN6ZeXlQtHZCU&libraries=places&callback=initAutocomplete"
-         async defer></script>
+                       
+                <script src="/scripts/google_api.js"></script>
+		
+         
+         
         <!-- <script src="/scripts/date-time-pickers.js"></script> -->
-		<script src="/scripts/script.js"></script>
+		<!--<script src="/scripts/script.js"></script>-->
          
 		<?php $this->endBody() ?>
 	</body>

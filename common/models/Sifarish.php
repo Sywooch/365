@@ -5,7 +5,7 @@ namespace common\models;
 use Yii;
 
 /**
- * This is the model class for table "{{%sifarish}}".
+ * This is the model class for table "sifarish".
  *
  * @property integer $id
  * @property integer $created_at
@@ -30,19 +30,19 @@ use Yii;
  * @property string $currency
  * @property string $return
  * @property integer $seat
- * @property integer $arrivaltime
  * @property string $gsign
- *
- * @property Auto $car0
+ * @property string $address
  */
 class Sifarish extends \yii\db\ActiveRecord
 {
     /**
      * @inheritdoc
      */
+    public $date;
+    public $time;
     public static function tableName()
     {
-        return '{{%sifarish}}';
+        return 'sifarish';
     }
 
     /**
@@ -51,12 +51,13 @@ class Sifarish extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['created_at', 'updated_at', 'passangers', 'pickuptime', 'car', 'amount', 'seat', 'arrivaltime'], 'integer'],
+            [['created_at', 'updated_at', 'passangers', 'pickuptime', 'car', 'amount', 'seat','date','time'], 'integer'],
+            [['lastname', 'firstname', 'email', 'phone', 'from', 'to', 'pickuptime', 'car', 'amount' ,'date' ,'time'], 'required'],
             [['type', 'return'], 'string'],
             [['lastname', 'firstname', 'email', 'flightnumber', 'gsign'], 'string', 'max' => 45],
             [['phone', 'phone1'], 'string', 'max' => 15],
             [['notes'], 'string', 'max' => 255],
-            [['from', 'to', 'anotherd', 'anotherd1', 'anotherd2'], 'string', 'max' => 100],
+            [['from', 'to', 'anotherd', 'anotherd1', 'anotherd2', 'address'], 'string', 'max' => 100],
             [['currency'], 'string', 'max' => 10]
         ];
     }
@@ -71,38 +72,27 @@ class Sifarish extends \yii\db\ActiveRecord
             'created_at' => Yii::t('yii', 'Created At'),
             'updated_at' => Yii::t('yii', 'Updated At'),
             'lastname' => Yii::t('yii', 'Lastname'),
-            'firstname' => Yii::t('yii', 'full name'),
+            'firstname' => Yii::t('yii', 'Firstname'),
             'email' => Yii::t('yii', 'Email'),
             'phone' => Yii::t('yii', 'Phone'),
             'phone1' => Yii::t('yii', 'Phone1'),
             'flightnumber' => Yii::t('yii', 'Flightnumber'),
-            'passangers' => Yii::t('yii', 'sernishin sayi'),
-            'notes' => Yii::t('yii', 'haqqinda melumat'),
-            'type' => Yii::t('yii', 'sifarishin novu
-0=taxi sifarishi
-1=surucu ve avtomobili icare goturmek'),
-            'from' => Yii::t('yii', 'bu type ise sifarishiin
-aeroportdan olduqu'),
+            'passangers' => Yii::t('yii', 'Passangers'),
+            'notes' => Yii::t('yii', 'Notes'),
+            'type' => Yii::t('yii', 'Type'),
+            'from' => Yii::t('yii', 'From'),
             'to' => Yii::t('yii', 'To'),
-            'anotherd' => Yii::t('yii', 'elave aparilacaq yer'),
-            'anotherd1' => Yii::t('yii', 'elave aparilacaq yer 2'),
+            'anotherd' => Yii::t('yii', 'Anotherd'),
+            'anotherd1' => Yii::t('yii', 'Anotherd1'),
             'anotherd2' => Yii::t('yii', 'Anotherd2'),
             'pickuptime' => Yii::t('yii', 'Pickuptime'),
-            'car' => Yii::t('yii', 'secilmish avtomobil'),
-            'amount' => Yii::t('yii', 'qiymet'),
+            'car' => Yii::t('yii', 'Car'),
+            'amount' => Yii::t('yii', 'Amount'),
             'currency' => Yii::t('yii', 'Currency'),
             'return' => Yii::t('yii', 'Return'),
-            'seat' => Yii::t('yii', 'usaq oturacaqi'),
-            'arrivaltime' => Yii::t('yii', 'Arrivaltime'),
-            'gsign' => Yii::t('yii', 'Salamlama'),
+            'seat' => Yii::t('yii', 'Seat'),
+            'gsign' => Yii::t('yii', 'Gsign'),
+            'address' => Yii::t('yii', 'Address'),
         ];
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getCar0()
-    {
-        return $this->hasOne(Auto::className(), ['id' => 'car']);
     }
 }

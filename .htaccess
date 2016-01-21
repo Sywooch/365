@@ -4,11 +4,12 @@ RewriteEngine On
 </IfModule>
 
     <IfModule mod_rewrite.c>
-    RewriteCond %{REQUEST_URI} ^/(admin)
+RewriteCond %{REQUEST_URI} ^/(admin) 
 RewriteRule ^admin/assets/(.*)$ backend/web/assets/$1 [L]
 RewriteRule ^admin/css/(.*)$ backend/web/css/$1 [L]
-RewriteCond %{REQUEST_URI} !^/backend/web/(assets|css)/
-RewriteCond %{REQUEST_URI} ^/(admin)
+
+RewriteCond %{REQUEST_URI} !^/backend/web/(assets|css)/  
+RewriteCond %{REQUEST_URI} ^/(admin)  
 RewriteRule ^.*$ backend/web/index.php [L]
 RewriteCond %{REQUEST_URI} ^/(assets|css|scripts|uploads)
 RewriteRule ^assets/(.*)$ frontend/web/assets/$1 [L]
@@ -19,7 +20,9 @@ RewriteCond %{REQUEST_URI} !^/(frontend|backend)/web/(assets|css|scripts|uploads
 RewriteCond %{REQUEST_URI} !index.php
 
 
- RewriteCond %{REQUEST_FILENAME} !-f [OR]
+    RewriteCond %{REQUEST_FILENAME} !-f [OR]
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteRule ^.*$ frontend/web/index.php
+    
+
 </IfModule>

@@ -25,6 +25,10 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'carnumber') ?>
 
+    <?php // echo $form->field($model, 'price') ?>
+
+    <?php // echo $form->field($model, 'maxpas') ?>
+
     <div class="form-group">
         <?= Html::submitButton(Yii::t('yii', 'Search'), ['class' => 'btn btn-primary']) ?>
         <?= Html::resetButton(Yii::t('yii', 'Reset'), ['class' => 'btn btn-default']) ?>

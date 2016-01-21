@@ -1,0 +1,59 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Jan 8, 2016, 4:20:30 PM
+    Author     : Kamran
+*/
+div.ui-datepicker{
+     font-size:14px;
+     border-bottom-right-radius: 0px;
+     border-bottom-left-radius: 0px;
+     border-top-left-radius: 0px;
+     border-top-right-radius: 0px;
+}
+
+.ui-accordion .ui-accordion-header{
+    margin-bottom: 10px;
+    box-shadow: -1px 2px 5px -2px rgba(0, 0, 0, 0.7);
+    outline: transparent;
+    height: 71px;
+}
+
+
+
+
+.ui-accordion .ui-accordion-content{
+   position: relative;
+   bottom: 10px;
+   width:100%;
+}
+
+ .ui-corner-all,.ui-corner-bottom, .ui-corner-right{
+    border-bottom-right-radius: 40px;
+}
+
+ .ui-corner-all,.ui-corner-bottom, .ui-corner-left{
+    border-bottom-left-radius: 40px;
+}
+
+.ui-corner-all,.ui-corner-top, .ui-corner-right{
+    border-top-right-radius: 40px;
+}
+
+.ui-corner-all,.ui-corner-top, .ui-corner-left{
+    border-top-left-radius: 40px;
+}
+
+.ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default {
+    border: 1px solid #D3D3D3;
+    background: transparent url("images/button_price_select-sprite.png") repeat-x scroll left top;
+    font-weight: normal;
+    color: #555;
+}
+
+.ui-state-hover{
+    background-color: #6d0019;
+}

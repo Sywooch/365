@@ -18,8 +18,8 @@ class AutoSearch extends Auto
     public function rules()
     {
         return [
-            [['id', 'idcat'], 'integer'],
-            [['name', 'photo', 'carnumber'], 'safe'],
+            [['id', 'idcat', 'price'], 'integer'],
+            [['name', 'photo', 'carnumber', 'maxpas'], 'safe'],
         ];
     }
 
@@ -58,11 +58,13 @@ class AutoSearch extends Auto
         $query->andFilterWhere([
             'id' => $this->id,
             'idcat' => $this->idcat,
+            'price' => $this->price,
         ]);
 
         $query->andFilterWhere(['like', 'name', $this->name])
             ->andFilterWhere(['like', 'photo', $this->photo])
-            ->andFilterWhere(['like', 'carnumber', $this->carnumber]);
+            ->andFilterWhere(['like', 'carnumber', $this->carnumber])
+            ->andFilterWhere(['like', 'maxpas', $this->maxpas]);
 
         return $dataProvider;
     }

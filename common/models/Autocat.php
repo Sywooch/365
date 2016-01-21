@@ -11,8 +11,6 @@ use Yii;
  * @property string $name_ru
  * @property string $name_en
  * @property string $name_az
- * @property string $maxpas
- * @property string $photo
  *
  * @property Auto[] $autos
  * @property Price[] $prices
@@ -34,7 +32,7 @@ class Autocat extends \yii\db\ActiveRecord
     {
         return [
             [['name_ru', 'name_en', 'name_az'], 'required'],
-            [['name_ru', 'name_en', 'name_az', 'maxpas', 'photo'], 'string', 'max' => 45]
+            [['name_ru', 'name_en', 'name_az'], 'string', 'max' => 45]
         ];
     }
 
@@ -48,8 +46,6 @@ class Autocat extends \yii\db\ActiveRecord
             'name_ru' => Yii::t('yii', 'Name Ru'),
             'name_en' => Yii::t('yii', 'Name En'),
             'name_az' => Yii::t('yii', 'Name Az'),
-            'maxpas' => Yii::t('yii', 'Maxpas'),
-            'photo' => Yii::t('yii', 'Photo'),
         ];
     }
 
@@ -67,14 +63,5 @@ class Autocat extends \yii\db\ActiveRecord
     public function getPrices()
     {
         return $this->hasMany(Price::className(), ['catid' => 'id']);
-    }
-
-    /**
-     * @inheritdoc
-     * @return AutocatQuery the active query used by this AR class.
-     */
-    public static function find()
-    {
-        return new AutocatQuery(get_called_class());
     }
 }

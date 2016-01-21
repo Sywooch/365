@@ -4,7 +4,7 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 
 /* @var $this yii\web\View */
-/* @var $searchModel common\models\autocatSearch */
+/* @var $searchModel common\models\AutoSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = Yii::t('yii', 'Autocats');
@@ -31,6 +31,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'name_az',
             'maxpas',
             // 'photo',
+             'price',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

@@ -12,10 +12,11 @@ use Yii;
  * @property string $name
  * @property string $photo
  * @property string $carnumber
+ * @property integer $price
+ * @property string $maxpas
  *
  * @property Autocat $idcat0
  * @property Drivers[] $drivers
- * @property Sifarish[] $sifarishes
  */
 class Auto extends \yii\db\ActiveRecord
 {
@@ -33,9 +34,10 @@ class Auto extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['idcat', 'name'], 'required'],
-            [['idcat'], 'integer'],
-            [['name', 'photo', 'carnumber'], 'string', 'max' => 45]
+            [['idcat', 'name', 'photo', 'price'], 'required'],
+            [['idcat', 'price'], 'integer'],
+            [['name', 'photo', 'carnumber'], 'string', 'max' => 45],
+            [['maxpas'], 'string', 'max' => 15]
         ];
     }
 
@@ -50,6 +52,8 @@ class Auto extends \yii\db\ActiveRecord
             'name' => Yii::t('yii', 'Name'),
             'photo' => Yii::t('yii', 'Photo'),
             'carnumber' => Yii::t('yii', 'Carnumber'),
+            'price' => Yii::t('yii', 'Price'),
+            'maxpas' => Yii::t('yii', 'Maxpas'),
         ];
     }
 
@@ -67,22 +71,5 @@ class Auto extends \yii\db\ActiveRecord
     public function getDrivers()
     {
         return $this->hasMany(Drivers::className(), ['car' => 'id']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getSifarishes()
-    {
-        return $this->hasMany(Sifarish::className(), ['car' => 'id']);
-    }
-
-    /**
-     * @inheritdoc
-     * @return AutoQuery the active query used by this AR class.
-     */
-    public static function find()
-    {
-        return new AutoQuery(get_called_class());
     }
 }

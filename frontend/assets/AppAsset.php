@@ -15,18 +15,29 @@ use yii\web\AssetBundle;
  */
 class AppAsset extends AssetBundle
 {
+
+  
+
     public $basePath = '@webroot';
     public $baseUrl = '@web';
+   // public $sourcePath = '@vendor';
     public $css = [
-        'css/site.css',
+//        'css/jquery-ui.min.css',
+        'css/jquery-ui-custom.css',
         'css/style.css',
-        
+        'css/media-queries.css',
+        'css/car-class-choice.css',
+        'css/loader.css',
     ];
+//    public $jsOptions = ['position'=>\yii\web\view::POS_HEAD];
     public $js = [
-    	
+        'scripts/script.js',
+        'https://maps.googleapis.com/maps/api/js?key=AIzaSyBB19cyGLWQeSz1amgo9wJN6ZeXlQtHZCU&libraries=places&callback=Autocomplete', 
     ];
-    public $depends = [
+     public $depends = [
         'yii\web\YiiAsset',
-        'yii\bootstrap\BootstrapAsset',
+        'yii\bootstrap\BootstrapAsset', 
+        'yii\jui\JuiAsset',
     ];
+     
 }

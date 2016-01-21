@@ -4,21 +4,129 @@
 }
 
 .destination-choice label{
-	float: none;
+    float: none;
 }
 
 .destination-choice label span{
-	margin-right: 5px;
+    margin-right: 5px;
+}
+
+@media only screen and (min-width: 360px){
+    .logo {
+        height: 8em;
+        background-size: cover;
+    }
+}
+
+@media only screen and (min-width: 768px){
+    .car-button-image{
+        display: block;
+    }
+    .skype{
+        position: relative;
+        bottom: 15px;
+        left: 48px;
+    }
+    
+    .logo{
+        height: 8em;
+        background-size: 69% auto;
+    }
+    .header-num-phone {
+        text-align:center;
+    }
+    
+    .phoneico {
+    width: 76px;
+    position: absolute;
+    top: -4px;
+    right: 294px;}
+    
+    .steps{
+        font-size: 14px;
+    }
+    
+    #step1{
+        top: 1px;
+        right: 5px;
+    }
+
+    #step2{
+       bottom: 1px;
+       left: 5px;
+    }
+
+    #step3{
+        top: 1px;
+        left: 5px;
+    }
 }
 
 @media only screen and (min-width: 1200px){
-	#swap-icon img{
-		position: inherit;
-		transform: rotate(90deg);
-		top: 0px;
-	}
-	
-	.destination-choice label{
-		float: left;
-	}
+    .footer{
+        font-size: 20px;
+    }
+    
+    #swap-icon img{
+        position: inherit;
+        transform: rotate(90deg);
+        top: 0px;
+    }
+
+    .destination-choice label{
+        float: left;
+    }
+
+    .transfer, .chaffeur {
+        height: 90px;
+    }
+
+    .fixed-box{
+        display: block;
+        
+    }
+
+    .logo{
+        -webkit-background:no-repeat center/60% url("images/smll1.png");
+        background-image: url('images/smll1.png');
+        background-repeat: no-repeat;
+        background:no-repeat center/100% url("images/smll1.png");
+        
+        background-origin: padding-box;
+        background-position: center left;
+        height: 9em;
+    }
+    
+    .header-num-phone{
+        text-align: right;
+    }
+    
+    .skype {
+        position: absolute;
+        top: -25px;
+        left: 126px;
+    }
+    
+    .wrap-for-dotted-border{
+        top: 248px;
+        display: block;
+    }
+    
+    .phoneico{
+        right: 244px;
+    }
+    
+    .swap-icon{
+        margin-top: 33px;
+    }
+    
+    .features-inner{
+        padding-left: 91px;
+        
+    }
+    
+    #destination-in-form{
+        padding-top: 6px;
+    }
+    
 }

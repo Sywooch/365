@@ -6,8 +6,7 @@ html {
 
 body {
 	height: 100%;
-	font-size:14px;
-	color: #ffffff !important;
+	font-size:16px;
 	margin: 0;
 	padding: 0;
 	font-family: "PT Sans Caption", "verdana", sans-serif ;
@@ -28,6 +27,14 @@ label {
 	
 }
 
+.logo {
+    -webkit-background:no-repeat center/60% url("images/smll1.png");
+    background:no-repeat center/60% url("images/smll1.png");
+    background-origin: content-box;
+    background-size: cover;
+    height: 7em;
+}
+
 .logo h1{
 	color: #000000;
 }
@@ -39,7 +46,7 @@ label {
 
 .destination-choice-wrap {
 	width: 100%;
-	
+	color: #fff;
 	padding-top: 15px;
 	padding-bottom: 20px;
 	margin-bottom: 20px;
@@ -52,18 +59,12 @@ background: -moz-linear-gradient(left,  #6d0019 35%, #4d0026 90%); /* FF3.6-15 *
 background: -webkit-linear-gradient(left,  #6d0019 35%,#4d0026 90%); /* Chrome10-25,Safari5.1-6 */
 background: linear-gradient(to right,  #6d0019 35%,#4d0026 90%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
 filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#6d0019', endColorstr='#4d0026',GradientType=1 ); /* IE6-9 */
-
-
-
-#6d0019
-#ffb3b3	
 }
 
 .footer-wrap {
 	width: 100%;
 	background-color: #444d3e;
-	border-top: 3px solid #c6c9c5;
-	margin-top:30px;
+	margin-top:4px;
 }
 
 .header {
@@ -71,13 +72,46 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#6d0019', end
 }
 
 .header-num-phone #text-above-phone{
-	margin-left: 30px;
+	margin-left: 0px;
+}
+
+.phoneico{
+  width: 76px;
+  position: absolute;
+  top: -4px;
+  right: 246px;
 }
 
 .footer {
 	color: #fff;
 	padding-top: 15px;
 	padding-bottom: 15px;
+        font-size: 23px;
+}
+
+.footer-link {
+    color: #FFF;
+}
+
+.footer-link:hover {
+    color: #fff;
+    text-decoration: underline;
+}
+
+.footer-credit-cards{
+    -webkit-background:no-repeat url("images/visa.png");
+    background:no-repeat url("images/visa.png");
+    background-position: -23px -27px;
+    background-size: 155% 155%;
+    height: 69px;
+    width: 69px;
+    
+}
+
+
+#return{
+    margin-right: 5px;
+    float: left;
 }
 
 .service-choice{
@@ -99,6 +133,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#6d0019', end
 
 .destination-choice input[type="text"]{
 	height: 50px;
+        border: 4px solid transparent;
 	-webkit-border-radius: 4px;
 	-moz-border-radius: 4px;
 	border-radius: 4px;
@@ -106,7 +141,28 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#6d0019', end
 	padding-right: 5px;
 	padding-left:5px;
 	text-overflow: ellipsis;
-	color: #8F948B;
+	color: #000000;
+}
+
+#chaffeur-time-from, #chaffeur-time-to{
+    background: url("images/el_date.png") no-repeat scroll -20px 9px #fff;	
+    float: right;
+    padding-left: 35px;
+    vertical-align: top;
+    white-space: normal;
+    cursor: pointer;
+}
+
+#chaffeur-time-from-col, #chaffeur-time-to-col{
+    padding-left: 0px;
+}
+
+
+.input-from, .input-to{
+/*i put this here because in mobile version this inputs were overflown by other
+content. see stacking context. this might be a bad workaround
+*/
+    z-index:1;
 }
 
 .input-from label{
@@ -115,6 +171,10 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#6d0019', end
 
 #input-from-chaffeur label{
 	float: none;
+}
+
+.chaffeur{
+    display: none;
 }
 
 .input-to label{
@@ -129,7 +189,6 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#6d0019', end
 
 
 .swap-icon {
-	margin-top: 33px;
 	text-align: center;
 	cursor: pointer;
 }
@@ -149,17 +208,16 @@ ul:first-child {
 }
 
 .header-num-phone{
-	color: #c6c9c5;
-	font-weight: bold;
+    text-align: right;
+    margin-top: 23px;
+    color: #c6c9c5;
+    font-weight: bold;
+    font-size: 15px;
 	
 }
 
-.header-num-phone{
-	margin-top: 10px;
-}
-
-.header-num-phone .row:last-child {
-	font-size: 24px;
+.phone-number {
+	font-size: 1.5em;
 	font-weight:bold;
 }
 
@@ -190,14 +248,29 @@ ul:first-child {
 }
 
 .car-class-arrow {
-	color: #697165;
+    color: #697165;
 }
 
 .hide {
-	display: none;
+    display: none;
+}
+
+.wrap-for-dotted-border{
+    position: absolute;
+    height: 125px;
+    width: 343px;
+    border-right: 2px dotted #FFF;
+    top: 243px;
+    display:none;
 }
 
 /* passenger form*/
+#destination-in-form{
+    padding-top: 8px;
+    height: 42px;
+    font-size: 16px;
+}
+
 .cpanel {
 	color: #444d3e;
 	background:#e3e4e2;
@@ -229,7 +302,7 @@ ul:first-child {
 }
 
 .cpanel-section label{
-	float:right;
+	float:left;
 }
 
 .cpanel-footer {
@@ -283,16 +356,16 @@ ul:first-child {
 	cursor: pointer;
 }
 
-#date-arrival{
+#date-arrival, #date-flight{
 	background: url("images/el_date.png") no-repeat scroll -20px 9px #fff;	
 	float: left;
 	padding-left: 35px;
 	vertical-align: top;
-	white-space: normal;
+        white-space: normal;
 	cursor: pointer;
 }
 
-.time-arrival{
+#time-arrival, #time-flight, #time-pickup, #date-pickup-citytocity{
 	background: url("images/el_date.png") no-repeat scroll 8px -41px #fff;
 	float: left;
 	padding-left: 35px;
@@ -300,39 +373,88 @@ ul:first-child {
 	white-space: normal;
 }
 
+
+
+#return-panel{
+    display: none;
+}
+
+.description{
+    font-style: italic;
+    font-size: 0.9em;
+    margin-top:10px;
+}
+
+.inner-addon span{
+    position: absolute;
+    pointer-events: none;
+    padding: 6px;
+}
+
+.inner-addon input{
+    padding-left: 40px;
+    padding-top: 3px;
+}
+
+#return-check-form{
+    margin-top: 11px;
+}
+
+#pass-amount{
+        
+}
 /* button-box (box with a title and a big button) */
 
 .button-box {
 	padding: 25px;
-	background: linear-gradient(to bottom, #e9f5ed, #19f563);
-	color: #2a2e3f;
+	background: #6d0019; /* Old browsers */
+    background: -moz-linear-gradient(left,  #6d0019 35%, #4d0026 90%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(left,  #6d0019 35%,#4d0026 90%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to right,  #6d0019 35%,#4d0026 90%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#6d0019', endColorstr='#4d0026',GradientType=1 ); /* IE6-9 */
+	color: #fff;
 	-webkit-border-radius: 4px;
 	-moz-border-radius: 4px;
 	border-radius: 4px;
 }
 
 .button-box button{
-	border: solid 1px #bdc6be;
-	cursor: pointer;
-	display: block;
-	box-shadow: -1px 3px 8px -2px rgba(0,0,0,0.7);
-	width: 100%;
-	height: 50px;
-	margin-bottom: 10px;
-	margin-top: 10px;
-	font-size: 18px;
-	color: #697165;
-	
-	-webkit-border-radius: 7px;
-	-moz-border-radius: 7px;
-	border-radius: 7px;
-	
+    border: solid 1px #d7dbd7;
+    background-color: #d7dbd7;
+    cursor: pointer;
+    display: block;
+    width: 100%;
+    height: 50px;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    font-size: 18px;
+    color: #697165;
+
+    -webkit-border-radius: 7px;
+    -moz-border-radius: 7px;
+    border-radius: 7px;
+
+    -o-transition: background-color 1s, border-color 1s, color 1s;
+    -moz-transition: background-color 1s, border-color 1s, color 1s;
+    -webkit-transition: background-color 1s, border-color 1s, color 1s;
+    transition: background-color 1s, border-color 1s, color 1s;
 }
 
 .button-box button:hover{
-	background-position: left bottom;
-	border: solid 1px #d3d9d3;
-	box-shadow: -1px 2px 5px -2px rgba(0,0,0,0.7);
+    background-color:#00B300;
+    border: solid 1px #00B300;
+    color:#fff;
+    background-position: left bottom;
+}
+
+@keyframes highliteGoToPayment{
+    from {
+        background-color: #BDC6BE;
+    }
+    
+    to {
+        background-color: #00B300;
+    }
 }
 
 .button-box-title {
@@ -342,16 +464,17 @@ ul:first-child {
 /* right side fixed block */
 
 .fixed-box{
-	position: fixed;
-	background: #fff;
-	width: 22%;
-	top: 156px;
-	right: 0px;
+        top: 0px;
+        margin-top: 15px;
+	background: #FFF6CC;
 	-webkit-border-radius: 5px;
 	-moz-border-radius: 5px;
 	border-radius: 5px;
 	border: 1px solid #e3e4e2;
 	padding: 10px;
+        color: #2A2E3F;
+        display: none;
+        box-shadow: -1px 3px 8px -2px rgba(0,0,0,0.7);
 	
 }
 
@@ -381,12 +504,227 @@ ul:first-child {
 }
 
 .placeholder {
-	visibility: hidden;
+    visibility: hidden;
+}
+
+/* SKYPE buttons */
+
+.skype{
+    position: relative;
+    bottom: 15px;
+    left: -10px;
+}
+
+#car-class-container{
+    opacity: 1;
+    visibility: visible;
 }
 
 
-/* allow fa icons in jquery ui*/
- /* Allow Font Awesome Icons in lieu of jQuery UI and only apply when using a FA icon */
 
+/* steps */
+.step-wrap,
+.steps,
+.steps .step{
+    height: 40px;
+}
 
+.steps-wrap{
+    /*background-color: #bfbfbf;*/
+    margin-bottom: 5px;
+    
+}
+.steps{
+    color: #000000;
+    font-size: 11px;
+}
 
+#step1, #step2, #step3{
+    position: relative;
+}
+
+#step1{
+    top: 3px;
+    right: 4px;
+}
+
+#step2{
+   bottom: 4px;
+   left: 5px;
+}
+
+#step3{
+    top: 3px;
+    left: 8px;
+}
+
+.steps .step{
+    text-align: center;
+    padding: 1px;
+    border-left: none;
+    border-top-right-radius: 31px;
+    border-bottom-right-radius: 31px;
+    border-top-left-radius: -31px;
+    border-bottom-left-radius: -31px;
+    padding-top: 9px;
+}
+
+.step-inactive{
+    background: #C6C9C5;
+}
+
+.step-active{
+    font-weight: bold;
+    color: #fff;
+    background-color: #6d0019; /* Old browsers */
+    background-color: -moz-linear-gradient(left,  #6d0019 35%, #4d0026 90%); /* FF3.6-15 */
+    background-color: -webkit-linear-gradient(left,  #6d0019 35%,#4d0026 90%); /* Chrome10-25,Safari5.1-6 */
+    background-color: linear-gradient(to right,  #6d0019 35%,#4d0026 90%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#6d0019', endColorstr='#4d0026',GradientType=1 ); /* IE6-9 */
+    animation-duration: 2s;
+    animation-name: blinkActive;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+@keyframes blinkActive{
+    to {
+        background-color: #6d0019; /* Old browsers */
+        background-color: -moz-linear-gradient(left,  #6d0019 35%, #4d0026 90%); /* FF3.6-15 */
+        background-color: -webkit-linear-gradient(left,  #6d0019 35%,#4d0026 90%); /* Chrome10-25,Safari5.1-6 */
+        background-color: linear-gradient(to right,  #6d0019 35%,#4d0026 90%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#6d0019', endColorstr='#4d0026',GradientType=1 ); /* IE6-9 */
+    }
+    
+    from {
+        color: #000;
+        background-color: #fff; /* Old browsers */
+        background-color: -moz-linear-gradient(left,  #fff 35%, #fff 90%); /* FF3.6-15 */
+        background-color: -webkit-linear-gradient(left,  #fff 35%,#fff 90%); /* Chrome10-25,Safari5.1-6 */
+        background-color: linear-gradient(to right,  #fff 35%,#fff 90%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fff', endColorstr='#fff',GradientType=1 ); /* IE6-9 */
+    }
+}
+
+.step-complete{
+    color: #fff;
+    background: #00b300; /* Old browsers */
+}
+
+.rounded-border{
+    position: absolute;
+    height: 40px;
+    background: #fff;
+    width: 20px;
+    top: 0px;
+    left: 0px;
+    border-top-right-radius: 31px;
+    border-bottom-right-radius: 31px;
+}
+
+.pac-container:after{
+    background-image: none !important;
+    height: 0px;
+}
+
+/*  index.php features coming after car class buttons*/
+.features-container{
+    color: #444D3E;
+    background-color: #C6C9C5;
+    font-size: 23px;
+    margin-top: 20px;
+}
+
+.features-inner{
+    padding-left:0px;
+    margin-top: 30px;
+    padding-bottom: 30px;
+}
+
+.features-col{
+    margin-top: 30px;
+   
+       
+}
+
+.features-free-wait{
+    background: transparent url("images/wait.png") no-repeat scroll 13px 2px;
+    height: 67px;
+}
+
+.features-free-wait div, .features-lagguage div,.around-the-clock div,
+.clean-car div, .greeting-sign, .fixed-price{
+   line-height: 28px; 
+}
+
+.features-free-wait div{
+    margin-left: 107px;
+    
+}
+
+.features-lagguage {
+    background: transparent url("images/lagguage.png") no-repeat scroll 13px 2px;
+    height: 67px;
+}
+
+.features-lagguage div{
+    margin-left: 107px;
+    
+}
+
+.around-the-clock{
+    background-image: url("images/2471.png");
+    background-size: 100px;
+    background-repeat: no-repeat;
+    background-position: -7px -19px;
+    height: 67px;
+    
+}
+
+.around-the-clock div{
+    margin-left: 107px;
+}
+
+.clean-car img{
+    width: 120px;
+    height: 120px;
+    
+}
+
+.clean-car{
+   background-image: url("images/car.png");
+   background-size: 140px 140px;
+   background-repeat: no-repeat;
+   background-position: -12px -42px;
+   height: 67px;    
+}
+
+.clean-car div{
+   margin-left: 109px;
+}
+
+.fixed-price{
+    background: transparent url("images/fixed-price.png") no-repeat scroll 13px 2px;
+    height: 67px;
+}
+
+.fixed-price div{margin-left: 107px;}
+
+.greeting-sign{
+    background: transparent url("images/greeting.png") no-repeat scroll 13px 2px;
+    height: 67px;
+}
+
+.greeting-sign div{margin-left: 107px;}
+
+/*language picker*/
+.language-picker-wrap{
+    text-align: right;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+#add {
+    cursor: pointer;
+    text-decoration: underline;
+}

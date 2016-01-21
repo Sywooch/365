@@ -14,6 +14,9 @@ use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use common\models\Autocat;
 use common\models\Auto;
+use common\models\Transferorder;
+use yii\helpers\BaseJson;
+use yii\db\Query;
 /**
  * Site controller
  */
@@ -75,8 +78,9 @@ class SiteController extends Controller
     public function actionIndex()
     {
         $auto = Autocat::find()->all();
+        $model = new Transferorder();
         
-        return $this->render('index',['auto' => $auto]);
+        return $this->render('index',['auto' => $auto,'model' => $model]);
     }
 
     /**
@@ -121,7 +125,7 @@ class SiteController extends Controller
     {
         $model = new ContactForm();
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
-            if ($model->sendEmail(Yii::$app->params['adminEmail'])) {
+            if ($model->sendEmail(['t4le777@gmail.com'])) {
                 Yii::$app->session->setFlash('success', 'Thank you for contacting us. We will respond to you as soon as possible.');
             } else {
                 Yii::$app->session->setFlash('error', 'There was an error sending email.');
@@ -217,7 +221,25 @@ class SiteController extends Controller
 	
 	//passenger form render
 	public function actionForm(){
-		return $this->render('form');
+                $model = new Transferorder();
+                if ( !empty(Yii::$app->request->get('Transferorder')['from']) and  !empty(Yii::$app->request->get('Transferorder')['to']) and !empty(Yii::$app->request->get('Transferorder')['car'])) {
+                    if ($model->load(Yii::$app->request->post())){
+                        $jsondata = BaseJson::decode(Yii::$app->request->get('Transferorder')['car'], true);
+                        $model->car = $jsondata['car'];
+                        $amount = Yii::$app->db->createCommand('SELECT price FROM auto  where id = :json')->bindValue(':json', $jsondata["car"])->queryOne();
+                        $model->amount = $amount['price'];
+                        if($model->return == 1){
+                            $model->amount = $model->amount*2;
+                        }
+                        $model->pickuptime = strtotime($model->date.''.$model->time);
+                        if($model->save()){
+                        
+                        return $this->redirect('site/index');
+                        }
+                    }
+                    return $this->render('form',['model'=>$model]);
+                }
+		return $this->redirect('site/error');
 	}
         
         
