@@ -112,6 +112,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#6d0019', end
 #return{
     margin-right: 5px;
     float: left;
+    margin-top: 8px;
 }
 
 .service-choice{
@@ -727,4 +728,5 @@ ul:first-child {
 #add {
     cursor: pointer;
     text-decoration: underline;
+    width: 40%;
 }
