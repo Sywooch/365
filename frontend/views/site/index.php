@@ -59,7 +59,7 @@ $this->title = 'My Yii Application';
                                         <label for="from">
                                         <span>From</span>
                                         <input type="text" id="pac-input-from-chaffeur" class="controls" name="destination-from" 
-                                        autofocus=true/>
+                                        value="Baku, Azerbaijan" autofocus=true/>
                                         </label>
                                         </div>
                                 <div id="chaffeur-time-from-col" class="col-md-4">
@@ -83,7 +83,7 @@ $this->title = 'My Yii Application';
 
 
         <?= Html::activeInput('text', $model, 'from', ['id'=>'pac-input-from' ,'class' => 'controls' ,
-            'autofocus' => 'true']) ?>
+            'autofocus' => 'true', 'placeholder'=>'Heydar Aliyev International Airport (Terminal 1), Azerbaijan']) ?>
 
 
                                 </div>
@@ -95,17 +95,18 @@ $this->title = 'My Yii Application';
 
 
                                         <?= Html::activeInput('text', $model, 'to', ['id'=>'pac-input-to' ,'class' => 'controls' ,
-                                             'disabled' => false]) ?>
+                                             'disabled' => false, 'placeholder'=>'Baku, Azerbaijan']) ?>
 
 
                         </div>
                         <div class="col-md-3">
                                 <div class="row placeholder">placeholder</div>
                                 <div class="row placeholder">placeholder</div>
-                                <label for="return">
-                <input type="checkbox" id="return" name="return-check"/><span>Return</span>
+                                
+                                <input type="checkbox" id="return" name="return-check"/>
+                                <label for="return"><span>Return</span></label>
 
-                                </label>
+                                
                         </div>
                         </div>
 
@@ -146,7 +147,7 @@ $to_Currency = urlencode('USD');
 
                                 <div class="row">
                                         <div class="col-sm-3 car-button-image">
-                                                <img src="/uploads/swap.png" />
+                                                <img src="/uploads/<?=$cats['autos']['0']['photo']?>" />
                                         </div>
                                         <div class="col-sm-3 col-xs-4 car-button-classname">
                                                 <?= $cats[$lang] ?><br>
@@ -154,14 +155,15 @@ $to_Currency = urlencode('USD');
                                         </div>
                                         <div class="col-sm-3 col-xs-4 car-button-features">
 
-                                            <span><?= Icon::show('wifi',[], Icon::FA)?></span>
+                                            <img src="uploads/wifi.png"/>
 
 
                                         </div>
-                                        <div data-price="<?= $cats['autos']['0']['price']  ?>" class="col-sm-3 col-xs-4 car-class-min-price">
-                                            <?= $cats['autos']['0']['price'] ?>
+                                        
+                                        <div data-price="<?= $cats['autos']['0']['priceT']  ?>" data-pricebuffer="0" class="col-sm-3 col-xs-4 car-class-min-price">
+                                            $ <?= $cats['autos']['0']['priceT'] ?>
                                             <?php 
-                                            $amount = urldecode($cats['autos']['0']['price']);
+                                            $amount = urldecode($cats['autos']['0']['priceT']);
                                             //$get = file_get_contents("https://www.google.com/finance/converter?a=$amount&from=$from_Currency&to=$to_Currency");
                                             //$get = explode("<span class=bld>",$get);
                                             //$get = explode("</span>",$get[1]);
@@ -189,12 +191,12 @@ $to_Currency = urlencode('USD');
                 <?php foreach($cats['autos'] as $autos): ?>
                     <?php
                         $buttonContent = $this->context->renderPartial(
-                                'carClassButtonContent', ['price'=>$autos['price'],
-                                    'name'=>$autos['name']]);
+                                'carClassButtonContent', ['price'=>$autos['priceT'],
+                                    'name'=>$autos['name'], 'pas' => $autos['maxpas'] ,'photo' => $autos['photo']]);
                     ?>
                     <?= Html::button($buttonContent,
                         ['name'=>'Transferorder[car]','value'=>['car' => $autos['id'],
-                            'amount' => $autos['price']], 'type' => 'submit', 'class'=>'car-class' ]); ?>
+                            'amount' => $autos['priceT']], 'type' => 'submit', 'class'=>'car-class' ]); ?>
 
 
 

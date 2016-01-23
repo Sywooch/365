@@ -5,20 +5,23 @@ $(document).ready(function(){
             "July", "August", "September", "October", "November", "December"];
         
     $('#phone-number').intlTelInput({
-            nationalMode: false
+            nationalMode: false,
+            preferredCountries: ["", ""]
         });
         
+    //bootstrap3 datetimepicker     
     $('#time-arrival').datetimepicker({
+       debug: true, 
        format: 'HH:mm',
        stepping: 15,
-       minDate: moment()
+       
     });
     
     //bootstrap3 datetimepicker 
     $('#time-pickup').datetimepicker({
+        debug: true,
         format: 'HH:mm',
         stepping: 15,
-        minDate: moment()
     });
        
     //jquery-ui datepicker

@@ -7,8 +7,8 @@ use yii\helpers\BaseJson;
 use frontend\assets\FormAsset;
 use frontend\assets\BootstrapDateTimePickerAsset;
 use frontend\assets\InternationalTelephoneAsset;
-FormAsset::register($this);
 BootstrapDateTimePickerAsset::register($this);
+FormAsset::register($this);
 InternationalTelephoneAsset::register($this);
 ?>
 

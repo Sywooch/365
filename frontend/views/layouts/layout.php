@@ -65,9 +65,9 @@ SemanticUiDropdownAsset::register($this);
                     </div>
                     <div  class="col-xs-4 col-md-1 currency-converter">
                         <select id="currency-converter" name="currency">
-                            <option value = "AZN">AZN</option>
-                            <option value = "RUB">RUB</option>
-                            <option value = "USD">USD</option>
+                            <option value = "AZN">USD</option>
+                            <option value = "RUB">EUR</option>
+                            <option value = "USD">RUB</option>
                         </select>
                     </div>
                     </div>

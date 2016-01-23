@@ -18,8 +18,9 @@ class AutoSearch extends Auto
     public function rules()
     {
         return [
-            [['id', 'idcat', 'price'], 'integer'],
-            [['name', 'photo', 'carnumber', 'maxpas'], 'safe'],
+            [['id', 'idcat', 'priceT', 'priceC'], 'integer'],
+            [['name', 'photo', 'carnumber', 'maxpas', 'active'], 'safe'],
+            [['cent'], 'number'],
         ];
     }
 
@@ -41,7 +42,7 @@ class AutoSearch extends Auto
      */
     public function search($params)
     {
-        $query = Auto::find();
+        $query = Auto::find()->orderBy('idcat');
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
@@ -58,13 +59,16 @@ class AutoSearch extends Auto
         $query->andFilterWhere([
             'id' => $this->id,
             'idcat' => $this->idcat,
-            'price' => $this->price,
+            'priceT' => $this->priceT,
+            'priceC' => $this->priceC,
+            'cent' => $this->cent,
         ]);
 
         $query->andFilterWhere(['like', 'name', $this->name])
             ->andFilterWhere(['like', 'photo', $this->photo])
             ->andFilterWhere(['like', 'carnumber', $this->carnumber])
-            ->andFilterWhere(['like', 'maxpas', $this->maxpas]);
+            ->andFilterWhere(['like', 'maxpas', $this->maxpas])
+            ->andFilterWhere(['like', 'active', $this->active]);
 
         return $dataProvider;
     }

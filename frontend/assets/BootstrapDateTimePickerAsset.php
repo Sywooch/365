@@ -21,6 +21,7 @@ class BootstrapDateTimePickerAsset extends AssetBundle
         'build/js/bootstrap-datetimepicker.min.js',
     ];
     public $depends = [
+      'yii\web\JqueryAsset',
       'frontend\assets\MomentAsset',
       'yii\bootstrap\BootstrapAsset',
     ];

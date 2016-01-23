@@ -12,8 +12,11 @@ use Yii;
  * @property string $name
  * @property string $photo
  * @property string $carnumber
- * @property integer $price
+ * @property integer $priceT
+ * @property integer $priceC
+ * @property double $cent
  * @property string $maxpas
+ * @property string $active
  *
  * @property Autocat $idcat0
  * @property Drivers[] $drivers
@@ -34,8 +37,10 @@ class Auto extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['idcat', 'name', 'photo', 'price'], 'required'],
-            [['idcat', 'price'], 'integer'],
+            [['idcat', 'name', 'photo', 'priceT', 'priceC'], 'required'],
+            [['idcat', 'priceT', 'priceC'], 'integer'],
+            [['cent'], 'number'],
+            [['active'], 'string'],
             [['name', 'photo', 'carnumber'], 'string', 'max' => 45],
             [['maxpas'], 'string', 'max' => 15]
         ];
@@ -52,8 +57,11 @@ class Auto extends \yii\db\ActiveRecord
             'name' => Yii::t('yii', 'Name'),
             'photo' => Yii::t('yii', 'Photo'),
             'carnumber' => Yii::t('yii', 'Carnumber'),
-            'price' => Yii::t('yii', 'Price'),
+            'priceT' => Yii::t('yii', 'Price T'),
+            'priceC' => Yii::t('yii', 'Price C'),
+            'cent' => Yii::t('yii', 'Cent'),
             'maxpas' => Yii::t('yii', 'Maxpas'),
+            'active' => Yii::t('yii', 'Active'),
         ];
     }
 

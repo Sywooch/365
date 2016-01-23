@@ -32,7 +32,7 @@ class AppAsset extends AssetBundle
 //    public $jsOptions = ['position'=>\yii\web\view::POS_HEAD];
     public $js = [
         'scripts/script.js',
-        'https://maps.googleapis.com/maps/api/js?key=AIzaSyBB19cyGLWQeSz1amgo9wJN6ZeXlQtHZCU&libraries=places&callback=Autocomplete', 
+        'https://maps.googleapis.com/maps/api/js?key=AIzaSyBB19cyGLWQeSz1amgo9wJN6ZeXlQtHZCU&libraries=places&callback=Autocomplete&signed_in=true',
     ];
      public $depends = [
         'yii\web\YiiAsset',

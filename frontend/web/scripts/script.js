@@ -29,7 +29,8 @@
 
 /* Main scripts */
 
-$(document).ready(function (){
+$(document).ready(function (){    
+    
     $('#currency-converter').dropdown();
     
     /*check viewport size*/
@@ -60,14 +61,14 @@ $(document).ready(function (){
     }); //how this function works?
 
     //set default values in destination choice fields
-    function setDefaultInputValues(){
-       var defaultFrom = 'Heydar Aliyev International Airport (Terminal 1), Azerbaijan';
-       var defaultTo = 'Baku, Azerbaijan';
-       $('#pac-input-from').val(defaultFrom);
-       $('#pac-input-to').val(defaultTo); 
-    }
-    
-    setDefaultInputValues();
+//    function setDefaultInputValues(){
+//       var defaultFrom = 'Heydar Aliyev International Airport (Terminal 1), Azerbaijan';
+//       var defaultTo = 'Baku, Azerbaijan';
+//       $('#pac-input-from').val(defaultFrom);
+//       $('#pac-input-to').val(defaultTo); 
+//    }
+//    
+//    setDefaultInputValues();
 
     jQuery.fn.exists = function(){return this.length>0;}; //function to check if element exists
 
@@ -87,6 +88,7 @@ $(document).ready(function (){
         
     /* main page car buttons accordion*/
     $('#accordion').accordion({
+            heightStyle: "content",
             collapsible: true,
             active: false,
             icons: false,
@@ -124,26 +126,26 @@ $(document).ready(function (){
 
 //main page destination choice fields. swap icon and disabled field functionalities	
 function changeEventHandler(){
-	var firstField = document.getElementById("pac-input-from");
-	var secondField = document.getElementById("pac-input-to");
-	
-	if (firstField.value == ""){
-		secondField.setAttribute("disabled", true);
-		secondField.value = "";
-	} else {
-		secondField.removeAttribute("disabled");
-	}
+    var firstField = document.getElementById("pac-input-from");
+    var secondField = document.getElementById("pac-input-to");
+
+    if (firstField.value == ""){
+            secondField.setAttribute("disabled", true);
+            secondField.value = "";
+    } else {
+            secondField.removeAttribute("disabled");
+    }
 	
 };
 
 function swapFieldValues(){
-	var firstField = document.getElementById("pac-input-from");
-	var secondField = document.getElementById("pac-input-to");
-	var tmp;
-	
-	tmp = secondField.value;
-	secondField.value = firstField.value;
-	firstField.value = tmp;
+    var firstField = document.getElementById("pac-input-from");
+    var secondField = document.getElementById("pac-input-to");
+    var tmp;
+
+    tmp = secondField.value;
+    secondField.value = firstField.value;
+    firstField.value = tmp;
 	
 };
 
@@ -186,7 +188,7 @@ if ($("#pac-input-from").exists()){
             }, 1000);
         }
         
-        var returnCheckBox = document.getElementById('return'); //get checkbox index.php
+       // var returnCheckBox = document.getElementById('return'); //get checkbox index.php
         
 	document.getElementById('transfer-radio').addEventListener("change", function () {
 		$('#transfer').show('fast').fadeIn();
@@ -206,46 +208,47 @@ if ($("#pac-input-from").exists()){
 	});
         
         /* function to update cost when return is checked */
-        function multiplyCost(){
+      /*  function multiplyCost(){
             var carClassArray = document.getElementsByClassName('car-class-min-price');
+            
             for (var i = 0; i < carClassArray.length; i++){
-               var oldCarClassPrice = carClassArray[i].innerHTML;
+               var oldCarClassPrice = carClassArray[i].dataset.price;
                newCarClassPrice = Number(oldCarClassPrice)*2;
-               carClassArray[i].innerHTML = oldCarClassPrice + ' + ' + oldCarClassPrice +
-                       ' = ' + newCarClassPrice;
+               carClassArray[i].innerHTML ='$' + oldCarClassPrice + ' + ' + '$'+ oldCarClassPrice +
+                       ' = $' + newCarClassPrice;
                
             }
             
-        };
+        };*/
         /* function to reset cost when return is unchecked */
         function resetCost(){
             var carClassArray = document.getElementsByClassName('car-class-min-price');
             for (var i = 0; i < carClassArray.length; i++){
-               carClassArray[i].innerHTML = carClassArray[i].dataset.price;
+               carClassArray[i].innerHTML = '$' + carClassArray[i].dataset.price;
             }
         };
         
         
         /*when page reloads check if checkbox is checked then update cost*/
-        if (returnCheckBox.checked){
-           multiplyCost(); 
-        };
+//        if (returnCheckBox.checked){
+//           multiplyCost(); 
+//        };
         
         /* update cost when checkbox is true */
-        returnCheckBox.addEventListener('change', function(){
-           
-           hideCarClassContainer();
-           if (this.checked && document.getElementById('transfer-radio').checked){
-               setTimeout(function(){
-                   multiplyCost();
-               }, 200);
-               
-           }else{
-               setTimeout(function(){
-                   resetCost();
-               }, 200);
-           }
-        });
+//        returnCheckBox.addEventListener('change', function(){
+//           
+//           hideCarClassContainer();
+//           if (this.checked && document.getElementById('transfer-radio').checked){
+//               setTimeout(function(){
+//                   multiplyCost();
+//               }, 200);
+//               
+//           }else{
+//               setTimeout(function(){
+//                   resetCost();
+//               }, 200);
+//           }
+//        });
   
     }
 

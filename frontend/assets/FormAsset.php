@@ -23,9 +23,9 @@ class FormAsset extends AssetBundle
     public $baseUrl = '@web';
    // public $sourcePath = '@vendor';
     public $css = [
-        'css/xdsoft-custom.css',
         'css/inttel-custom.css',
         'css/bootstrap-custom.css',
+        'css/bootstrap-datetimepicker-custom.css'
     ];
     
     public $js = [

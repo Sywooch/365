@@ -4,17 +4,14 @@ To change this template file, choose Tools | Templates
 and open the template in the editor.
 */
 /* 
-    Created on : Jan 21, 2016, 4:54:56 PM
+    Created on : Jan 22, 2016, 1:49:48 PM
     Author     : Kamran
 */
-.form-group{
-    margin-bottom: 0px;
+
+a{
+    color: #6D0019;
 }
 
-.help-block{
-    display: none;
-}
-
-.btn:hover, .btn:focus{
-    color: #fff;
+.bootstrap-datetimepicker-widget table td span:hover{
+    background: #6D0019 none repeat scroll 0% 0%;
 }

@@ -1,19 +1,19 @@
 @import url("media-queries.css");
 
 .car-class{
-	border: solid 1px #bdc6be;
-	cursor: pointer;
-	display: block;
-	border-radius: 7px;
-	box-shadow: -1px 3px 8px -2px rgba(0,0,0,0.7);
-	width: 100%;
-	height: 70px;
-	padding-top: 7px;
-        font-weight:normal;
-	margin-top: 20px;
-	font-size: 12px;
-	background: #d9d9d9 url("images/ui-bg_glass_75_e6e6e6_1x400.png") 50% 50% repeat-x;
-        color: #555555;	
+    border: solid 1px #bdc6be;
+    cursor: pointer;
+    display: block;
+    border-radius: 7px;
+    box-shadow: -1px 3px 8px -2px rgba(0,0,0,0.7);
+    width: 100%;
+    height: 70px;
+    padding-top: 7px;
+    font-weight:normal;
+    margin-top: 20px;
+    font-size: 12px;
+    background: #d9d9d9 url("images/ui-bg_glass_75_e6e6e6_1x400.png") 50% 50% repeat-x;
+    color: #555555;	
 }
 
 .car-class:hover{
@@ -101,7 +101,7 @@ li ul button:hover{
 }
 
 .car-button-features,.car-features{
-    margin-top: 13px;
+    margin-top: 6px;
 }
 
 .car-class-min-price,.car-price{
@@ -137,7 +137,11 @@ li ul button:hover{
         display: block;
     }
     
-    .car-button-features, .car-class-min-price{
+    .car-button-features{
+        margin-top: 15px;
+    }
+    
+    .car-class-min-price{
         margin-top: 20px;
     }
     .car-button-classname{

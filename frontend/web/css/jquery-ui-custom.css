@@ -57,3 +57,7 @@ div.ui-datepicker{
 .ui-state-hover{
     background-color: #6d0019;
 }
+
+.ui-widget input, .ui-widget select, .ui-widget textarea, .ui-widget button{
+    font-size: 0.8em;
+}
