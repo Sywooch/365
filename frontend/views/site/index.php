@@ -10,71 +10,75 @@ $this->title = 'My Yii Application';
 <?php $lang = 'name_'.Yii::$app->language;?>
 
 <div class="container-fluid steps-wrap">
-<div class="row steps">
-<div class="col-xs-4 col-md-4 step step-active">
-<span id="step1">Destination</span>
-
-</div>
-<div class="col-xs-4 col-md-4 step step-inactive">
-<span id="step2">Passenger information</span>
-<div class="rounded-border"></div>
-</div>
-<div class=" col-xs-4 col-md-4 step step-inactive">
-<span id="step3">Confirmation</span>
-<div class="rounded-border"></div>
-</div>
-</div>
+    <div class="row steps">
+        <div class="col-xs-4 col-md-4 step step-active">
+            <span id="step1">Destination</span>
+        </div>
+        <div class="col-xs-4 col-md-4 step step-inactive">
+            <span id="step2">Passenger information</span>
+            <div class="rounded-border"></div>
+        </div>
+        <div class=" col-xs-4 col-md-4 step step-inactive">
+        <span id="step3">Confirmation</span>
+        <div class="rounded-border"></div>
+        </div>
+    </div>
 </div>
 
 <div class="destination-choice-wrap">
-<div class="wrap-for-dotted-border">
-</div>
+    
 <div class="container">
+    
 <div class="row">
 <div class="col-md-3 service-choice">
-                <div class="row">
-                        <div class="col-md-12">
-                                <div>
-                                        <label for="transfer-radio">
-                                                <input type="radio" id="transfer-radio" name="service" checked=true />
-                                                Transfer
-                                        </label>
-                                </div>
-                        </div>
-                </div>
-                <div class="row">
-                        <div class="col-md-12">
-                                <label for="chaffeur-radio">
-                                        <input id="chaffeur-radio" type="radio" name="service" />
-                                        Chaffeur Service
-                                </label>
-                        </div>
-                </div>
+    
+    <div class=" wrap-for-dotted-border">
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div>
+                <label for="transfer-radio">
+                    <input type="radio" id="transfer-radio" name="service" checked=true />
+                    Transfer
+                </label>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <label for="chaffeur-radio">
+                <input id="chaffeur-radio" type="radio" name="service" />
+                Chaffeur Service
+            </label>
+        </div>
+    </div>
         </div>
 
+    <!-- destination and service choice -->
         <div class="col-md-9 destination-choice">
                 <div class="row">
-                        <div class="chaffeur" id="chaffeur">
-                                <div id="input-from-chaffeur" class="col-md-4">
-                                        <label for="from">
-                                        <span>From</span>
-                                        <input type="text" id="pac-input-from-chaffeur" class="controls" name="destination-from" 
-                                        value="Baku, Azerbaijan" autofocus=true/>
-                                        </label>
-                                        </div>
-                                <div id="chaffeur-time-from-col" class="col-md-4">
-                                        <label for="chaffeur-time-from">
-                                                Time from
-                                                <input type="text" id="chaffeur-time-from" />
-                                        </label>
-                                        </div>
-                                        <div id="chaffeur-time-to-col" class="col-md-4">
-                                        <label for="chaffeur-time-to">
-                                                Time to
-                                                <input type="text" id="chaffeur-time-to"/>
-                                        </label>
-                                        </div>
+                    <div class="chaffeur" id="chaffeur">
+                        <div id="input-from-chaffeur" class="col-md-4">
+                            <label for="from">
+                            <span>From</span>
+                            <input type="text" id="pac-input-from-chaffeur" class="controls" name="destination-from" 
+                            value="Baku, Azerbaijan" autofocus=true/>
+                            </label>
                         </div>
+                        <div id="chaffeur-time-from-col" class="col-md-4">
+                            <label for="chaffeur-time-from">
+                                    Time from
+                                    <input type="text" id="chaffeur-time-from" />
+                            </label>
+                        </div>
+                        <div id="chaffeur-time-to-col" class="col-md-4">
+                            <label for="chaffeur-time-to">
+                                    Time to
+                                    <input type="text" id="chaffeur-time-to"/>
+                            </label>
+                        </div>
+                    </div>
 
 <?= Html::beginForm(['site/form'], 'get', ['enctype' => 'multipart/form-data']) ?>
                         <div class="transfer" id="transfer">
@@ -111,7 +115,7 @@ $this->title = 'My Yii Application';
                         </div>
 
                 </div>
-        </div>
+        </div> <!-- destination and service choice end -->
 
 </div>
 </div>
@@ -142,33 +146,36 @@ $to_Currency = urlencode('USD');
 
             <?php foreach($auto as $cats): ?>
 
+ <?php  $say =  count($cats['autos']);?>
+            <button class="col-xs-12 car-class-main" name="button" type="button">
 
-                                <button class="col-xs-12 car-class-main" name="button" type="button">
+            <div class="row">
+                    <div class="col-sm-3 car-button-image">
+                            <img src="/uploads/<?=$cats['autos'][$say-1]['photo']?>" />
 
-                                <div class="row">
-                                        <div class="col-sm-3 car-button-image">
-                                                <img src="/uploads/<?=$cats['autos']['0']['photo']?>" />
-                                        </div>
-                                        <div class="col-sm-3 col-xs-4 car-button-classname">
-                                                <?= $cats[$lang] ?><br>
-                                                max 3 <?=Icon::show('user',[],Icon::FA)?>
-                                        </div>
-                                        <div class="col-sm-3 col-xs-4 car-button-features">
+                    </div>
+                    <div class="col-sm-3 col-xs-4 car-button-classname">
+                            <?= $cats[$lang] ?><br>
+                            MAX <?=Html::encode($cats['autos'][$say-1]['maxpas'])?> <?=Icon::show('user',[],Icon::FA)?>
+                    </div>
+                    <div class="col-sm-3 col-xs-4 car-button-features">
 
-                                            <img src="uploads/wifi.png"/>
+                        <img src="uploads/wifi.png"/>
 
 
-                                        </div>
-                                        
-                                        <div data-price="<?= $cats['autos']['0']['priceT']  ?>" data-pricebuffer="0" class="col-sm-3 col-xs-4 car-class-min-price">
-                                            $ <?= $cats['autos']['0']['priceT'] ?>
-                                            <?php 
-                                            $amount = urldecode($cats['autos']['0']['priceT']);
-                                            //$get = file_get_contents("https://www.google.com/finance/converter?a=$amount&from=$from_Currency&to=$to_Currency");
-                                            //$get = explode("<span class=bld>",$get);
-                                            //$get = explode("</span>",$get[1]);
-                                            $converted_amount = 5;//preg_replace("/[^0-9\.]/", null, $get[0]);
-                                            ?>
+                    </div>
+
+                    <div data-price="<?= $cats['autos']['0']['priceT']  ?>" 
+                         data-coefficient="<?= $cats['autos']['0']['cent']?>"
+                         class="col-sm-3 col-xs-4 car-class-min-price">
+                        <span>from</span> $ <?= $cats['autos']['0']['priceT'] ?>
+                        <?php 
+                        $amount = urldecode($cats['autos']['0']['priceT']);
+                        //$get = file_get_contents("https://www.google.com/finance/converter?a=$amount&from=$from_Currency&to=$to_Currency");
+                        //$get = explode("<span class=bld>",$get);
+                        //$get = explode("</span>",$get[1]);
+                        $converted_amount = 5;//preg_replace("/[^0-9\.]/", null, $get[0]);
+                        ?>
 
             <?php 
              // $amount = urldecode($cats['price']);
@@ -177,22 +184,21 @@ $to_Currency = urlencode('USD');
               // $get = explode("</span>",$get[1]);
               $converted_amount = 5; //preg_replace("/[^0-9\.]/", null, $get[0]);
             ?>
-                                                <?=substr($converted_amount, 0 , -2) ?>
-                                        </div>
-                                    <div class="col-sm-3 arrow">
+                        <?=substr($converted_amount, 0 , -2) ?>
+                </div>
+            <div class="col-sm-3 arrow">
 
-                                    </div>
+            </div>
 
-                                </div>
-                        </button>
+        </div>
+        </button>
 
 
             <ul>
                 <?php foreach($cats['autos'] as $autos): ?>
                     <?php
                         $buttonContent = $this->context->renderPartial(
-                                'carClassButtonContent', ['price'=>$autos['priceT'],
-                                    'name'=>$autos['name'], 'pas' => $autos['maxpas'] ,'photo' => $autos['photo']]);
+                                'carClassButtonContent', ['autos'=>$autos]);
                     ?>
                     <?= Html::button($buttonContent,
                         ['name'=>'Transferorder[car]','value'=>['car' => $autos['id'],

@@ -9,30 +9,26 @@ $(document).ready(function(){
             preferredCountries: ["", ""]
         });
         
-    //bootstrap3 datetimepicker     
-    $('#time-arrival').datetimepicker({
-       debug: true, 
-       format: 'HH:mm',
-       stepping: 15,
-       
+    $('.addpass-phone').intlTelInput({
+       nationalMode: false,
+       preferredCountries: ["",""]
     });
     
-    //bootstrap3 datetimepicker 
-    $('#time-pickup').datetimepicker({
-        debug: true,
+    $('.time-picker').datetimepicker({
         format: 'HH:mm',
-        stepping: 15,
+        stepping:15
+        
     });
-       
-    //jquery-ui datepicker
-    $('#date-arrival').datepicker({
+    
+    $('.date-picker').datepicker({
         dateFormat:'dd/mm/yy',
         setDate: myDate,
         numberOfMonths: 2,
         showOtherMonths: true,
         minDate: 0,
 
-        onSelect: function(){
+        onSelect: function(e){
+            console.log(this.className);
             var full_date = '';
             var selected_date = $(this).datepicker("getDate");
             var day = selected_date.getDate();
@@ -41,62 +37,50 @@ $(document).ready(function(){
             var side_box = document.getElementById('date-fixed');
 
             full_date = day + " " + month + " " + year;
-            $('#date-fixed').text(full_date);
-        }
-
-    });
-   
-    if ($('#date-flight').exists()){
-        $('#date-flight').datepicker({
-        dateFormat:'dd/mm/yy',
-        setDate: myDate,
-        numberOfMonths: 2,
-        showOtherMonths: true,
-        minDate: 0,
-
-            onSelect: function(){
-                var full_date = '';
-                var selected_date = $(this).datepicker("getDate");
-                var day = selected_date.getDate();
-                var month = months[selected_date.getMonth()];
-                var year = selected_date.getFullYear();
-                var side_box = document.getElementById('date-fixed');
-
-                full_date = day + " " + month + " " + year;
+            //separate dates displayed on sidebox 
+            if (this.className == 'cpanel-input date-picker return hasDatepicker'){
+                $('#date-return-fixed').text(full_date);
+            }else if (this.className == 'cpanel-input date-picker hasDatepicker'){
                 $('#date-fixed').text(full_date);
-
-                $('#date-pickup').text(full_date);
             }
-        });
-    }
-    
-    
-    
-    if ($('#date-pickup-citytocity').exists()){
-        $('#date-pickup-citytocity').datepicker({
-        dateFormat:'dd/mm/yy',
-        setDate: myDate,
-        numberOfMonths: 2,
-        showOtherMonths: true,
-        minDate: 0,
-        onSelect: function(){
-            var full_date = '';
-            var selected_date = $(this).datepicker("getDate");
-            var day = selected_date.getDate();
-            var month = months[selected_date.getMonth()];
-            var year = selected_date.getFullYear();
-            var side_box = document.getElementById('date-fixed');
-
-            full_date = day + " " + month + " " + year;
-            $('#date-fixed').text(full_date);
         }
-        });
-    }
+    });
+    
+    var returnPanelParent = document.getElementById("return-panel");
+    var dateInputReturnPanel = document.getElementById("date-pickup-return-panel");
+    var timeInputReturnPanel = document.getElementById("time-pickup-return-panel");
+    var pickupAdressInputReturnPanel = document.getElementById('pickup-address-return-panel');
+    var pickupAddressFixed = document.getElementById('pickup-address-return-fixed');
+    
+    $(returnPanelParent).on('input change', function(e){
+        if(e.target.id=="pickup-address-return-panel"){
+            console.log(e.target.value);
+           pickupAddressFixed.innerHTML = e.target.value;  
+        }
+            
+    });
+    
+
+    });
+    
+   
     
     
     
-    
-});
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+
 
 //why script work only when i add $(document).ready()?
 

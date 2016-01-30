@@ -22,12 +22,13 @@ class AppAsset extends AssetBundle
     public $baseUrl = '@web';
    // public $sourcePath = '@vendor';
     public $css = [
-//        'css/jquery-ui.min.css',
+       'css/custom365/jquery-ui.min.css',
         'css/jquery-ui-custom.css',
         'css/style.css',
         'css/media-queries.css',
         'css/car-class-choice.css',
         'css/loader.css',
+        'css/bootstrap-datetimepicker-custom.css'
     ];
 //    public $jsOptions = ['position'=>\yii\web\view::POS_HEAD];
     public $js = [

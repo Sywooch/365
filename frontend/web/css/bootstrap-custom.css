@@ -12,7 +12,8 @@ and open the template in the editor.
 }
 
 .help-block{
-    display: none;
+    margin-top: 0px;
+    margin-bottom: 0px;
 }
 
 .btn:hover, .btn:focus{

@@ -7,8 +7,8 @@ use yii\helpers\BaseJson;
 use frontend\assets\FormAsset;
 use frontend\assets\BootstrapDateTimePickerAsset;
 use frontend\assets\InternationalTelephoneAsset;
-BootstrapDateTimePickerAsset::register($this);
 FormAsset::register($this);
+BootstrapDateTimePickerAsset::register($this);
 InternationalTelephoneAsset::register($this);
 ?>
 
@@ -64,196 +64,102 @@ InternationalTelephoneAsset::register($this);
                 </div>
             </div>
 						
-    <div class="cpanel">
-	<div class="cpanel-heading">
-            <h4>Passengers data</h4>
-	</div>
-       
-        <div id="add-pass-anchor">
-                <div class="cpanel-section">
-                <div class="row">
-                    <div class="cpanel-item">
-                        <div class="col-md-2">
-                                <label for="pass-name">
-                                        First name
-                                </label>
-                        </div>
-                        <div class="col-md-4">
-                                <!--<input type="text" id="pass-name" class="cpanel-input"/> -->
-                                 
-                            <?= $form->field($model, 'firstname')->textInput(['id' => 'pass-name', 'class' => 'cpanel-input'])->label(false) ?>
-                          
-                        </div>
-
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="cpanel-item">
-                        <div class="col-md-2">
-                                <label for="pass-lastname">
-                                        Last name
-                                </label>
-                        </div>
-                        <div class="col-md-4">
-                                <!-- <input type="text" id="pass-lastname" class="cpanel-input"/> -->
-                               
-                            <?= $form->field($model, 'lastname')->textInput(['id' => 'pass-lastname', 'class' => 'cpanel-input'])->label(false) ?>
-                        </div>
-
-                    </div>
-                </div>
-                <div class="row">
-                        <div class="cpanel-item">
-                                <div class="col-md-2">
-                                        <label for="phone-number">
-                                                Phone number
-                                        </label>
-                                </div>
-                                <div class="col-md-4">
-                                     <!--    <input type="text" id="phone-number" class="cpanel-input"/>-->
-                                        
-                                    <?= $form->field($model, 'phone')->textInput(['id' => 'phone-number', 'class' => 'cpanel-input','placeholder' => '', 'type'=>'tel'])->label(false) ?>
-                                </div>
-                        </div>
-                </div>
-                <div class="row">
-                        <div class="cpanel-item">
-                                <div class="col-md-2">
-                                        <label for="email">
-                                                E-mail address
-                                        </label>
-                                </div>
-                                <div class="col-md-4">
-                                       <!--  <input type="text" id="email" class="cpanel-input"/>-->
-                                      
-                                    <?= $form->field($model, 'email')->textInput(['id' => 'email', 'class' => 'cpanel-input'])->label(false) ?>
-                                </div>
-                        </div>
-                </div>
-
-                <div class="row">
-                <div class="cpanel-item">
-                        <div class="col-md-2"></div>
-                        <div class="col-md-6">
-                                <div class="pseudo-link passenger"><span id="pseudo-link">Add another passenger information</span></div>
-                        </div>
-                </div>
-        </div>
-        </div>
-        </div>
-
-
-
-        <div class="cpanel-section">
-                <div class="row">
-                        <div class="col-md-6">
-
-                                        <div class="col-md-2">
-                                                <label for="notes">
-                                                        Notes
-                                                </label>
-                                        </div>
-                                        <div class="col-md-4 notes-field">
-                                               <!--  <textarea rows="10" cols="100" id="notes" class="cpanel-input textarea"
-                                                placeholder="Any important information (children, heavy lagguage and etc.)"></textarea>-->
-
-                                        <?= $form->field($model, 'notes')->textInput(['id' => 'notes', 'class' => 'cpanel-input textarea' ,'rows' => '10','cols' => '100', 'placeholder' => 'Any important information (children,heavy lagguage and etc.)'])->label(false) ?>
-                                        </div>
-
-                        </div>
-                        <div class="col-md-6">
-                                <div class="col-md-3">
-                                        <label for="greeting-sign">Greeting sign</label>
-                                </div>
-                                <div class="col-md-3">
-                                        <!-- <textarea id="greeting-sign"
-                                placeholder="By default first name and last name of the passenger"></textarea>-->
-                                
-                                <?= $form->field($model, 'notes')->textInput(['id' => 'greeting-sign', 'placeholder' => 'By default first name and last name of the passanger'])->label(false) ?>
-                                </div>
-                        </div>
-
-                </div>
-        </div>
-</div>	
-
+    <?= $this->render('passengerInformation', ['model'=>$model, 'form'=>$form]); ?>
 
 </div>
-        <div  class="col-md-3">
-            <div id="fixed-box" class="fixed-box">
-                    <div class="fixed-box-heading">
-                            Order information
-                    </div>
-                    <div class="fixed-box-body">
-                            <div class="fixed-box-section">
-                                    <div class="fixed-box-section-heading">
-                                        Place and time of pick up
-                                    </div>
-                                    <div class="fixed-box-section-body">
-                                            <div class="fb-section-line"><?= Yii::$app->request->get('Transferorder')['from'] ?>
-                                                <span id="pickup-address-fixed"></span>
-                                                <span id="flight-number-fixed"></span> <!-- flight number -->
-                                            </div>
-                                            
-                                            <div class="fb-section-line" id="date-arrival-fixed"></div>
-                                            <div class="fb-section-line" >At <span id="time-arrival-fixed"></span></div>
-                                    </div>
-                            </div>
-                            <div class="fixed-box-section">
-                                    <div class="fixed-box-section-heading">
-                                            Destination
-                                    </div>
-                                    <div class="fixed-box-section-body">
-                                            <div class="fb-section-line" id="destination-fixed"><?= Yii::$app->request->get('Transferorder')['to'] ?></div>
-                                            <div class="fb-section-line" id="specify-address-fixed"></div>
-
-                                    </div>
-                            </div>
-                            <div class="fixed-box-section">
-                                    <div class="fixed-box-section-heading">
-                                            Transfer type
-                                    </div>
-                                    <div class="fixed-box-section-body">
-                                            <div class="fb-section-line">Tarrif <span id="tariff-fixed">Economy</span></div>
-                                            <div class="fb-section-line">1-4 passengers,up to 3 lagguage places</div>
-                                            <div class="fb-section-line">Passengers: <span id="pass-num-fixed"></span></div>
-                                            <div class="fb-section-line" id="chair-side"></div>
-                                    </div>
-                            </div>
-                            <div id="contacts-fixed" class="fixed-box-section">
-                                    <div class="fixed-box-section-heading">
-                                            Contact information
-                                    </div>
-                                    <div class="fixed-box-section-body">
-                                            <div class="fb-section-line">
-                                                    <span id="pass-name-fixed"></span>
-                                                    <span id="pass-lastname-fixed"></span>
-                                            </div>
-                                            <div class="fb-section-line" id="phone-number-fixed"></div>
-                                            <div class="fb-section-line" id="email-fixed"></div>
-                                    </div>
-                            </div>
-                            <div id="nfixed" class="fixed-box-section">
-                                <div class = "fixed-box-section-heading">
-                                        Notes
-                                </div>
-                                    <div class="fixed-box-section-body" id="notes-fixed">
-
-                                    </div>
-                            </div>
-
-                    </div>
-                    <div class="fixed-box-footer">
-                            <div class="fixed-box-heading">
-                                    Transfer price
-                            </div>
-                            <div class="fixed-box-heading">
-                                    Summary
-                                    <div class="fixed-box-price"><?= $jsondata['amount'] ?></div>
-                            </div>
-                    </div>
+    <div  class="col-md-3">
+        <div id="fixed-box" class="fixed-box">
+            <div class="fixed-box-heading">
+                Order information
             </div>
-    </div>
+            <div class="fixed-box-body">
+                <div class="fixed-box-section">
+                    <div class="fixed-box-section-heading">
+                        Place and time of pick up
+                    </div>
+                    <div class="fixed-box-section-body">
+                            <div class="fb-section-line"><?= Yii::$app->request->get('Transferorder')['from'] ?>
+                                
+                                <span id="flight-number-fixed"></span> <!-- flight number -->
+                            </div>
+                        <div clas="fb-section-line">
+                            <span id="pickup-address-fixed"></span>
+                        </div>
+
+                        <div class="fb-section-line" >
+                            <span id="date-fixed"></span>
+                            <span id="time-fixed"></span>
+                        </div>
+                            
+                    </div>
+                </div>
+                <div class="fixed-box-section">
+                    <div class="fixed-box-section-heading">
+                            Destination
+                    </div>
+                    <div class="fixed-box-section-body">
+                        <div class="fb-section-line" id="destination-fixed"><?= Yii::$app->request->get('Transferorder')['to'] ?></div>
+                        <div class="fb-section-line" id="specify-address-fixed"></div>
+
+                    </div>
+                </div>
+                <div class="fixed-box-section">
+                    <div class="fixed-box-section-heading">
+                            Transfer type
+                    </div>
+                    <div class="fixed-box-section-body">
+                            <div class="fb-section-line">Tarrif <span id="tariff-fixed">Economy</span></div>
+                            <div class="fb-section-line">1-4 passengers,up to 3 lagguage places</div>
+                            <div class="fb-section-line">Passengers: <span id="pass-num-fixed"></span></div>
+                            <div class="fb-section-line" id="chair-side"></div>
+                    </div>
+                </div>
+                <div id="contacts-fixed" class="fixed-box-section">
+                    <div class="fixed-box-section-heading">
+                            Contact information
+                    </div>
+                    <div class="fixed-box-section-body">
+                            <div class="fb-section-line">
+                                    <span id="pass-name-fixed"></span>
+                                    <span id="pass-lastname-fixed"></span>
+                            </div>
+                            <div class="fb-section-line" id="phone-number-fixed"></div>
+                            <div class="fb-section-line" id="email-fixed"></div>
+                    </div>
+                </div>
+                    <div class="fixed-box-section">
+                        <div class="fixed-box-section-heading">
+                            Return
+                        </div>
+                        <div class="fixed-box-section-body">
+                            <div class="fb-section-line">
+                                <span id="date-return-fixed"></span>
+                                <span id="time-return-fixed"></span>
+                            </div>
+                            <div id="pickup-address-return-fixed" class="fb-section-line"></div>
+                        </div>
+                    </div>
+                    <div id="nfixed" class="fixed-box-section">
+                        <div class = "fixed-box-section-heading">
+                                Notes
+                        </div>
+                        <div class="fixed-box-section-body" id="notes-fixed">
+
+                        </div>
+                    </div>
+
+            </div>
+            <div class="fixed-box-footer">
+                <div class="fixed-box-heading">
+                        Transfer price
+                </div>
+                <div class="fixed-box-heading">
+                        Summary
+                        <div class="fixed-box-price"><?= $jsondata['amount'] ?></div>
+                </div>
+            </div>
+        </div>
+</div>
 			</div>
 			
 			

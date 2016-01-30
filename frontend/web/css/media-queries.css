@@ -62,6 +62,8 @@
     }
 }
 
+
+
 @media only screen and (min-width: 1200px){
     .footer{
         font-size: 20px;
@@ -108,8 +110,10 @@
     }
     
     .wrap-for-dotted-border{
-        top: 248px;
+        top: -33px;
         display: block;
+        width: 70%;
+        
     }
     
     .phoneico{
@@ -119,14 +123,11 @@
     .swap-icon{
         margin-top: 33px;
     }
-    
-    .features-inner{
-        padding-left: 91px;
-        
-    }
+
     
     #destination-in-form{
-        padding-top: 0px;
+        padding-top: 4px;
     }
     
 }
+

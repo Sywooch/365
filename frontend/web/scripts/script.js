@@ -1,32 +1,3 @@
-//function initAutocomplete(){
-    // Create the search box and link it to the UI element.
-//  jQuery.fn.exists = function(){return this.length>0;}; // function to check if element exists
-//  
-//  var options = {
-//  	componentRestrictions: {country: 'az'}
-//  };
-//  
-//  //check if elements exist. workaround to fix unexistent elements problem on the pages
-//  if($('#pac-input-from').exists() && $('#pac-input-from-chaffeur').exists() && $('#pac-input-to').exists()){
-//  	var inputFrom = document.getElementById('pac-input-from');
-//  	var inputFromChaffeur = document.getElementById('pac-input-from-chaffeur');
-//  	var inputTo = document.getElementById('pac-input-to');
-//  	
-//  	var searchBoxFrom = new google.maps.places.Autocomplete(inputFrom, options);
-//  	var searchBoxChaffeur = new google.maps.places.Autocomplete(inputFromChaffeur, options);
-//  	var searchBoxTo = new google.maps.places.Autocomplete(inputTo, options);
-//  }else if($('#pac-input-order-form').exists()){
-//  	var inputFormOrder = document.getElementById('pac-input-order-form');
-//  	var searchBoxFormOrder = new google.maps.places.Autocomplete(inputFormOrder, options);
-//  }
-
-  // [START region_getplaces]
-  // Listen for the event fired when the user selects a prediction and retrieve
-  // more details for that place.
-  
-  // [END region_getplaces] 
-//}
-
 /* Main scripts */
 
 $(document).ready(function (){    
@@ -60,29 +31,7 @@ $(document).ready(function (){
         });
     }); //how this function works?
 
-    //set default values in destination choice fields
-//    function setDefaultInputValues(){
-//       var defaultFrom = 'Heydar Aliyev International Airport (Terminal 1), Azerbaijan';
-//       var defaultTo = 'Baku, Azerbaijan';
-//       $('#pac-input-from').val(defaultFrom);
-//       $('#pac-input-to').val(defaultTo); 
-//    }
-//    
-//    setDefaultInputValues();
-
     jQuery.fn.exists = function(){return this.length>0;}; //function to check if element exists
-
-    function rotate(d, elem){
-        $({deg:0}).animate({deg:d}, {
-            duration: 250,
-            step: function(now){
-                elem.css({
-                        transform: "rotate(" + now +"deg)"	
-
-                });
-            }
-        });
-    }
 	
     $.getScript("destination_fields_swap_and_disable.js");
         
@@ -125,7 +74,7 @@ $(document).ready(function (){
     }); //jquery ui accordion
 
 //main page destination choice fields. swap icon and disabled field functionalities	
-function changeEventHandler(){
+function changeEventHandler(){ //function disables "to" field if "from" is empty
     var firstField = document.getElementById("pac-input-from");
     var secondField = document.getElementById("pac-input-to");
 
@@ -138,6 +87,7 @@ function changeEventHandler(){
 	
 };
 
+//function swaps values of "from" and "to"
 function swapFieldValues(){
     var firstField = document.getElementById("pac-input-from");
     var secondField = document.getElementById("pac-input-to");
@@ -156,6 +106,7 @@ if ($("#pac-input-from").exists()){
 	var transferForm = document.getElementsByClassName('transfer')[0];
 	var chaffeurForm = document.getElementsByClassName('chaffeur')[0];
 	
+        //check which radio is active and show appropriate transfer/chaffeur fields
 	if  (document.getElementById('transfer-radio').checked){
 		transferForm.style.display = "block";
 		chaffeurForm.style.display = "none";
@@ -188,8 +139,6 @@ if ($("#pac-input-from").exists()){
             }, 1000);
         }
         
-       // var returnCheckBox = document.getElementById('return'); //get checkbox index.php
-        
 	document.getElementById('transfer-radio').addEventListener("change", function () {
 		$('#transfer').show('fast').fadeIn();
 		$('#chaffeur').hide('fast').fadeOut();
@@ -204,7 +153,7 @@ if ($("#pac-input-from").exists()){
                 /*reset car cost for chaffeur*/
                 /*setTimeout to hide the moment when price is updated*/
                 returnCheckBox.checked = false;
-                resetCost();
+//                resetCost();
 	});
         
         /* function to update cost when return is checked */
@@ -221,13 +170,13 @@ if ($("#pac-input-from").exists()){
             
         };*/
         /* function to reset cost when return is unchecked */
-        function resetCost(){
-            var carClassArray = document.getElementsByClassName('car-class-min-price');
-            for (var i = 0; i < carClassArray.length; i++){
-               carClassArray[i].innerHTML = '$' + carClassArray[i].dataset.price;
-            }
-        };
-        
+//        function resetCost(){
+//            var carClassArray = document.getElementsByClassName('car-class-min-price');
+//            for (var i = 0; i < carClassArray.length; i++){
+//               carClassArray[i].innerHTML = '$' + carClassArray[i].dataset.price;
+//            }
+//        };
+//        
         
         /*when page reloads check if checkbox is checked then update cost*/
 //        if (returnCheckBox.checked){
@@ -250,6 +199,19 @@ if ($("#pac-input-from").exists()){
 //           }
 //        });
   
+    }
+    
+    if($('#return-form').exists()){
+        var returnForm = $('#return-form');
+        returnForm.on('change', showHideReturnPanel);
+    }
+    
+    function showHideReturnPanel(event){
+        console.log(event.target.checked);
+        if (event.target.checked)
+            $('.return-panel').css('display', 'block');
+        else
+            $('.return-panel').css('display', 'none');
     }
 
 });

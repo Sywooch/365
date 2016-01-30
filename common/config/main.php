@@ -3,6 +3,23 @@ return [
     'vendorPath' => dirname(dirname(__DIR__)) . '/vendor',
     'bootstrap' => ['languagepicker'],
     'components' => [
+        'assetManager' => [
+            'bundles' => [ 
+                'yii\jui\JuiAsset' => [
+                    'css' => [
+                        'themes/custom365/jquery-ui.css',
+                    ],
+                    
+            
+],
+                'dosamigos\google\maps\MapAsset' => [
+                'options' => [
+                    'key' => 'AIzaSyBB19cyGLWQeSz1amgo9wJN6ZeXlQtHZCU',
+                    'language' => 'id',
+                    'version' => '3.1.18'
+                ]
+            ]
+                ] ],
          'formatter' => 
             [
                'defaultTimeZone' => 'UTC+4',

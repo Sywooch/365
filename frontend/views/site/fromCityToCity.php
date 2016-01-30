@@ -15,11 +15,15 @@
             </div>
             <div class="col-xs-12 col-md-3">
               
-                <?= $form->field($model, 'date')->textInput(['id' => 'date-pickup-citytocity', 'class' => 'cpanel-input' ,'placeholder' => 'dd/mm/yy/'])->label(false) ?>
+                <?= $form->field($model, 'date')->textInput(['id' => 
+                    'date-pickup-citytocity', 'class' => 'cpanel-input date-picker' ,
+                    'placeholder' => 'dd/mm/yy/'])->label(false) ?>
             </div>
             <div class="col-xs-12 col-md-2">
                
-                <?= $form->field($model, 'time')->textInput(['id' => 'time-pickup', 'class' => 'cpanel-input' ,'placeholder' => 'HH:mm'])->label(false) ?>
+                <?= $form->field($model, 'time')->
+        textInput(['id' => 'time-pickup', 'class' => 'cpanel-input time-picker' ,
+            'placeholder' => 'HH:mm'])->label(false) ?>
             </div>
             <div class="col-xs-12 col-md-3">
                 <div class="description">
@@ -80,11 +84,30 @@
 
     </div>
 </div>
+        
+    <div id="parent-container-add-destination">
+    <?= $this->render('addDestination', ['model'=>$model, 'form'=>$form, 'id'=>'anotherd', 'aaddress'=>'aaddress'])?>
+    <?= $this->render('addDestination', ['model'=>$model, 'form'=>$form, 'id'=>'anotherd1', 'aaddress'=>'aaddress1'])?>
+    <?= $this->render('addDestination', ['model'=>$model, 'form'=>$form, 'id'=>'anotherd2', 'aaddress'=>'aaddress2'])?>
+        
+    <div id="add" class="cpanel-item">Add another another destination</div>
+</div> <!--add destination end --> 
 
-
+<div class="row">
+            <div class="cpanel-item">
+                <div class="col-md-2">
+                    <?= $form->field($model, 'return')->checkbox(['id' => 'return-form',
+                         'class' => 'cpanel-input'])->label(false); ?>
+                </div>
+            </div>
+        </div>
 
 
 </fieldset>
 
 
+</div>
+
+<div id="return-panel" class="return-panel">
+    <?= $this->render('returnPanel', ['model'=>$model, 'form'=>$form])?>
 </div>

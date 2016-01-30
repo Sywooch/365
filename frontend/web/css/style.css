@@ -112,7 +112,12 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#6d0019', end
 #return{
     margin-right: 5px;
     float: left;
-    margin-top: 8px;
+}
+
+#return-form {
+    float: right;
+    margin-top: 0px;
+    margin-left: 9px;
 }
 
 .service-choice{
@@ -259,9 +264,9 @@ ul:first-child {
 .wrap-for-dotted-border{
     position: absolute;
     height: 125px;
-    width: 343px;
+    width: 20%;
     border-right: 2px dotted #FFF;
-    top: 243px;
+    top: 0px;
     display:none;
 }
 
@@ -326,6 +331,7 @@ ul:first-child {
 	-webkit-border-radius: 4px;
 	-moz-border-radius: 4px;
 	border-radius: 4px;
+        z-index: 9999;
 }
 
 .cpanel label{
@@ -476,6 +482,7 @@ ul:first-child {
         color: #2A2E3F;
         display: none;
         box-shadow: -1px 3px 8px -2px rgba(0,0,0,0.7);
+        z-index: 1;
 	
 }
 
@@ -643,7 +650,7 @@ ul:first-child {
 }
 
 .features-col{
-    margin-top: 30px;
+    margin-top: 20px;
    
        
 }
@@ -663,14 +670,23 @@ ul:first-child {
     
 }
 
-.features-lagguage {
-    background: transparent url("images/lagguage.png") no-repeat scroll 13px 2px;
+.features-service {
+    background: transparent url("images/rservice.png") no-repeat scroll -8px -15px;
+    height: 74px;
+}
+
+.features-service div{
+    margin-left: 109px;
+}
+
+
+.features-free-wifi{
+    background: transparent url("images/freewf.png") no-repeat scroll 13px 2px;
     height: 67px;
 }
 
-.features-lagguage div{
-    margin-left: 107px;
-    
+.features-free-wifi div{
+    margin-left: 109px;
 }
 
 .around-the-clock{
@@ -705,18 +721,27 @@ ul:first-child {
 }
 
 .fixed-price{
-    background: transparent url("images/fixed-price.png") no-repeat scroll 13px 2px;
+    background: transparent url("images/fixed-price.png") no-repeat scroll 13px 8px;
     height: 67px;
 }
 
 .fixed-price div{margin-left: 107px;}
 
 .greeting-sign{
-    background: transparent url("images/greeting.png") no-repeat scroll 13px 2px;
+    background: transparent url("images/gsign.png") no-repeat scroll 4px -21px;
     height: 67px;
 }
 
-.greeting-sign div{margin-left: 107px;}
+.greeting-sign div{
+    margin-left: 108px;
+    margin-top:6px
+}
+
+.greeting-sign img{
+    height: 85px;
+    position: absolute;
+    right: 14px;
+}
 
 /*language picker*/
 .language-picker-wrap{
@@ -729,4 +754,66 @@ ul:first-child {
     cursor: pointer;
     text-decoration: underline;
     width: 40%;
+}
+
+input[type=checkbox]{
+  -webkit-appearance:checkbox;
+    width: 22px;
+    height: 21px;
+    padding-right: 10px;
+}
+
+.language-picker.button-list a{
+    color: #6D0019;
+}
+
+.language-picker.button-list a:hover{
+    background: transparent;
+}
+
+#map{
+    float: right;
+    width: 50%;
+    height: 50%;
+}
+
+.return-panel{
+    display: none;
+}
+
+.greeting{
+    
+   width: 87%;
+position: absolute;
+bottom: -121px;
+right: 19px;
+}
+
+#greeting-sign{
+    
+    max-width: 38%;
+    position: absolute;
+    bottom: 60px;
+    z-index: 1;
+    transform: rotate(6deg);
+    resize: none;
+}
+
+.online-payment{
+    background: transparent url("images/visa.png") no-repeat scroll -24px -38px;
+    height: 73px;
+}
+
+.online-payment div{
+    margin-left: 108px;
+}
+
+.date-picker{
+    background: #FFF url("images/el_date.png") no-repeat scroll -20px 9px;
+    padding-left:33px;  
+}
+
+.time-picker{
+    background: #FFF url("images/el_date.png") no-repeat scroll 8px -41px;
+    padding-left: 35px;
 }

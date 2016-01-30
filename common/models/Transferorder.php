@@ -40,8 +40,10 @@ class Transferorder extends \yii\db\ActiveRecord
     /**
      * @inheritdoc
      */
-     public $date;
+    public $date;
     public $time;
+    public $rdate;
+    public $rtime;
     public static function tableName()
     {
         return 'transferorder';
@@ -58,14 +60,15 @@ class Transferorder extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['created_at', 'updated_at', 'pickuptime', 'car', 'amount', 'seat'], 'integer'],
+            [['created_at', 'updated_at', 'pickuptime','rpickuptime', 'car', 'amount', 'seat'], 'integer'],
             [['lastname', 'firstname', 'email', 'phone', 'from', 'to', 'pickuptime', 'car', 'amount','date' ,'time'], 'required'],
             [['type', 'return'], 'string'],
             [['lastname', 'firstname', 'email', 'flightnumber', 'gsign'], 'string', 'max' => 45],
             [['phone', 'phone1'], 'string', 'max' => 15],
             [['notes'], 'string', 'max' => 255],
             [['from', 'to', 'anotherd', 'anotherd1', 'anotherd2', 'address'], 'string', 'max' => 100],
-            [['currency'], 'string', 'max' => 10]
+            [['currency'], 'string', 'max' => 10],
+            [['rdate','rtime'], 'safe']
         ];
     }
 
@@ -100,5 +103,10 @@ class Transferorder extends \yii\db\ActiveRecord
             'gsign' => Yii::t('yii', 'Gsign'),
             'address' => Yii::t('yii', 'Address'),
         ];
+    }
+    
+    public function getAutos()
+    {
+        return $this->hasMany(Auto::className(), ['id' => 'car']);
     }
 }

@@ -92,7 +92,11 @@ li ul button:hover{
     display: none;
 }
 
-.car-button-classname, .car-button-features, .car-class-min-price{
+.car-class-price {
+    font-size: 100%;
+}
+
+.car-button-classname, .car-button-features{
     font-size: 80%
 }
 
@@ -100,22 +104,24 @@ li ul button:hover{
     text-transform: uppercase;
 }
 
-.car-button-features,.car-features{
+.car-button-classname{}
+
+.car-button-features{
     margin-top: 6px;
 }
 
-.car-class-min-price,.car-price{
+.car-class-min-price{
     margin-top: 13px;
 }
 
 /* car buttons inside car class buttons */
-.car-image{}
+.car-image{display: none;}
 
-.car-name{}
+.car-name{margin-bottom: 7px;}
 
-.car-features{}
+.car-features{margin-top: 2px;}
 
-.car-price{}
+.car-price{margin-top: 9px;}
 
 .car-arrow{
     background: transparent url("images/oxright.png") no-repeat scroll 0px 0px;
@@ -126,7 +132,7 @@ li ul button:hover{
     position: relative;
     bottom: 31px;
     right: 6px;
-    /*display: none;*/
+    display: none;
 }
 
 
@@ -138,7 +144,7 @@ li ul button:hover{
     }
     
     .car-button-features{
-        margin-top: 15px;
+        margin-top: 13px;
     }
     
     .car-class-min-price{
@@ -147,12 +153,28 @@ li ul button:hover{
     .car-button-classname{
         margin-top:12px;
     }
+    
+    .car-image{display: block;}
 }
 
 @media only screen and (min-width: 1200px){
     .arrow{
         display:block;
+        margin-top: 0px;
     }
+    
+    .car-arrow{display: block;
+    margin-top: 6px;}
+    
+    .car-class-min-price{font-size: 80%;}
+    
+    .car-name{margin-top: 8px;}
+    
+    .car-features{margin-top: 13px;}
+    
+    .car-price{margin-top: 17px;}
+    
+    
 }
 
 

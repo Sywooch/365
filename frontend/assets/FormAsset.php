@@ -25,15 +25,14 @@ class FormAsset extends AssetBundle
     public $css = [
         'css/inttel-custom.css',
         'css/bootstrap-custom.css',
-        'css/bootstrap-datetimepicker-custom.css'
+        
     ];
     
     public $js = [
         'scripts/form.js',
         'scripts/side-box.js',
         'scripts/add-destination.js',
-        'scripts/fixed-box-position.js',
-//        'scripts/semantic-ui-dropdown.js',
+        'scripts/semantic-ui-dropdown.js',
 
     ];
     public $depends = [
