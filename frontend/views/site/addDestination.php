@@ -7,7 +7,8 @@ use kartik\icons\Icon;
  */
 ?>
 <div class="row">
-        <div class="cpanel-item new-destination hide">
+        <div 
+        class="cpanel-item new-destination hide">
             <div class="col-md-3" style="text-align: right">
                 <label for="destination_address">Additional destination</label>
         </div>

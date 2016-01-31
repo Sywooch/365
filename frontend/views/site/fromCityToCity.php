@@ -43,7 +43,7 @@
         <div class="inner-addon">
             <span><?= Icon::show('home', ['class'=>'fa-2x'], Icon::FA);?></span>
                
-            <?= $form->field($model, 'address')->textInput(['id' => 'pickup-address', 'class' => 'cpanel-input' ,'placeholder' => 'Specify address(i.e str, house etc.)'])->label(false) ?>
+            <?= $form->field($model, 'address')->textInput(['id' => 'pickup-address', 'class' => 'cpanel-input' ,'placeholder' => 'Specify street number'])->label(false) ?>
         </div>
     </div>
     </div>
@@ -90,7 +90,9 @@
     <?= $this->render('addDestination', ['model'=>$model, 'form'=>$form, 'id'=>'anotherd1', 'aaddress'=>'aaddress1'])?>
     <?= $this->render('addDestination', ['model'=>$model, 'form'=>$form, 'id'=>'anotherd2', 'aaddress'=>'aaddress2'])?>
         
-    <div id="add" class="pseudo-link cpanel-item">Add another another destination</div>
+    <div class="row">
+        <div id="add" class="col-xs-12 col-md-6 pseudo-link cpanel-item">Add another another destination</div>
+    </div>
 </div> <!--add destination end --> 
 
 <div class="row">

@@ -46,7 +46,7 @@
 
 <div class="row">
     <div class="cpanel-item">
-        <div class="col-xs-12col-md-3" style="text-align: right">
+        <div class="col-xs-12 col-md-3" style="text-align: right">
                 <label for="destination_address">Destination address</label>
         </div>
         <div class="col-xs-12 col-md-9">
@@ -58,18 +58,20 @@
             <!-- Html::activeTextInput($model, 'to', ['id' => 'pac-input-order-form','class'=>'cpanel-input','value' =>  Yii::$app->request->get("Sifarish")["to"]]); -->
             <div id="destination-in-form"><?= Yii::$app->request->get("Transferorder")["to"] ?></div>
         </div>
-
-        <div class="col-xs-12 col-md-12">
+        <div class="row">
+            <div class="col-md-3"></div>
+        <div class="col-xs-12 col-md-5">
             <div class="inner-addon">
                 <span><?= Icon::show('home', ['class'=>'fa-2x'], Icon::FA);?></span>
                 <!--<input type="text" id="specify-address" class="cpanel-input" placeholder="Specify address(i.e. str, house etc.)"/>-->
 
                    
                 <?= $form->field($model, 'address')->textInput(['id' => 'specify-address', 
-                    'class' => 'cpanel-input' ,'placeholder' => 'Imran Qasimov, 4'])->label(false) ?>
+                    'class' => 'cpanel-input' ,'placeholder' => 'Specify street number'])->label(false) ?>
             </div>
 
 
+        </div>
         </div>
         <!-- append icon here -->
         <div class="col-md-1">
