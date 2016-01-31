@@ -820,7 +820,7 @@ right: 19px;
 
 .error{
     border: none !important;
-    -moz-box-shadow: 1px 1px 4px 13px red inset;
-    -webkit-box-shadow: 1px 1px 4px 13px red inset;
-    box-shadow: 1px 1px 4px 13px red inset;
+    -moz-box-shadow: 1px 1px 13px 3px red inset;
+    -webkit-box-shadow: 1px 1px 13px 3px red inset;
+    box-shadow: 1px 1px 13px 3px red inset;
 }
