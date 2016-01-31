@@ -372,12 +372,16 @@ ul:first-child {
 	cursor: pointer;
 }
 
-#time-arrival, #time-flight, #time-pickup, #date-pickup-citytocity{
+#time-arrival, #time-flight, #time-pickup {
 	background: url("images/el_date.png") no-repeat scroll 8px -41px #fff;
 	float: left;
 	padding-left: 35px;
 	vertical-align: top;
 	white-space: normal;
+}
+
+#date-pickup-citytocity{
+    background: #FFF url("images/el_date.png") no-repeat scroll -20px 9px;
 }
 
 
