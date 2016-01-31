@@ -175,11 +175,13 @@ function Autocomplete(){
                 carClassArray[i].innerHTML ='from $ ' + Math.floor(newCarClassPrice);
                 
                 for (var j = 0; j < carSpecificArray.length; j++){
-                var priceClass =  Math.floor(Number(carSpecificArray[j].dataset.price) * returnState);
-                var bill = priceClass * 10 / 100;
-                var newSpecificPrice = Math.floor(priceClass - bill);
-                    carSpecificArray[j].innerHTML = '$ ' + 
-                        newSpecificPrice;
+                    var priceClass =  Number(carSpecificArray[j].dataset.price) * returnState;
+                    console.log('class price' + priceClass);
+                    
+                    
+                    var newSpecificPrice = Math.floor(priceClass);
+                        carSpecificArray[j].innerHTML = '$ ' + 
+                            newSpecificPrice;
                 };
                 
             }       
@@ -190,8 +192,8 @@ function Autocomplete(){
                 
                 var priceClass = (carClassArray[i].dataset.coefficient*s +
                         Number(oldCarClassPrice))*returnState;
-                var bill = priceClass * 10 / 100; 
-                newCarClassPrice = priceClass - bill;
+                
+                newCarClassPrice = priceClass;
                 carClassArray[i].innerHTML ='from $ ' + Math.floor(newCarClassPrice);
                 
                 for (var j = 0; j < carSpecificArray.length; j++){
@@ -200,9 +202,9 @@ function Autocomplete(){
                     var priceSpecific = Math.floor((kSpecific*s + 
                             Number(carSpecificArray[j].dataset.price)) * returnState);
                     
-                    var bill = priceSpecific * 10 / 100;
-                    console.log('price ' + priceSpecific + ' ' + 'bill ' + bill);
-                    var newSpecificPrice = Math.floor(priceSpecific - bill);
+                    
+                    
+                    var newSpecificPrice = Math.floor(priceSpecific);
                     carSpecificArray[j].innerHTML = '$ ' + newSpecificPrice;
                         
                 };
