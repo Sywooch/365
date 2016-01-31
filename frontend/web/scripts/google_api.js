@@ -147,6 +147,8 @@ function Autocomplete(){
             kilometers = response.routes[0].legs[0].distance.value / 1000;
             console.log(kilometers);
             updatePrice(kilometers, returnState);
+            
+            
                 
       } else {
         window.alert('Directions request failed due to ' + status);
@@ -212,12 +214,13 @@ function Autocomplete(){
   
 //if checkbox value is "checked" then update price
   returnCheckBox.addEventListener('change', function (){
+      hideCarClassContainer();
       if (!this.checked){
          returnState = 1; //global parameter
       }else{
           returnState = 2;
       }
-      updatePrice(kilometers, returnState);
+      setTimeout(function(){updatePrice(kilometers, returnState);}, 300)
   });
   
   
