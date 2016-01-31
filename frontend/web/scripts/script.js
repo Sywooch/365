@@ -216,18 +216,18 @@ if ($("#pac-input-from").exists()){
     
    //index form validation (from - to fields)
    document.getElementById('index-form').addEventListener('submit', function(e){
-       if ($('#pac-input-from').val() == ''){
+       if ($('#from').val() == ''){
            e.preventDefault();
-            $('#pac-input-from').addClass('error');
+            $('#from').addClass('error');
             $(window).scrollTop(0);
             
-       }else if ($('#pac-input-to').val() == ''){
+       }else if ($('#to').val() == ''){
             e.preventDefault();
-            $('#pac-input-to').addClass('error');
+            $('#to').addClass('error');
             $(window).scrollTop(0);
             
        }else{
-           $('#pac-input-from, #pac-input-to').removeClass('error');
+           $('#from, #to').removeClass('error');
            return true;
        }
        

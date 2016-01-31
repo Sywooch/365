@@ -74,7 +74,8 @@ function Autocomplete(){
 //    }
      
      autocompletes.addListener('place_changed', function(){
-         waypts = [];
+        $('#from, #to').removeClass('error');
+        waypts = [];
         for (var i = 0; i<locationInputs.length; i++){
             if (locationInputs[i].id != 'from' && locationInputs[i].value != ''){
                     waypts.push({
