@@ -155,7 +155,7 @@ InternationalTelephoneAsset::register($this);
                 </div>
                 <div class="fixed-box-heading">
                         Summary
-                        <div class="fixed-box-price"><?= $jsondata['amount'] ?></div>
+                        <div id='fixed-box-price' class="fixed-box-price"><?= $jsondata['amount'] ?></div>
                 </div>
             </div>
         </div>

@@ -86,7 +86,7 @@ $this->title = 'My Yii Application';
     <label for="from"><span>From</span></label>
 
 
-        <?= Html::activeInput('text', $model, 'from', ['id'=>'pac-input-from' ,'class' => 'controls' ,
+        <?= Html::activeInput('text', $model, 'from', ['id'=>'from' ,'class' => 'controls add-dest-address' ,
             'autofocus' => 'true', 'placeholder'=>'Heydar Aliyev International Airport (Terminal 1), Azerbaijan']) ?>
 
 
@@ -98,8 +98,8 @@ $this->title = 'My Yii Application';
             <label for="to"><span>To</span></label>
 
 
-                                        <?= Html::activeInput('text', $model, 'to', ['id'=>'pac-input-to' ,'class' => 'controls' ,
-                                             'disabled' => false, 'placeholder'=>'Baku, Azerbaijan']) ?>
+    <?= Html::activeInput('text', $model, 'to', ['class' => 'controls add-dest-address' ,
+         'disabled' => false, 'placeholder'=>'Baku, Azerbaijan']) ?>
 
 
                         </div>

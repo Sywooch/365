@@ -5,39 +5,20 @@
  */
 
 /* PLEASE, FIND SOME TIME TO THINK ABOUT ALL THIS CRAP YOU HAVE MADE*/
-
-var kilometers = 0;
+var overallDistance = 0;
 var currentPrice = 0;
 var returnCheckBox = document.getElementById('return');
 var returnState = 1;
+var waypts = [];
+var origin = document.getElementById('from').value;
+var destination = null;
+
 function Autocomplete(){
-    var directionsService = new google.maps.DirectionsService;
+    
+    
+   
     jQuery.fn.exists = function(){return this.length>0;}; // function to check if element exists
-//    var directionsDisplay = new google.maps.DirectionsRenderer;
-//    var mapProp = {
-//        center: new google.maps.LatLng(51.508742,-0.120850),
-//        zoom:9,
-//        mapTypeId: google.maps.MapTypeId.ROADMAP
-//    };
-//      var map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
-//      directionsDisplay.setMap(map);
-//      directionsService.route({
-//          origin: 'Heydar Aliyev International Airport (Terminal 1), Khazar, Azerbaijan',
-//          destination: 'Gence, Azerbaycan',
-//          waypoints: [
-//              {location: 'Salyan, Azərbaycan'},
-//              {location: 'Lenkoran, Azerbaijan'},
-//              {location: 'Barda, Azerbaijan'}],
-//            travelMode: google.maps.TravelMode.DRIVING
-//      },function(response,status){
-//           if (status === google.maps.DirectionsStatus.OK) {
-//            directionsDisplay.setDirections(response);
-//        }else {
-//      window.alert('Directions request failed due to ' + status);
-//    }
-//
-//
-//      });
+
 
     function hideCarClassContainer(){
         $('#car-class-container').animate({
@@ -66,90 +47,120 @@ function Autocomplete(){
   	componentRestrictions: {country: 'az'}
   };
   
+  var directionsService = new google.maps.DirectionsService;
   var travel_mode = google.maps.TravelMode.DRIVING;
   
+  google.maps.event.addDomListener(window, 'load', function(){
+      console.log('origin ' + origin);
+        console.log('destination ' + destination);
+        console.log(waypts);
+      route(directionsService, origin, destination, waypts);
+  });
   
-  var origin_place_id = null; //set initial origin value to From input
-  var destination_place_id = null; //set initial origin value to To input
+  var locationInputs = document.getElementsByClassName('add-dest-address'); //grab all inputs supposed to have autocomplete
+//  console.log(locationInputs);
+//  console.log(waypts);
   
-  //check if elements exist. workaround to fix unexistent elements errors on the pages
-  if($('#pac-input-from').exists() && $('#pac-input-to').exists()){
-    var inputFrom = document.getElementById('pac-input-from');
-    var inputFromChaffeur = document.getElementById('pac-input-from-chaffeur');
-    var inputTo = document.getElementById('pac-input-to');
+ //attach autocomplete to those inputs
+ for (var i = 0; i < locationInputs.length; i++){
+     var autocompletes = new google.maps.places.Autocomplete(locationInputs[i], options);
+     
+     
+     
+//     locationInputs[i].value = '';
 
+//    function gatherInfomation(){
+//        return [origin, destination, waypts];
+//    }
+     
+     autocompletes.addListener('place_changed', function(){
+         waypts = [];
+        for (var i = 0; i<locationInputs.length; i++){
+            if (locationInputs[i].id != 'from' && locationInputs[i].value != ''){
+                    waypts.push({
+                            location: locationInputs[i].value
+                    });
 
-    var searchBoxFrom = new google.maps.places.Autocomplete(inputFrom, options);
-    var searchBoxChaffeur = new google.maps.places.Autocomplete(inputFromChaffeur, options);
-    var searchBoxTo = new google.maps.places.Autocomplete(inputTo, options);
-    /* sometimes it gives errors */
+            }
 
-    searchBoxFrom.addListener('place_changed', function(e){
-        hideCarClassContainer();
-        $(inputFrom).removeClass('error');
-        var place = searchBoxFrom.getPlace();
-        if (!place.geometry) {
-            window.alert("Autocomplete's returned place contains no geometry");
-        return;}
-        origin_place_id = place.place_id; //set origin
+        }
+        
+        
+        origin = document.getElementById('from').value;
+        if (waypts.length == 0){
+            destination = origin;
+        }else{
+            destination = waypts[waypts.length - 1].location;
+        }
+        
+//        waypts.pop();
+        
+        route(directionsService, origin, destination, waypts);
+        waypts=[];
+     });
+ }
+ 
+    //recalculate on close
+   var close = document.getElementsByClassName('close');
+    for (var i = 0; i < close.length; i++){
+        close[i].addEventListener('click', function (e){
+            waypts = [];
+            var closed = $(e.target.parentElement.parentElement);
+            closed.find('.add-dest-address').val('');
+            
+            for (var i = 0; i<locationInputs.length; i++){
+            if (locationInputs[i].id != 'from' && locationInputs[i].value != ''){
+                console.log(locationInputs[i].value);
+                    waypts.push({
+                            location: locationInputs[i].value
+                    });
+            }
 
-        var placeTo = searchBoxTo.getPlace();
-        route(origin_place_id, destination_place_id, travel_mode,
-           directionsService);
-    });
-
-    searchBoxTo.addListener('place_changed', function(e){
-        $(inputTo).removeClass('error');
-        hideCarClassContainer();
-        var place = searchBoxTo.getPlace();
-        if (!place.geometry) {
-          window.alert("Autocomplete's returned place contains no geometry");
-          return;
-    }
-
-    // If the place has a geometry, store its place ID and route if we have
-    // the other place ID
-    destination_place_id = place.place_id;
-    route(origin_place_id, destination_place_id, travel_mode,
-          directionsService);
+        }
+       
+       
+       
+        
+        origin = document.getElementById('from').value;
+        if (waypts.length == 0){
+            destination = origin;
+        }else{
+            destination = waypts[waypts.length - 1].location;
+        }
+        
+//        
+     
+        
+        route(directionsService, origin, destination, waypts);
+            waypts = [];
         });
-        
-        searchBoxChaffeur.addListener('place_changed', function(e){
-            hideCarClassContainer();
-        });
-        
-  }else if($('#pac-input-order-form').exists()){
-  	var inputFormOrder = document.getElementById('pac-input-order-form');
-  	var searchBoxFormOrder = new google.maps.places.Autocomplete(inputFormOrder, options);
-        
-        searchBoxFormOrder.addListener('place_changed', function(){
-            $('#destination-fixed, #heading-to').text(inputFormOrder.value); 
-        });
-        
-        /*add autocompletes to add destination inputs*/
-        var addDestinationInputs = document.getElementsByClassName('add-dest-address');
-        for (var i=0; i < addDestinationInputs.length; i++)
-            new google.maps.places.Autocomplete(addDestinationInputs[i], options);
-
-  }
+    };
   
-  function route(origin_place_id, destination_place_id, travel_mode,
-                 directionsService) {
-    if (!origin_place_id || !destination_place_id) {
+  function route(directionsService, origin, destination, waypoints) {
+    if (!origin || !destination) {
+        console.log('no data');
       return;
     }
+    console.log('origin ' + origin);
+        console.log('destination ' + destination);
+        console.log(waypts);
+    
     directionsService.route({
-      origin: {'placeId': origin_place_id},
-      destination: {'placeId': destination_place_id},
+        
+      origin: origin,
+      destination: destination,
+      waypoints: waypts,
       travelMode: travel_mode
     }, function(response, status) {
       if (status === google.maps.DirectionsStatus.OK) {
-            kilometers = response.routes[0].legs[0].distance.value / 1000;
-            console.log(kilometers);
-            updatePrice(kilometers, returnState);
-            
-            
-                
+        overallDistance = 0;
+
+        for (var i=0; i<response.routes[0].legs.length; i++){
+                overallDistance += response.routes[0].legs[i].distance.value / 1000;
+        }
+			console.log(overallDistance); 
+                        updatePrice(overallDistance, returnState);
+                        
       } else {
         window.alert('Directions request failed due to ' + status);
         window.alert(response.routes[0]);
@@ -157,6 +168,8 @@ function Autocomplete(){
       }
     });
   }
+ 
+  
 
   //function to update car prices depending on distance and return value
   function updatePrice(kilometers, returnState){
@@ -176,7 +189,7 @@ function Autocomplete(){
                 
                 for (var j = 0; j < carSpecificArray.length; j++){
                     var priceClass =  Number(carSpecificArray[j].dataset.price) * returnState;
-                    console.log('class price' + priceClass);
+                    
                     
                     
                     var newSpecificPrice = Math.floor(priceClass);
@@ -187,6 +200,7 @@ function Autocomplete(){
             }       
             //if distance is more than 35km then price should be calculated like this:
             //koeff * (distance - 35)+
+            console.log('kilometers ' + kilometers)
             if (kilometers >= 35 ){
                 var s = (kilometers - 35); //normalized distance
                 
@@ -222,10 +236,40 @@ function Autocomplete(){
       }else{
           returnState = 2;
       }
-      setTimeout(function(){updatePrice(kilometers, returnState);}, 300)
+      console.log('kilometers in return ' + overallDistance);
+      setTimeout(function(){updatePrice(overallDistance, returnState);}, 300)
   });
   
   
   
 };
 
+//function displayMapSummary(){
+//    var directionsService = new google.maps.DirectionsService;
+//        var directionsDisplay = new google.maps.DirectionsRenderer;
+//        
+//    var mapProp = {
+//        center: new google.maps.LatLng(51.508742,-0.120850),
+//        zoom:9,
+//        mapTypeId: google.maps.MapTypeId.ROADMAP
+//    };
+//      var map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
+//      directionsDisplay.setMap(map);
+//      directionsService.route({
+//          origin: 'Heydar Aliyev International Airport (Terminal 1), Khazar, Azerbaijan',
+//          destination: 'Gence, Azerbaycan',
+//          waypoints: [
+//              {location: 'Salyan, Azərbaycan'},
+//              {location: 'Lenkoran, Azerbaijan'},
+//              {location: 'Barda, Azerbaijan'}],
+//            travelMode: google.maps.TravelMode.DRIVING
+//      },function(response,status){
+//           if (status === google.maps.DirectionsStatus.OK) {
+//            directionsDisplay.setDirections(response);
+//        }else {
+//      window.alert('Directions request failed due to ' + status);
+//    }
+//
+//
+//      });
+//};
