@@ -98,7 +98,7 @@ $this->title = 'My Yii Application';
             <label for="to"><span>To</span></label>
 
 
-    <?= Html::activeInput('text', $model, 'to', ['class' => 'controls add-dest-address' ,
+    <?= Html::activeInput('text', $model, 'to', ['id'=>'to','class' => 'controls add-dest-address' ,
          'disabled' => false, 'placeholder'=>'Baku, Azerbaijan']) ?>
 
 
@@ -202,7 +202,7 @@ $to_Currency = urlencode('USD');
                     ?>
                     <?= Html::button($buttonContent,
                         ['name'=>'Transferorder[car]','value'=>['car' => $autos['id'],
-                            'amount' => $autos['priceT']], 'type' => 'submit', 'class'=>'car-class' ]); ?>
+                            'amount' => $autos['priceT'], 'cent' => $autos['cent']], 'type' => 'submit', 'class'=>'car-class' ]); ?>
 
 
 

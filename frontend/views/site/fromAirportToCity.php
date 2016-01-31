@@ -52,7 +52,7 @@
         <div class="col-xs-12 col-md-9">
                <!-- <input type="text" id="pac-input-order-form" class="cpanel-input" value=""/>-->
        
-            <?= $form->field($model, 'to')->HiddenInput(['class'=>'add-dest-address',
+            <?= $form->field($model, 'to')->HiddenInput(['id'=>'to','class'=>'add-dest-address',
                 'value' => Yii::$app->request->get('Transferorder')['to']])->label(false) ?>
             <?= $form->field($model, 'from')->HiddenInput(['id'=>'from', 'class'=>'add-dest-address'
                 ,'value' => Yii::$app->request->get('Transferorder')['from']])->label(false) ?>

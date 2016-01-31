@@ -11,7 +11,7 @@ var returnCheckBox = document.getElementById('return');
 var returnState = 1;
 var waypts = [];
 var origin = document.getElementById('from').value;
-var destination = null;
+var destination = document.getElementById('to').value;
 
 function Autocomplete(){
     
@@ -159,7 +159,9 @@ function Autocomplete(){
                 overallDistance += response.routes[0].legs[i].distance.value / 1000;
         }
 			console.log(overallDistance); 
+                        
                         updatePrice(overallDistance, returnState);
+                        updatePriceInFixedBox(overallDistance);
                         
       } else {
         window.alert('Directions request failed due to ' + status);
@@ -169,7 +171,26 @@ function Autocomplete(){
     });
   }
  
-  
+  function updatePriceInFixedBox(distance){
+      var priceInFixedBox = document.getElementById('fixed-box-price');
+
+      var carPrice = Number(priceInFixedBox.dataset.carPrice);
+      var carCent = Number(priceInFixedBox.dataset.cent);
+      
+      if (distance == 0 || distance <= 35) {
+          priceInFixedBox.innerHTML = Number(carPrice);
+          return;
+      };
+      
+      
+      console.log('car price ' + priceInFixedBox.dataset.carPrice);
+      console.log('car cent ' + priceInFixedBox.dataset.cent);
+      console.log('distance ' + distance);
+ 
+      var updatedPrice = Math.floor(carCent * (distance - 35) + carPrice);
+      
+      priceInFixedBox.innerHTML = updatedPrice;
+  };
 
   //function to update car prices depending on distance and return value
   function updatePrice(kilometers, returnState){
@@ -200,7 +221,7 @@ function Autocomplete(){
             }       
             //if distance is more than 35km then price should be calculated like this:
             //koeff * (distance - 35)+
-            console.log('kilometers ' + kilometers)
+            
             if (kilometers >= 35 ){
                 var s = (kilometers - 35); //normalized distance
                 
