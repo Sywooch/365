@@ -81,7 +81,7 @@
     <?= $this->render('addDestination', ['model'=>$model, 'form'=>$form, 'id'=>'anotherd1', 'aaddress'=>'aaddress1'])?>
     <div id="last"><?= $this->render('addDestination', ['model'=>$model, 'form'=>$form, 'id'=>'anotherd2', 'aaddress'=>'aaddress2'])?></div>
    
-    <div id="add" class="cpanel-item">Add another another destination</div>
+    <div id="add" class="pseudo-link cpanel-item">Add another another destination</div>
 </div> <!--add destination end -->
 
         <div class="row">

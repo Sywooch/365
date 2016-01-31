@@ -3,23 +3,6 @@ return [
     'vendorPath' => dirname(dirname(__DIR__)) . '/vendor',
     'bootstrap' => ['languagepicker'],
     'components' => [
-        'assetManager' => [
-            'bundles' => [ 
-                'yii\jui\JuiAsset' => [
-                    'css' => [
-                        'themes/custom365/jquery-ui.css',
-                    ],
-                    
-            
-],
-                'dosamigos\google\maps\MapAsset' => [
-                'options' => [
-                    'key' => 'AIzaSyBB19cyGLWQeSz1amgo9wJN6ZeXlQtHZCU',
-                    'language' => 'id',
-                    'version' => '3.1.18'
-                ]
-            ]
-                ] ],
          'formatter' => 
             [
                'defaultTimeZone' => 'UTC+4',
@@ -31,6 +14,17 @@ return [
         'cache' => [
             'class' => 'yii\caching\FileCache',
         ],
+            'assetManager' => [
+        'bundles' => [
+            'dosamigos\google\maps\MapAsset' => [
+                'options' => [
+                    'key' => 'AIzaSyBB19cyGLWQeSz1amgo9wJN6ZeXlQtHZCU',
+                    'language' => 'id',
+                    'version' => '3.1.18'
+                ]
+            ]
+        ]
+    ],
         'languagepicker' => [
         'class' => 'lajax\languagepicker\Component',
         'languages' => ['az' => 'AZ','en' => 'EN', 'ru' => 'RU'],     // List of available languages
