@@ -46,10 +46,10 @@
 
 <div class="row">
     <div class="cpanel-item">
-        <div class="col-md-3" style="text-align: right">
+        <div class="col-xs-12col-md-3" style="text-align: right">
                 <label for="destination_address">Destination address</label>
         </div>
-        <div class="col-md-3">
+        <div class="col-xs-12 col-md-9">
                <!-- <input type="text" id="pac-input-order-form" class="cpanel-input" value=""/>-->
        
             <?= $form->field($model, 'to')->HiddenInput(['value' => Yii::$app->request->get('Transferorder')['to']])->label(false) ?>
@@ -59,7 +59,7 @@
             <div id="destination-in-form"><?= Yii::$app->request->get("Transferorder")["to"] ?></div>
         </div>
 
-        <div class="col-md-4">
+        <div class="col-xs-12 col-md-12">
             <div class="inner-addon">
                 <span><?= Icon::show('home', ['class'=>'fa-2x'], Icon::FA);?></span>
                 <!--<input type="text" id="specify-address" class="cpanel-input" placeholder="Specify address(i.e. str, house etc.)"/>-->
@@ -80,8 +80,10 @@
     <?= $this->render('addDestination', ['model'=>$model, 'form'=>$form, 'id'=>'anotherd', 'aaddress'=>'aaddress'])?>
     <?= $this->render('addDestination', ['model'=>$model, 'form'=>$form, 'id'=>'anotherd1', 'aaddress'=>'aaddress1'])?>
     <div id="last"><?= $this->render('addDestination', ['model'=>$model, 'form'=>$form, 'id'=>'anotherd2', 'aaddress'=>'aaddress2'])?></div>
-   
-    <div id="add" class="pseudo-link cpanel-item">Add another another destination</div>
+    
+    <div class="row">
+        <div id="add" class="col-xs-12 col-md-6 pseudo-link cpanel-item">Add another another destination</div>
+    </div>
 </div> <!--add destination end -->
 
         <div class="row">
