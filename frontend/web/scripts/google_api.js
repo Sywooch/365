@@ -22,12 +22,12 @@ function Autocomplete(){
 //      var map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
 //      directionsDisplay.setMap(map);
 //      directionsService.route({
-//          origin: document.getElementById('summary-from').value,
-//          destination: document.getElementById('summary-to').value,
+//          origin: 'Heydar Aliyev International Airport (Terminal 1), Khazar, Azerbaijan',
+//          destination: 'Gence, Azerbaycan',
 //          waypoints: [
-//              {location: document.getElementById('summary-anotherd').value},
-//              {location: document.getElementById('summary-anotherd1').value},
-//              {location: document.getElementById('summary-anotherd2').value}],
+//              {location: 'Salyan, Azərbaycan'},
+//              {location: 'Lenkoran, Azerbaijan'},
+//              {location: 'Barda, Azerbaijan'}],
 //            travelMode: google.maps.TravelMode.DRIVING
 //      },function(response,status){
 //           if (status === google.maps.DirectionsStatus.OK) {
@@ -86,6 +86,7 @@ function Autocomplete(){
 
     searchBoxFrom.addListener('place_changed', function(e){
         hideCarClassContainer();
+        $(inputFrom).removeClass('error');
         var place = searchBoxFrom.getPlace();
         if (!place.geometry) {
             window.alert("Autocomplete's returned place contains no geometry");
@@ -98,6 +99,7 @@ function Autocomplete(){
     });
 
     searchBoxTo.addListener('place_changed', function(e){
+        $(inputTo).removeClass('error');
         hideCarClassContainer();
         var place = searchBoxTo.getPlace();
         if (!place.geometry) {

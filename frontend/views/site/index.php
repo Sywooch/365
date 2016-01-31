@@ -80,7 +80,7 @@ $this->title = 'My Yii Application';
                         </div>
                     </div>
 
-<?= Html::beginForm(['site/form'], 'get', ['enctype' => 'multipart/form-data']) ?>
+<?= Html::beginForm(['site/form'], 'get', ['enctype' => 'multipart/form-data', 'id'=>'index-form']) ?>
                         <div class="transfer" id="transfer">
     <div class="col-xs-12 col-md-4 input-from">
     <label for="from"><span>From</span></label>

@@ -213,6 +213,28 @@ if ($("#pac-input-from").exists()){
         else
             $('.return-panel').css('display', 'none');
     }
+    
+   //index form validation (from - to fields)
+   document.getElementById('index-form').addEventListener('submit', function(e){
+       if ($('#pac-input-from').val() == ''){
+           e.preventDefault();
+            $('#pac-input-from').addClass('error');
+            $(window).scrollTop(0);
+            
+       }else if ($('#pac-input-to').val() == ''){
+            e.preventDefault();
+            $('#pac-input-to').addClass('error');
+            $(window).scrollTop(0);
+            
+       }else{
+           $('#pac-input-from, #pac-input-to').removeClass('error');
+           return true;
+       }
+       
+      
+   });
+    
+    
 
 });
 
