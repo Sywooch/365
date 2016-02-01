@@ -2,6 +2,7 @@
 
 $(document).ready(function (){    
     
+    
     $('#currency-converter').dropdown();
     
     /*check viewport size*/
@@ -75,8 +76,8 @@ $(document).ready(function (){
 
 //main page destination choice fields. swap icon and disabled field functionalities	
 function changeEventHandler(){ //function disables "to" field if "from" is empty
-    var firstField = document.getElementById("pac-input-from");
-    var secondField = document.getElementById("pac-input-to");
+    var firstField = document.getElementById("from");
+    var secondField = document.getElementById("to");
 
     if (firstField.value == ""){
             secondField.setAttribute("disabled", true);
@@ -89,8 +90,8 @@ function changeEventHandler(){ //function disables "to" field if "from" is empty
 
 //function swaps values of "from" and "to"
 function swapFieldValues(){
-    var firstField = document.getElementById("pac-input-from");
-    var secondField = document.getElementById("pac-input-to");
+    var firstField = document.getElementById("from");
+    var secondField = document.getElementById("to");
     var tmp;
 
     tmp = secondField.value;
@@ -99,9 +100,30 @@ function swapFieldValues(){
 	
 };
 
-if ($("#pac-input-from").exists()){
-	document.getElementById("pac-input-from").addEventListener("input", changeEventHandler);
-	document.getElementsByClassName("swap-icon")[0].addEventListener("click", swapFieldValues);
+if($('#return-form').exists()){
+        var returnForm = $('#return-form');
+        if ($('#return-form').prop('checked')){
+            
+            $('.return-panel').css('display', 'block');
+        }
+        returnForm.on('change', showHideReturnPanel);
+    }
+    
+    function showHideReturnPanel(event){
+        console.log(event.target.checked);
+        if (event.target.checked)
+            $('.return-panel').css('display', 'block');
+        else
+            $('.return-panel').css('display', 'none');
+    }
+
+if ($("#from").exists()){
+    if ($('#from').val() == '') $('#to').attr('disabled', true);
+	document.getElementById("from").addEventListener("input", changeEventHandler);
+        
+        
+	document.getElementById("swap-icon").addEventListener("click", swapFieldValues);
+    
 	
 	var transferForm = document.getElementsByClassName('transfer')[0];
 	var chaffeurForm = document.getElementsByClassName('chaffeur')[0];
@@ -201,18 +223,7 @@ if ($("#pac-input-from").exists()){
   
     }
     
-    if($('#return-form').exists()){
-        var returnForm = $('#return-form');
-        returnForm.on('change', showHideReturnPanel);
-    }
     
-    function showHideReturnPanel(event){
-        console.log(event.target.checked);
-        if (event.target.checked)
-            $('.return-panel').css('display', 'block');
-        else
-            $('.return-panel').css('display', 'none');
-    }
     
    //index form validation (from - to fields)
    document.getElementById('index-form').addEventListener('submit', function(e){

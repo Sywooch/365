@@ -14,7 +14,7 @@
                 <div class="col-xs-12 col-md-3">
                     
                     <?= $form->field($model, 'date')->textInput(['id' => 'date-pickup',
-                        'class' => 'cpanel-input date-picker' ,'placeholder' => 'Choose date'])->label(false) ?>
+                        'class' => 'cpanel-input date-picker' ,'placeholder' => 'dd/mm/yy'])->label(false) ?>
                 </div>
                 <div class="col-xs-12 col-md-2">
         
@@ -45,7 +45,8 @@
         <div class="inner-addon">
             <span><?= Icon::show('home', ['class'=>'fa-2x'], Icon::FA);?></span>
                
-            <?= $form->field($model, 'address')->textInput(['id' => 'pickup-address', 'class' => 'cpanel-input' ,'placeholder' => 'Specify street number'])->label(false) ?>
+            <?= $form->field($model, 'address')->textInput(['id' => 
+                'pickup-address', 'class' => 'cpanel-input' ,'placeholder' => 'Specify street number'])->label(false) ?>
         </div>
     </div>
    

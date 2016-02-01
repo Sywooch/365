@@ -19,7 +19,7 @@ use yii\widgets\ActiveForm;
                 </div>
                 <div class="col-xs-12 col-md-3">
                     <?= $form->field($model, 'rdate')->textInput(['id' => 'date-pickup-return-panel',
-                        'class' => 'cpanel-input date-picker return' ,'placeholder' => 'Choose date'])->label(false) ?>
+                        'class' => 'cpanel-input date-picker return' ,'placeholder' => 'dd/mm/yy'])->label(false) ?>
                 </div>
                 <div class="col-xs-12 col-md-2">
         
@@ -43,7 +43,9 @@ use yii\widgets\ActiveForm;
         <div class="inner-addon">
             <span><?= Icon::show('home', ['class'=>'fa-2x'], Icon::FA);?></span>
                
-            <?= $form->field($model, 'raaddress')->textInput(['id' => 'pickup-address-return-panel', 'class' => 'cpanel-input' ,'placeholder' => 'Imran Qasimov, 4'])->label(false) ?>
+            <?= $form->field($model, 'raaddress')->
+                textInput(['id' => 'pickup-address-return-panel', 
+                'class' => 'cpanel-input' ,'placeholder' => 'Specify street number'])->label(false) ?>
         </div>
     </div>
     </div>

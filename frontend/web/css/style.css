@@ -363,7 +363,11 @@ ul:first-child {
 	cursor: pointer;
 }
 
-#date-arrival, #date-flight{
+#flight-number{
+    
+}
+
+#date-arrival, #date-flight, #date-pickup-citytocity{
 	background: url("images/el_date.png") no-repeat scroll -20px 9px #fff;	
 	float: left;
 	padding-left: 35px;
@@ -379,12 +383,6 @@ ul:first-child {
 	vertical-align: top;
 	white-space: normal;
 }
-
-#date-pickup-citytocity{
-    background: #FFF url("images/el_date.png") no-repeat scroll -20px 9px;
-}
-
-
 
 #return-panel{
     display: none;

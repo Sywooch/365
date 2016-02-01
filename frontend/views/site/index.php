@@ -151,7 +151,15 @@ $to_Currency = urlencode('USD');
 
             <div class="row">
                     <div class="col-sm-3 car-button-image">
+                        <?php if ($cats[$lang] == 'Suv' || $cats[$lang] == 'Сув'): ?>
+                            <img src="/uploads/prado.png" />
+                        <?php else: ?>
                             <img src="/uploads/<?=$cats['autos'][$say-1]['photo']?>" />
+                        <?php endif; ?>
+                            
+                        
+                        
+                            
 
                     </div>
                     <div class="col-sm-3 col-xs-4 car-button-classname">

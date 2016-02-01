@@ -19,7 +19,7 @@ window.onload = function () {
                 var a = $(e.target.parentElement.parentElement);
                 a.find('.add-dest-address').val('');
                 e.target.parentElement.parentElement.className = "cpanel-item new-destination hide";
-                document.querySelector('#add').className = "cpanel-item"; //show "add destination" link
+                document.querySelector('#add').className = "col-xs-12 col-md-6 pseudo-link cpanel-item"; //show "add destination" link
             }}catch (e){
                     console.log("cant add more destinations");
             }

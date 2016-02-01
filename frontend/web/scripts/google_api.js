@@ -75,6 +75,7 @@ function Autocomplete(){
      
      autocompletes.addListener('place_changed', function(){
         $('#from, #to').removeClass('error');
+        hideCarClassContainer();
         waypts = [];
         for (var i = 0; i<locationInputs.length; i++){
             if (locationInputs[i].id != 'from' && locationInputs[i].value != ''){
