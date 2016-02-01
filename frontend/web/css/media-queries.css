@@ -133,10 +133,11 @@
         width: 34%;
     }
     
-    #flight-number{
+    #flight-number, #date-pickup-citytocity, #date-pickup{
         position: relative;
-        bottom: 20px;
+        bottom: 22px;
     }
     
+
 }
 

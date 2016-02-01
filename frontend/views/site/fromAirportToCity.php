@@ -9,12 +9,14 @@
         <legend id="route">Route</legend>
         <div class="row">
             <div class="cpanel-item">
+
                 <div class="col-md-3">
                     <label for="flight-number">Flight number</label>
                 </div>
                 <div class="col-md-3">
                     <?= $form->field($model, 'flightnumber')->textInput(['id' =>
                         'flight-number', 'class' => 'cpanel-input','placehodler' => 'Enter flight number'])->label(false) ?>
+
                 </div>
                 <div class="col-md-6">
                     <div class="description">

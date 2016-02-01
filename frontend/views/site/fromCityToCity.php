@@ -16,8 +16,7 @@
                 </div>
                 <div class="col-xs-12 col-md-3">
 
-                    <?= $form->field($model, 'date')->textInput(['id' => 
-                        'date-pickup-citytocity', 'class' => 'cpanel-input date-picker' ,
+                    <?= $form->field($model, 'date')->textInput(['id' =>'date-pickup-citytocity', 'class' => 'cpanel-input date-picker' ,
                         'placeholder' => 'dd/mm/yy/'])->label(false) ?>
                 </div>
                 <div class="col-xs-12 col-md-2">
