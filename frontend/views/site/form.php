@@ -173,7 +173,7 @@ InternationalTelephoneAsset::register($this);
 					<div class="col-md-2"></div>
 					<div class="col-md-6 button-box">
 						<div class="row">
-							<div class="col-md-12 button-box-title">Total price <?= $jsondata['amount'] ?> AZN</div>
+                                                    <div class="col-md-12 button-box-title">Total price <span><?= $jsondata['amount'] ?></span> AZN</div>
 						</div>
 						<div class="row">
 							<div class="col-md-12">

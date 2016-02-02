@@ -100,22 +100,7 @@ function swapFieldValues(){
 	
 };
 
-if($('#return-form').exists()){
-        var returnForm = $('#return-form');
-        if ($('#return-form').prop('checked')){
-            
-            $('.return-panel').css('display', 'block');
-        }
-        returnForm.on('change', showHideReturnPanel);
-    }
-    
-    function showHideReturnPanel(event){
-        console.log(event.target.checked);
-        if (event.target.checked)
-            $('.return-panel').css('display', 'block');
-        else
-            $('.return-panel').css('display', 'none');
-    }
+
 
 if ($("#from").exists()){
     if ($('#from').val() == '') $('#to').attr('disabled', true);

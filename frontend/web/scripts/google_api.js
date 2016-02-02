@@ -5,6 +5,8 @@
  */
 
 /* PLEASE, FIND SOME TIME TO THINK ABOUT ALL THIS CRAP YOU HAVE MADE*/
+/* 1. there are to many directionsService requests */
+
 var overallDistance = 0;
 var currentPrice = 0;
 var returnCheckBox = document.getElementById('return');
@@ -50,6 +52,7 @@ function Autocomplete(){
   var directionsService = new google.maps.DirectionsService;
   var travel_mode = google.maps.TravelMode.DRIVING;
   
+  //display updated price when page reloads
   google.maps.event.addDomListener(window, 'load', function(){
       console.log('origin ' + origin);
         console.log('destination ' + destination);
@@ -65,28 +68,18 @@ function Autocomplete(){
  for (var i = 0; i < locationInputs.length; i++){
      var autocompletes = new google.maps.places.Autocomplete(locationInputs[i], options);
      
-     
-     
-//     locationInputs[i].value = '';
-
-//    function gatherInfomation(){
-//        return [origin, destination, waypts];
-//    }
-     
      autocompletes.addListener('place_changed', function(){
-        $('#from, #to').removeClass('error');
-        hideCarClassContainer();
+        $('#from, #to').removeClass('error'); //remove red inner border from inputs if there was place_changed
+        hideCarClassContainer(); //run loading animation
         waypts = [];
         for (var i = 0; i<locationInputs.length; i++){
             if (locationInputs[i].id != 'from' && locationInputs[i].value != ''){
                     waypts.push({
                             location: locationInputs[i].value
                     });
-
             }
 
         }
-        
         
         origin = document.getElementById('from').value;
         if (waypts.length == 0){
@@ -94,8 +87,6 @@ function Autocomplete(){
         }else{
             destination = waypts[waypts.length - 1].location;
         }
-        
-//        waypts.pop();
         
         route(directionsService, origin, destination, waypts);
         waypts=[];
@@ -119,33 +110,29 @@ function Autocomplete(){
             }
 
         }
-       
-       
-       
-        
+
         origin = document.getElementById('from').value;
         if (waypts.length == 0){
             destination = origin;
         }else{
             destination = waypts[waypts.length - 1].location;
         }
-        
-//        
-     
-        
+
         route(directionsService, origin, destination, waypts);
             waypts = [];
         });
     };
   
+   //function creates directionsService request and get response. then it calls functions for 
+   // updating and displaying time
   function route(directionsService, origin, destination, waypoints) {
     if (!origin || !destination) {
         console.log('no data');
       return;
     }
     console.log('origin ' + origin);
-        console.log('destination ' + destination);
-        console.log(waypts);
+    console.log('destination ' + destination);
+    console.log(waypts);
     
     directionsService.route({
         
@@ -156,42 +143,85 @@ function Autocomplete(){
     }, function(response, status) {
       if (status === google.maps.DirectionsStatus.OK) {
         overallDistance = 0;
-
+        console.log(response.routes[0]);
         for (var i=0; i<response.routes[0].legs.length; i++){
                 overallDistance += response.routes[0].legs[i].distance.value / 1000;
+                
         }
-			console.log(overallDistance); 
+       
+        console.log(overallDistance); 
+            
+            //actually it will be better to call this functions from other place
+            updatePrice(overallDistance, returnState);
+            updatePriceInFixedBox(overallDistance); 
                         
-                        updatePrice(overallDistance, returnState);
-                        updatePriceInFixedBox(overallDistance);
-                        
-      } else {
+        } else {
         window.alert('Directions request failed due to ' + status);
         window.alert(response.routes[0]);
         
       }
     });
+    
+      //check if return then double the price
+        var returnForm = $('#return-form');
+        if ($('#return-form').prop('checked')){
+            
+            $('.return-panel').css('display', 'block');
+        }
+        returnForm.on('change', showHideReturnPanel);
+    
+    //function works when return state changed. toggles return pannel and call updatePriceInFixedBox
+    //to correctly update the price
+    function showHideReturnPanel(event){
+
+        if (event.target.checked){
+            $('.return-panel').css('display', 'block');
+            updatePriceInFixedBox(overallDistance);
+        }
+            
+        else{
+            $('.return-panel').css('display', 'none');
+            updatePriceInFixedBox(overallDistance);
+            
+        }
+    }
+    
   }
- 
+  
+  //function updates summary price in right fixed box
   function updatePriceInFixedBox(distance){
       var priceInFixedBox = document.getElementById('fixed-box-price');
+      var buttonBoxBottomSpan = $('.button-box-title span');
+      
+      console.log(buttonBoxBottomSpan.text());
+      
+      if ($('#return-form').prop('checked')){
+         var returnState = 2;
+      }else{
+         var returnState = 1;
+      }
 
       var carPrice = Number(priceInFixedBox.dataset.carPrice);
       var carCent = Number(priceInFixedBox.dataset.cent);
       
       if (distance == 0 || distance <= 35) {
-          priceInFixedBox.innerHTML = Number(carPrice);
+          priceInFixedBox.innerHTML = Number(carPrice) * returnState;
+          buttonBoxBottomSpan.text(priceInFixedBox.innerHTML);
           return;
       };
       
+     
       
-      console.log('car price ' + priceInFixedBox.dataset.carPrice);
-      console.log('car cent ' + priceInFixedBox.dataset.cent);
-      console.log('distance ' + distance);
+      
+//      console.log('car price ' + priceInFixedBox.dataset.carPrice);
+//      console.log('car cent ' + priceInFixedBox.dataset.cent);
+//      console.log('distance ' + distance);
+      console.log(returnState);
  
-      var updatedPrice = Math.floor(carCent * (distance - 35) + carPrice);
+      var updatedPrice = Math.floor(carCent * (distance - 35) + carPrice) * returnState;
       
       priceInFixedBox.innerHTML = updatedPrice;
+      buttonBoxBottomSpan.text(priceInFixedBox.innerHTML);
   };
 
   //function to update car prices depending on distance and return value
