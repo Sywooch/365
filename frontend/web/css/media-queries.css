@@ -135,8 +135,9 @@
     
     #flight-number, #date-pickup-citytocity, #date-pickup{
         position: relative;
-        bottom: 22px;
+        bottom: 0px;
     }
+    
     
 
 }

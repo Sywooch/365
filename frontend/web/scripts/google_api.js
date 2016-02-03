@@ -128,7 +128,7 @@ function Autocomplete(){
   function route(directionsService, origin, destination, waypoints) {
     if (!origin || !destination) {
         console.log('no data');
-      return;
+        return;
     }
     console.log('origin ' + origin);
     console.log('destination ' + destination);
