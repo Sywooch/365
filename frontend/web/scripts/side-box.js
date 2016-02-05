@@ -61,7 +61,25 @@ $(document).ready(function (){
            document.getElementById('time-return-fixed').innerHTML = time;
        }
     });
+    
+    //update information about child seat on right side box
+    if ($('#childseat') != null){
         
+        function checkSeatAndUpdateBox(){
+            if ($('#childseat').prop('checked')){
+                $('#child-seat-fixed span').text('yes');
+            }
+            else{
+                $('#child-seat-fixed span').text('no');
+            }
+        }
+        
+        checkSeatAndUpdateBox();
+        
+        $('#childseat').on('change', function(){
+            checkSeatAndUpdateBox();
+        });
+    }
         
         //fixed side box position on scrolling
         var rightSideBox = document.getElementById('fixed-box');

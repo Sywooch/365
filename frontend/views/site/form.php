@@ -4,6 +4,7 @@ use yii\helpers\Html;
 use kartik\icons\Icon;
 use yii\widgets\ActiveForm;
 use yii\helpers\BaseJson;
+use yii\web\UrlManager;
 use frontend\assets\FormAsset;
 use frontend\assets\BootstrapDateTimePickerAsset;
 use frontend\assets\InternationalTelephoneAsset;
@@ -42,7 +43,8 @@ InternationalTelephoneAsset::register($this);
 
                 </div>
                 <?php
-                 
+                    $getRequestReturn = Yii::$app->request->get('return-check'); //get return fron "get request" and then pass it to the form
+                                                                                 //which renders airportToCity and CityToCity
                     $getRequestFrom = Yii::$app->request->get('Transferorder')['from'];
                     $getRequestTo = Yii::$app->request->get('Transferorder')['to'];
                     
@@ -51,11 +53,11 @@ InternationalTelephoneAsset::register($this);
                     $toAirport = stristr($getRequestTo, 'airport'); //find substr 'airport' in getRuquestFrom
                     
                     if ($fromAirport){
-                        echo $this->render('fromAirportToCity', ['model'=>$model,'form' => $form]);
+                        echo $this->render('fromAirportToCity', ['model'=>$model,'form' => $form, 'return' => $getRequestReturn]);
                     }elseif(!$fromAirport && $toAirport){
-                        echo $this->render('fromCityToAirport', ['model'=>$model,'form' => $form]);
+                        echo $this->render('fromCityToAirport', ['model'=>$model,'form' => $form, 'return' => $getRequestReturn]);
                     }else{
-                        echo $this->render('fromCityToCity', ['model'=>$model,'form' => $form]);
+                        echo $this->render('fromCityToCity', ['model'=>$model,'form' => $form, 'return' => $getRequestReturn]);
                     }
                 ?>
 
@@ -108,10 +110,10 @@ InternationalTelephoneAsset::register($this);
                             Transfer type
                     </div>
                     <div class="fixed-box-section-body">
-                            <div class="fb-section-line">Tarrif <span id="tariff-fixed">Economy</span></div>
+<!--                            <div class="fb-section-line">Tarrif <span id="tariff-fixed">Economy</span></div>
                             <div class="fb-section-line">1-4 passengers,up to 3 lagguage places</div>
-                            <div class="fb-section-line">Passengers: <span id="pass-num-fixed"></span></div>
-                            <div class="fb-section-line" id="chair-side"></div>
+                            <div class="fb-section-line">Passengers: <span id="pass-num-fixed"></span></div>-->
+                        <div class="fb-section-line" id="child-seat-fixed">Child seat: <span>yes</span></div>
                     </div>
                 </div>
                 <div id="contacts-fixed" class="fixed-box-section">
@@ -154,11 +156,11 @@ InternationalTelephoneAsset::register($this);
                         Transfer price
                 </div>
                 <div class="fixed-box-heading">
-                        Summary
-                        <div id='fixed-box-price' data-cent='<?= $jsondata['cent']?>'
-                             data-car-price='<?= $jsondata['amount']?>' class="fixed-box-price">
-                                <?= $jsondata['amount'] ?>
-                        </div>
+                    Summary
+                    <div id='fixed-box-price' data-cent='<?= $jsondata['cent']?>'
+                         data-car-price='<?= $jsondata['amount']?>' class="fixed-box-price">
+                            <?= $jsondata['amount'] ?>
+                    </div>
                 </div>
             </div>
         </div>
@@ -167,32 +169,31 @@ InternationalTelephoneAsset::register($this);
 			
 			
 			
-		</div> <!-- Passenger form container end -->
-		<div class="container">
-				<div class="row">
-					<div class="col-md-2"></div>
-					<div class="col-md-6 button-box">
-						<div class="row">
-                                                    <div class="col-md-12 button-box-title">Total price <span><?= $jsondata['amount'] ?></span> AZN</div>
-						</div>
-						<div class="row">
-							<div class="col-md-12">
-								
-                                                                <?= Html::SubmitButton('Go To Payment'); ?>
-							</div>
-						</div>
-                                            
-						<div class="row">
-							<div class="col-md-12">
-							</div>
-						</div>
-						
-					</div>
-					<div class="col-md-2">
-					</div>
-                                        <?php ActiveForm::end() ?>
-				</div>
-			</div>
+        </div> <!-- Passenger form container end -->
+        <div class="container">
+            <div class="row">
+                <div class="col-md-2"></div>
+                <div class="col-md-6 button-box">
+                    <div class="row">
+                        <div class="col-md-12 button-box-title">Total price <span><?= $jsondata['amount'] ?></span> AZN</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <?= Html::SubmitButton('Go To Payment'); ?>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                            <div class="col-md-12">
+                            </div>
+                    </div>
+
+                </div>
+                <div class="col-md-2">
+                </div>
+                <?php ActiveForm::end() ?>
+            </div>
+        </div>
 		
 
 		
