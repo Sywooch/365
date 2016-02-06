@@ -273,7 +273,7 @@ ul:first-child {
 
 /* passenger form*/
 #destination-in-form{
-    padding-top: 8px;
+    /*padding-top: 8px;*/
     height: 42px;
     font-size: 16px;
 }
@@ -455,6 +455,20 @@ ul:first-child {
     border: solid 1px #00B300;
     color:#fff;
     background-position: left bottom;
+}
+
+.button-box a:hover{
+    text-decoration: none;
+}
+
+#button-box-confirmation{
+    padding: 25px;
+	background: transparent; /* Old browsers */
+    
+	color: #fff;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
 }
 
 @keyframes highliteGoToPayment{
@@ -788,18 +802,18 @@ input[type=checkbox]{
     
    width: 87%;
 position: absolute;
-bottom: -121px;
+bottom: -109px;
 right: 19px;
 }
 
 #greeting-sign{
-    
     max-width: 38%;
     position: absolute;
     bottom: 60px;
     z-index: 1;
     transform: rotate(6deg);
     resize: none;
+    text-align: center;
 }
 
 .online-payment{
@@ -826,4 +840,10 @@ right: 19px;
     -moz-box-shadow: 1px 1px 13px 3px red inset;
     -webkit-box-shadow: 1px 1px 13px 3px red inset;
     box-shadow: 1px 1px 13px 3px red inset;
+}
+
+#childseat{
+    float: right;
+    margin-left: 9px;
+    margin-top: 2px;
 }

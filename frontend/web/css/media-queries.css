@@ -71,8 +71,12 @@
     
     #swap-icon img{
         position: inherit;
-        transform: rotate(90deg);
         top: 0px;
+        
+        -webkit-transform: rotate(90deg);
+        -moz-transform: rotate(90deg);
+        -o-transform: rotate(90deg);
+        transform: rotate(90deg);
     }
 
     .destination-choice label{
@@ -126,7 +130,7 @@
 
     
     #destination-in-form{
-        padding-top: 4px;
+        /*padding-top: 4px;*/
     }
     
     #add{
@@ -138,7 +142,9 @@
         bottom: 0px;
     }
     
-    
+    .inner-addon {
+        margin-left: 0px;
+    }
 
 }
 
