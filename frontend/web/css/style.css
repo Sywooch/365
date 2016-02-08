@@ -6,10 +6,10 @@ html {
 
 body {
 	height: 100%;
-	font-size:16px;
+	/*font-size:16px;*/
 	margin: 0;
 	padding: 0;
-	font-family: "PT Sans Caption", "verdana", sans-serif ;
+	font-family: "Open Sans","PT Sans Caption", "verdana", sans-serif ;
 	overflow-x: scroll;
 }
 
@@ -279,11 +279,12 @@ ul:first-child {
 }
 
 .cpanel {
-	color: #444d3e;
+	color: #333;
 	background:#e3e4e2;
 	margin-bottom: 15px;
 	margin-top: 15px;
 	border-radius: 20px;
+        font-size: 14px;
 	
 }
 
@@ -299,8 +300,8 @@ ul:first-child {
 	border-radius: 8px 8px 0px 0px;
 	text-align: center;
 	padding: 5px;
-	font-size: 18px;
-	font-weight: bold;
+	font-size: 16px;
+	font-weight: normal;
 }
 
 .cpanel-section {
@@ -308,8 +309,30 @@ ul:first-child {
 	padding: 20px;
 }
 
+.return-checkbox{
+    font-size: 18px;
+}
+
+.label-wrapper {
+    letter-spacing: 6px;
+}
+
+.location{
+    letter-spacing: 2px;
+    font-size: 16px;
+    color: #6E6E6E;
+}
+
+.location-input {
+    margin-top: 10px; 
+}
+
+.close > i{
+    margin-top: 20px;
+}
+
 .cpanel-section label{
-	float:left;
+	float:right;
 }
 
 .cpanel-footer {
@@ -336,7 +359,7 @@ ul:first-child {
 }
 
 .cpanel label{
-	margin-top: 5px;
+	/*margin-top: 5px;*/
 	margin-bottom:0px;
 	font-weight: normal;
 }
@@ -347,8 +370,8 @@ ul:first-child {
 }
 
 #route {
-	font-weight: normal;
-	margin-bottom: 0px;
+	font-weight: 300;
+	margin-bottom: 20px;
 }
 
 .pseudo-link {
@@ -390,15 +413,18 @@ ul:first-child {
 }
 
 .description{
-    font-style: italic;
-    font-size: 0.9em;
-    margin-top:10px;
+    font-style: normal;
+    font-size: 12px;
+    margin-top: 10px;
+    line-height: 16px;
+    color: #6E6E6E;
 }
 
 .inner-addon span{
     position: absolute;
     pointer-events: none;
     padding: 6px;
+    color: #6D0019;
 }
 
 .inner-addon input{
@@ -769,14 +795,14 @@ ul:first-child {
 
 #add {
     cursor: pointer;
-    text-decoration: underline;
+    text-decoration: underline dashed;
     width: 100%;
 }
 
 input[type=checkbox]{
   -webkit-appearance:checkbox;
     width: 22px;
-    height: 21px;
+    height: 27px;
     padding-right: 10px;
 }
 
@@ -847,3 +873,7 @@ right: 19px;
     margin-left: 9px;
     margin-top: 2px;
 }
+
+
+
+

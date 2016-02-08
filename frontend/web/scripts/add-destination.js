@@ -10,15 +10,26 @@ window.onload = function () {
         try {
             if (e.target.id == "add"){ //if clicked on "add destination" show div
                 var targetDiv = document.querySelector(".cpanel-item.new-destination.hide");
-                console.log(targetDiv.id);
-                if (targetDiv.id == "last"){ // hide "add destination link after last div was shown
+                for (var i = 0; i < $(targetDiv).parents().length; i++){
+                    parent = $(targetDiv).parents()[i];
+                    
+                    if ($(parent).attr('id')=='last'){ // hide "add destination link after last div was shown
+                    
                     e.target.className = "hide"; //hide "add destination link"
                 }
+                    
+                }
+                
+                console.log($(targetDiv).parents());
                 targetDiv.className = "cpanel-item new-destination"; //show div
-            }else if(e.target.className == "fa-2x fa fa-times-circle"){ //if clicked on "close" hide div   
-                var a = $(e.target.parentElement.parentElement);
-                a.find('.add-dest-address').val('');
-                e.target.parentElement.parentElement.className = "cpanel-item new-destination hide";
+            }else if(e.target.className == "fa-lg fa fa-times-circle"){ //if clicked on "close" hide div
+                
+                var a = $(e.target).parents('.parent-anchor'); //this takes the parent in addDestination
+                a.find('.add-dest-address').val(''); //this clears the address fields when close is clicked
+                a.find('.specify-address').val('');
+                
+                console.log($(a).children('.new-destination'));
+                a.children('.new-destination').addClass('hide');
                 document.querySelector('#add').className = "col-xs-12 col-md-6 pseudo-link cpanel-item"; //show "add destination" link
             }}catch (e){
                     console.log("cant add more destinations");
