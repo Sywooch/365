@@ -67,6 +67,8 @@ $(document).ready(function (){
         
         function checkSeatAndUpdateBox(){
             if ($('#childseat').prop('checked')){
+                
+                
                 $('#child-seat-fixed span').text('yes');
             }
             else{
@@ -79,6 +81,9 @@ $(document).ready(function (){
         $('#childseat').on('change', function(){
             checkSeatAndUpdateBox();
         });
+        
+       
+       
     }
         
         //fixed side box position on scrolling

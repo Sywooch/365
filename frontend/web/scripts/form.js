@@ -4,6 +4,8 @@ $(document).ready(function(){
     var months = ["January", "February", "March", "April", "May", "June",
             "July", "August", "September", "October", "November", "December"];
         
+    $('#childseat-amount-dropdown').dropdown();
+        
     $('#phone-number').intlTelInput({
             nationalMode: false,
             preferredCountries: ["", ""]
@@ -60,6 +62,23 @@ $(document).ready(function(){
             
     });
     
+    function checkChildSeatBox(){
+       if ($('#childseat').prop('checked')){
+            $('.ui.dropdown').removeClass('disabled'); 
+            
+        }else{
+            $('.ui.dropdown').addClass('disabled');
+        } 
+    }
+    
+    
+    
+    $('#childseat').on('change', function (){
+        checkChildSeatBox();
+        
+    });
+    
+    checkChildSeatBox();
 
     });
     
