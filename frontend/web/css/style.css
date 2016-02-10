@@ -118,7 +118,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#6d0019', end
     float: right;
     
     margin-left: 9px;
-    margin-top: 2px;
+    margin-top: 5px;
 }
 
 .service-choice{
@@ -810,7 +810,7 @@ ul:first-child {
 input[type=checkbox]{
   -webkit-appearance:checkbox;
     width: 22px;
-    height: 27px;
+    height: 20px;
     padding-right: 10px;
 }
 
@@ -838,14 +838,14 @@ input[type=checkbox]{
     
    width: 87%;
 position: absolute;
-bottom: -109px;
+bottom: -29px;
 right: 19px;
 }
 
 #greeting-sign{
     max-width: 38%;
     position: absolute;
-    bottom: 60px;
+    bottom: 144px;
     z-index: 1;
     transform: rotate(6deg);
     resize: none;
@@ -881,9 +881,59 @@ right: 19px;
 #childseat{
     float: right;
     margin-left: 0px;
-    margin-top: -2px;
+    margin-top: 1px;
+    height: 15px;
 }
 
+.footer-link{
+    color: #fff;
+}
 
+.footer-link:hover{
+    color: #fff;
+}
 
+.currency-converter{
+    margin-top: 14px;
+    font-size: 14px;
+}
 
+.ui.simple.dropdown:hover > .menu{
+    width: 100% !important; 
+}
+
+.about-wrap{
+    font-size: 20px;
+    padding: 20px;
+}
+
+.aboutHeaderWrap{
+    text-align: center;
+    padding: 20px;
+    letter-spacing:3px;
+    
+}
+
+#about-header{
+    font-size:3em;
+}
+
+.aboutContent{
+    max-width: 700px;
+    margin-left:auto;
+    margin-right: auto;
+}
+
+.aboutContent p{
+    text-align: left;
+    
+    
+}
+
+#transfer-word{
+    color: #6D0019;
+}
+
+.row:focus{
+    outline: unset !important;
+}

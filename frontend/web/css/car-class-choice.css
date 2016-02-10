@@ -14,6 +14,7 @@
     font-size: 12px;
     background: #d9d9d9 url("images/ui-bg_glass_75_e6e6e6_1x400.png") 50% 50% repeat-x;
     color: #555555;	
+    
 }
 
 .car-class:hover{
@@ -26,6 +27,10 @@
     background-position: left bottom;
     border: solid 1px #d3d9d3;
     box-shadow: -1px 2px 5px -2px rgba(0,0,0,0.7);
+}
+
+button:focus{
+    outline: unset !important;
 }
 
 .car-class:hover .car-arrow{
