@@ -101,6 +101,10 @@ function Autocomplete(){
   if (document.getElementById('index')){
       console.log('we are in index')
       
+      for (var i=0; i<locationInputs.length; i++){
+          locationInputs[i].value = '';
+      } //clear fields on page reload
+      
       var origin;
       var destination;
       
@@ -114,6 +118,7 @@ function Autocomplete(){
       var index = 0
         for (var i=0; i < locationInputs.length; i++){
             $(locationInputs[i]).on('keypress', function(e){
+                $(e.target).removeClass('error')
                 index = arrayOfInputs.indexOf(e.target)
             })
         }
@@ -169,6 +174,7 @@ function Autocomplete(){
     
     
     
+    
     console.log(document.getElementById('fromLatLng').dataset.coords.split(','))
     console.log(document.getElementById('toLatLng').dataset.coords.split(','))
     
@@ -185,6 +191,11 @@ function Autocomplete(){
     var waypoints = []; console.log(waypoints)
     
     var addDestInputs = document.getElementsByClassName('side-dests');
+    
+    for (var i=0; i<addDestInputs.length; i++){
+          addDestInputs[i].value = '';
+      } //clear fields on page reload
+    
     var addDestsArray = []
     for (var i = 0; i < addDestInputs.length; i++){
       addDestsArray.push(addDestInputs.item(i))
