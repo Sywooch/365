@@ -438,7 +438,7 @@ if ($("#from").exists()){
     
    //index form validation (from - to fields)
    try{
-   document.getElementById('index-form').addEventListener('submit', function(e){
+   document.getElementById('tform').addEventListener('submit', function(e){
        if ($('#from').val() == ''){
            e.preventDefault();
             $('#from').addClass('error');
