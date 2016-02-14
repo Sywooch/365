@@ -15,7 +15,8 @@
                 </div>
                 <div class="col-md-3">
                     <?= $form->field($model, 'flightnumber')->textInput(['id' =>
-                        'flight-number', 'class' => 'cpanel-input','placehodler' => 'Enter flight number'])->label(false) ?>
+                        'flight-number', 'class' => 'cpanel-input',
+                        'placehodler' => 'Enter flight number'])->label(false) ?>
 
                 </div>
                 <div class="col-md-6">

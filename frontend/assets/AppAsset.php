@@ -22,7 +22,7 @@ class AppAsset extends AssetBundle
     public $baseUrl = '@web';
    // public $sourcePath = '@vendor';
     public $css = [
-       'css/custom365/jquery-ui.min.css',
+        'css/custom365/jquery-ui.min.css',
         'css/jquery-ui-custom.css',
         'css/style.css',
         'css/media-queries.css',
@@ -33,7 +33,7 @@ class AppAsset extends AssetBundle
 //    public $jsOptions = ['position'=>\yii\web\view::POS_HEAD];
     public $js = [
         'scripts/script.js',
-        'https://maps.googleapis.com/maps/api/js?v=3&key=AIzaSyBB19cyGLWQeSz1amgo9wJN6ZeXlQtHZCU&language=en&libraries=places&callback=Autocomplete&signed_in=true',
+        'https://maps.googleapis.com/maps/api/js?key=AIzaSyBB19cyGLWQeSz1amgo9wJN6ZeXlQtHZCU&signed_in=true&libraries=places&callback=Autocomplete&language=ru',
     ];
      public $depends = [
         'yii\web\YiiAsset',

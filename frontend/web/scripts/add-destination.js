@@ -20,7 +20,7 @@ window.onload = function () {
                     
                 }
                 
-                console.log($(targetDiv).parents());
+                
                 targetDiv.className = "cpanel-item new-destination"; //show div
             }else if(e.target.className == "fa-lg fa fa-times-circle"){ //if clicked on "close" hide div
                 
@@ -28,7 +28,7 @@ window.onload = function () {
                 a.find('.add-dest-address').val(''); //this clears the address fields when close is clicked
                 a.find('.specify-address').val('');
                 
-                console.log($(a).children('.new-destination'));
+                
                 a.children('.new-destination').addClass('hide');
                 document.querySelector('#add').className = "col-xs-12 col-md-6 pseudo-link cpanel-item"; //show "add destination" link
             }}catch (e){

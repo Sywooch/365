@@ -14,7 +14,7 @@ use kartik\icons\Icon;
                 <label for="specify-address">Additional address</label>
             </div>
             <div class="col-md-5">
-                <div id="destination-in-form"><?= $form->field($model, $id)->textInput(['class' => 'cpanel-input add-dest-address',
+                <div id="destination-in-form"><?= $form->field($model, $id)->textInput(['class' => 'cpanel-input add-dest-address side-dests',
                     'value' => ''])->label(false) ?></div>
             </div>
         </div>

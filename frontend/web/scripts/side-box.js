@@ -3,21 +3,22 @@
 $(document).ready(function (){
     jQuery.fn.exists = function(){return this.length>0;}; //function to check if element exists
     
-    
-    
     var parentContainer = document.querySelector('#parent-container');
  
     parentContainer.addEventListener("input", updateSideBox, false);
+    
     
     function updateSideBox(e){
         var sourceInput = document.querySelector('#' + e.target.id);
         var placeOnBoxId = '#' + e.target.id + '-fixed';
         var placeOnBox = document.querySelector(placeOnBoxId);
+        
+        
    
         $(placeOnBox).text(sourceInput.value);
     };
     
-    
+   
 	
 	//greeting sign
 	var firstNameInput = document.getElementById("pass-name");
@@ -47,6 +48,7 @@ $(document).ready(function (){
          //keep values in the sidebox when page reloads
         
         $('.time-picker').on('dp.change', function(e){
+            
        var target = e.target.className;
        var time = moment(e.date).format('H:mm');// format e.date that comes
                                                 //from datepicker to display
@@ -85,6 +87,27 @@ $(document).ready(function (){
        
        
     }
+    
+//        //update additional destinations
+//        var inputs = document.getElementsByClassName('side-dests')
+//        var arrayOfInputs = []
+//        
+//        for (var i = 0; i < inputs.length; i++){
+//            arrayOfInputs.push(inputs.item(i))
+//        }
+//        
+//        for (var i = 0; i < inputs.length; i++){
+//            $(inputs[i]).on('keypress change', function(e) {
+//                if (arrayOfInputs.indexOf(e.target) == 0) {
+//                  $('#dest1 span').text(e.target.value)
+//                } else if (arrayOfInputs.indexOf(e.target) == 1) {
+//                  $('#dest2 span').text(e.target.value)
+//                } else if (arrayOfInputs.indexOf(e.target) == 2) {
+//                  $('#dest3 span').text(e.target.value)
+//                }
+//        })}
+        
+      
         
         //fixed side box position on scrolling
         var rightSideBox = document.getElementById('fixed-box');

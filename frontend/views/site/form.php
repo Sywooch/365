@@ -6,15 +6,22 @@ use yii\widgets\ActiveForm;
 use yii\helpers\BaseJson;
 use yii\web\UrlManager;
 use frontend\assets\FormAsset;
-use frontend\assets\BootstrapDateTimePickerAsset;
+
 use frontend\assets\InternationalTelephoneAsset;
+
 FormAsset::register($this);
-BootstrapDateTimePickerAsset::register($this);
+
 InternationalTelephoneAsset::register($this);
+
+
+$this->title = 'Order transfer from Airport to Baku, Azerbaijan';
+
+
 ?>
 
+
 <!-- Steps -->
-<div class="container-fluid steps-wrap">
+<div id="form" class="container-fluid steps-wrap">
     <div class="row steps">
         <div class="col-xs-4 col-md-4 step step-complete">
             <span id="step1">Destination</span>
@@ -38,8 +45,9 @@ InternationalTelephoneAsset::register($this);
             <div class="cpanel">
                 <div class="cpanel-heading">
 
-                    <h4><span id="heading-from"><?= Yii::$app->request->get('Transferorder')['from'] ?></span> <--> <span id="heading-to"><?= Yii::$app->request->get('Transferorder')['to'] ?></span><br></h4>
+                    <h4><span id="heading-from"><?= Yii::$app->request->get('Transferorder')['from'] ?></span> <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span> <span id="heading-to"><?= Yii::$app->request->get('Transferorder')['to'] ?></span><br></h4>
                    <?php $jsondata = BaseJson::decode(Yii::$app->request->get('Transferorder')['car'], true) ?>
+                    <?= print_r($jsondata) ?>
 
                 </div>
                 <?php
@@ -48,18 +56,25 @@ InternationalTelephoneAsset::register($this);
                     $getRequestFrom = Yii::$app->request->get('Transferorder')['from'];
                     $getRequestTo = Yii::$app->request->get('Transferorder')['to'];
                     
+                    
                      
                     $fromAirport = stristr($getRequestFrom, 'airport'); //find substr 'airport' in getRuquestFrom
                     $toAirport = stristr($getRequestTo, 'airport'); //find substr 'airport' in getRuquestFrom
                     
                     if ($fromAirport){
-                        echo $this->render('fromAirportToCity', ['model'=>$model,'form' => $form, 'return' => $getRequestReturn]);
+                        echo $this->render('fromAirportToCity', ['model'=>$model,
+                            'form' => $form, 'return' => $getRequestReturn]);
                     }elseif(!$fromAirport && $toAirport){
-                        echo $this->render('fromCityToAirport', ['model'=>$model,'form' => $form, 'return' => $getRequestReturn]);
+                        echo $this->render('fromCityToAirport', ['model'=>$model,
+                            'form' => $form, 'return' => $getRequestReturn]);
                     }else{
-                        echo $this->render('fromCityToCity', ['model'=>$model,'form' => $form, 'return' => $getRequestReturn]);
+                        echo $this->render('fromCityToCity', ['model'=>$model,
+                            'form' => $form, 'return' => $getRequestReturn]);
                     }
                 ?>
+                
+                <div id="fromLatLng" data-coords="<?= Yii::$app->request->get('Transferorder')['fplaceid']?>"></div>
+                <div id="toLatLng" data-coords="<?= Yii::$app->request->get('Transferorder')['tplaceid']?>"></div>
 
                 <div class="cpanel-footer">
                     Free cancellation of the trip in an 12 hours before the start 
@@ -103,6 +118,20 @@ InternationalTelephoneAsset::register($this);
                         <div class="fb-section-line" id="destination-fixed"><?= Yii::$app->request->get('Transferorder')['to'] ?></div>
                         <div class="fb-section-line" id="specify-address-fixed"></div>
 
+                    </div>
+                    
+                </div>
+                <div class="fixed-box-section">
+                    <div class="additionals-wrap">
+                        <div class="fixed-box-section-heading">
+                            Additional destinations
+                        </div>
+                        <div class="fixed-box-section-body">
+                            <div class="fb-section-line" id="dest1"><span></span></div>
+                            <div class="fb-section-line" id="dest2"><span></span></div>
+                            <div class="fb-section-line" id="dest3"><span></span></div>
+                            
+                        </div>
                     </div>
                 </div>
                 <div class="fixed-box-section">
@@ -175,11 +204,11 @@ InternationalTelephoneAsset::register($this);
                 <div class="col-md-2"></div>
                 <div class="col-md-6 button-box">
                     <div class="row">
-                        <div class="col-md-12 button-box-title">Total price <span><?= $jsondata['amount'] ?></span> AZN</div>
+                        <div class="col-md-12 button-box-title">Total price <span><?= $jsondata['amount'] ?></span> USD</div>
                     </div>
                     <div class="row">
                         <div class="col-md-12">
-                            <?= Html::SubmitButton('Go To Payment'); ?>
+                            <?= Html::SubmitButton('Confirm'); ?>
                         </div>
                     </div>
 

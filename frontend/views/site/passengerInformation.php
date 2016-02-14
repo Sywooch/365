@@ -111,7 +111,7 @@ use yii\widgets\ActiveForm;
                    <div class="col-md-1"></div>
                    <div class="col-md-1 description-childseat-panel">Chair<br>9-18kg</div>
                     <div class="col-md-3">
-                        <select id="childseat-amount-dropdown" class="ui dropdown">
+                        <select id="childseat-amount-dropdown" class="ui dropdown childseat">
                           <option value="">Amount</option>
                           <option value="1">1</option>
                           <option value="2">2</option>

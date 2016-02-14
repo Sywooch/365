@@ -3,8 +3,41 @@ $(document).ready(function(){
     var myDate = new Date("now");
     var months = ["January", "February", "March", "April", "May", "June",
             "July", "August", "September", "October", "November", "December"];
-        
+    
+    
+    if(document.getElementById('chaffeurForm')){
+        var days = document.getElementById('days')
+        var anchor = document.getElementById('anchor')
+        $(days).on('change', function(){
+            var items = document.getElementsByClassName('time-control')
+            var alreadyExist = items.length
+            var numToAdd = Number($(this).val()) - alreadyExist
+            
+            while(numToAdd != 0){
+                if (numToAdd < 0){
+                for (var i = alreadyExist - 1; i > (alreadyExist-1) + numToAdd; i--){
+                        console.log(i)
+                        anchor.removeChild(items[i])
+                }
+              }else{
+                var item = document.getElementById('clone').cloneNode(true)
+                
+                anchor.appendChild(item)
+                $('.time-picker').datetimepicker({
+                    format: 'HH:mm',
+                    stepping:1,
+                    useCurrent: true
+                });
+                numToAdd--
+              }
+            }
+        })
+    }
+
+    
     $('#childseat-amount-dropdown').dropdown();
+    $('.ui.dropdown.chauffeurDays').dropdown();
+    
         
     $('#phone-number').intlTelInput({
             nationalMode: false,
@@ -16,11 +49,8 @@ $(document).ready(function(){
        preferredCountries: ["",""]
     });
     
-    $('.time-picker').datetimepicker({
-        format: 'HH:mm',
-        stepping:15
-        
-    });
+    
+    
     
     $('.date-picker').datepicker({
         dateFormat:'dd/mm/yy',
@@ -64,10 +94,10 @@ $(document).ready(function(){
     
     function checkChildSeatBox(){
        if ($('#childseat').prop('checked')){
-            $('.ui.dropdown').removeClass('disabled'); 
+            $('.ui.dropdown.childseat').removeClass('disabled'); 
             
         }else{
-            $('.ui.dropdown').addClass('disabled');
+            $('.ui.dropdown.childseat').addClass('disabled');
         } 
     }
     

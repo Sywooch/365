@@ -23,7 +23,8 @@
         "eonasdan/bootstrap-datetimepicker": "^4.17",
         "kartik-v/yii2-icons": "@dev",
         "nkovacs/yii2-datetimepicker": "*",
-        "2amigos/yii2-google-maps-library": "*"
+        "2amigos/yii2-google-maps-library": "*",
+        "imanilchaudhari/yii2-currency-converter": "dev-master"
     },
     "require-dev": {
         "yiisoft/yii2-codeception": "*",

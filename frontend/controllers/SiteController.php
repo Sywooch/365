@@ -15,6 +15,7 @@ use yii\filters\AccessControl;
 use common\models\Autocat;
 use common\models\Auto;
 use common\models\Transferorder;
+use common\models\Rentorder;
 use yii\helpers\BaseJson;
 use yii\db\Query;
 use dosamigos\google\maps\services\DirectionsService;
@@ -22,6 +23,8 @@ use dosamigos\google\maps\services\DirectionsClient;
 use dosamigos\google\maps\services\DirectionsRequest;
 use dosamigos\google\maps\services\TravelMode;
 use dosamigos\google\maps\services\DirectionsWayPoint;
+use yii\data\Sort;
+use imanilchaudhari\CurrencyConverter\CurrencyConverter;
 /**
  * Site controller
  */
@@ -82,12 +85,23 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        $auto = Autocat::find()->all();
+        \Yii::$app->view->registerMetaTag([
+        'name' => 'Description',
+        'content' => 'This service has been created due to insufficient and outdated systems of transportation. With us your first few minutes of entering the country will be nothing short of outstanding as every customer is important to us. A \'meet and greet\' service is offered where our driver will meet you in arrivals with a  board clearly displaying your name. Currently our services are provided with unified standards and fixed rates. 24 hours a day, 7 days a week, 365 days a year, you can book a transfer via our website and telephone in a matter of minutes.'
+    ]);
+//        \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+     
+        $auto = Autocat::find()->joinWith('autos')->orderBy(['autocat.id' => SORT_ASC])->asArray()->all();
         $model = new Transferorder();
-        
-        return $this->render('index',['auto' => $auto,'model' => $model]);
+        $rentmodel = new Rentorder();
+        return $this->render('index',['auto' => $auto,'model' => $model, 'rentmodel' => $rentmodel]);
     }
-    
+    public function actionAccardion(){
+        $auto = Autocat::find()->joinWith('autos')->orderBy(['autocat.id' => SORT_ASC])->asArray()->all();
+        return $this->renderPartial('accardion',['auto' => $auto]);
+    }
+
+
     public function actionUl(){
         return $this->renderPartial('ul');
     }
@@ -233,7 +247,8 @@ class SiteController extends Controller
 	//passenger form render
 	public function actionForm(){
                 $model = new Transferorder();
-                if ( !empty(Yii::$app->request->get('Transferorder')['from']) and  !empty(Yii::$app->request->get('Transferorder')['to']) and !empty(Yii::$app->request->get('Transferorder')['car'])) {
+              //  $rentmodel = new Rentorder();
+                if (!empty(Yii::$app->request->get('Transferorder')['from']) and  !empty(Yii::$app->request->get('Transferorder')['to']) and !empty(Yii::$app->request->get('Transferorder')['car'])) {
                     if($model->load(Yii::$app->request->post())){
                         $jsondata = BaseJson::decode(Yii::$app->request->get('Transferorder')['car'], true);
                         $model->car = $jsondata['car'];
@@ -245,6 +260,7 @@ class SiteController extends Controller
                             'params' => [
                                 'origin' => Yii::$app->request->get('Transferorder')['from'],
                                 'destination' => Yii::$app->request->get('Transferorder')['to'],
+                                
                                // 'waypoints' => 'Salyan, Azerbaijan | Ganja, Azerbaijan | Jalilabad, Azerbaijan'
 
                                ]
@@ -265,19 +281,19 @@ class SiteController extends Controller
                                 $anotherd = Yii::$app->request->get('Transferorder')['to'];
 //                                $anotherd1 = null;
 //                                $anotherd2 = null;
-                                if(Yii::$app->request->post('Transferorder')['return'] == 1){
-                                    $returnOrigin = $destination;
-                                    $returnDestination = $origin;
-                                }
+//                                if(Yii::$app->request->post('Transferorder')['return'] == 1){
+//                                    $returnOrigin = $destination;
+//                                    $returnDestination = $origin;
+//                                }
                                 
                             }if(!empty($anotherd) and !empty($anotherd1)){
                                 $destination = $anotherd1;
                                 $anotherd = Yii::$app->request->get('Transferorder')['to'];
                                 $anotherd1 = ' | '.$model->anotherd;
-                                if(Yii::$app->request->post('Transferorder')['return'] == 1){
-                                    $returnOrigin = $destination;
-                                    $returnDestination = $origin;
-                                }
+//                                if(Yii::$app->request->post('Transferorder')['return'] == 1){
+//                                    $returnOrigin = $destination;
+//                                    $returnDestination = $origin;
+//                                }
                                 
                             }
                             if(!empty($anotherd) and !empty($anotherd1) and !empty($anotherd2)){
@@ -285,22 +301,43 @@ class SiteController extends Controller
                                 $anotherd = Yii::$app->request->get('Transferorder')['to'];
                                 $anotherd1 = ' | '.$model->anotherd;
                                 $anotherd2 = ' | '.$model->anotherd1;
-                                if(Yii::$app->request->post('Transferorder')['return'] == 1){
-                                    $returnOrigin = $destination;
-                                    $returnDestination = $origin;
-                                }
+//                                if(Yii::$app->request->post('Transferorder')['return'] == 1){
+//                                    $returnOrigin = $destination;
+//                                    $returnDestination = $origin;
+//                                }
                                 
                             }
-                        if($model->return == 1){
-                            
-                       
-                            $return =   new DirectionsClient([
-                            'params' => [
-                                'origin' => $returnOrigin,
-                                'destination' => $returnDestination,                                                         
-                               ]
-                            ]);
-                             }
+                            if(empty($anotherd) and !empty($anotherd1)){
+                                $destination = $model->anotherd1;
+                                $anotherd = Yii::$app->request->get('Transferorder')['to'];
+//                                $anotherd1 = null;
+//                                $anotherd2 = null;
+//                                if(Yii::$app->request->post('Transferorder')['return'] == 1){
+//                                    $returnOrigin = $destination;
+//                                    $returnDestination = $origin;
+//                                }
+                                
+                            }if(empty($anotherd) and empty($anotherd1) and !empty($anotherd2)){
+                                $destination = $model->anotherd2;
+                                $anotherd = Yii::$app->request->get('Transferorder')['to'];
+//                                $anotherd1 = null;
+//                                $anotherd2 = null;
+//                                if(Yii::$app->request->post('Transferorder')['return'] == 1){
+//                                    $returnOrigin = $destination;
+//                                    $returnDestination = $origin;
+//                                }
+                                
+                            }
+//                        if($model->return == 1){
+//                            
+//                       
+//                            $return =   new DirectionsClient([
+//                            'params' => [
+//                                'origin' => $returnOrigin,
+//                                'destination' => $returnDestination,                                                         
+//                               ]
+//                            ]);
+//                            }
                             
                             $direction =   new DirectionsClient([
                             'params' => [
@@ -312,27 +349,32 @@ class SiteController extends Controller
                             ]);
                         }
                       // var_dump($direction->lookup()['routes'][0]);
-//   echo 'sade'.$direction->lookup()['routes'][0]['legs'][0]['distance']['value'] / 1000  .'// '.$direction->lookup()['routes'][0]['legs'][0]['start_address'].'->'.$direction->lookup()['routes'][0]['legs'][0]['end_address'];
-//    echo '<p>';
-//   echo 'waypoint'.$direction->lookup()['routes'][0]['legs'][1]['distance']['text'].'// '.$direction->lookup()['routes'][0]['legs'][1]['start_address'].'->'.$direction->lookup()['routes'][0]['legs'][1]['end_address'];
-//   echo '<p>';
-//    echo 'waypoint'.$direction->lookup()['routes'][0]['legs'][2]['distance']['text'].'// '.$direction->lookup()['routes'][0]['legs'][2]['start_address'].'->'.$direction->lookup()['routes'][0]['legs'][2]['end_address'];
-//      echo '</p>';
-//      echo 'waypoint'.$direction->lookup()['routes'][0]['legs'][3]['distance']['text'].'// '.$direction->lookup()['routes'][0]['legs'][3]['start_address'].'->'.$direction->lookup()['routes'][0]['legs'][3]['end_address'];
-//   
-//   echo '<p>';
-//   echo 'return'.$return->lookup()['routes'][0]['legs'][0]['distance']['text'].'// '.$return->lookup()['routes'][0]['legs'][0]['start_address'].'->'.$return->lookup()['routes'][0]['legs'][0]['end_address'];
-       if(empty($direction->lookup()['routes'][0]['legs'][0]['distance']['value'])){
-           return $this->redirect('site/error');
-       }
+//   $unvanlar[] = (!empty($direction->lookup()['routes'][0]['legs'][0]) ? $direction->lookup()['routes'][0]['legs'][0]['start_address'].' --> '.$direction->lookup()['routes'][0]['legs'][0]['end_address'] : null);
+//   $unvanlar[] = (!empty($direction->lookup()['routes'][0]['legs'][1]) ? $direction->lookup()['routes'][0]['legs'][1]['start_address'].' --> '.$direction->lookup()['routes'][0]['legs'][1]['end_address'] : null);
+//   $unvanlar[] = (!empty($direction->lookup()['routes'][0]['legs'][2]) ? $direction->lookup()['routes'][0]['legs'][2]['start_address'].' --> '.$direction->lookup()['routes'][0]['legs'][2]['end_address'] : null);
+//   $unvanlar[] = (!empty($direction->lookup()['routes'][0]['legs'][3]) ? $direction->lookup()['routes'][0]['legs'][3]['start_address'].' --> '.$direction->lookup()['routes'][0]['legs'][3]['end_address'] : null);
+//   $address = (!empty($model->address) ?  '<h5 style="font-weight:bold;">Address: '.$model->address.'</h5>' : null);
+//   $faddress = (!empty($model->faddress) ?  '<h5 style="font-weight:bold;">Address: '.$model->faddress.'</h5>' : null);
+//   $aaddress = (!empty($model->aaddress) ?  '<h5 style="font-weight:bold;">Address: '.$model->aaddress.'</h5>' : null);
+//   $aaddress1 = (!empty($model->aaddress1) ?   '<h5 style="font-weight:bold;">Address: '.$model->aaddress1.'</h5>' : null);
+//   $aaddress2 = (!empty($model->aaddress2) ?     '<h5 style="font-weight:bold;">Address: '.$model->aaddress2.'</h5>' : null);
+//   $unvanlar[] = $model->from.$faddress.'➟➟'.$model->to.$address;
+//   $unvanlar[] = (!empty($model->anotherd) ? $model->to.'➟'.$model->anotherd.$aaddress : null);
+//   $unvanlar[] = (!empty($model->anotherd1) ? $model->anotherd.'➟'.$model->anotherd1.$aaddress1 : null);
+//   $unvanlar[] = (!empty($model->anotherd2) ? $model->anotherd1.'➟'.$model->anotherd2.$aaddress2 : null);
+//$unvanlar[] = $direction->lookup()['routes'][0]['legs'][4]['start_address'].'-->'.$direction->lookup()['routes'][0]['legs'][4]['end_address'];
+//   if($model->return == 1 and count(array_filter($unvanlar)) > 1){ 
+//        $unvanlar[] = $return->lookup()['routes'][0]['legs'][0]['start_address'].'->'.$return->lookup()['routes'][0]['legs'][0]['end_address'];
+//   }
+   
         $routes[] = $direction->lookup()['routes'][0]['legs'][0]['distance']['value'];
         $routes[] = (!empty($direction->lookup()['routes'][0]['legs'][1]['distance']['value']) ? $direction->lookup()['routes'][0]['legs'][1]['distance']['value']:null);
         $routes[] = (!empty($direction->lookup()['routes'][0]['legs'][2]['distance']['value']) ? $direction->lookup()['routes'][0]['legs'][2]['distance']['value']  :null);
         $routes[] = (!empty($direction->lookup()['routes'][0]['legs'][3]['distance']['value']) ? $direction->lookup()['routes'][0]['legs'][3]['distance']['value']  :null);
         $routes[] = (!empty($direction->lookup()['routes'][0]['legs'][4]['distance']['value']) ? $direction->lookup()['routes'][0]['legs'][4]['distance']['value']  :null);
-        if($model->return == 1 and count(array_filter($routes)) > 1){ 
-           $routes[] =$return->lookup()['routes'][0]['legs'][0]['distance']['value'];
-        }
+//        if($model->return == 1 and count(array_filter($routes)) > 1){ 
+//           $routes[] =$return->lookup()['routes'][0]['legs'][0]['distance']['value'];
+//        }
         
 //           echo $from;
 //        echo '<br>';
@@ -342,27 +384,36 @@ class SiteController extends Controller
 //        echo '<br>';
 //        echo $a3;
 //        echo '<br>';
-        
+//        $cookies = Yii::$app->request->cookies;
+//        $model->currency = $cookies->getValue('currency', 'USD');
+        $converter = new CurrencyConverter();
+        $rate =  $converter->convert('USD', 'AZN');
             $kmsum = 0;
             foreach($routes as $route){
                  $kmsum += $route/1000;             
             }
             $kmsums =  intval($kmsum);
-
+            $zero = 00;
             if($kmsums > 35){
-                $qiymet = $amount['cent']*($kmsums-35)+$amount['priceT'];
+                $qiymet = $amount['cent']*$rate*($kmsums-35)+$amount['priceT']*$rate;
 
-                $giymet = $qiymet-($qiymet*10/100);
+             //   $giymet = $qiymet-($qiymet*10/100);
                
-                $model->amount = intval($giymet);
-                echo $kmsums.' $'.$model->amount;
-                if($model->return == 1 and count(array_filter($routes)) > 1){ 
-                    echo $kmsums.' multiple 2'.$kmsum*2;
+                $model->amount = intval($qiymet);
+               // echo $kmsums.' $'.$model->amount;
+                if($model->return == 1 /*and count(array_filter($routes)) > 1*/){ 
+                    $model->amount = $model->amount*2;
+                    
                 }
             }else{
-                $model->amount = $amount['priceT'];
+                $model->amount = intval($amount['priceT']*$rate);
+                
+                
+                
                 if($model->return == 1){
                     $model->amount = $model->amount*2;
+                    
+                   
                 }
             }
             
@@ -372,26 +423,50 @@ class SiteController extends Controller
 
                         date_default_timezone_set('Asia/Baku');
                         $model->pickuptime = strtotime(str_replace('/', '-',$model->date).''.$model->time);
-                        if(!empty($model->rdate) and !empty($model->rtime)){
+                        
+                        if($model->return == 1){
                             $model->rpickuptime = strtotime(str_replace('/', '-',$model->rdate).''.$model->rtime);
                         }
+                            $reference = $model->id.time();
+                            $reference = sha1($reference);
+                            $model->reference = $reference;
                         if ($model->validate()) {
-                            if($model->save()){
-                             $email = \Yii::$app->mailer->compose()
-                                ->setFrom('support@transfer365.az')
-                                ->setTo('t4lex999@gmail.com')
-
-                                ->setSubject($model->car)
-                                ->setTextBody('from '.$model->from.' to '.$model->to .'timeee'.$model->date.'/'.$model->time)
-                                ->send();
-
-                            return $this->redirect(['site/summary', 'id' => $model->id]);
+                            if(empty($model->status)){
+                                if($model->save()){
+                                   // require Yii::app()->basePath . '/frontend/views/site/mail.php';
+//                                    require(__DIR__ . '/../views/site/mail.php');
+//
+//
+//                                 $email = \Yii::$app->mailer->compose()
+//                                    ->setFrom('support@transfer365.az')
+//                                    ->setTo(['support@transfer365.az','t4lex999@gmail.com'])   
+//                                    ->setSubject('Yeni Sifariş')
+//                                    ->setHtmlBody($html)
+//                                    ->send();
+//                                $mid = 'transfer365';
+//                                $amount = $model->amount;
+//                                $currency = 944;
+//                                $description = 'test';
+//                                $referance = $model->reference;
+//                                $language = 'az';
+//                                $key = '123456qwerty';
+//                                $signature = md5(strlen($mid).$mid.strlen($amount).$amount.strlen($currency).$currency.(!empty($description)?strlen($description).$description :"0").strlen($reference).$reference.strlen($language).$language.$key);
+//                                $signature = strtoupper($signature);
+                               // return $this->redirect('https://test.millikart.az:7444/gateway/payment/register?' . http_build_query(['mid' => $mid,'amount' => $amount, 'currency' => $currency, 'description' => $description, 'reference'=>$model->reference,'language'=>$language,'signature'=>$signature,'redirect'=>1]));
+                                
+                                return $this->redirect(['site/confirmation' , 'id' => $model->id]);
+                                }
                             }
                         }else{
                             // validation failed: $errors is an array containing error messages
+
+                           
                             foreach($model->errors as $errors){
-                                var_dump($errors);
+                                
+                                 
                             }
+                         
+                            echo $model->amount;
                         }
                     }
                     return $this->render('form',['model'=>$model]);
@@ -399,8 +474,83 @@ class SiteController extends Controller
 		return $this->redirect('site/error');
 	}
         
-        public function actionSummary($id){
-            $model =  Transferorder::find()->where(['id' => $id])->one();
-            return $this->render('summary',['model' => $model]); 
+        public function actionConfirmation($id){
+
+           $model =  Transferorder::find()->where(['id' => $id])->one();
+           
+           return $this->render('confirmation',['model' => $model]); 
         }
+        
+        public function actionConfirm($id){
+            $model =  Transferorder::find()->where(['id' => $id])->one();
+            $mid = 'transfer365';
+            $amount = $model->amount;
+            $currency = 944;
+            $description = $model->amount.$model->from.$model->to;
+            $reference = $model->reference;
+            $language = 'en';
+            $key = '123456qwerty';
+            $signature = md5(strlen($mid).$mid.strlen($amount).$amount.strlen($currency).$currency.(!empty($description)?strlen($description).$description :"0").strlen($reference).$reference.strlen($language).$language.$key);
+            $signature = strtoupper($signature);
+            return $this->redirect('https://test.millikart.az:7444/gateway/payment/register?' . http_build_query(['mid' => $mid,'amount' => $amount, 'currency' => $currency, 'description' => $description, 'reference'=>$model->reference,'language'=>$language,'signature'=>$signature,'redirect'=>1]));
+        }
+        
+        
+        public function actionSummary(){
+            $modelsave = new Transferorder();
+            $reference = Yii::$app->request->get('reference');
+            $model =  Transferorder::find()->where(['reference' => $reference])->one();
+            $xml = simplexml_load_file('https://test.millikart.az:7444/gateway/payment/status?mid=transfer365&reference='.$reference);
+
+            if($model->status == null){
+                if($xml['RC'] == 000 and empty($model->status)){
+                    $model->status = '000';
+                    $model->save(false);
+                    $address = (!empty($model->address) ?  '<h5 style="font-weight:bold;">Address: '.$model->address.'</h5>' : null);
+                    $faddress = (!empty($model->faddress) ?  '<h5 style="font-weight:bold;">Address: '.$model->faddress.'</h5>' : null);
+                    $aaddress = (!empty($model->aaddress) ?  '<h5 style="font-weight:bold;">Address: '.$model->aaddress.'</h5>' : null);
+                    $aaddress1 = (!empty($model->aaddress1) ?   '<h5 style="font-weight:bold;">Address: '.$model->aaddress1.'</h5>' : null);
+                    $aaddress2 = (!empty($model->aaddress2) ?     '<h5 style="font-weight:bold;">Address: '.$model->aaddress2.'</h5>' : null);
+                    $unvanlar[] = $model->from.$faddress.'➟➟'.$model->to.$address;
+                    $unvanlar[] = (!empty($model->anotherd) ? $model->to.'➟'.$model->anotherd.$aaddress : null);
+                    $unvanlar[] = (!empty($model->anotherd1) ? $model->anotherd.'➟'.$model->anotherd1.$aaddress1 : null);
+                    $unvanlar[] = (!empty($model->anotherd2) ? $model->anotherd1.'➟'.$model->anotherd2.$aaddress2 : null);
+                    require(__DIR__ . '/../views/site/mail.php');
+                                     $email = \Yii::$app->mailer->compose()
+                                    ->setFrom('support@transfer365.az')
+                                    ->setTo(['support@transfer365.az','t4lex999@gmail.com'])   
+                                    ->setSubject('Yeni Sifariş')
+                                    ->setHtmlBody($html)
+                                    ->send();
+                                     
+                                     $email = \Yii::$app->mailer->compose()
+                                    ->setFrom('support@transfer365.az')
+                                    ->setTo([$model->email])   
+                                    ->setSubject('Your Order')
+                                    ->setHtmlBody($html)
+                                    ->send();
+                    
+                }elseif($xml['RC'] == 101 and empty($model->status)){
+                    $model->status = $xml['RC'];
+                    $model->save();
+                }elseif($xml['RC'] == 119 and empty($model->status)){
+                    $model->status = $xml['RC'];
+                    $model->save();
+                }elseif($xml['RC'] == 100 and empty($model->status)){
+                    $model->status = $xml['RC'];
+                    $model->save();
+                }
+            }
+            $model =  Transferorder::find()->where(['reference' => $reference])->one();
+            //return $this->render('summary',['model' => $model,'xml' => $xml]); 
+        }
+
+        public function actionChauffeur(){
+            return $this->render('chauffeurForm');
+        }
+
+
+        
+        
+        
 }
