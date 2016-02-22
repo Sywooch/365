@@ -197,14 +197,26 @@ $('.service-choice').on('click', function(e){
 /********start page load********/
 var activecurrency = document.querySelector('.selected');
     activecurrency = activecurrency.dataset.currency;
-        var request =$.ajax({
-     url: "/site/accardion/",
-     cache: false,
-     method: "GET",
-     data: { request : 'priceT', currency: activecurrency, 'form':'tform'},
-     dataType: "html"
+    if (document.getElementById('transfer-radio').checked){
+       var request =$.ajax({
+            url: "/site/accardion/",
+            cache: false,
+            method: "GET",
+            data: { request : 'priceT', currency: activecurrency, 'form':'tform'},
+            dataType: "html"
 
-   });
+        }); 
+    }else{
+        var request =$.ajax({
+            url: "/site/accardion/",
+            cache: false,
+            method: "GET",
+            data: { request : 'priceC', currency: activecurrency, 'form':'cform'},
+            dataType: "html"
+        }); 
+    }
+    
+        
 request.done(function( msg ) {
   $( "#ajaxaccardion" ).html( msg );
    $('#accordion').accordion({
@@ -243,10 +255,14 @@ request.done(function( msg ) {
             }
 
     });
+    console.log('pageload')
     if (document.getElementById('transfer-radio').checked){
+       
         $('.prices-transfer').each(function(){$(this).removeClass('hide')})
         $('.prices-chauffeur').each(function(){$(this).addClass('hide')})
+      
     }else{
+        
         $('.prices-transfer').each(function(){$(this).addClass('hide')})
         $('.prices-chauffeur').each(function(){$(this).removeClass('hide')}) 
     }
