@@ -102,6 +102,10 @@ function Autocomplete(){
       
       var chaffInput = document.querySelector('.chaff-pickup-address')
       var chaffAutocomplete = new google.maps.places.Autocomplete(chaffInput, options)
+      //event to remove error class from input in chaffeur(index)
+      $(chaffInput).on('keypress', function(){
+          $(this).removeClass('error')
+      })
       
       for (var i=0; i<locationInputs.length; i++){
           locationInputs[i].value = '';
@@ -174,7 +178,10 @@ function Autocomplete(){
  
   if (document.getElementById('form')) {   
     console.log('we are in form')
-
+    
+    
+    
+    
     console.log(document.getElementById('fromLatLng').dataset.coords.split(','))
     console.log(document.getElementById('toLatLng').dataset.coords.split(','))
     
@@ -366,8 +373,6 @@ if(document.getElementById('chaffeurForm')){
             destination: destination,
             travelMode: travel_mode
         }
-        $('.origin').val(origin.lat + ' ' + origin.lng)
-        $('.destination').val(destination.lat + ' ' + destination.lng)
     }
     else if (waypoints.length > 0){
         function checkToken(value){
@@ -384,20 +389,7 @@ if(document.getElementById('chaffeurForm')){
             waypoints: filteredWaypoints,
             travelMode: travel_mode
         }
-        
-       
-        
-        console.log(filteredWaypoints)
-        console.log(document.getElementsByClassName('places'))
-        $('.origin').val(origin.lat + ' ' + origin.lng)
-        $('.destination').val(modifiedDestination.lat + ' ' + modifiedDestination.lng)
-        for (var i = 0; i < filteredWaypoints.length; i++){
-            console.log($('.waypoint')[i])
-            console.log(filteredWaypoints[i].location)
-            document.getElementsByClassName('waypoint').item(i).value = filteredWaypoints[i].location.lat + ' ' + filteredWaypoints[i].location.lng 
-        }
-        
-//        console.log(waypoints)
+        console.log(waypoints)
     }
     
     
@@ -571,8 +563,7 @@ if(document.getElementById('chaffeurForm')){
      var directionsService = new google.maps.DirectionsService;
      var directionsDisplay = new google.maps.DirectionsRenderer;
      var geocoder = new google.maps.Geocoder();
-     
-     
+
  
      if (document.getElementById('confirm-chaffer')){
          console.log('chaffer confirm')
@@ -616,18 +607,8 @@ if(document.getElementById('chaffeurForm')){
          var originDiv = document.getElementById("origin");
          
          origin = originDiv.dataset.origin;
-         
-         origin = {'lat': Number(origin.split(' ')[0]), 'lng': Number(origin.split(' ')[1])}
-
-         console.log('origin')
-         console.log(origin)
-         
          var destinationDiv = document.getElementById("destination");
-         destination = destinationDiv.dataset.destination;
-             destination = {'lat': Number(destination.split(' ')[0]), 'lng': Number(destination.split(' ')[1])}
-             console.log('destination')
-             console.log(destination)
-
+         
 //         destination = destinationDiv.dataset.destination;
          waypoints=[];
          /*
@@ -645,17 +626,18 @@ if(document.getElementById('chaffeurForm')){
                  console.log('null')
              }else{
                  waypoints.push({
-                     location: {'lat': Number(waypointDivs[i].dataset.waypt.split(' ')[0]),
-                     'lng': Number(waypointDivs[i].dataset.waypt.split(' ')[1])}});
+                     location: waypointDivs[i].dataset.waypt
+                 });
              }
              
          }
          
-         
-             
-         
-         
-         console.log(waypoints)
+         if (waypoints.length == 0){
+             destination = destinationDiv.dataset.destination;
+         }else{
+             waypoints.unshift({location: destinationDiv.dataset.destination});
+             destination = waypoints[waypoints.length-1].location;
+         }
 
     }catch(e){
         console.log(e);
@@ -699,11 +681,13 @@ if(document.getElementById('chaffeurForm')){
       window.alert('Sorry, but we could not display your route on the map.');
     }
 
+
       });
      }
      
     console.log('summary map works');
 
+      
 };
   
   displayMapSummary();
