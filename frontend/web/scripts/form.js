@@ -124,7 +124,7 @@ $(document).ready(function(){
             console.log(items)
             var alreadyExist = items.length
             var numToAdd = Number($(this).val()) - alreadyExist
-            addIndex() 
+            addIndex() //this was necessery for server-side calculations
             while(numToAdd != 0){
                 if (numToAdd < 0){
                 for (var i = alreadyExist - 1; i > (alreadyExist-1) + numToAdd; i--){
@@ -155,8 +155,16 @@ $(document).ready(function(){
         })
         
      var numberOfDays = Number(document.getElementById('number-of-days').dataset.days)
-     $(days).val(numberOfDays) 
-     $(days).trigger('change')   
+     console.log(numberOfDays)
+     /*this is a fix when not selecting days in index the Node not found error
+      * occured in chaffeur form which caused not working datepicker and telephone*/
+     if (numberOfDays == 0){ //when no days selected in index this value is zero
+        $(days).val(1)  // so when this happens, number of days become 1 by default
+     }else{
+         $(days).val(numberOfDays) //else pass the value that was selected in index
+     }
+     
+     $(days).trigger('change') //have to trigger this initially 
      
      
      
@@ -170,10 +178,10 @@ $(document).ready(function(){
     
         
     $('#phone-number').intlTelInput({
-            nationalMode: false,
-            preferredCountries: ["", ""],
-            excludeCountries: ['am'],
-        });
+        nationalMode: false,
+        preferredCountries: ["", ""],
+        excludeCountries: ['am']
+    });
         
     $('.addpass-phone').intlTelInput({
        nationalMode: false,
@@ -181,7 +189,7 @@ $(document).ready(function(){
     });
     
     
-    
+    console.log('test')
     
     $('.date-picker').datepicker({
         dateFormat:'dd/mm/yy',
