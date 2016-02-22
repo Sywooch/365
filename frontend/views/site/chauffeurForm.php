@@ -15,9 +15,13 @@ InternationalTelephoneAsset::register($this);
 
 $this->title = 'Order chaffeured service in Azerbaijan, Baku';
 
+$jsondata = BaseJson::decode(Yii::$app->request->get('Transferorder')['car'], true);
+
 
 ?>
 <!-- Steps -->
+<?php $form = ActiveForm::begin(['method' => 'post']); ?>
+<div id="car-price" data-price="<?=$jsondata['amount']?>"></div>
 <div class="container-fluid steps-wrap">
     <div class="row steps">
         <div class="col-xs-4 col-md-4 step step-complete">
@@ -25,7 +29,7 @@ $this->title = 'Order chaffeured service in Azerbaijan, Baku';
             
         </div>
         <div class="col-xs-4 col-md-4 step step-active">
-            <span id="step2">Booking</span>
+            <span id="step2">Passenger information</span>
             <div class="rounded-border"></div>
         </div>
         <div class=" col-xs-4 col-md-4 step step-inactive">
@@ -35,8 +39,10 @@ $this->title = 'Order chaffeured service in Azerbaijan, Baku';
     </div>
 </div><!--Steps end-->
 
+
 <div id="chaffeurForm" class="container">
-<div class="row">
+<div id="parent-container" class="row">
+    <div id="number-of-days" data-days="<?= Yii::$app->request->get('days')?>"></div>
     <div class="col-xs-9">
         <div class="cpanel">
             <div class="cpanel-heading">
@@ -45,12 +51,37 @@ $this->title = 'Order chaffeured service in Azerbaijan, Baku';
             <div class="cpanel-section">
                 <h3>Departure</h3>
                 <div class="row">
+                    <div class=" cpanel-item">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <label>Place of pickup</label>
+                            </div>
+                            <div class="col-md-5">
+
+                                <?= Html::activeInput('text', $model, 'from', ['class' => 'cpanel-input chaff-pickup-address' ,
+                            'autofocus' => 'true', 
+                                    'autocomplete'=>'false',
+                                    'placeholder'=>'Baku, Azerbaijan' ,'value' =>Yii::$app->request->get('Rentorder')['from']] ) ?>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <label>Please, specify address</label>
+                            </div>
+                            <div class="col-md-5">
+                                <?= Html::activeInput('text', $model, 'address', ['class' => 'cpanel-input' ,
+                                    'autocomplete'=>'false',
+                            'autofocus' => 'true', 'placeholder'=>'Specify address (i.e str, house etc.)']) ?>
+                            </div>
+                        </div>
+                    </div>
                     <div class="row cpanel-item">
                         <div class="col-md-3">
                             <label>Date of pickup</label>
                         </div>
                         <div class="col-md-3">
-                            <input type="text" class="cpanel-input date-picker" placeholder="dd/mm/yy" />
+                            
+                            <?= $form->field($model, 'pickdate')->textInput(['class' => 'cpanel-input date-picker' , 'placeholder' => 'dd/mm/yy' , 'value' =>Yii::$app->request->get('Rentorder')['pickdate'] ])->label(false) ?>
                         </div>
                         <div class="col-md-2">
                             <div class="ui selection dropdown chauffeurDays">
@@ -88,13 +119,17 @@ $this->title = 'Order chaffeured service in Azerbaijan, Baku';
                             <label>From</label>
                         </div>
                         <div class="col-md-2">
-                            <input type="text" class="cpanel-input time-picker" placeholder="hh:mm"/>
+                            
+                         
+                           <input type="text" class="cpanel-input time-picker from" placeholder="hh:mm" />
                         </div>
                         <div class="col-md-3">
                             <label>To</label>
                         </div>
                         <div class="col-md-2">
-                            <input type="text" class="cpanel-input time-picker" placeholder="hh:mm"/>
+                           
+                            <input type="text" class="cpanel-input time-picker to" placeholder="hh:mm" />
+                            
                         </div>
                     </div>
                     <div id="anchor">
@@ -102,10 +137,99 @@ $this->title = 'Order chaffeured service in Azerbaijan, Baku';
                 </div>
                 </div>
                 
-                
             </div>
             
         </div>
+        <?= $this->render('passengerInformation', ['model'=>$model, 'form'=>$form, 'seat'=> 'yoxdu']); ?>
+        
     </div>
+    <div  class="col-xs-3">
+        <div id="fixed-box" class="fixed-box">
+            <div class="fixed-box-heading">
+                Order information
+            </div>
+            <div class="fixed-box-body">
+                <div class="fixed-box-section">
+                    <div class="fixed-box-section-heading">
+                        Place and time of pick up
+                    </div>
+                    <div class="fixed-box-section-body">
+                        <div class="fb-section-line">
+                            <span id="pickup-address-fixed">
+                                <?=Yii::$app->request->get('Rentorder')['from']?></span>
+                        </div>
+
+                        <div class="fb-section-line" >
+                            <span id="date-fixed"><?=Yii::$app->request->get('Rentorder')['pickdate']?></span>
+                        </div>
+                            
+                    </div>
+                </div>
+                <div id="contacts-fixed" class="fixed-box-section">
+                    <div class="fixed-box-section-heading">
+                            Contact information
+                    </div>
+                    <div class="fixed-box-section-body">
+                            <div class="fb-section-line">
+                                    <span id="pass-name-fixed"></span>
+                                    <span id="pass-lastname-fixed"></span>
+                            </div>
+                            <div class="fb-section-line" id="phone-number-fixed"></div>
+                            <div class="fb-section-line" id="email-fixed"></div>
+                    </div>
+                </div>
+                    <div id="nfixed" class="fixed-box-section">
+                        <div class = "fixed-box-section-heading">
+                                Notes
+                        </div>
+                        <div class="fixed-box-section-body" id="notes-fixed">
+
+                        </div>
+                    </div>
+
+            </div>
+            <div class="fixed-box-footer">
+                <div class="fixed-box-heading">
+                        Price
+                </div>
+                <div class="fixed-box-section-body">
+                    <div class="full-day">8 hours rent - <span class="prices"></span></div>
+                    <div class="half-day">Half day rent - <span class="prices"></span></div>
+                    <div class="overtime">1 hour overtime - <span class="prices"></span></div><br>
+                    
+                </div>
+                <div class="fixed-box-heading">
+                    Summary
+                    <div id='fixed-box-price'  class="fixed-box-price">
+                            <p id="price"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
 </div>
+    <!-- maybe will render this partial -->
+    
+</div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-6 button-box">
+            <div class="row">
+                <div class="col-md-12">
+                    <?= Html::SubmitButton('Confirm'); ?>
+                </div>
+            </div>
+
+            <div class="row">
+                    <div class="col-md-12">
+                    </div>
+            </div>
+
+        </div>
+        <div class="col-md-2">
+        </div>
+        <?php ActiveForm::end() ?>
+    </div>
 </div>

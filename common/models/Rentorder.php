@@ -27,6 +27,11 @@ use Yii;
  */
 class Rentorder extends \yii\db\ActiveRecord
 {
+    
+    public $pickdate;
+   // public $enddate;
+    public $time_start = array();
+    public $time_end;
     /**
      * @inheritdoc
      */
@@ -41,8 +46,8 @@ class Rentorder extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['pickuptime', 'car', 'amount'], 'integer'],
-            [['created_at', 'updated_at', 'lastname', 'firstname', 'email', 'phone', 'notes', 'from', 'address', 'endtime'], 'string', 'max' => 45],
+            [['pickuptime', 'car', 'amount','date','time'], 'integer'],
+            [['created_at', 'updated_at', 'lastname', 'firstname', 'email', 'phone', 'notes', 'from', 'address', 'endtime','time_start','time_end','pickdate'], 'string', 'max' => 45],
             [['gsign'], 'string', 'max' => 100]
         ];
     }

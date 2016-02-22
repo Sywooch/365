@@ -1,4 +1,5 @@
 <?php
+use common\models\Transferorder;
     use yii\helpers\Html;
     use yii\helpers\Url;
     date_default_timezone_set('Asia/Baku');
@@ -14,12 +15,13 @@
    $unvanlar[] = (!empty($model->anotherd2) ? $model->anotherd1.'➟'.$model->anotherd2.$aaddress2 : null);
 ?>
 <!-- Steps -->
-
-<div id="origin" data-origin="<?= $model->from ?>"></div>
-<div id="destination" data-destination="<?= $model->to ?>"></div>
-<div class="waypoints" data-waypt="<?= $model->anotherd ?>"></div>
-<div class="waypoints" data-waypt="<?= $model->anotherd1 ?>"></div>
-<div class="waypoints" data-waypt="<?= $model->anotherd2 ?>"></div>
+<div id="distance" data-distance="<?=Yii::$app->request->get('Transferorder')?>"></div>
+<div id="orderId" data-id="<?= $model->id ?>"></div>
+<div id="origin" data-origin="<?= Yii::$app->request->get('place1') ?>"></div>
+<div id="destination" data-destination="<?= Yii::$app->request->get('place2') ?>"></div>
+<div class="waypoints" data-waypt="<?= Yii::$app->request->get('place3') ?>"></div>
+<div class="waypoints" data-waypt="<?= Yii::$app->request->get('place4') ?>"></div>
+<div class="waypoints" data-waypt="<?= Yii::$app->request->get('place5') ?>"></div>
 
 <div class="container-fluid steps-wrap">
     <div class="row steps">
@@ -69,22 +71,77 @@
                 <?php endforeach; ?>
          
             </ol>
-            <div class="row">Pickup at: <strong><?=date("Y F d - H:i",$model->pickuptime)?></strong></div>
-            <div class="row">Car: <strong><?= $model->autos['0']['name']?></strong></div>
-            <div id="total-distance" class="row">Total distance: <strong><span></span></strong></div>
-            <div id="estimated-time" class="row">Estimated time of the trip: <strong><span></span></strong></div>
+            <div class="row"><h3>Tariff</h3></div>
+            <ul>
+                <li><div class="row">Pickup at: <strong><?=date("Y F d - H:i",$model->pickuptime)?></strong></div></li>
+                <li><div class="row">Car: <strong><?= $model->autos['0']['name']?></strong></div></li>
+                <?php if (!empty($model->seat)):?>
+                    <li><div class="row">Child seats: <?= $model->seat?></div></li>
+                <?php endif ?>
+                <li><div id="total-distance" class="row">Total distance: <strong><span></span></strong></div></li>
+                <li><div id="estimated-time" class="row">Estimated time of the trip: <strong><span></span></strong></div></li>
+                <li><div id="price" class="row">Price: <strong><span><?= $amount = substr($model->amount, 0, -2) ?></span> AZN</strong></div>
+            </ul>
+            
+            
             <div class="row"><h3>Customer information</h3></div>
-            <div class="row">Customer: <strong><?=$model->firstname?> <?=$model->lastname?></strong></div>
-            <div class="row">Tel: <strong><?=$model->phone?></strong></div>
-            <div class="row">Email: <strong><?=$model->email?></strong></div>
-            <?php if (!empty($model->gsign)):?>
+            <ul>
+                <li><div class="row">Customer: <strong><?=$model->firstname?> <?=$model->lastname?></strong></div></li>
+                <li><div class="row">Tel: <strong><?=$model->phone?></strong></div></li>
+                <li><div class="row">Email: <strong><?=$model->email?></strong></div></li>
+                <li>
+                    <?php if (!empty($model->gsign)):?>
                 <div class="row">Greeting sign: <strong><?=$model->gsign?></strong></div>
             <?php endif ?>
-            <?php if (!empty($model->notes)):?>
+                </li>
+                <li><?php if (!empty($model->notes)):?>
                 <div class="row">Notes: <?=$model->notes?></div>
-            <?php endif ?>
+            <?php endif ?></li>
+            </ul>
         </div>
     </div>
+    <script>
+    
+    
+  
+          
+    </script>
+         
+            <?php
+           /* $converter = new CurrencyConverter();
+            $rate =  $converter->convert('USD', 'AZN');
+           /* $kmsum = 0;
+            foreach($routes as $route){
+                 $kmsum += $route/1000; 
+                // echo '<br>'.$route;
+            }
+            $kmsums =  intval($kmsum);
+           // echo $kmsums;
+            $zero = 00;*/
+           /* if($kmsums > 35){
+                $qiymet = $amount['cent']*$rate*($kmsums-35)+$amount['priceT']*$rate;
+
+             //   $giymet = $qiymet-($qiymet*10/100);
+               
+                $model->amount = intval($qiymet);
+               // echo $kmsums.' $'.$model->amount;
+                if($model->return == 1 /*and count(array_filter($routes)) > 1*///){ 
+                   // $model->amount = $model->amount*2;
+                    
+             /*   }
+            }else{
+                $model->amount = intval($amount['priceT']*$rate);
+                
+                
+                
+                if($model->return == 1){
+                    $model->amount = $model->amount*2;
+                    
+                   
+                }
+            }
+            */
+            ?>
         </div>
     </div>
     

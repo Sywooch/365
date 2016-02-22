@@ -8,6 +8,10 @@ and open the template in the editor.
     Author     : Kamran
 */
 
+.bootstrap-datepicker-widget{
+    z-index:9999;
+}
+
 .bootstrap-datetimepicker-widget a{
     color: #6D0019 !important;
 }

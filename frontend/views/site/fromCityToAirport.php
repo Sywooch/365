@@ -14,12 +14,15 @@
                 <div class="col-xs-12 col-md-3">
                     
                     <?= $form->field($model, 'date')->textInput(['id' => 'date-pickup',
-                        'class' => 'cpanel-input date-picker' ,'placeholder' => 'dd/mm/yy'])->label(false) ?>
+                        'class' => 'cpanel-input date-picker',
+                        'autocomplete'=>'false'
+                        ,'placeholder' => 'dd/mm/yy'])->label(false) ?>
                 </div>
                 <div class="col-xs-12 col-md-2">
         
                     <?= $form->field($model, 'time')->textInput(['id' => 'time-pickup',
-                        'class' => 'cpanel-input time-picker' ,'placeholder' => 'HH:mm'])->label(false) ?>
+                        'class' => 'cpanel-input time-picker',
+                        'autocomplete'=>'false','placeholder' => 'HH:mm'])->label(false) ?>
                 </div>
                 <div class="col-xs-12 col-md-3">
                 <div class="description">

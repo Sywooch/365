@@ -35,11 +35,15 @@
                 </div>
                 <div class="col-md-3">
                     <?= $form->field($model, 'date')->textInput(['id' => 
-                        'date-arrival', 'class' => 'cpanel-input date-picker' , 'placeholder' => 'dd/mm/yy'])->label(false) ?>
+                        'date-arrival', 'class' => 'cpanel-input date-picker' ,
+                        'autocomplete'=>'false',
+                        'placeholder' => 'dd/mm/yy'])->label(false) ?>
                 </div>
                 <div class="col-md-2">     
                     <?= $form->field($model, 'time')->textInput(['id' => 
-                        'time-arrival', 'class' => 'cpanel-input time-picker' , 'placeholder' => 'HH:mm'])->label(false) ?>
+                        'time-arrival', 'class' => 'cpanel-input time-picker' ,
+                        'autocomplete'=>'false',
+                        'placeholder' => 'HH:mm'])->label(false) ?>
                 </div>
                 <div class="col-md-3">
                     <div class="description">

@@ -16,7 +16,6 @@ InternationalTelephoneAsset::register($this);
 
 $this->title = 'Order transfer from Airport to Baku, Azerbaijan';
 
-
 ?>
 
 
@@ -40,17 +39,18 @@ $this->title = 'Order transfer from Airport to Baku, Azerbaijan';
 
 <div class="container" id="parent-container"> <!-- Passenger form container -->
     <div class="row">
-<?php $form = ActiveForm::begin(['method' => 'post']); ?>
+<?php $form = ActiveForm::begin(['method' => 'post', 'id'=>'transfer-form']); ?>
         <div class="col-md-9">
             <div class="cpanel">
                 <div class="cpanel-heading">
 
                     <h4><span id="heading-from"><?= Yii::$app->request->get('Transferorder')['from'] ?></span> <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span> <span id="heading-to"><?= Yii::$app->request->get('Transferorder')['to'] ?></span><br></h4>
                    <?php $jsondata = BaseJson::decode(Yii::$app->request->get('Transferorder')['car'], true) ?>
-                    <?= print_r($jsondata) ?>
+                    
 
                 </div>
                 <?php
+                    
                     $getRequestReturn = Yii::$app->request->get('return-check'); //get return fron "get request" and then pass it to the form
                                                                                  //which renders airportToCity and CityToCity
                     $getRequestFrom = Yii::$app->request->get('Transferorder')['from'];
@@ -75,13 +75,23 @@ $this->title = 'Order transfer from Airport to Baku, Azerbaijan';
                 
                 <div id="fromLatLng" data-coords="<?= Yii::$app->request->get('Transferorder')['fplaceid']?>"></div>
                 <div id="toLatLng" data-coords="<?= Yii::$app->request->get('Transferorder')['tplaceid']?>"></div>
+                
+                <?= Html::activeHiddenInput($model, 'fplaceid', ['id'=>'distanceConfirm']) ?>
+                <!-- input to send to confirmation -->
+                <?= Html::activeHiddenInput($model, 'place1', ['class'=>'origin'])?>
+                <?= Html::activeHiddenInput($model, 'place2', ['class'=>'destination'])?>
+                <?= Html::activeHiddenInput($model, 'place3', ['class'=>'waypoint'])?>
+                <?= Html::activeHiddenInput($model, 'place4', ['class'=>'waypoint'])?>
+                <?= Html::activeHiddenInput($model, 'place5', ['class'=>'waypoint'])?>
+                
+        
 
                 <div class="cpanel-footer">
                     Free cancellation of the trip in an 12 hours before the start 
                 </div>
             </div>
 						
-    <?= $this->render('passengerInformation', ['model'=>$model, 'form'=>$form]); ?>
+    <?= $this->render('passengerInformation', ['model'=>$model, 'form'=>$form, 'seat'=>'var']); ?>
 
 </div>
     <div  class="col-md-3">

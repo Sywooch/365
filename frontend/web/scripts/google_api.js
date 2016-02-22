@@ -43,7 +43,6 @@ function Autocomplete(){
         console.log(e);
     }
 
-
     function hideCarClassContainer(){
         $('#car-class-container').animate({
             opacity: 0,          
@@ -101,6 +100,9 @@ function Autocomplete(){
   if (document.getElementById('index')){
       console.log('we are in index')
       
+      var chaffInput = document.querySelector('.chaff-pickup-address')
+      var chaffAutocomplete = new google.maps.places.Autocomplete(chaffInput, options)
+      
       for (var i=0; i<locationInputs.length; i++){
           locationInputs[i].value = '';
       } //clear fields on page reload
@@ -124,12 +126,13 @@ function Autocomplete(){
         }
       
       for (var i = 0; i < inputs.length; i++){
-          var autocomplete = new google.maps.places.Autocomplete(inputs.item(i))
+          var autocomplete = new google.maps.places.Autocomplete(inputs.item(i), options)
           
           autocomplete.addListener('place_changed', function(){
                 hideCarClassContainer()
                 var place = this.getPlace()
                 
+                console.log(place)
                 console.log(place.geometry.location.lat())
                 console.log(place.geometry.location.lng())
                
@@ -171,10 +174,7 @@ function Autocomplete(){
  
   if (document.getElementById('form')) {   
     console.log('we are in form')
-    
-    
-    
-    
+
     console.log(document.getElementById('fromLatLng').dataset.coords.split(','))
     console.log(document.getElementById('toLatLng').dataset.coords.split(','))
     
@@ -188,7 +188,7 @@ function Autocomplete(){
     route(origin, destination)
     
     
-    var waypoints = []; console.log(waypoints)
+    var waypoints = []; 
     
     var addDestInputs = document.getElementsByClassName('side-dests');
     
@@ -202,7 +202,7 @@ function Autocomplete(){
     };
     
     for (var i = 0; i < addDestInputs.length; i++){
-        var autocomplete = new google.maps.places.Autocomplete(addDestInputs.item(i))
+        var autocomplete = new google.maps.places.Autocomplete(addDestInputs.item(i), options)
         
         autocomplete.addListener('place_changed', function(){
             var place = this.getPlace()
@@ -265,6 +265,14 @@ function Autocomplete(){
           }
         })
     }
+}
+
+if(document.getElementById('chaffeurForm')){
+    console.log('we are in chauffeur')
+    
+    var chaffInput = document.querySelector('.chaff-pickup-address')
+    var chaffAutocomplete = new google.maps.places.Autocomplete(chaffInput, options)
+    
 }
     
   
@@ -358,6 +366,8 @@ function Autocomplete(){
             destination: destination,
             travelMode: travel_mode
         }
+        $('.origin').val(origin.lat + ' ' + origin.lng)
+        $('.destination').val(destination.lat + ' ' + destination.lng)
     }
     else if (waypoints.length > 0){
         function checkToken(value){
@@ -374,12 +384,22 @@ function Autocomplete(){
             waypoints: filteredWaypoints,
             travelMode: travel_mode
         }
+        
+       
+        
+        console.log(filteredWaypoints)
+        console.log(document.getElementsByClassName('places'))
+        $('.origin').val(origin.lat + ' ' + origin.lng)
+        $('.destination').val(modifiedDestination.lat + ' ' + modifiedDestination.lng)
+        for (var i = 0; i < filteredWaypoints.length; i++){
+            console.log($('.waypoint')[i])
+            console.log(filteredWaypoints[i].location)
+            document.getElementsByClassName('waypoint').item(i).value = filteredWaypoints[i].location.lat + ' ' + filteredWaypoints[i].location.lng 
+        }
+        
+//        console.log(waypoints)
     }
     
-    console.log('before passing to route request')
-    console.log(origin)
-    console.log(modifiedDestination)
-    console.log(filteredWaypoints)
     
     
     directionsService.route(request, function(response, status) {
@@ -392,7 +412,8 @@ function Autocomplete(){
         }
        
         console.log(overallDistance); 
-            
+        $('#distanceConfirm').val(overallDistance)
+        
             //actually it will be better to call this functions from other place
             updatePrice(overallDistance, returnState);
             updatePriceInFixedBox(overallDistance); 
@@ -436,6 +457,8 @@ function Autocomplete(){
   function updatePriceInFixedBox(distance){
       var priceInFixedBox = document.getElementById('fixed-box-price');
       var buttonBoxBottomSpan = $('.button-box-title span');
+      
+      
 
       if ($('#return-form').prop('checked')){
          var returnState = 2;
@@ -445,9 +468,13 @@ function Autocomplete(){
 
       var carPrice = Number(priceInFixedBox.dataset.carPrice);
       var carCent = Number(priceInFixedBox.dataset.cent);
-      
+      console.log('childseat price')
+      console.log(4 * Number(priceInFixedBox.dataset.cent))
+      console.log('cent')
+      console.log(Number(priceInFixedBox.dataset.cent))
       if (distance == 0 || distance <= 35) {
-          priceInFixedBox.innerHTML = Number(carPrice) * returnState;
+            priceInFixedBox.innerHTML = Number(carPrice) * returnState;
+          
           buttonBoxBottomSpan.text(priceInFixedBox.innerHTML);
           return;
       };
@@ -480,12 +507,12 @@ function Autocomplete(){
             if (kilometers == 0 || kilometers < 35){ //kilometers is global parameter
                 newCarClassPrice = Number(oldCarClassPrice)*returnState;
                 
-                $(carClassArray[i]).children('span').text( Math.round(newCarClassPrice)); //update car class price
+                $(carClassArray[i]).find('.prices-transfer > span').text( Math.round(newCarClassPrice)); //update car class price
                 
                 for (var j = 0; j < carSpecificArray.length; j++){
                     var priceClass =  Number(carSpecificArray[j].dataset.price) * returnState;
                     var newSpecificPrice = Math.round(priceClass);
-                        $(carSpecificArray[j]).children('span').text(newSpecificPrice); //update specific price
+                        $(carSpecificArray[j]).find('.prices-transfer > span').text(newSpecificPrice); //update specific price
                             
                 };
                 
@@ -503,7 +530,7 @@ function Autocomplete(){
                 
                 
                 newCarClassPrice = priceClass;
-                $(carClassArray[i]).children('span').text(Math.round(newCarClassPrice));
+                $(carClassArray[i]).find('.prices-transfer > span').text(Math.round(newCarClassPrice));
                 
                 for (var j = 0; j < carSpecificArray.length; j++){
                     
@@ -514,7 +541,7 @@ function Autocomplete(){
                     
                     
                     var newSpecificPrice = Math.round(priceSpecific);
-                    $(carSpecificArray[j]).children('span').text(newSpecificPrice);
+                    $(carSpecificArray[j]).find('.prices-transfer > span').text(newSpecificPrice);
                         
                 };
                 
@@ -540,14 +567,67 @@ function Autocomplete(){
 //  }
   
  function displayMapSummary(){
-    console.log('summary map works');
-    try{
-//         var waypoints = [];
+     
+     var directionsService = new google.maps.DirectionsService;
+     var directionsDisplay = new google.maps.DirectionsRenderer;
+     var geocoder = new google.maps.Geocoder();
+     
+     
+ 
+     if (document.getElementById('confirm-chaffer')){
+         console.log('chaffer confirm')
+
+         var place = document.getElementById('location').dataset.location
+         
+         console.log(place)
+         
+         var mapProp = {
+            center: new google.maps.LatLng(51.508742,-0.120850),
+            zoom:9,
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+        };
+
+         var map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
+         
+         function geocodeAddress(geocoder, resultsMap) {
+  
+  geocoder.geocode({'address': place}, function(results, status) {
+    if (status === google.maps.GeocoderStatus.OK) {
+      resultsMap.setCenter(results[0].geometry.location);
+      var marker = new google.maps.Marker({
+        map: resultsMap,
+        position: results[0].geometry.location
+      });
+    } else {
+      alert('Geocode was not successful for the following reason: ' + status);
+    }
+  });
+}
+         
+         geocodeAddress(geocoder,map)
+         
+         
+         
+     }else if(document.getElementById('confirmation')){
+        try{ 
+         var id = document.getElementById('orderId').dataset.id
+         console.log(document.getElementById('distance').dataset.distance)
+         
          var originDiv = document.getElementById("origin");
          
          origin = originDiv.dataset.origin;
-         var destinationDiv = document.getElementById("destination");
          
+         origin = {'lat': Number(origin.split(' ')[0]), 'lng': Number(origin.split(' ')[1])}
+
+         console.log('origin')
+         console.log(origin)
+         
+         var destinationDiv = document.getElementById("destination");
+         destination = destinationDiv.dataset.destination;
+             destination = {'lat': Number(destination.split(' ')[0]), 'lng': Number(destination.split(' ')[1])}
+             console.log('destination')
+             console.log(destination)
+
 //         destination = destinationDiv.dataset.destination;
          waypoints=[];
          /*
@@ -565,39 +645,35 @@ function Autocomplete(){
                  console.log('null')
              }else{
                  waypoints.push({
-                     location: waypointDivs[i].dataset.waypt
-                 });
+                     location: {'lat': Number(waypointDivs[i].dataset.waypt.split(' ')[0]),
+                     'lng': Number(waypointDivs[i].dataset.waypt.split(' ')[1])}});
              }
              
          }
          
-         if (waypoints.length == 0){
-             destination = destinationDiv.dataset.destination;
-         }else{
-             waypoints.unshift({location: destinationDiv.dataset.destination});
-             destination = waypoints[waypoints.length-1].location;
-         }
+         
+             
+         
+         
+         console.log(waypoints)
 
     }catch(e){
         console.log(e);
-    }
- 
-    var directionsService = new google.maps.DirectionsService;
-    var directionsDisplay = new google.maps.DirectionsRenderer;
-        
+    } 
+    
     var mapProp = {
         center: new google.maps.LatLng(51.508742,-0.120850),
         zoom:9,
         mapTypeId: google.maps.MapTypeId.ROADMAP
     };
-      
-      var map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
+    
+    var map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
       directionsDisplay.setMap(map);
       directionsService.route({
           origin: origin,
           destination: destination,
           waypoints: waypoints,
-            travelMode: google.maps.TravelMode.DRIVING
+          travelMode: google.maps.TravelMode.DRIVING
       },function(response,status){
            if (status === google.maps.DirectionsStatus.OK) {
             directionsDisplay.setDirections(response);
@@ -606,17 +682,28 @@ function Autocomplete(){
             var duration=0;
             for (var i=0; i<response.routes[0].legs.length; i++){
                 overallDistance += response.routes[0].legs[i].distance.value / 1000;
-                duration += response.routes[0].legs[i].duration.value / 60 / 60;
+                duration += response.routes[0].legs[i].duration.value;
+            }
+            
+            console.log(duration)
+            
+            if (Math.round(duration/60/60) == 0){
+                var minutes = duration/60
+            }else{
+                var minutes = duration%60
             }
             
             $('#total-distance span').text(Math.round(overallDistance) + ' kilometers');
-            $('#estimated-time span').text(Math.round(duration) + ' hours');
+            $('#estimated-time span').text(Math.round(duration/60/60) + ' hour(s) ' + Math.round(minutes) + ' minutes' );
         }else {
-      window.alert('Directions request failed due to ' + status);
+      window.alert('Sorry, but we could not display your route on the map.');
     }
 
-
       });
+     }
+     
+    console.log('summary map works');
+
 };
   
   displayMapSummary();

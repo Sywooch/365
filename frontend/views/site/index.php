@@ -5,7 +5,7 @@ use yii\helpers\Url;
 use yii\widgets\ActiveForm;
 use imanilchaudhari\CurrencyConverter\CurrencyConverter;
  
-$this->title = 'Transfer365 - transfer service in Azerbaijan';
+$this->title = 'Transfer365 - Transfer service in Azerbaijan';
 ?>
 
 
@@ -56,8 +56,8 @@ $this->title = 'Transfer365 - transfer service in Azerbaijan';
             </label>
         </div>
     </div>
-        </div>
-<?= Html::beginForm(['site/cform'], 'get', ['enctype' => 'multipart/form-data', 'id'=>'cform']) ?>
+</div>
+<?= Html::beginForm(['site/chauffeur'], 'get', ['id'=>'cform']) ?>
     <!-- destination and service choice -->
         <div class="col-md-9 destination-choice">
                 <div class="row">
@@ -65,20 +65,36 @@ $this->title = 'Transfer365 - transfer service in Azerbaijan';
                         <div id="input-from-chaffeur" class="col-md-4">
                             <label for="from">
                             <span>From</span>
-                           
+                                   <?= Html::activeInput('text', $rentmodel, 'from', ['id'=>"pac-input-from-chaffeur",'class' => 'controls chaff-pickup-address' ,
+            'autofocus' => 'true', 'placeholder'=>'Baku, Azerbaijan']) ?>
                             </label>
                         </div>
-                        <div id="chaffeur-time-from-col" class="col-md-4">
+                        <div id="input-date-chaffeur" class="col-md-4">
                             <label for="chaffeur-time-from">
-                                    Date from
-                                    <input type="text" id="chaffeur-time-from" class="chauffeur-datepicker" />
+                                <span>Date</span> 
+                                  
+                                    
+                                    <?= Html::activeInput('text', $rentmodel, 'pickdate', ['class' => 'chauffeur-datepicker' ,'id'=>'chaffeur-time-from' ,'placeholder' => 'dd/mm/yy']) ?>
                             </label>
                         </div>
-                        <div id="chaffeur-time-to-col" class="col-md-4">
-                            <label for="chaffeur-time-to">
-                                    Time to
-                                    <input type="text" id="chaffeur-time-to"/>
-                            </label>
+                        <div id="input-days-chaffeur" class="col-md-2">
+                            <div class="ui selection dropdown chauffeurDays">
+                                <input id="days" name="days" type="hidden">
+                                    <i class="dropdown icon"></i>
+                                    <div class="default text">Days</div>
+                                    <div class="menu">
+                                      <div class="item" data-value="1">1 day</div>
+                                      <div class="item" data-value="2">2 days</div>
+                                      <div class="item" data-value="3">3 days</div>
+                                      <div class="item" data-value="4">4 days</div>
+                                      <div class="item" data-value="5">5 days</div>
+                                      <div class="item" data-value="6">6 days</div>
+                                      <div class="item" data-value="7">7 days</div>
+                                      <div class="item" data-value="8">8 days</div>
+                                      <div class="item" data-value="9">9 days</div>
+                                      <div class="item" data-value="10">10 days</div>
+                                    </div>
+                              </div>
                         </div>
                     </div>
 <?= Html::endForm() ?>

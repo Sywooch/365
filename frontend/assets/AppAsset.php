@@ -32,8 +32,11 @@ class AppAsset extends AssetBundle
     ];
 //    public $jsOptions = ['position'=>\yii\web\view::POS_HEAD];
     public $js = [
+        'scripts/birthdayPicker.js',
         'scripts/script.js',
-        'https://maps.googleapis.com/maps/api/js?key=AIzaSyBB19cyGLWQeSz1amgo9wJN6ZeXlQtHZCU&signed_in=true&libraries=places&callback=Autocomplete&language=ru',
+        
+        'https://maps.googleapis.com/maps/api/js?key=AIzaSyBB19cyGLWQeSz1amgo9wJN6ZeXlQtHZCU&signed_in=true&libraries=places&callback=Autocomplete&language=en',
+        
     ];
      public $depends = [
         'yii\web\YiiAsset',

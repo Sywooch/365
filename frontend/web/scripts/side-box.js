@@ -39,7 +39,9 @@ $(document).ready(function (){
 		greetingField.value = greetingValue[0] + " " + greetingValue[1];
 	});
         
-        //linking date and time pickers with sidebox
+        
+        if (document.getElementById('form')){
+            //linking date and time pickers with sidebox
         
             document.getElementById('date-fixed').innerHTML = $('.cpanel-input.date-picker.hasDatepicker').val();
             document.getElementById('time-fixed').innerHTML = $('.cpanel-input.time-picker').val();
@@ -87,6 +89,8 @@ $(document).ready(function (){
        
        
     }
+        }
+        
     
 //        //update additional destinations
 //        var inputs = document.getElementsByClassName('side-dests')
@@ -127,7 +131,7 @@ $(document).ready(function (){
         window.onscroll = function(){
 	
         //of course i am not sure how it works
-        var scrolled = window.pageYOffset || document.documentElement.scrollTop; 
+        var scrolled = window.pageYOffset || document.documentElement.scrollTop;
 	if (scrolled >= 245){
 		fixBox(rightSideBox);
 	}else{

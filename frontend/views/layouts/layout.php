@@ -87,8 +87,11 @@ BootstrapDateTimePickerAsset::register($this);
                             <i class="dropdown icon"></i>
                             <div class="default text">USD</div>
                             <div class="menu">
-                               <a id='usd' class="item currency-active" data-currency ='USD' href="#">USD<?= Icon::show('usd',['class' => ''], Icon::FA); ?></a>
-                               <a id='rub' class="item" data-currency ='RUB' href="#">RUB<?= Icon::show('rub',['class' => ''], Icon::FA); ?></a> <a id='eur' class="item" data-currency ='EUR' href="#">EUR<?= Icon::show('eur',['class' => ''], Icon::FA); ?></a>
+                               <a id='usd' class="item currency-active selected" data-currency ='USD' href="#">USD<?= Icon::show('usd',['class' => ''], Icon::FA); ?></a>
+                               <a id='rub' class="item" data-currency ='RUB' href="#">RUB<?= Icon::show('rub',['class' => ''], Icon::FA); ?></a> 
+                               <a id='eur' class="item" data-currency ='EUR' href="#">EUR<?= Icon::show('eur',['class' => ''], Icon::FA); ?></a>
+                               <a id='ytl' class="item" data-currency ='TRY' href="#">YTL &#8378</a>
+                               
                             </div>
                           </div>
                     </div>
@@ -112,17 +115,12 @@ BootstrapDateTimePickerAsset::register($this);
                                     <a id="mailto" class="footer-link" href="mailto:support@transfer365.az">support@transfer365.az</a></div></div>
                         </div>
                         <div class="col-xs-12 col-sm-6 col-lg-3">
-                            <div class="row"><a class="footer-link" href="site/about">
+                            <div class="row"><a class="footer-link" href="/site/about">
                                     <div class="col-xs-12">
                                         About
                                     </div>
                                     </a></div>
-                            <div class="row"><a class="footer-link" href="#">
-                                    <div class="col-xs-12">
-                                        Fleet
-                                    </div>
-                                    </a></div>
-                            <div class="row"><a class="footer-link" href="#">
+                            <div class="row"><a class="footer-link" href="/site/corporate">
                                     <div class="col-xs-12">
                                         For corporate customers
                                     </div>

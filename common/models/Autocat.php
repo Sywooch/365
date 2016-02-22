@@ -54,7 +54,7 @@ class Autocat extends \yii\db\ActiveRecord
      */
     public function getAutos()
     {
-        return $this->hasMany(Auto::className(), ['idcat' => 'id']);
+        return $this->hasMany(Auto::className(), ['idcat' => 'id'])->orderBy(['priceT' => SORT_ASC]);
     }
 
     /**

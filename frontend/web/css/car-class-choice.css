@@ -7,7 +7,7 @@
     border-radius: 7px;
     box-shadow: -1px 3px 8px -2px rgba(0,0,0,0.7);
     width: 100%;
-    height: 70px;
+    height: 100px;
     padding-top: 7px;
     font-weight:normal;
     margin-top: 20px;
@@ -15,6 +15,10 @@
     background: #d9d9d9 url("images/ui-bg_glass_75_e6e6e6_1x400.png") 50% 50% repeat-x;
     color: #555555;	
     
+}
+
+.car-class .car-image img{
+    width: 79px;
 }
 
 .car-class:hover{
@@ -79,7 +83,7 @@ li ul button:hover{
     width: 51px;
     transform: rotate(0deg);
     position: relative;
-    bottom: 19px;
+    bottom: -14px;
     right: 6px;
     display: none;
 }
@@ -94,11 +98,15 @@ li ul button:hover{
 }
 
 .car-button-image{
-    display: none;
+    display: block;
 }
 
 .car-class-price {
     font-size: 100%;
+}
+
+.car-button-features{
+    display: none;
 }
 
 .car-button-classname, .car-button-features{
@@ -115,18 +123,30 @@ li ul button:hover{
     margin-top: 6px;
 }
 
-.car-class-min-price{
-    margin-top: 13px;
+.car-class-min-price .prices-transfer{
+    position: relative;
+    top: 8px;
+}
+
+.car-class-min-price .prices-transfer{
+    position: relative;
+    top: 8px;
 }
 
 /* car buttons inside car class buttons */
-.car-image{display: none;}
+.car-image{display: block;}
 
 .car-name{margin-bottom: 7px;}
 
 .car-features{margin-top: 2px;}
 
-.car-price{margin-top: 9px;}
+
+.car-price .prices-chauffeur{
+    position: relative;
+    bottom: 4px;
+    left:0px;
+        
+}
 
 .car-arrow{
     background: transparent url("images/oxright.png") no-repeat scroll 0px 0px;
@@ -135,31 +155,67 @@ li ul button:hover{
     width: 51px;
     transform: rotate(0deg);
     position: relative;
-    bottom: 31px;
+    bottom: -4px;
     right: 6px;
     display: none;
 }
+
+.prices-chauffeur{
+    position: relative;
+    top: 4px;
+    text-align: left;
+    left: 50px;
+    font-size: 13px;
+}
+
 
 
 /*media queries. i keep them here because i could not import them from external place*/
 
 @media only screen and (min-width:768px){
+    .car-class{
+        height: 71px;
+    }
+    
     .car-button-image{
         display: block;
     }
     
     .car-button-features{
-        margin-top: 13px;
+        display: block;
+        margin-top: 5px;
     }
     
-    .car-class-min-price{
-        margin-top: 20px;
+    .car-button-features img{
+        position: relative;
+        left: 60px;
+    }
+    
+    .car-class-min-price .prices-transfer{
+        position: relative;
+        top: 13px;
+    }
+    
+    .car-price .prices-transfer{
+        position: relative;
+        top: 15px;
+    }
+    
+    .car-class-min-price .prices-chauffeur{
+        position: relative;
+        top: 3px;
     }
     .car-button-classname{
-        margin-top:12px;
+        margin-top:7px;
+        position: relative;
+        left: 40px;
     }
     
     .car-image{display: block;}
+    
+    .car-class .car-image img{
+        width: 118px;
+    }
 }
 
 @media only screen and (min-width: 1200px){
@@ -171,15 +227,52 @@ li ul button:hover{
     .car-arrow{display: block;
     margin-top: 6px;}
     
-    .car-class-min-price{font-size: 80%;}
-    
-    .car-name{margin-top: 8px;}
-    
-    .car-features{margin-top: 13px;}
-    
-    .car-price{margin-top: 17px;}
+    .car-class-min-price{
+        font-size: 80%;
+        positiona: relative;
+        left: 100px;
+    }
     
     
+    .car-name{
+        margin-top: 8px;
+        position: relative;
+        left: 68px;
+    }
+    
+    .car-features{
+        position: relative;
+        margin-top: 13px;
+        left: 30px;
+    }
+    
+    
+    
+    
+    
+   
+    
+    .car-class .car-image img{
+        width: 130px;
+        position: relative;
+        left: 45px;
+    }
+    
+    .car-button-features img{
+        position: relative;
+        left: 175px;
+    }
+    
+    .car-button-classname{
+        margin-top:7px;
+        position: relative;
+        left: 120px;
+    }
+    
+    .car-button-image img{
+        position: relative;
+        left: 45px;
+    }
 }
 
 

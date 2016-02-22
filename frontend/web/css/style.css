@@ -160,8 +160,14 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#6d0019', end
     cursor: pointer;
 }
 
-#chaffeur-time-from-col, #chaffeur-time-to-col{
+#chaffeur-time-from-col {
     padding-left: 0px;
+    margin-top: 0px;
+}
+
+#chaffeur-time-to-col{
+   padding-left: 0px; 
+   margin-top: 32px;
 }
 
 
@@ -177,7 +183,15 @@ content. see stacking context. this might be a bad workaround
 }
 
 #input-from-chaffeur label{
-	float: none;
+    float: none;
+    width: 100%;
+}
+
+
+
+#input-days-chaffeur label{
+    float: none;
+    width: 100%;
 }
 
 .chaffeur{
@@ -903,7 +917,7 @@ right: 19px;
 }
 
 .about-wrap{
-    font-size: 20px;
+    font-size: 15px;
     padding: 20px;
 }
 
@@ -930,6 +944,14 @@ right: 19px;
     
 }
 
+.site-about a, #final a{
+    color: #6D0019;
+}
+
+.site-about a:hover{
+    color: #6D0019;
+}
+
 #transfer-word{
     color: #6D0019;
 }
@@ -937,3 +959,20 @@ right: 19px;
 .row:focus{
     outline: unset !important;
 }
+
+#corporate .jumbotron{
+    background: #6d0019; /* Old browsers */
+    background: -moz-linear-gradient(left,  #6d0019 35%, #4d0026 90%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(left,  #6d0019 35%,#4d0026 90%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to right,  #6d0019 35%,#4d0026 90%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#6d0019', endColorstr='#4d0026',GradientType=1 ); /* IE6-9 */
+    color: #fff;
+    box-shadow: -16px 16px 8px -6px #e4e6e2;
+}
+
+
+
+#driver-bday .menu {
+    z-index: 9999;
+}
+

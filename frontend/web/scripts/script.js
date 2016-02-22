@@ -4,8 +4,21 @@ $(document).ready(function (){
     
     
         $('#currency').dropdown();
-        if(document.getElementById('form')){
+        if(document.getElementById('form') || document.getElementById('corporate') || document.getElementById('confirmation')){
             $('#currency').addClass('disabled')
+        }
+        
+        if(document.getElementById('index')){
+            console.log('index')
+            $('.ui.dropdown.chauffeurDays').dropdown();
+            
+            
+        }
+        
+        if (document.getElementById('driver-form')){
+            console.log('driver form')
+            $('#driver-bday').birthdayPicker()
+            $('.ui.dropdown').dropdown()
         }
         
         $('.time-picker').datetimepicker({
@@ -16,30 +29,12 @@ $(document).ready(function (){
         
         var myDate = new Date("now");
          $('.chauffeur-datepicker').datepicker({
-        dateFormat:'dd/mm/yy',
-        setDate: myDate,
-        numberOfMonths: 2,
-        showOtherMonths: true,
-        minDate: 0,
-
-        onSelect: function(e){
-            console.log(this.className);
-            var full_date = '';
-            var selected_date = $(this).datepicker("getDate");
-            var day = selected_date.getDate();
-            var month = months[selected_date.getMonth()];
-            var year = selected_date.getFullYear();
-            var side_box = document.getElementById('date-fixed');
-
-            full_date = day + " " + month + " " + year;
-            //separate dates displayed on sidebox 
-            if (this.className == 'cpanel-input date-picker return hasDatepicker'){
-                $('#date-return-fixed').text(full_date);
-            }else if (this.className == 'cpanel-input date-picker hasDatepicker'){
-                $('#date-fixed').text(full_date);
-            }
-        }
-    });
+             minDate: 0,
+             setDate: myDate,
+             dateFormat:'dd/mm/yy',
+             numberOfMonths: 2,
+            showOtherMonths: true
+         });
     
     
     /*check viewport size*/
@@ -59,6 +54,8 @@ $(document).ready(function (){
             $('#step2').text('Passenger information');
             $('#step3').text('Confirmation');
         }
+        
+       
     }
     
     /*apply new text and font-size to steps*/
@@ -91,22 +88,12 @@ $(document).ready(function (){
         });*/
         
 
-$('#rub').click(function() {
-      $("#usd").removeClass('currency-active');
-      $("#eur").removeClass('currency-active');
-      $("#rub").addClass("currency-active");
-    var tactive = document.querySelector('.transfer-active');
-    tactive = tactive.dataset.priceajax;
-    if(tactive == 'priceT'){
-        var form = 'tform';
-    }else{
-        form = 'cform';
-    }
-          var request =$.ajax({
+function makeRequest(currency, tactive, form){
+	var request =$.ajax({
      url: "/site/accardion/",
      cache: false,
      method: "GET",
-     data: { request : tactive, currency: 'RUB', form:form},
+     data: { request : tactive, currency: currency, form:form},
      dataType: "html"
 
    });
@@ -118,14 +105,53 @@ $('#rub').click(function() {
                collapsible: true,
                active: false,
                icons: false,
-       });
-   });
+			   create:function(event, ui){
+                var currentButton = ui.header[0];
+                var currentButtonArrow = $(currentButton).find('.arrow');
+                
+                $(currentButtonArrow).css({
+                    'transform': 'rotate(180deg)',
+                    'margin-right': '14px'
+                }); 
+            },
+            activate: function (event, ui){
+                var oldButton = ui.oldHeader[0];
+                var oldButtonArrow = $(oldButton).find('.arrow');
+                $(oldButtonArrow).css({
+                    'transform': 'rotate(0deg)',
+                    'margin-right': '0px'
+                });
+            },
+            beforeActivate: function(event, ui){
+                var currentButton = ui.newHeader[0];
+                var currentButtonArrow = $(currentButton).find('.arrow');
+                
+                $(currentButtonArrow).css({
+                    'transform': 'rotate(180deg)',
+                    'margin-right': '14px'
+                    
 
-});
-$('#eur').click(function() {
-      $("#rub").removeClass('currency-active');
-      $("#usd").removeClass("currency-active");
-      $("#eur").addClass("currency-active");
+                });
+                
+            }
+       });
+       if (document.getElementById('transfer-radio').checked){
+         
+        $('.prices-transfer').each(function(){$(this).removeClass('hide')})
+        $('.prices-chauffeur').each(function(){$(this).addClass('hide')})
+    }else{
+        $('.prices-transfer').each(function(){$(this).addClass('hide')})
+        $('.prices-chauffeur').each(function(){$(this).removeClass('hide')}) 
+    }
+   });
+}
+
+
+$('.menu').on('click', function(e){
+    console.log(e.target)
+    console.log($(this).children('a'))
+    $(this).children('a').each(function(){console.log($(this).removeClass('currency-active'))})
+    $(e.target).addClass('currency-active')
     var tactive = document.querySelector('.transfer-active');
     tactive = tactive.dataset.priceajax;
     if(tactive == 'priceT'){
@@ -133,115 +159,31 @@ $('#eur').click(function() {
     }else{
         form = 'cform';
     }
-    
-    var request =$.ajax({
-     url: "/site/accardion/",
-     cache: false,
-     method: "GET",
-     data: { request : tactive, currency: 'EUR', form: form},
-     dataType: "html"
-
-   });
-
-   request.done(function( msg ) {
-     $( "#ajaxaccardion" ).html( msg );
-      $('#accordion').accordion({
-               heightStyle: "content",
-               collapsible: true,
-               active: false,
-               icons: false,
-       });
-   });
-
-});
-$('#usd').click(function() {
-      $("#rub").removeClass('currency-active');
-      $("#eur").removeClass('currency-active');
-      $("#usd").addClass("currency-active");
-    var tactive = document.querySelector('.transfer-active');
-    tactive = tactive.dataset.priceajax;
-    if(tactive == 'priceT'){
-        var form = 'tform';
-    }else{
-        form = 'cform';
-    }
-    var request =$.ajax({
-     url: "/site/accardion/",
-     cache: false,
-     method: "GET",
-     data: { request : tactive, currency: 'USD', form:form},
-     dataType: "html"
-
-   });
-
-   request.done(function( msg ) {
-     $( "#ajaxaccardion" ).html( msg );
-      $('#accordion').accordion({
-               heightStyle: "content",
-               collapsible: true,
-               active: false,
-               icons: false,
-       });
-   });
-
-});
-
+	
+	var currency = e.target.dataset.currency
+	
+	makeRequest(currency, tactive, form)
+})
 /*********start*********/
 
-$('#chaffeur-radio').click(function() {
-     $("#transfer-radio").removeClass('transfer-active');
-     $("#chaffeur-radio").addClass("transfer-active");
-    var activecurrency = document.querySelector('.currency-active');
-    activecurrency = activecurrency.dataset.currency;
-    
-        var request =$.ajax({
-     url: "/site/accardion/",
-     cache: false,
-     method: "GET",
-     data: { request : 'priceC', currency: activecurrency,'form':'cform'},
-     dataType: "html"
+$('.service-choice').on('click', function(e){
+        console.log(e.target)
 
-   });
-
-   request.done(function( msg ) {
-     $( "#ajaxaccardion" ).html( msg );
-      $('#accordion').accordion({
-               heightStyle: "content",
-               collapsible: true,
-               active: false,
-               icons: false,
-       });
-   });
-});
-/***********end***********/
-/*********start*********/
-
-$('#transfer-radio').click(function() {
-    
-     $("#chaffeur-radio").removeClass('transfer-active');
-     $("#transfer-radio").addClass("transfer-active");
-    var activecurrency = document.querySelector('.currency-active');
-    activecurrency = activecurrency.dataset.currency;
-        var request =$.ajax({
-     url: "/site/accardion/",
-     cache: false,
-     method: "GET",
-     data: { request : 'priceT', currency: activecurrency,'form':'tform'},
-     dataType: "html"
-
-   });
-
-   request.done(function( msg ) {
-     $( "#ajaxaccardion" ).html( msg );
-      $('#accordion').accordion({
-               heightStyle: "content",
-               collapsible: true,
-               active: false,
-               icons: false,
-       });
-   });
-});
-/***********end***********/
+	var activecurrency = document.querySelector('.selected');
+        activecurrency = activecurrency.dataset.currency;
+	
+	if (e.target.id == 'transfer-radio'){
+            $("#chaffeur-radio").removeClass('transfer-active');
+            $("#transfer-radio").addClass('transfer-active');
+            makeRequest(activecurrency, 'priceT', 'tform')
+            
+	}
+	if (e.target.id == 'chaffeur-radio'){
+            $("#chaffeur-radio").addClass('transfer-active');
+            $("#transfer-radio").removeClass('transfer-active');
+            makeRequest(activecurrency, 'priceC', 'cform')
+	}
+})
 
 
 
@@ -253,7 +195,7 @@ $('#transfer-radio').click(function() {
 
 
 /********start page load********/
-var activecurrency = document.querySelector('.currency-active');
+var activecurrency = document.querySelector('.selected');
     activecurrency = activecurrency.dataset.currency;
         var request =$.ajax({
      url: "/site/accardion/",
@@ -301,6 +243,13 @@ request.done(function( msg ) {
             }
 
     });
+    if (document.getElementById('transfer-radio').checked){
+        $('.prices-transfer').each(function(){$(this).removeClass('hide')})
+        $('.prices-chauffeur').each(function(){$(this).addClass('hide')})
+    }else{
+        $('.prices-transfer').each(function(){$(this).addClass('hide')})
+        $('.prices-chauffeur').each(function(){$(this).removeClass('hide')}) 
+    }
 });
 
 //main page destination choice fields. swap icon and disabled field functionalities	
@@ -459,10 +408,16 @@ if ($("#from").exists()){
    }catch(e){
        console.log(e);
    }
+   
+  
+   
+   
     
     
 
 });
+
+
 
 
 	

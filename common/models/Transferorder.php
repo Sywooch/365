@@ -46,6 +46,12 @@ class Transferorder extends \yii\db\ActiveRecord
     public $rtime;
     public $fplaceid;
     public $tplaceid;
+    public $place1;
+    public $place2;
+    public $place3;
+    public $place4;
+    public $place5;
+    
     public static function tableName()
     {
         return 'transferorder';
@@ -72,7 +78,11 @@ class Transferorder extends \yii\db\ActiveRecord
             [['from', 'to', 'anotherd', 'anotherd1', 'anotherd2', 'address','faaddress','raaddress','aaddress','aaddress1','aaddress2'], 'string', 'max' => 100],
             [['currency'], 'string', 'max' => 10],
             [['rdate','rtime'], 'safe'],
-            [['fplaceid', 'tplaceid'], 'string']
+            [['reference'],'string','max' => 82],
+            [['type', 'return'], 'string'],
+             [['type', 'status'], 'string'],
+            [['fplaceid', 'tplaceid' ], 'string'],
+            [['place1', 'place2', 'place3', 'place4', 'place5'], 'string']
         ];
     }
 
