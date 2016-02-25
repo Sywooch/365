@@ -28,7 +28,8 @@ class AppAsset extends AssetBundle
         'css/media-queries.css',
         'css/car-class-choice.css',
         'css/loader.css',
-        'css/bootstrap-datetimepicker-custom.css'
+        'css/bootstrap-datetimepicker-custom.css',
+        'css/site-preloader.css'
     ];
 //    public $jsOptions = ['position'=>\yii\web\view::POS_HEAD];
     public $js = [

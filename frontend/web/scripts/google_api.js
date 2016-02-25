@@ -24,11 +24,46 @@ try{
 
 var overallDistance = 0;
 var currentPrice = 0;
-
 var returnState = 1;
 var waypts = [];
+var childseats = 0;
+var childseatsPrice = 0;
 
 function Autocomplete(){
+    if (document.getElementById('form')){
+    var rateDiv = document.getElementById('rate');
+    var rate = Number(rateDiv.dataset.rate) * 4;
+    
+    childseats = Number($('#childseat-amount-dropdown').val());
+    childseatsPrice = childseats * rate;
+    
+    $('#childseat-price').text(rate);
+    
+    console.log(childseatsPrice);
+    console.log($('#childseat-amount-dropdown').val());
+    
+    function checkChildSeatBox(){
+       if ($('#childseat').prop('checked')){
+            $('.ui.dropdown.childseat').removeClass('disabled'); 
+            childseatsPrice = childseats * rate;
+        }else{
+            $('.ui.dropdown.childseat').addClass('disabled');
+            childseatsPrice = 0;
+            console.log($('#childseat-amount-dropdown').val());
+        } 
+    }
+
+    
+    
+    checkChildSeatBox();
+    
+    $('#childseat-amount-dropdown').on('change', function() {
+        childseats = Number($(this).val());
+        childseatsPrice = childseats * rate;
+        document.getElementById('fixed-box-price').innerHtml
+        console.log(childseatsPrice);
+    });
+    }
     
     jQuery.fn.exists = function(){return this.length>0;}; // function to check if element exists
     
@@ -99,17 +134,39 @@ function Autocomplete(){
   
   if (document.getElementById('index')){
       console.log('we are in index')
+      var boundsChaffeur = new google.maps.LatLng(40.391802, 49.866707)
+      var optionsChaffeur = {
+          location: boundsChaffeur,
+          rankBy: google.maps.places.RankBy.DISTANCE,
+          componentRestrictions: {country: 'az'}
+      }
       
       var chaffInput = document.querySelector('.chaff-pickup-address')
-      var chaffAutocomplete = new google.maps.places.Autocomplete(chaffInput, options)
-      //event to remove error class from input in chaffeur(index)
-      $(chaffInput).on('keypress', function(){
-          $(this).removeClass('error')
-      })
+      var chaffAutocomplete = new google.maps.places.Autocomplete(chaffInput, optionsChaffeur)
       
-      for (var i=0; i<locationInputs.length; i++){
+      chaffAutocomplete.addListener('place_changed', function() {
+          //here origin always stays baku
+          
+          var origin = {'placeId': 'ChIJ-Rwh1mt9MEARa2zlel5rPzQ'}; //baku place id
+          
+          var place = chaffAutocomplete.getPlace()
+          
+          var destination = {'placeId': place.place_id}
+          
+          $('#chaffeur-dest-placeid').val(place.place_id)
+          
+          route(origin, destination)
+          
+      });
+      
+      //event to remove error class from input in chaffeur(index)
+      $(chaffInput).on('keypress', function() {
+          $(this).removeClass('error')
+      });
+      
+      for (var i=0; i<locationInputs.length; i++) {
           locationInputs[i].value = '';
-      } //clear fields on page reload
+      }; //clear fields on page reload
       
       var origin;
       var destination;
@@ -135,24 +192,22 @@ function Autocomplete(){
           autocomplete.addListener('place_changed', function(){
                 hideCarClassContainer()
                 var place = this.getPlace()
-                
-                console.log(place)
-                console.log(place.geometry.location.lat())
-                console.log(place.geometry.location.lng())
-               
-                
+
                 if (arrayOfInputs.indexOf(inputs.item(index)) == 0){
                     origin = place.geometry.location
+                    
                     var coordinates_lat = place.geometry.location.lat()
                     var coordinates_lng = place.geometry.location.lng()
+                    
                     coordinates_lat = coordinates_lat.toString()
                     coordinates_lng = coordinates_lng.toString()
-                    console.log(coordinates_lat + ',' + coordinates_lng)
                     $('#fromLatLng').val(coordinates_lat + ',' + coordinates_lng)
                 }else if(arrayOfInputs.indexOf(inputs.item(index)) == 1){
                     destination = place.geometry.location
+                    
                     var coordinates_lat = place.geometry.location.lat()
                     var coordinates_lng = place.geometry.location.lng()
+                    
                     coordinates_lat = coordinates_lat.toString()
                     coordinates_lng = coordinates_lng.toString()
                     $('#toLatLng').val(coordinates_lat + ',' + coordinates_lng)
@@ -162,8 +217,7 @@ function Autocomplete(){
             
         });
       }
-      
-      
+
       returnCheckBox.addEventListener('change', function (){
         hideCarClassContainer();
         if (!this.checked){
@@ -179,22 +233,28 @@ function Autocomplete(){
   if (document.getElementById('form')) {   
     console.log('we are in form')
     
-    
-    
-    
-    console.log(document.getElementById('fromLatLng').dataset.coords.split(','))
-    console.log(document.getElementById('toLatLng').dataset.coords.split(','))
-    
     var fromCoords = document.getElementById('fromLatLng').dataset.coords.split(',')
     var toCoords = document.getElementById('toLatLng').dataset.coords.split(',')
     
     var origin = {'lat': Number(fromCoords[0]), 'lng': Number(fromCoords[1])}
     var destination = {'lat': Number(toCoords[0]), 'lng':  Number(toCoords[1])}
-    
-    
+
     route(origin, destination)
     
+    //so complete mess happens here
     
+    $('#childseat-amount-dropdown').on('change', function() {
+        childseats = Number($(this).val());
+        childseatsPrice = childseats * rate;
+        route(origin, destination)
+        console.log(childseatsPrice);
+    });
+    
+    $('#childseat').on('change', function (){
+        checkChildSeatBox();
+        route(origin, destination)
+    });
+
     var waypoints = []; 
     
     var addDestInputs = document.getElementsByClassName('side-dests');
@@ -212,6 +272,8 @@ function Autocomplete(){
         var autocomplete = new google.maps.places.Autocomplete(addDestInputs.item(i), options)
         
         autocomplete.addListener('place_changed', function(){
+            
+            
             var place = this.getPlace()
             
              if (addDestsArray.indexOf(addDestInputs.item(index)) == 0) {
@@ -225,9 +287,18 @@ function Autocomplete(){
                 waypoints[2] = {'location': {'lat': place.geometry.location.lat(), 'lng': place.geometry.location.lng()}}
               }
               
-              
-              
-              
+              $('#childseat-amount-dropdown').on('change', function() {
+                childseats = Number($(this).val());
+                childseatsPrice = childseats * rate;
+                route(origin, destination, waypoints)
+                console.log(childseatsPrice);
+            });
+            
+            $('#childseat').on('change', function (){
+                checkChildSeatBox();
+                route(origin, destination, waypoints)
+            });
+
               route(origin, destination, waypoints)
               
         })
@@ -245,8 +316,7 @@ function Autocomplete(){
                 $('#dest2 span').text(e.target.value)
             }else if (addDestsArray.indexOf(e.target) == 2){
                 $('#dest3 span').text(e.target.value)
-                    
-                
+
             }
         });
     }
@@ -256,7 +326,7 @@ function Autocomplete(){
     for (var i = 0; i < closes.length; i++){
         closes[i].addEventListener('click', function(e){
             var tinput = $(e.target).parents('.new-destination').find('.side-dests')
-            console.log(addDestsArray.indexOf(tinput[0]))
+            
             if (addDestsArray.indexOf(tinput[0]) == 0) {
             $('#dest1 span').text('')
             waypoints[0] = 'token'
@@ -277,88 +347,29 @@ function Autocomplete(){
 if(document.getElementById('chaffeurForm')){
     console.log('we are in chauffeur')
     
+    var placeidFromInput = $('#chaffeur-dest-placeid').data('id')
+    console.log(placeidFromInput)
+    
+    var origin = {'placeId': 'ChIJ-Rwh1mt9MEARa2zlel5rPzQ'}
+    var destination = {'placeId': placeidFromInput}
+    
+    console.log(destination)
+    route(origin, destination)
+    
     var chaffInput = document.querySelector('.chaff-pickup-address')
     var chaffAutocomplete = new google.maps.places.Autocomplete(chaffInput, options)
     
-}
+    chaffAutocomplete.addListener('place_changed', function(){
+        var place = chaffAutocomplete.getPlace()
+        
+        var origin = {'placeId': 'ChIJ-Rwh1mt9MEARa2zlel5rPzQ'}
+        var destination = {'placeId': place.place_id}
+        
+        route(origin, destination)
+    })
     
-  
-  
-  
-  
- //attach autocomplete to those inputs
-// for (var i = 0; i < locationInputs.length; i++){
-//     var autocomplete = new google.maps.places.Autocomplete(locationInputs[i], options);
-//     
-//     autocomplete.addListener('place_changed', function(){
-//        var place = this.getPlace();
-//        
-//        if (document.getElementById('index')){
-//            $('#from, #to').removeClass('error'); //remove red inner border from inputs if there was place_changed
-//            hideCarClassContainer(); //run loading animation
-//            checkLocations(locationInputs);
-//        }
-//        
-////        var place = this.getPlace();
-//        
-//        waypts = [];
-//        for (var i = 0; i<locationInputs.length; i++){
-//            
-//            
-//            if (locationInputs[i].id != 'from' && locationInputs[i].value != ''){
-//                    waypts.push({
-//                            location: locationInputs[i].value
-//                    });
-//            }
-//
-//        }
-//        
-//        origin = document.getElementById('from').value;
-//        if (waypts.length == 0){
-//            destination = origin;
-//        }else{
-//            destination = waypts[waypts.length - 1].location;
-//        }
-//        
-//        route(directionsService, origin, destination, waypts);
-//        waypts=[];
-//     });
-// }
- 
-    //recalculate on close
-//   var close = document.getElementsByClassName('close');
-//    for (var i = 0; i < close.length; i++){
-//        close[i].addEventListener('click', function (e){
-//            console.log(e.target);
-//            
-//            var closed = $(e.target).parents('.parent-anchor');
-//            
-//            closed.find('.add-dest-address').val(''); //this clears the address fields when close is clicked
-//            closed.find('.specify-address').val('');
-//            waypts = [];
-//            
-//            for (var i = 0; i<locationInputs.length; i++){
-//            if (locationInputs[i].id != 'from' && locationInputs[i].value != ''){
-//                console.log(locationInputs[i].value);
-//                    waypts.push({
-//                            location: locationInputs[i].value
-//                    });
-//            }
-//
-//        }
-//
-//        origin = document.getElementById('from').value;
-//        if (waypts.length == 0){
-//            destination = origin;
-//        }else{
-//            destination = waypts[waypts.length - 1].location;
-//        }
-//
-//        route(directionsService, origin, destination, waypts);
-//            waypts = [];
-//        });
-//    };
-  
+}
+
    //function creates directionsService request and get response. then it calls functions for 
    // updating and displaying time
   function route(origin, destination, waypoints) {
@@ -373,6 +384,12 @@ if(document.getElementById('chaffeurForm')){
             destination: destination,
             travelMode: travel_mode
         }
+        
+        //here i write values into hidden inputs. these value the go to the
+        //confirmation page. i need these values to display the route
+        
+        $("#start").val(origin.lat + ' ' + origin.lng)
+        $('#end').val(destination.lat + ' ' + destination.lng)
     }
     else if (waypoints.length > 0){
         function checkToken(value){
@@ -389,26 +406,41 @@ if(document.getElementById('chaffeurForm')){
             waypoints: filteredWaypoints,
             travelMode: travel_mode
         }
-        console.log(waypoints)
+        
+        //i will display only origin and destination, without displayin
+        //waypoints
+        
+        $("#start").val(origin.lat + ' ' + origin.lng)
+        $('#end').val(modifiedDestination.lat + ' ' + modifiedDestination.lng)
     }
-    
-    
-    
+
     directionsService.route(request, function(response, status) {
       if (status === google.maps.DirectionsStatus.OK) {
-        overallDistance = 0;
+        var overallDistance = 0;
+        var duration = 0;
         console.log(response.routes[0]);
         for (var i=0; i<response.routes[0].legs.length; i++){
                 overallDistance += response.routes[0].legs[i].distance.value / 1000;
+                 duration += response.routes[0].legs[i].duration.value;
                 
         }
        
         console.log(overallDistance); 
+        
+        $('#distance').val(Math.round(overallDistance))
+        $('#duration').val(duration)
         $('#distanceConfirm').val(overallDistance)
         
             //actually it will be better to call this functions from other place
             updatePrice(overallDistance, returnState);
-            updatePriceInFixedBox(overallDistance); 
+            
+            if(document.getElementById('transfer-fixed-box')){
+                updatePriceInFixedBox(overallDistance);
+            }
+            
+            if (document.getElementById('chaffeur-fixed-box')){
+               updatePriceChaffeurBox(overallDistance)
+            }
                         
         } else {
         window.alert('Directions request failed due to ' + status);
@@ -424,9 +456,7 @@ if(document.getElementById('chaffeurForm')){
             $('.return-panel').css('display', 'block');
         }
         returnForm.on('change', showHideReturnPanel);
-        
-        
-    
+  
     //function works when return state changed. toggles return pannel and call updatePriceInFixedBox
     //to correctly update the price
     function showHideReturnPanel(event){
@@ -445,44 +475,56 @@ if(document.getElementById('chaffeurForm')){
     
   }
   
+  function updatePriceChaffeurBox(distance){
+      console.log(distance)
+      
+      var priceInFixedBox = document.getElementById('fixed-box-price');
+      var carPrice = Number(priceInFixedBox.dataset.carPrice);
+      var carCent = Number(priceInFixedBox.dataset.cent);
+      var transferPrice = Math.round(carCent * (distance - 35) + carPrice);
+      
+      console.log(carPrice)
+      console.log(carCent)
+      
+      console.log(transferPrice);
+      
+      if (distance > 35) {
+          $('#price').text(transferPrice);
+          document.getElementById('transfer-price').dataset.price = transferPrice;
+      };
+  }
+  
   //function updates summary price in right fixed box
   function updatePriceInFixedBox(distance){
+      console.log(childseatsPrice)
+      
       var priceInFixedBox = document.getElementById('fixed-box-price');
       var buttonBoxBottomSpan = $('.button-box-title span');
-      
-      
 
       if ($('#return-form').prop('checked')){
          var returnState = 2;
       }else{
          var returnState = 1;
       }
-
+      
       var carPrice = Number(priceInFixedBox.dataset.carPrice);
       var carCent = Number(priceInFixedBox.dataset.cent);
-      console.log('childseat price')
-      console.log(4 * Number(priceInFixedBox.dataset.cent))
-      console.log('cent')
-      console.log(Number(priceInFixedBox.dataset.cent))
+//      console.log('childseat price')
+//      console.log(4 * Number(priceInFixedBox.dataset.cent))
+//      console.log('cent')
+//      console.log(Number(priceInFixedBox.dataset.cent))
       if (distance == 0 || distance <= 35) {
-            priceInFixedBox.innerHTML = Number(carPrice) * returnState;
+            priceInFixedBox.innerHTML = Number(carPrice) * returnState + childseatsPrice;
           
           buttonBoxBottomSpan.text(priceInFixedBox.innerHTML);
           return;
       };
-      
-     
-      
-      
-//      console.log('car price ' + priceInFixedBox.dataset.carPrice);
-//      console.log('car cent ' + priceInFixedBox.dataset.cent);
-//      console.log('distance ' + distance);
-      
  
       var updatedPrice = Math.round(carCent * (distance - 35) + carPrice) * returnState;
       
-      priceInFixedBox.innerHTML = updatedPrice;
+      priceInFixedBox.innerHTML = updatedPrice + childseatsPrice;
       buttonBoxBottomSpan.text(priceInFixedBox.innerHTML);
+
   };
 
   //function to update car prices depending on distance and return value
@@ -500,7 +542,7 @@ if(document.getElementById('chaffeurForm')){
                 newCarClassPrice = Number(oldCarClassPrice)*returnState;
                 
                 $(carClassArray[i]).find('.prices-transfer > span').text( Math.round(newCarClassPrice)); //update car class price
-                
+               
                 for (var j = 0; j < carSpecificArray.length; j++){
                     var priceClass =  Number(carSpecificArray[j].dataset.price) * returnState;
                     var newSpecificPrice = Math.round(priceClass);
@@ -513,58 +555,60 @@ if(document.getElementById('chaffeurForm')){
             //koeff * (distance - 35)+
             
             if (kilometers >= 35 ){
+                var chaffeurDailyRentPrice = Number($(carClassArray[i]).find('.prices-chauffeur > .pricefull').text())
+                var chaffeurHalfDayRentPrice = Number($(carClassArray[i]).find('.prices-chauffeur > .pricehalf').text())
+                
                 var s = (kilometers - 35); //normalized distance
              
-                
                 var priceClass = (carClassArray[i].dataset.coefficient*s +
                         Number(oldCarClassPrice))*returnState;
                 
+                var chaffeurPriceClass = carClassArray[i].dataset.coefficient*s +
+                        Number(oldCarClassPrice);
                 
-                
+//                console.log(chaffeurPriceClass);
+
                 newCarClassPrice = priceClass;
-                $(carClassArray[i]).find('.prices-transfer > span').text(Math.round(newCarClassPrice));
                 
+                //here prices displayed on buttons are being updated
+                $(carClassArray[i]).find('.prices-transfer > span').text(Math.round(newCarClassPrice));
+                $(carClassArray[i]).find('.prices-chauffeur > .pricefull').
+                        text(Math.round(chaffeurPriceClass + chaffeurDailyRentPrice))
+                $(carClassArray[i]).find('.prices-chauffeur > .pricehalf').
+                        text(Math.round(chaffeurPriceClass + chaffeurHalfDayRentPrice))
+
                 for (var j = 0; j < carSpecificArray.length; j++){
                     
                     var kSpecific = carSpecificArray[j].dataset.coefficient; //car coefficient
+                    
                     var priceSpecific = Math.round((kSpecific*s + 
                             Number(carSpecificArray[j].dataset.price)) * returnState);
                     
+                    console.log(kSpecific)
+                    console.log(s)
+                    console.log(carSpecificArray[j].dataset.price)
                     
+                    var chaffeurPriceSpecific = kSpecific*s + 
+                            Number(carSpecificArray[j].dataset.price)
                     
-                    var newSpecificPrice = Math.round(priceSpecific);
+
+                    var newSpecificPrice = priceSpecific;
+ 
                     $(carSpecificArray[j]).find('.prices-transfer > span').text(newSpecificPrice);
-                        
+ 
                 };
                 
             }
 
         }
    }
-  
-//if checkbox value is "checked" then update price
-//try{
-//  returnCheckBox.addEventListener('change', function (){
-//      hideCarClassContainer();
-//      if (!this.checked){
-//         returnState = 1; //global parameter
-//      }else{
-//          returnState = 2;
-//      }
-//      
-//      setTimeout(function(){updatePrice(overallDistance, returnState);}, 300)
-//  });}
-//  catch(e){
-//      console.log(e);
-//  }
-  
+
  function displayMapSummary(){
      
      var directionsService = new google.maps.DirectionsService;
      var directionsDisplay = new google.maps.DirectionsRenderer;
      var geocoder = new google.maps.Geocoder();
 
- 
      if (document.getElementById('confirm-chaffer')){
          console.log('chaffer confirm')
 
@@ -594,50 +638,45 @@ if(document.getElementById('chaffeurForm')){
     }
   });
 }
-         
          geocodeAddress(geocoder,map)
-         
-         
-         
+
      }else if(document.getElementById('confirmation')){
         try{ 
          var id = document.getElementById('orderId').dataset.id
-         console.log(document.getElementById('distance').dataset.distance)
+         
+         //here i take strings with coordinates, extract them and format them
+         //before sending to directionsService
          
          var originDiv = document.getElementById("origin");
          
-         origin = originDiv.dataset.origin;
+         var coordStringStart = originDiv.dataset.origin;
+         
+         var latStart = Number(coordStringStart.split(' ')[0])
+         var lngStart = Number(coordStringStart.split(' ')[1])
+         
+         var origin = {'lat': latStart, 'lng': lngStart};
+         
          var destinationDiv = document.getElementById("destination");
          
-//         destination = destinationDiv.dataset.destination;
-         waypoints=[];
-         /*
-          * сделать так
-          * если waypoints.length == 0,
-          * то destination = $model->to.
-          * если в waypoints что-то есть, тогда
-          * $model-to идет вначало waypoints, a
-          * destination == последний непустой элемент в waypoits
-          */
-        var waypointDivs = document.getElementsByClassName("waypoints");
+         var coordStringEnd = destinationDiv.dataset.destination;
          
-         for (var i = 0; i < waypointDivs.length; i++){
-             if (waypointDivs[i].dataset.waypt == ""){
-                 console.log('null')
-             }else{
-                 waypoints.push({
-                     location: waypointDivs[i].dataset.waypt
-                 });
-             }
-             
-         }
+         var latEnd = Number(coordStringEnd.split(' ')[0])
+         var lngEnd = Number(coordStringEnd.split(' ')[1])
          
-         if (waypoints.length == 0){
-             destination = destinationDiv.dataset.destination;
-         }else{
-             waypoints.unshift({location: destinationDiv.dataset.destination});
-             destination = waypoints[waypoints.length-1].location;
-         }
+         var destination = {'lat': latEnd, 'lng': lngEnd};
+         
+         //here i take seconds and extract hours and minutes from them
+         
+         var durationDiv = document.getElementById('duration');
+         
+         var secondsDuration = Math.round(Number(durationDiv.dataset.duration));
+         
+         var hours = secondsDuration / 3600;
+         var minutes = (secondsDuration / 60) % 60;
+
+         $('#hours').text(Math.round(hours));
+         $('#minutes').text(Math.round(minutes));
+         
 
     }catch(e){
         console.log(e);
@@ -654,29 +693,10 @@ if(document.getElementById('chaffeurForm')){
       directionsService.route({
           origin: origin,
           destination: destination,
-          waypoints: waypoints,
           travelMode: google.maps.TravelMode.DRIVING
       },function(response,status){
            if (status === google.maps.DirectionsStatus.OK) {
-            directionsDisplay.setDirections(response);
-            console.log(response.routes[0]);
-            var overallDistance=0;
-            var duration=0;
-            for (var i=0; i<response.routes[0].legs.length; i++){
-                overallDistance += response.routes[0].legs[i].distance.value / 1000;
-                duration += response.routes[0].legs[i].duration.value;
-            }
-            
-            console.log(duration)
-            
-            if (Math.round(duration/60/60) == 0){
-                var minutes = duration/60
-            }else{
-                var minutes = duration%60
-            }
-            
-            $('#total-distance span').text(Math.round(overallDistance) + ' kilometers');
-            $('#estimated-time span').text(Math.round(duration/60/60) + ' hour(s) ' + Math.round(minutes) + ' minutes' );
+            directionsDisplay.setDirections(response);            
         }else {
       window.alert('Sorry, but we could not display your route on the map.');
     }
@@ -687,7 +707,6 @@ if(document.getElementById('chaffeurForm')){
      
     console.log('summary map works');
 
-      
 };
   
   displayMapSummary();

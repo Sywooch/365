@@ -17,11 +17,10 @@ use common\models\Transferorder;
 <!-- Steps -->
 <div id="distance" data-distance="<?=Yii::$app->request->get('Transferorder')?>"></div>
 <div id="orderId" data-id="<?= $model->id ?>"></div>
-<div id="origin" data-origin="<?= Yii::$app->request->get('place1') ?>"></div>
-<div id="destination" data-destination="<?= Yii::$app->request->get('place2') ?>"></div>
-<div class="waypoints" data-waypt="<?= Yii::$app->request->get('place3') ?>"></div>
-<div class="waypoints" data-waypt="<?= Yii::$app->request->get('place4') ?>"></div>
-<div class="waypoints" data-waypt="<?= Yii::$app->request->get('place5') ?>"></div>
+<div id="origin" data-origin="<?= Yii::$app->request->get('placeStart') ?>"></div>
+<div id="destination" data-destination="<?= Yii::$app->request->get('placeEnd') ?>"></div>
+<div id="distance" data-distance='<?= Yii::$app->request->get('distance') ?>'></div>
+<div id="duration" data-duration='<?= Yii::$app->request->get('duration') ?>'></div>
 
 <div class="container-fluid steps-wrap">
     <div class="row steps">
@@ -50,7 +49,7 @@ use common\models\Transferorder;
 <div class="container">
     <div class="row">
         <div class="col-md-2">
-            <div id="googleMap" style="width:600px;height:400px;z-index:9999;margin-top: 25px;"></div>
+            <div id="googleMap" style="width:600px;height:400px;z-index:1;margin-top: 25px;"></div>
         </div>
         <div class="col-md-10">
             <div class="row">
@@ -78,8 +77,12 @@ use common\models\Transferorder;
                 <?php if (!empty($model->seat)):?>
                     <li><div class="row">Child seats: <?= $model->seat?></div></li>
                 <?php endif ?>
-                <li><div id="total-distance" class="row">Total distance: <strong><span></span></strong></div></li>
-                <li><div id="estimated-time" class="row">Estimated time of the trip: <strong><span></span></strong></div></li>
+                <li><div id="total-distance" class="row">Total distance:
+                    <strong><span><?= Yii::$app->request->get('distance') ?></span> km</strong> 
+                    <span class='description'>*distance with waypoints</span></div></li>
+                <li><div id="estimated-time" class="row">Estimated time of the trip:
+                        <strong><span id='hours'></span> hour(s) <span id='minutes'></span> minute(s)</strong>
+                     <span class='description'>*time with waypoints</span></div></li>
                 <li><div id="price" class="row">Price: <strong><span><?= $amount = substr($model->amount, 0, -2) ?></span> AZN</strong></div>
             </ul>
             
@@ -155,7 +158,7 @@ use common\models\Transferorder;
                     </div>
                     <div class="row">
                         <div class="col-md-12">
-                            <?= Html::a('<button>Go To Payment</button>', ['site/confirm', 'id'=>$model->id ]) ?>
+                            <?= Html::a('<button>Go To Payment</button>', ['site/confirm', 'id'=>$model->id, 'mode'=>'transfer' ]) ?>
                         </div>
                     </div>
 

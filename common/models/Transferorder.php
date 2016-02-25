@@ -46,11 +46,8 @@ class Transferorder extends \yii\db\ActiveRecord
     public $rtime;
     public $fplaceid;
     public $tplaceid;
-    public $place1;
-    public $place2;
-    public $place3;
-    public $place4;
-    public $place5;
+    public $chauffeurDestPlaceId;
+    public $placeStart, $placeEnd, $distance, $duration;
     
     public static function tableName()
     {
@@ -81,8 +78,8 @@ class Transferorder extends \yii\db\ActiveRecord
             [['reference'],'string','max' => 82],
             [['type', 'return'], 'string'],
              [['type', 'status'], 'string'],
-            [['fplaceid', 'tplaceid' ], 'string'],
-            [['place1', 'place2', 'place3', 'place4', 'place5'], 'string']
+            [['fplaceid', 'tplaceid', 'chauffeurDestPlaceId',
+                'placeStart', 'placeEnd', 'distance', 'duration'], 'string'],
         ];
     }
 
@@ -100,21 +97,21 @@ class Transferorder extends \yii\db\ActiveRecord
             'email' => Yii::t('yii', 'Email'),
             'phone' => Yii::t('yii', 'Phone'),
             'phone1' => Yii::t('yii', 'Phone1'),
-            'flightnumber' => Yii::t('yii', 'Flightnumber'),
+            'flightnumber' => Yii::t('yii', 'Flight number'),
             'notes' => Yii::t('yii', 'Notes'),
             'type' => Yii::t('yii', 'Type'),
             'from' => Yii::t('yii', 'From'),
             'to' => Yii::t('yii', 'To'),
-            'anotherd' => Yii::t('yii', 'Anotherd'),
-            'anotherd1' => Yii::t('yii', 'Anotherd1'),
-            'anotherd2' => Yii::t('yii', 'Anotherd2'),
-            'pickuptime' => Yii::t('yii', 'Pickuptime'),
+            'anotherd' => Yii::t('yii', 'Another destination 1'),
+            'anotherd1' => Yii::t('yii', 'Another destination 2'),
+            'anotherd2' => Yii::t('yii', 'Another destination 3'),
+            'pickuptime' => Yii::t('yii', 'Pickup time'),
             'car' => Yii::t('yii', 'Car'),
             'amount' => Yii::t('yii', 'Amount'),
             'currency' => Yii::t('yii', 'Currency'),
             'return' => Yii::t('yii', 'Return'),
             'seat' => Yii::t('yii', 'Seat'),
-            'gsign' => Yii::t('yii', 'Gsign'),
+            'gsign' => Yii::t('yii', 'Greating sign'),
             'address' => Yii::t('yii', 'Address'),
         ];
     }
@@ -122,5 +119,9 @@ class Transferorder extends \yii\db\ActiveRecord
     public function getAutos()
     {
         return $this->hasMany(Auto::className(), ['id' => 'car']);
+    }
+     public function getAuto()
+    {
+        return $this->hasOne(Auto::className(), ['id' => 'car']);
     }
 }

@@ -1,8 +1,12 @@
 /* Main scripts */
 
-$(document).ready(function (){    
-    
-    
+$(window).load(function() {
+  $('body').addClass('loaded');
+  $('h1').css('color','#222222');
+
+});
+
+$(document).ready(function() {    
         $('#currency').dropdown();
         if(document.getElementById('form') || document.getElementById('corporate') || document.getElementById('confirmation')){
             $('#currency').addClass('disabled')
@@ -147,7 +151,7 @@ function makeRequest(currency, tactive, form){
 }
 
 
-$('.menu').on('click', function(e){
+$('#curr-menu').on('click', function(e){
     console.log(e.target)
     console.log($(this).children('a'))
     $(this).children('a').each(function(){console.log($(this).removeClass('currency-active'))})
@@ -262,7 +266,8 @@ request.done(function( msg ) {
         $('.prices-chauffeur').each(function(){$(this).addClass('hide')})
       
     }else{
-        
+        $('#transfer-radio').removeClass('transfer-active')
+        $('#chaffeur-radio').addClass('transfer-active')
         $('.prices-transfer').each(function(){$(this).addClass('hide')})
         $('.prices-chauffeur').each(function(){$(this).removeClass('hide')}) 
     }
@@ -403,6 +408,16 @@ if ($("#from").exists()){
     
    //index form validation (from - to fields)
    try{
+    document.getElementById('cform').addEventListener('submit', function(e){
+        if ($('#pac-input-from-chaffeur').val() == ''){
+            e.preventDefault()
+            $('#pac-input-from-chaffeur').addClass('error')
+            $(window).scrollTop(0)
+        }else{
+            $('#pac-input-from-chaffeur').removeClass('error')
+        }
+    })
+       
    document.getElementById('tform').addEventListener('submit', function(e){
        if ($('#from').val() == ''){
            e.preventDefault();

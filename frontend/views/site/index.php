@@ -67,6 +67,7 @@ $this->title = 'Transfer365 - Transfer service in Azerbaijan';
                             <span>From</span>
                                    <?= Html::activeInput('text', $rentmodel, 'from', ['id'=>"pac-input-from-chaffeur",'class' => 'controls chaff-pickup-address' ,
             'autofocus' => 'true', 'placeholder'=>'Baku, Azerbaijan']) ?>
+                            <?= Html::activeHiddenInput($model, 'chauffeurDestPlaceId', ['id'=>'chaffeur-dest-placeid']) ?>
                             </label>
                         </div>
                         <div id="input-date-chaffeur" class="col-md-4">
@@ -123,11 +124,11 @@ $this->title = 'Transfer365 - Transfer service in Azerbaijan';
 
                         </div>
                         <div class="col-md-3">
-                                <div class="row placeholder">placeholder</div>
-                                <div class="row placeholder">placeholder</div>
-                                
-                                <input type="checkbox" id="return" name="return-check"/>
-                                <label for="return"><span>Return</span></label>
+                            <div class="row placeholder">placeholder</div>
+                            <div class="row placeholder">placeholder</div>
+
+                            <input type="checkbox" id="return" name="return-check"/>
+                            <label for="return"><span>Return</span></label>
 
                                 
                         </div>

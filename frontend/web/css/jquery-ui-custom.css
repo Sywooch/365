@@ -7,12 +7,17 @@ and open the template in the editor.
     Created on : Jan 8, 2016, 4:20:30 PM
     Author     : Kamran
 */
+#ui-datepicker-div{
+    z-index: 100;
+}
+
 div.ui-datepicker{
      font-size:14px;
      border-bottom-right-radius: 0px;
      border-bottom-left-radius: 0px;
      border-top-left-radius: 0px;
      border-top-right-radius: 0px;
+     
 }
 
 .ui-accordion .ui-accordion-header{

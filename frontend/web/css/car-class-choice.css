@@ -168,6 +168,9 @@ li ul button:hover{
     font-size: 13px;
 }
 
+.daily-rent {
+    font-size: larger;
+}
 
 
 /*media queries. i keep them here because i could not import them from external place*/

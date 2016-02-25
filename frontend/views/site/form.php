@@ -39,14 +39,14 @@ $this->title = 'Order transfer from Airport to Baku, Azerbaijan';
 
 <div class="container" id="parent-container"> <!-- Passenger form container -->
     <div class="row">
-<?php $form = ActiveForm::begin(['method' => 'post', 'id'=>'transfer-form']); ?>
+<?php $form = ActiveForm::begin(['method' => 'post']); ?>
         <div class="col-md-9">
             <div class="cpanel">
                 <div class="cpanel-heading">
 
                     <h4><span id="heading-from"><?= Yii::$app->request->get('Transferorder')['from'] ?></span> <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span> <span id="heading-to"><?= Yii::$app->request->get('Transferorder')['to'] ?></span><br></h4>
                    <?php $jsondata = BaseJson::decode(Yii::$app->request->get('Transferorder')['car'], true) ?>
-                    
+                    <div id='rate' data-rate='<?= $jsondata['rate'] ?>'></div>
 
                 </div>
                 <?php
@@ -77,13 +77,12 @@ $this->title = 'Order transfer from Airport to Baku, Azerbaijan';
                 <div id="toLatLng" data-coords="<?= Yii::$app->request->get('Transferorder')['tplaceid']?>"></div>
                 
                 <?= Html::activeHiddenInput($model, 'fplaceid', ['id'=>'distanceConfirm']) ?>
-                <!-- input to send to confirmation -->
-                <?= Html::activeHiddenInput($model, 'place1', ['class'=>'origin'])?>
-                <?= Html::activeHiddenInput($model, 'place2', ['class'=>'destination'])?>
-                <?= Html::activeHiddenInput($model, 'place3', ['class'=>'waypoint'])?>
-                <?= Html::activeHiddenInput($model, 'place4', ['class'=>'waypoint'])?>
-                <?= Html::activeHiddenInput($model, 'place5', ['class'=>'waypoint'])?>
                 
+                <!-- origin and destination for confirmation map-->
+                <?= Html::activeHiddenInput($model, 'placeStart', ['id'=>'start', 'value'=>''])?> 
+                <?= Html::activeHiddenInput($model, 'placeEnd', ['id'=>'end', 'value'=>''])?>
+                <?= Html::activeHiddenInput($model, 'distance', ['id'=>'distance']) ?>
+                <?= Html::activeHiddenInput($model, 'duration', ['id'=>'duration']) ?>
         
 
                 <div class="cpanel-footer">
@@ -94,7 +93,7 @@ $this->title = 'Order transfer from Airport to Baku, Azerbaijan';
     <?= $this->render('passengerInformation', ['model'=>$model, 'form'=>$form, 'seat'=>'var']); ?>
 
 </div>
-    <div  class="col-md-3">
+    <div id="transfer-fixed-box" class="col-md-3">
         <div id="fixed-box" class="fixed-box">
             <div class="fixed-box-heading">
                 Order information

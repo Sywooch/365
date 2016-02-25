@@ -231,23 +231,7 @@ $(document).ready(function(){
             
     });
     
-    function checkChildSeatBox(){
-       if ($('#childseat').prop('checked')){
-            $('.ui.dropdown.childseat').removeClass('disabled'); 
-            
-        }else{
-            $('.ui.dropdown.childseat').addClass('disabled');
-        } 
-    }
     
-    
-    
-    $('#childseat').on('change', function (){
-        checkChildSeatBox();
-        
-    });
-    
-    checkChildSeatBox();
 
     });
     

@@ -36,18 +36,15 @@ if(isset($_GET['currency'])){
 
  <?php  $say =  count($cats['autos']);?>
             <button class="col-xs-12 car-class-main" name="button" type="button">
+                
 
             <div class="row">
                     <div class="col-sm-3 col-xs-6 col-md-2 car-button-image">
                         <?php if ($cats['name_en'] == 'Suv' || $cats['name_ru'] == 'Сув'): ?>
                             <img src="/uploads/prado.png" />
                         <?php else: ?>
-                            <img src="/uploads/<?=$cats['autos'][$say-1]['photo']?>" />
+                            <img alt="Transfer and chauffeur service in baku <?=$cats['autos'][$say-1]['name']?>" src="/uploads/<?=$cats['autos'][$say-1]['photo']?>" />
                         <?php endif; ?>
-
-                        
-                        
-                            
 
                     </div>
                     <div class="col-sm-2 col-xs-6 col-md-2 car-button-classname">
@@ -65,9 +62,9 @@ if(isset($_GET['currency'])){
                             from <?= $sign[$s]?> <span><?= $cats['autos']['0'][$_GET['request']]*$rate['0'] ?></span>
                         </div>
                         <div class="prices-chauffeur">
-                            <span class="daily-rent"><span id="ch-full-main">Full day (8 hours)</span> </span>from <?= $sign[$s]?> <span><?= $cats['autos']['0'][$_GET['request']]*$rate['0'] ?></span><br>
-                            <span class="half-day"><span id="ch-half-main">Half day (4 hours)</span> </span>from <?= $sign[$s]?>
-                            <span><?=$cats['autos']['0'][$_GET['request']]*$rate['0'] / 2 * 1.2?></span><br>
+                            <span class="daily-rent"><span id="ch-full-main">Full day (8 hours) from </span> </span><?= $sign[$s]?> <span class="pricefull"><?= $cats['autos']['0'][$_GET['request']]*$rate['0'] ?></span><br>
+                            <span class="half-day"><span id="ch-half-main">Half day (4 hours) from </span> </span><?= $sign[$s]?>
+                            <span class="pricehalf"><?= $cats['autos']['0'][$_GET['request']]*$rate['0'] / 2 * 1.2 ?></span><br>
                             
                         </div>
                         <?php 
@@ -103,7 +100,7 @@ if(isset($_GET['currency'])){
                     ?>
                     <?= Html::button($buttonContent,
                         ['name'=>'Transferorder[car]','value'=>['car' => $autos['id'],
-                            'amount' => intval($autos[$_GET['request']]*$rate['0']), 'cent' => $autos['cent']*$rate['0']], 'type' => 'submit','form'=>$_GET['form'], 'class'=>'car-class' ]); ?>
+                            'amount' => intval($autos[$_GET['request']]*$rate['0']), 'cent' => $autos['cent']*$rate['0'], 'rate'=>$rate['0']], 'type' => 'submit','form'=>$_GET['form'], 'class'=>'car-class' ]); ?>
 
 
 

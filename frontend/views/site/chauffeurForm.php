@@ -21,7 +21,11 @@ $jsondata = BaseJson::decode(Yii::$app->request->get('Transferorder')['car'], tr
 ?>
 <!-- Steps -->
 <?php $form = ActiveForm::begin(['method' => 'post']); ?>
+<!-- here we take all the data we need, then we smoke weed, weed, weed...-->
 <div id="car-price" data-price="<?=$jsondata['amount']?>"></div>
+<div id="chaffeur-dest-placeid" data-id="<?= Yii::$app->request->get('Transferorder')['chauffeurDestPlaceId']; ?>"></div>
+<div id="transfer-price" data-price=""></div>
+     
 <div class="container-fluid steps-wrap">
     <div class="row steps">
         <div class="col-xs-4 col-md-4 step step-complete">
@@ -40,6 +44,7 @@ $jsondata = BaseJson::decode(Yii::$app->request->get('Transferorder')['car'], tr
 </div><!--Steps end-->
 
 
+
 <div id="chaffeurForm" class="container">
 <div id="parent-container" class="row">
     <div id="number-of-days" data-days="<?= Yii::$app->request->get('days')?>"></div>
@@ -48,6 +53,7 @@ $jsondata = BaseJson::decode(Yii::$app->request->get('Transferorder')['car'], tr
             <div class="cpanel-heading">
                 <h4><span>Mercedes E-Class</span> <strong>-</strong> Chauffeur service</h4>
             </div>
+            <?= Html::activeHiddenInput($model, 'fplaceid', ['id'=>'distanceConfirm']) ?>
             <div class="cpanel-section">
                 <h3>Departure</h3>
                 <div class="row">
@@ -143,7 +149,7 @@ $jsondata = BaseJson::decode(Yii::$app->request->get('Transferorder')['car'], tr
         <?= $this->render('passengerInformation', ['model'=>$model, 'form'=>$form, 'seat'=> 'yoxdu']); ?>
         
     </div>
-    <div  class="col-xs-3">
+    <div id="chaffeur-fixed-box" class="col-xs-3">
         <div id="fixed-box" class="fixed-box">
             <div class="fixed-box-heading">
                 Order information
@@ -200,7 +206,8 @@ $jsondata = BaseJson::decode(Yii::$app->request->get('Transferorder')['car'], tr
                 </div>
                 <div class="fixed-box-heading">
                     Summary
-                    <div id='fixed-box-price'  class="fixed-box-price">
+                    <div  id="fixed-box-price" data-cent='<?= $jsondata['cent']?>'
+                         data-car-price='<?= $jsondata['amount']?>'>
                             <p id="price"></p>
                     </div>
                 </div>

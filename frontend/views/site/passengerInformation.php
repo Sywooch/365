@@ -101,9 +101,8 @@ use yii\widgets\ActiveForm;
                     <div class="col-md-3">
                         <label for='childseat'>Add child seats
                         <input type="checkbox" id='childseat' class='cpanel-input'/></label>
-                        
-                       
                     </div>
+                   <div class='col-md-1'> + <span id='childseat-price'></span></div>
                </div>
            </div>
         </div>
@@ -115,7 +114,7 @@ use yii\widgets\ActiveForm;
                     <div class="col-md-3">
                         <?=$form->field($model, 'seat')->dropdownList(['1'=>1, '2'=>2, '3'=>3],
                             ['prompt'=>'Amount','id'=>'childseat-amount-dropdown', 'class'=>'ui dropdown childseat']
-                        );?>
+                        )->label(false);?>
 <!--                        <select id="childseat-amount-dropdown" class="ui dropdown childseat">
                           <option value="">Amount</option>
                           <option value="1">1</option>
@@ -123,6 +122,7 @@ use yii\widgets\ActiveForm;
                           <option value="3">3</option>
                         </select>-->
                     </div>
+                   
                </div>
            </div>
         

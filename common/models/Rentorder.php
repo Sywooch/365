@@ -32,6 +32,7 @@ class Rentorder extends \yii\db\ActiveRecord
    // public $enddate;
     public $time_start = array();
     public $time_end;
+    public $fplaceid;
     /**
      * @inheritdoc
      */
@@ -48,7 +49,8 @@ class Rentorder extends \yii\db\ActiveRecord
         return [
             [['pickuptime', 'car', 'amount','date','time'], 'integer'],
             [['created_at', 'updated_at', 'lastname', 'firstname', 'email', 'phone', 'notes', 'from', 'address', 'endtime','time_start','time_end','pickdate'], 'string', 'max' => 45],
-            [['gsign'], 'string', 'max' => 100]
+            [['gsign'], 'string', 'max' => 100],
+            [['fplaceid'], 'string']
         ];
     }
 

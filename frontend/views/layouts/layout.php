@@ -22,7 +22,7 @@ BootstrapDateTimePickerAsset::register($this);
 		<meta name="viewport" content="width=device-width, 
 			initial-scale=1">
                 <title><?= Html::encode($this->title) ?></title>
-                <link rel='shortcut icon' href='uploads/favicon.ico' type='image/x-icon' />
+                <link rel='shortcut icon' href='/uploads/favicon.ico' type='image/x-icon' />
                     <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -86,7 +86,7 @@ BootstrapDateTimePickerAsset::register($this);
                             <input name="currency" type="hidden" value = "">
                             <i class="dropdown icon"></i>
                             <div class="default text">USD</div>
-                            <div class="menu">
+                            <div id="curr-menu" class="menu">
                                <a id='usd' class="item currency-active selected" data-currency ='USD' href="#">USD<?= Icon::show('usd',['class' => ''], Icon::FA); ?></a>
                                <a id='rub' class="item" data-currency ='RUB' href="#">RUB<?= Icon::show('rub',['class' => ''], Icon::FA); ?></a> 
                                <a id='eur' class="item" data-currency ='EUR' href="#">EUR<?= Icon::show('eur',['class' => ''], Icon::FA); ?></a>
@@ -99,8 +99,13 @@ BootstrapDateTimePickerAsset::register($this);
 
                     </div>
 			
-                            
-			</div>
+                        <div id="loader-wrapper">
+			<div id="loader"></div>
+
+			<div class="loader-section section-left"></div>
+            <div class="loader-section section-right"></div>
+
+		</div>
  
 		<?= $content ?>
 
@@ -156,7 +161,7 @@ BootstrapDateTimePickerAsset::register($this);
                         <div class="col-xs-6 col-lg-3 footer-credit-cards">
                             
                         </div>
-                        
+                        <a href="http://www.beyondsecurity.com/vulnerability-scanner-verification/transfer365.az"><img src="https://seal.beyondsecurity.com/verification-images/transfer365.az/vulnerability-scanner-2.gif" alt="Website Security Test" border="0" /></a>
                         
                         
                     </div>
