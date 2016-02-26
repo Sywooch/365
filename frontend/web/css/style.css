@@ -867,9 +867,11 @@ right: 19px;
 }
 
 .online-payment{
-    background: transparent url("images/visa.png") no-repeat scroll -24px -38px;
-    height: 73px;
+        background: transparent url("images/visa1.png") no-repeat scroll 10px -4px;
+        height: 73px;
+        background-size: 82px;
 }
+
 
 .online-payment div{
     margin-left: 108px;
@@ -895,7 +897,7 @@ right: 19px;
 #childseat{
     float: right;
     margin-left: 0px;
-    margin-top: 1px;
+    margin-top: 4px;
     height: 15px;
 }
 

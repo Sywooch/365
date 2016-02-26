@@ -47,6 +47,7 @@ $this->title = 'Order transfer from Airport to Baku, Azerbaijan';
                     <h4><span id="heading-from"><?= Yii::$app->request->get('Transferorder')['from'] ?></span> <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span> <span id="heading-to"><?= Yii::$app->request->get('Transferorder')['to'] ?></span><br></h4>
                    <?php $jsondata = BaseJson::decode(Yii::$app->request->get('Transferorder')['car'], true) ?>
                     <div id='rate' data-rate='<?= $jsondata['rate'] ?>'></div>
+                    <div id='sign' data-sign='<?= $jsondata['sign']?>'></div>
 
                 </div>
                 <?php
@@ -90,7 +91,8 @@ $this->title = 'Order transfer from Airport to Baku, Azerbaijan';
                 </div>
             </div>
 						
-    <?= $this->render('passengerInformation', ['model'=>$model, 'form'=>$form, 'seat'=>'var']); ?>
+    <?= $this->render('passengerInformation', ['model'=>$model, 'form'=>$form,
+        'seat'=>'var', 'sign'=>$jsondata['sign']]); ?>
 
 </div>
     <div id="transfer-fixed-box" class="col-md-3">
@@ -197,7 +199,7 @@ $this->title = 'Order transfer from Airport to Baku, Azerbaijan';
                     Summary
                     <div id='fixed-box-price' data-cent='<?= $jsondata['cent']?>'
                          data-car-price='<?= $jsondata['amount']?>' class="fixed-box-price">
-                            <?= $jsondata['amount'] ?>
+                            <?= $jsondata['amount'] ?> <span><?= $jsondata['sign']?></span>
                     </div>
                 </div>
             </div>
@@ -213,7 +215,7 @@ $this->title = 'Order transfer from Airport to Baku, Azerbaijan';
                 <div class="col-md-2"></div>
                 <div class="col-md-6 button-box">
                     <div class="row">
-                        <div class="col-md-12 button-box-title">Total price <span><?= $jsondata['amount'] ?></span> USD</div>
+                        <div class="col-md-12 button-box-title">Total price <span><?= $jsondata['amount'] ?></span></div>
                     </div>
                     <div class="row">
                         <div class="col-md-12">

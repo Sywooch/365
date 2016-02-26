@@ -56,15 +56,16 @@ if(isset($_GET['currency'])){
                     </div>
 
                     <div data-price="<?= $cats['autos']['0']['priceT']*$rate['0']  ?>" 
+                         data-pricechaffeur="<?= $cats['autos']['0']['priceC'] * $rate['0']?>"
                          data-coefficient="<?= $cats['autos']['0']['cent']*$rate['0']?>"
                          class="col-sm-5 col-xs-12 car-class-min-price">
                         <div class="prices-transfer">
-                            from <?= $sign[$s]?> <span><?= $cats['autos']['0'][$_GET['request']]*$rate['0'] ?></span>
+                            from <?= $sign[$s]?> <span><?= intval($cats['autos']['0'][$_GET['request']]*$rate['0']) ?></span>
                         </div>
                         <div class="prices-chauffeur">
-                            <span class="daily-rent"><span id="ch-full-main">Full day (8 hours) from </span> </span><?= $sign[$s]?> <span class="pricefull"><?= $cats['autos']['0'][$_GET['request']]*$rate['0'] ?></span><br>
+                            <span class="daily-rent"><span id="ch-full-main">Full day (8 hours) from </span> </span><?= $sign[$s]?> <span class="pricefull"><?= intval($cats['autos']['0'][$_GET['request']]*$rate['0']) ?></span><br>
                             <span class="half-day"><span id="ch-half-main">Half day (4 hours) from </span> </span><?= $sign[$s]?>
-                            <span class="pricehalf"><?= $cats['autos']['0'][$_GET['request']]*$rate['0'] / 2 * 1.2 ?></span><br>
+                            <span class="pricehalf"><?= intval($cats['autos']['0'][$_GET['request']]*$rate['0'] / 2 * 1.2) ?></span><br>
                             
                         </div>
                         <?php 
@@ -96,11 +97,19 @@ if(isset($_GET['currency'])){
                 <?php foreach($cats['autos'] as $autos): ?>
                     <?php
                         $buttonContent = $this->context->renderPartial(
-                                'carClassButtonContent', ['autos'=>$autos,'rate'=>$rate, 'sign'=>$sign,'s'=>$s,'ajaxr' => $_GET['request']]);
+                                'carClassButtonContent', ['autos'=>$autos,
+                                    'rate'=>$rate, 
+                                    'sign'=>$sign,'s'=>$s,
+                                    'ajaxr' => $_GET['request']]);
                     ?>
                     <?= Html::button($buttonContent,
                         ['name'=>'Transferorder[car]','value'=>['car' => $autos['id'],
-                            'amount' => intval($autos[$_GET['request']]*$rate['0']), 'cent' => $autos['cent']*$rate['0'], 'rate'=>$rate['0']], 'type' => 'submit','form'=>$_GET['form'], 'class'=>'car-class' ]); ?>
+                            'car-name' => $autos['name'],
+                            'transfer-price' => $autos['priceT'],
+                            'amount' => intval($autos[$_GET['request']] * $rate['0']),
+                            'cent' => $autos['cent'] * $rate['0'], 'rate'=>$rate['0'],
+                            'sign' => $sign[$s]],
+                            'type' => 'submit','form' => $_GET['form'], 'class'=>'car-class' ]); ?>
 
 
 

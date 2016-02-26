@@ -37,7 +37,7 @@ date_default_timezone_set('Asia/Baku');
 <div class="container">
     <div class="row">
         <div class="col-md-2">
-            <div id="googleMap" style="width:600px;height:400px;z-index:9999;margin-top: 25px;"></div>
+            <div id="googleMap" style="width:600px;height:400px;z-index:1;margin-top: 25px;"></div>
         </div>
         <div class="col-md-10">
             <div class="row">
@@ -51,11 +51,11 @@ date_default_timezone_set('Asia/Baku');
                     </div>
                     <div class="row">
                         <h4>Rent starts at:</h4>
-                        <div class="col-md-12"><?=date("Y F d - H:i",$model->pickuptime)?></div>
+                        <div class="col-md-12"><?=date("Y F d",$model->pickuptime)?></div>
                     </div>
                     <div class="row">
                         <h4>Rent ends at:</h4>
-                        <div class="col-md-12"><?=date("Y F d - H:i",$model->endtime)?></div>
+                        <div class="col-md-12"><?=date("Y F d",$model->endtime)?></div>
                     </div>
                     <div class="row">
                         <h4>Car:</h4>
@@ -63,7 +63,8 @@ date_default_timezone_set('Asia/Baku');
                     </div>
                     <div class="row">
                         <h4>Price:</h4>
-                        <div class="col-md-12"><?=$model->amount?></div>
+                        <div class="col-md-12"><?= substr($model->amount, 0, -2) ?> AZN 
+                            <span class='description'>*the price to be paid in online payment system</span></div>
                     </div>
                     <div class="row">
                         <h3>Schedule</h3>

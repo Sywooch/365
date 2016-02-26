@@ -8,7 +8,8 @@ $(window).load(function() {
 
 $(document).ready(function() {    
         $('#currency').dropdown();
-        if(document.getElementById('form') || document.getElementById('corporate') || document.getElementById('confirmation')){
+        if(document.getElementById('form') || document.getElementById('corporate') || document.getElementById('confirmation') || 
+                document.getElementById('chaffeurForm')){
             $('#currency').addClass('disabled')
         }
         

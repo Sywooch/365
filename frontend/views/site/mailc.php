@@ -5,6 +5,7 @@ date_default_timezone_set('Asia/Baku');
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+$amount = substr($model->amount, 0, -2);
 $date = date('d-M-Y H:i', $model->updated_at);
 $datep = date('d-M-Y H:i', $model->pickuptime);
 $datee = date('d-M-Y H:i', $model->endtime);
@@ -27,7 +28,7 @@ $html .= <<<HTML
                                                <td style="border:2px solid">Əlaqə</td><td style="border:2px solid">email: {$model->email}, phone:☏ {$model->phone}</td>
                                             </tr>
                                             <tr>
-                                               <td style="border:2px solid">Ödəniş</td><td style="border:2px solid">{$model->amount}azn</td>   
+                                               <td style="border:2px solid">Ödəniş</td><td style="border:2px solid">{$amount}azn</td>   
                                             </tr>
                                             <tr>
                                                <td style="border:2px solid">Vaxt və ünvan</td><td style="border:2px solid">🕒 {$datep} {$model->from} {$model->address}</td>   

@@ -17,13 +17,13 @@ $this->title = 'Order chaffeured service in Azerbaijan, Baku';
 
 $jsondata = BaseJson::decode(Yii::$app->request->get('Transferorder')['car'], true);
 
-
 ?>
 <!-- Steps -->
 <?php $form = ActiveForm::begin(['method' => 'post']); ?>
 <!-- here we take all the data we need, then we smoke weed, weed, weed...-->
 <div id="car-price" data-price="<?=$jsondata['amount']?>"></div>
 <div id="chaffeur-dest-placeid" data-id="<?= Yii::$app->request->get('Transferorder')['chauffeurDestPlaceId']; ?>"></div>
+
 <div id="transfer-price" data-price=""></div>
      
 <div class="container-fluid steps-wrap">
@@ -51,7 +51,7 @@ $jsondata = BaseJson::decode(Yii::$app->request->get('Transferorder')['car'], tr
     <div class="col-xs-9">
         <div class="cpanel">
             <div class="cpanel-heading">
-                <h4><span>Mercedes E-Class</span> <strong>-</strong> Chauffeur service</h4>
+                <h4><span><?= $jsondata['car-name'] ?></span> <strong>-</strong> Chauffeur service</h4>
             </div>
             <?= Html::activeHiddenInput($model, 'fplaceid', ['id'=>'distanceConfirm']) ?>
             <div class="cpanel-section">
@@ -67,7 +67,8 @@ $jsondata = BaseJson::decode(Yii::$app->request->get('Transferorder')['car'], tr
                                 <?= Html::activeInput('text', $model, 'from', ['class' => 'cpanel-input chaff-pickup-address' ,
                             'autofocus' => 'true', 
                                     'autocomplete'=>'false',
-                                    'placeholder'=>'Baku, Azerbaijan' ,'value' =>Yii::$app->request->get('Rentorder')['from']] ) ?>
+                                    'placeholder'=>'Baku, Azerbaijan' ,'value' =>Yii::$app->request->get('Rentorder')['from'],
+                                    'disabled'=>'true'] ) ?>
                             </div>
                         </div>
                         <div class="row">
@@ -207,7 +208,8 @@ $jsondata = BaseJson::decode(Yii::$app->request->get('Transferorder')['car'], tr
                 <div class="fixed-box-heading">
                     Summary
                     <div  id="fixed-box-price" data-cent='<?= $jsondata['cent']?>'
-                         data-car-price='<?= $jsondata['amount']?>'>
+                         data-car-price='<?= $jsondata['amount']?>'
+                         data-transfer-car-price='<?= $jsondata['transfer-price']?>'>
                             <p id="price"></p>
                     </div>
                 </div>

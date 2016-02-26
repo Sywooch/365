@@ -17,6 +17,7 @@ try{
     var origin = document.getElementById('from').value; 
     var destination = document.getElementById('to').value;
     
+    
     console.log(returnFromIndexState);
 }catch(e){
     console.log(e);
@@ -33,6 +34,8 @@ function Autocomplete(){
     if (document.getElementById('form')){
     var rateDiv = document.getElementById('rate');
     var rate = Number(rateDiv.dataset.rate) * 4;
+    var sign = ' ' + document.getElementById('sign').dataset.sign;
+    console.log(sign)
     
     childseats = Number($('#childseat-amount-dropdown').val());
     childseatsPrice = childseats * rate;
@@ -49,6 +52,7 @@ function Autocomplete(){
         }else{
             $('.ui.dropdown.childseat').addClass('disabled');
             childseatsPrice = 0;
+            $('#childseat-amount-dropdown').val(0);
             console.log($('#childseat-amount-dropdown').val());
         } 
     }
@@ -348,12 +352,22 @@ if(document.getElementById('chaffeurForm')){
     console.log('we are in chauffeur')
     
     var placeidFromInput = $('#chaffeur-dest-placeid').data('id')
-    console.log(placeidFromInput)
+    
+    //these is a stupid hack
+    //when refreshing the page the transfer price recalculates according to
+    //data taken from url. and in url you placeid from location you picker in index
+    //so when you choose another location ib chauffeur and then reload the page
+    //you get price that you received from url
+    //i could not find proper way of preserving the prices, so decided to
+    //put in the input the initial value just to remove inconsistency
+    //just to preserve the logic
+    //so sometimes you play the rules of application :(
+    console.log($('#pickup-address-fixed').text());
+    $('#rentorder-from').val($('#pickup-address-fixed').text().trim());
     
     var origin = {'placeId': 'ChIJ-Rwh1mt9MEARa2zlel5rPzQ'}
     var destination = {'placeId': placeidFromInput}
     
-    console.log(destination)
     route(origin, destination)
     
     var chaffInput = document.querySelector('.chaff-pickup-address')
@@ -364,6 +378,8 @@ if(document.getElementById('chaffeurForm')){
         
         var origin = {'placeId': 'ChIJ-Rwh1mt9MEARa2zlel5rPzQ'}
         var destination = {'placeId': place.place_id}
+        
+        document.getElementById('chaffeur-dest-placeid').dataset.id = place.place_id;
         
         route(origin, destination)
     })
@@ -418,14 +434,12 @@ if(document.getElementById('chaffeurForm')){
       if (status === google.maps.DirectionsStatus.OK) {
         var overallDistance = 0;
         var duration = 0;
-        console.log(response.routes[0]);
+        
         for (var i=0; i<response.routes[0].legs.length; i++){
                 overallDistance += response.routes[0].legs[i].distance.value / 1000;
                  duration += response.routes[0].legs[i].duration.value;
                 
         }
-       
-        console.log(overallDistance); 
         
         $('#distance').val(Math.round(overallDistance))
         $('#duration').val(duration)
@@ -476,22 +490,181 @@ if(document.getElementById('chaffeurForm')){
   }
   
   function updatePriceChaffeurBox(distance){
-      console.log(distance)
       
       var priceInFixedBox = document.getElementById('fixed-box-price');
-      var carPrice = Number(priceInFixedBox.dataset.carPrice);
+      var carPrice = Number(priceInFixedBox.dataset.transferCarPrice);
       var carCent = Number(priceInFixedBox.dataset.cent);
       var transferPrice = Math.round(carCent * (distance - 35) + carPrice);
       
-      console.log(carPrice)
-      console.log(carCent)
-      
-      console.log(transferPrice);
-      
       if (distance > 35) {
-          $('#price').text(transferPrice);
           document.getElementById('transfer-price').dataset.price = transferPrice;
-      };
+      }else if(distance < 35) {
+          document.getElementById('transfer-price').dataset.price = 0;
+      }
+      
+      var transferPrice = Number(document.getElementById('transfer-price').dataset.price);
+      
+      var daily_rent = Number(document.getElementById('car-price').dataset.price); //example
+        
+      $('.full-day > span').text(daily_rent + transferPrice)
+      $('.half-day > span').text(Math.round(daily_rent / 2 * 1.2) + transferPrice)
+      $('.overtime > span').text(Math.round(daily_rent * 0.2))
+      
+      var daysArray = []
+        var pricesArray = []
+        
+        function putDaysToArray(){
+            var days = document.getElementsByClassName('time-control')
+            
+            for (var i = 0; i < days.length; i++){
+               
+               daysArray[i] = days.item(i)
+            }
+        }
+        
+        function calculateAndDisplayPrice(){
+            var displayPrice = 0
+            for (var i = 0; i < pricesArray.length; i++){
+                
+                if (typeof pricesArray[i] != 'undefined'){
+                    displayPrice += pricesArray[i]
+                }
+            }            
+            $('#price').text(Math.round(displayPrice))
+        }
+        
+        function addIndex(){
+            $('.time-control').each(function(index){
+                $(this).find('.time-picker.from').attr('name', 'Rentorder[time_start][' + index + ']')
+                $(this).find('.time-picker.to').attr('name', 'Rentorder[time_end][' + index + ']')
+            })
+        }
+        
+        function calculateHours(start, end, index){
+            console.log('start')
+            console.log(start)
+            console.log('end')
+            console.log(end)
+           
+            var hours = end - start
+           
+            var price;
+            
+            if (hours < 0){
+               hours = 24 - start + end;
+            }
+            
+            console.log('hours')
+            console.log(hours)
+            
+            if (hours > 4 && hours <= 8){
+                price = daily_rent;
+                
+            }if (hours>0 && hours <= 4){
+                price = daily_rent/2 * 1.2;
+                
+            }if (hours > 8){
+                var overtime = hours - 8;
+                price = daily_rent + (daily_rent * 0.2 * overtime);
+                
+            }if(hours == 0){
+                price = 0;
+            }
+            
+            //another hack
+            //without it when just clicking on the time-picker
+            //you get 24 hour rent price on the box
+            if (price == 0) {
+               pricesArray[index] = price 
+            }else {
+               pricesArray[index] = price + transferPrice;
+            }
+           
+            calculateAndDisplayPrice()
+        }
+        
+        function attachEvent(){
+            $('.time-picker.from').on('dp.change', function(e){
+              var fromHour = $(e.target).parents('.time-control').find('.time-picker.to').val()
+              var fromHourSplitted = fromHour.split(':')
+              var fromHourNumbered = Number(fromHourSplitted[0])
+              var dayIndex = daysArray.indexOf(($(e.target).parents('.time-control'))[0])
+              
+              calculateHours(e.date.hour(), fromHourNumbered, dayIndex)
+              
+            })
+            
+            $('.time-picker.to').on('dp.change', function(e){
+              var fromHour = $(e.target).parents('.time-control').find('.time-picker.from').val()
+              var fromHourSplitted = fromHour.split(':')
+              var fromHourNumbered = Number(fromHourSplitted[0])
+              var dayIndex = daysArray.indexOf(($(e.target).parents('.time-control'))[0])
+              
+              calculateHours(fromHourNumbered, e.date.hour(), dayIndex)
+           
+            })
+            
+        }
+        
+        function attachTimePicker(){
+            $('.time-picker').datetimepicker({
+                format: 'HH:mm',
+                stepping:1,
+                useCurrent: true
+            });
+        }
+        $('.ui.dropdown.chauffeurDays').dropdown();
+        attachTimePicker()
+        attachEvent()
+        var days = document.getElementById('days')
+        var anchor = document.getElementById('anchor')
+        
+        $(days).on('change', function(){
+            var items = document.getElementsByClassName('time-control')
+            var alreadyExist = items.length
+            var numToAdd = Number($(this).val()) - alreadyExist
+            addIndex() //this was necessery for server-side calculations
+            while(numToAdd != 0){
+                if (numToAdd < 0){
+                for (var i = alreadyExist - 1; i > (alreadyExist-1) + numToAdd; i--){
+                        anchor.removeChild(items[i])
+                        addIndex()
+                        pricesArray[i]=0;
+//                         $('.time-picker.to').trigger('dp.change');
+                        calculateAndDisplayPrice()
+                        putDaysToArray()
+                        
+                }
+              }else{
+                var item = document.getElementById('clone').cloneNode(true)
+                $(item).find('.time-picker').val('')
+                anchor.appendChild(item)
+                addIndex()
+                putDaysToArray()
+                attachTimePicker()
+                attachEvent()
+                numToAdd--
+              }
+            }
+            if (numToAdd == 0){
+                putDaysToArray()
+                calculateAndDisplayPrice()
+                
+            }
+        })
+        
+     var numberOfDays = Number(document.getElementById('number-of-days').dataset.days)
+     /*this is a fix when not selecting days in index the Node not found error
+      * occured in chaffeur form which caused not working datepicker and telephone*/
+     if (numberOfDays == 0){ //when no days selected in index this value is zero
+        $(days).val(1)  // so when this happens, number of days become 1 by default
+     }else{
+         $(days).val(numberOfDays) //else pass the value that was selected in index
+     }
+     
+     $(days).trigger('change') //have to trigger this initially 
+    
+
   }
   
   //function updates summary price in right fixed box
@@ -509,12 +682,9 @@ if(document.getElementById('chaffeurForm')){
       
       var carPrice = Number(priceInFixedBox.dataset.carPrice);
       var carCent = Number(priceInFixedBox.dataset.cent);
-//      console.log('childseat price')
-//      console.log(4 * Number(priceInFixedBox.dataset.cent))
-//      console.log('cent')
-//      console.log(Number(priceInFixedBox.dataset.cent))
+
       if (distance == 0 || distance <= 35) {
-            priceInFixedBox.innerHTML = Number(carPrice) * returnState + childseatsPrice;
+            priceInFixedBox.innerHTML = Number(carPrice) * returnState + childseatsPrice + sign;
           
           buttonBoxBottomSpan.text(priceInFixedBox.innerHTML);
           return;
@@ -522,7 +692,7 @@ if(document.getElementById('chaffeurForm')){
  
       var updatedPrice = Math.round(carCent * (distance - 35) + carPrice) * returnState;
       
-      priceInFixedBox.innerHTML = updatedPrice + childseatsPrice;
+      priceInFixedBox.innerHTML = updatedPrice + childseatsPrice + sign;
       buttonBoxBottomSpan.text(priceInFixedBox.innerHTML);
 
   };
@@ -535,19 +705,32 @@ if(document.getElementById('chaffeurForm')){
       for (var i = 0; i < carClassArray.length; i++){
           
             var oldCarClassPrice = carClassArray[i].dataset.price; //array of car class prices
-            
+            var oldCarClassPriceC = carClassArray[i].dataset.pricechaffeur;
             //if there is no distance or it is less than 35km then price should stay the same
             // only return updates the price in this case. 
             if (kilometers == 0 || kilometers < 35){ //kilometers is global parameter
                 newCarClassPrice = Number(oldCarClassPrice)*returnState;
+                var newCarClassPriceChaffeur = Number(oldCarClassPriceC);
+                
+                
                 
                 $(carClassArray[i]).find('.prices-transfer > span').text( Math.round(newCarClassPrice)); //update car class price
+                $(carClassArray[i]).find('.prices-chauffeur > .pricefull').
+                        text( Math.round(newCarClassPriceChaffeur));
+                $(carClassArray[i]).find('.prices-chauffeur > .pricehalf').
+                        text( Math.round(newCarClassPriceChaffeur / 2 * 1.2));
                
-                for (var j = 0; j < carSpecificArray.length; j++){
+                for (var j = 0; j < carSpecificArray.length; j++) {
                     var priceClass =  Number(carSpecificArray[j].dataset.price) * returnState;
                     var newSpecificPrice = Math.round(priceClass);
-                        $(carSpecificArray[j]).find('.prices-transfer > span').text(newSpecificPrice); //update specific price
-                            
+                    
+                    var priceSpecificChaffeur = Number(carSpecificArray[j].dataset.pricechaffeur)
+                    
+                    $(carSpecificArray[j]).find('.prices-transfer > span').text(Math.round(newSpecificPrice)); //update specific price
+                    $(carSpecificArray[j]).find('.prices-chauffeur > .pricefull-sp').
+                        text( Math.round(priceSpecificChaffeur));
+                    $(carSpecificArray[j]).find('.prices-chauffeur > .pricehalf-sp').
+                        text( Math.round(priceSpecificChaffeur / 2 * 1.2));        
                 };
                 
             }       
@@ -555,9 +738,7 @@ if(document.getElementById('chaffeurForm')){
             //koeff * (distance - 35)+
             
             if (kilometers >= 35 ){
-                var chaffeurDailyRentPrice = Number($(carClassArray[i]).find('.prices-chauffeur > .pricefull').text())
-                var chaffeurHalfDayRentPrice = Number($(carClassArray[i]).find('.prices-chauffeur > .pricehalf').text())
-                
+
                 var s = (kilometers - 35); //normalized distance
              
                 var priceClass = (carClassArray[i].dataset.coefficient*s +
@@ -567,35 +748,39 @@ if(document.getElementById('chaffeurForm')){
                         Number(oldCarClassPrice);
                 
 //                console.log(chaffeurPriceClass);
-
                 newCarClassPrice = priceClass;
                 
                 //here prices displayed on buttons are being updated
                 $(carClassArray[i]).find('.prices-transfer > span').text(Math.round(newCarClassPrice));
                 $(carClassArray[i]).find('.prices-chauffeur > .pricefull').
-                        text(Math.round(chaffeurPriceClass + chaffeurDailyRentPrice))
+                        text(Math.round(chaffeurPriceClass) + Number(carClassArray[i].dataset.pricechaffeur));
                 $(carClassArray[i]).find('.prices-chauffeur > .pricehalf').
-                        text(Math.round(chaffeurPriceClass + chaffeurHalfDayRentPrice))
+                        text(Math.round(chaffeurPriceClass) + (carClassArray[i].dataset.pricechaffeur / 2 * 1.2));
 
                 for (var j = 0; j < carSpecificArray.length; j++){
+                    
                     
                     var kSpecific = carSpecificArray[j].dataset.coefficient; //car coefficient
                     
                     var priceSpecific = Math.round((kSpecific*s + 
                             Number(carSpecificArray[j].dataset.price)) * returnState);
                     
-                    console.log(kSpecific)
-                    console.log(s)
-                    console.log(carSpecificArray[j].dataset.price)
+//                    console.log(kSpecific)
+//                    console.log(s)
+//                    console.log(carSpecificArray[j].dataset.price)
                     
-                    var chaffeurPriceSpecific = kSpecific*s + 
-                            Number(carSpecificArray[j].dataset.price)
-                    
+                    var chaffeurPriceSpecific = Math.round(kSpecific*s + 
+                            Number(carSpecificArray[j].dataset.price))
+//                    console.log(i, j)
+//                    console.log(chaffeurPriceSpecific);
 
                     var newSpecificPrice = priceSpecific;
  
-                    $(carSpecificArray[j]).find('.prices-transfer > span').text(newSpecificPrice);
- 
+                    $(carSpecificArray[j]).find('.prices-transfer > span').text(Math.round(newSpecificPrice));
+                    $(carSpecificArray[j]).find('.prices-chauffeur > .pricefull-sp').
+                        text(Math.round(chaffeurPriceSpecific) + Number(carSpecificArray[j].dataset.pricechaffeur));
+                    $(carSpecificArray[j]).find('.prices-chauffeur > .pricehalf-sp').
+                        text(Math.round(chaffeurPriceSpecific) + Number(carSpecificArray[j].dataset.pricechaffeur / 2 * 1.2));
                 };
                 
             }

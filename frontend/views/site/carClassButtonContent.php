@@ -14,7 +14,9 @@ use kartik\icons\Icon;
     <div class="col-sm-3 col-xs-4 col-md-3 car-features">
         <img alt="free wifi baku" src="uploads/wifi2.png" />
     </div>
-    <div data-price="<?= intval($autos['priceT']*$rate['0']) ?>" data-coefficient='<?= $autos['cent']*$rate['0']?>' 
+    <div data-price="<?= intval($autos['priceT']*$rate['0']) ?>" 
+         data-coefficient='<?= $autos['cent']*$rate['0']?>' 
+         data-pricechaffeur='<?= intval($autos['priceC'] * $rate['0'])?>'
          class="col-sm-4 col-xs-12 col-md-3 car-price">
         
         <div class="prices-transfer">from <?=$sign[$s]?> <span><?=Html::encode(intval($autos['priceT']*$rate['0']))?></span></div>

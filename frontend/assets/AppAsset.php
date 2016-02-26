@@ -36,7 +36,7 @@ class AppAsset extends AssetBundle
         'scripts/birthdayPicker.js',
         'scripts/script.js',
         
-        'https://maps.googleapis.com/maps/api/js?key=AIzaSyBB19cyGLWQeSz1amgo9wJN6ZeXlQtHZCU&signed_in=true&libraries=places&callback=Autocomplete&language=en',
+        'https://maps.googleapis.com/maps/api/js?key=AIzaSyBB19cyGLWQeSz1amgo9wJN6ZeXlQtHZCU&signed_in=true&libraries=places&callback=Autocomplete&language=en'
         
     ];
      public $depends = [

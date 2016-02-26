@@ -295,7 +295,8 @@ class SiteController extends Controller
                     
                 }
                 if($model->seat > 0){
-                    $model->amount = $model->amount+(4*$rate);
+                    
+                    $model->amount = $model->amount+($model->seat*4*$rate);
                 }
                 $model->amount = intval($model->amount).$z.$z;
             }else{
@@ -304,7 +305,7 @@ class SiteController extends Controller
                     $model->amount = $model->amount*2;
                 }
                 if($model->seat > 0){
-                    $model->amount = $model->amount+(4*$rate);
+                    $model->amount = $model->amount+($model->seat*4*$rate);
                 }
                 
                 
@@ -414,6 +415,7 @@ echo $model->amount.'<br>';
                     $qiymet = $amount['cent']*$rate*($kmsums-35)+$amount['priceT']*$rate;               
                     $qiymet = intval($qiymet);
                 }
+                
                
                 if($model->validate()){
                 $model->save();
@@ -432,7 +434,7 @@ echo $model->amount.'<br>';
                 }
                 $z = 0;
                 $model->amount=intval($amountC*$rate);
-                if($qiymet != null){
+                if($kmsums > 35){
                     $model->amount = $model->amount+$qiymet;
                 }
                 $model->amount = $model->amount.$z.$z;
@@ -547,7 +549,8 @@ if ($request->isAjax) {
             return $this->redirect('https://test.millikart.az:7444/gateway/payment/register?' . http_build_query(['mid' => $mid,'amount' => $amount, 'currency' => $currency, 'description' => $description, 'reference'=>$model->reference,'language'=>$language,'signature'=>$signature,'redirect'=>1]));
              //return $this->redirect('https://pay.millikart.az/gateway/payment/register?' . http_build_query(['mid' => $mid,'amount' => $amount, 'currency' => $currency, 'description' => $description, 'reference'=>$model->reference,'language'=>$language,'signature'=>$signature,'redirect'=>1]));
         }
-
+        
+        
         public function actionSummary(){
             $modelsave = new Transferorder();
             $reference = Yii::$app->request->get('reference');
@@ -572,7 +575,7 @@ if ($request->isAjax) {
             }
             //model asaqi dusur xml datadan description yoxlanilir eger shoferdirse shofer model caqirilir yada eksine transfer.
             if($model->status == null){
-                if($xml->RC == 000){
+                if($xml->RC == 000 and $xml->code == 0){
                     $model->status = '000';
                     $model->save(false);
                     if($xml->$a == 'transfer'){
@@ -580,6 +583,7 @@ if ($request->isAjax) {
                     }elseif($xml->$a == 'ch'){
                         require(__DIR__ . '/../views/site/mailc.php');
                     }
+                    $rrn = $xml->rrn;
                                      $email = \Yii::$app->mailer->compose()
                                     ->setFrom('support@transfer365.az')
                                     ->setTo(['support@transfer365.az','t4lex999@gmail.com','eldaraliyev93@gmail.com'])   
@@ -593,7 +597,7 @@ if ($request->isAjax) {
                                     ->setSubject('Your Order')
                                     ->setHtmlBody($html)
                                     ->send();
-                    $this->render('summary');
+                   return $this->render('summary');
                 }elseif($xml->RC == 101 ){
                     $model->status = $xml['RC'];
                     $model->save();

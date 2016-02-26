@@ -138,7 +138,8 @@
     }
     
     #add{
-        width: 80%;
+        width: 70%;
+        padding: 0px;
     }
     
     #flight-number, #date-pickup-citytocity, #date-pickup{
