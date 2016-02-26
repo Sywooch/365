@@ -47,7 +47,7 @@
         </div>
         
         <div class="row">
-            <div class="col-md-3"></div>
+            <div class="col-xs-12 col-md-3"></div>
             <div class="col-xs-12 col-md-5 location-input">
                 <div class="inner-addon">
                     <span><?= Icon::show('home', ['class'=>'fa-2x'], Icon::FA);?></span>
@@ -56,7 +56,7 @@
                 </div>
                 
             </div>
-            <div class="col-md-4">
+            <div class="col-xs-12 col-md-4">
                 <p class="description"> If you don't know the exact address, leave the field empty </p>
             </div>
         </div>
@@ -80,7 +80,7 @@
         </div>
 
         <div class="row">
-            <div class="col-md-3"></div>
+            <div class="col-xs-12 col-md-3"></div>
         <div class="col-xs-12 col-md-5 location">
             <div class="inner-addon">
                 <span><?= Icon::show('home', ['class'=>'fa-2x'], Icon::FA);?></span>
@@ -88,7 +88,7 @@
                     'class' => 'cpanel-input' ,'placeholder' => 'Specify address (i.e str, house etc.)'])->label(false) ?>
             </div>
         </div>
-        <div class="col-md-4">
+        <div class="col-xs-12 col-md-4">
             <p class="description"> If you don't know the exact address, leave the field empty </p>
         </div>
         </div>

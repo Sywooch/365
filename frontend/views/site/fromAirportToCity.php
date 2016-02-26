@@ -30,22 +30,22 @@
     <div class="row">
         <div class="row cpanel-item">
             
-                <div class="col-md-3">
+                <div class="col-xs-12 col-md-3">
                         <label for="date-arrival">Arrival time</label>
                 </div>
-                <div class="col-md-3">
+                <div class="col-xs-12 col-md-3">
                     <?= $form->field($model, 'date')->textInput(['id' => 
                         'date-arrival', 'class' => 'cpanel-input date-picker' ,
                         'autocomplete'=>'false',
                         'placeholder' => 'dd/mm/yy'])->label(false) ?>
                 </div>
-                <div class="col-md-2">     
+                <div class="col-xs-12 col-md-2">     
                     <?= $form->field($model, 'time')->textInput(['id' => 
                         'time-arrival', 'class' => 'cpanel-input time-picker' ,
                         'autocomplete'=>'false',
                         'placeholder' => 'HH:mm'])->label(false) ?>
                 </div>
-                <div class="col-md-3">
+                <div class="col-xs-12 col-md-3">
                     <div class="description">
                         local time
                     </div>
@@ -62,15 +62,15 @@
         <?= $form->field($model, 'from')->HiddenInput(['id'=>'from', 'class'=>'add-dest-address'
             ,'value' => Yii::$app->request->get('Transferorder')['from']])->label(false) ?>
         <div class="row">
-            <div class="col-md-3">
+            <div class="col-xs-12 col-md-3">
                 <label for="specify-address">Destination address</label>
             </div>
-            <div class="col-md-9 location"><?= Yii::$app->request->get('Transferorder')['to']?></div>
+            <div class="col-xs-12 col-md-9 location"><?= Yii::$app->request->get('Transferorder')['to']?></div>
         </div>
         
         <div class="row">
-            <div class="col-md-3"></div>
-            <div class="col-md-5 location-input">
+            <div class="col-xs-12 col-md-3"></div>
+            <div class="col-xs-12 col-md-5 location-input">
                 <div class="inner-addon">
                     <span><?= Icon::show('home', ['class'=>'fa-2x'], Icon::FA);?></span>
                     <?= $form->field($model, 'address')->textInput(['id' => 'specify-address', 

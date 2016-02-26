@@ -288,7 +288,7 @@ ul:first-child {
 /* passenger form*/
 #destination-in-form{
     /*padding-top: 8px;*/
-    height: 42px;
+    height: 100%;
     font-size: 16px;
 }
 
@@ -346,7 +346,7 @@ ul:first-child {
 }
 
 .cpanel-section label{
-	float:right;
+	float:left;
 }
 
 .cpanel-footer {
@@ -968,7 +968,7 @@ right: 19px;
     background: -webkit-linear-gradient(left,  #6d0019 35%,#4d0026 90%); /* Chrome10-25,Safari5.1-6 */
     background: linear-gradient(to right,  #6d0019 35%,#4d0026 90%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#6d0019', endColorstr='#4d0026',GradientType=1 ); /* IE6-9 */
-    color: #fff;
+    color: #fff !important;
     box-shadow: -16px 16px 8px -6px #e4e6e2;
 }
 

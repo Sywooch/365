@@ -43,7 +43,7 @@
             </div> 
         </div>
         <div class="row">
-            <div class="col-md-3"></div>
+            <div class="col-xs-12 col-md-3"></div>
             <div class="col-xs-12 col-md-5 location-input" style="margin-bottom: 4px;">
                 <div class="inner-addon">
                     <span><?= Icon::show('home', ['class'=>'fa-2x'], Icon::FA);?></span>
@@ -52,7 +52,7 @@
                         'pickup-address', 'class' => 'cpanel-input' ,'placeholder' => 'Specify address (i.e str, house etc.)'])->label(false) ?>
                 </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-xs-12 col-md-4">
                 <p class="description"> If you don't know the exact address, leave the field empty </p>
             </div>
         </div>
@@ -69,12 +69,12 @@
                 <?= $form->field($model, 'from')->HiddenInput(['id'=>'from','value' => Yii::$app->request->get('Transferorder')['from']])->label(false) ?>
                 <?= $form->field($model, 'to')->HiddenInput(['id'=>'to','value' => Yii::$app->request->get('Transferorder')['to']])->label(false) ?>
 
-                <div id="destination-in-form"><?= Yii::$app->request->get("Transferorder")["to"]; ?></div>
+                <div class="col-xs-12" id="destination-in-form"><?= Yii::$app->request->get("Transferorder")["to"]; ?></div>
             </div>
             
         </div>
         <div class="row">
-            <div class="col-md-3"></div>
+            <div class="col-xs-12 col-md-3"></div>
             <div class="col-xs-12 col-md-5 location-input" style="margin-bottom: 4px;">
                 <div class="inner-addon">
                     <span><?= Icon::show('home', ['class'=>'fa-2x'], Icon::FA);?></span>
@@ -83,7 +83,7 @@
                         'pickup-address', 'class' => 'cpanel-input' ,'placeholder' => 'Specify address (i.e str, house etc.)'])->label(false) ?>
                 </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-xs-12 col-md-4">
                 <p class="description"> If you don't know the exact address, leave the field empty </p>
             </div>
         </div>
