@@ -48,7 +48,7 @@ $jsondata = BaseJson::decode(Yii::$app->request->get('Transferorder')['car'], tr
 <div id="chaffeurForm" class="container">
 <div id="parent-container" class="row">
     <div id="number-of-days" data-days="<?= Yii::$app->request->get('days')?>"></div>
-    <div class="col-xs-9">
+    <div class="col-xs-12 col-md-9">
         <div class="cpanel">
             <div class="cpanel-heading">
                 <h4><span><?= $jsondata['car-name'] ?></span> <strong>-</strong> Chauffeur service</h4>
@@ -69,6 +69,9 @@ $jsondata = BaseJson::decode(Yii::$app->request->get('Transferorder')['car'], tr
                                     'autocomplete'=>'false',
                                     'placeholder'=>'Baku, Azerbaijan' ,'value' =>Yii::$app->request->get('Rentorder')['from'],
                                     'disabled'=>'true'] ) ?>
+                                
+                                <?= Html::activeHiddenInput($model, 'from', 
+                                ['value' => Yii::$app->request->get('Rentorder')['from']]) ?>
                             </div>
                         </div>
                         <div class="row">
@@ -150,7 +153,7 @@ $jsondata = BaseJson::decode(Yii::$app->request->get('Transferorder')['car'], tr
         <?= $this->render('passengerInformation', ['model'=>$model, 'form'=>$form, 'seat'=> 'yoxdu']); ?>
         
     </div>
-    <div id="chaffeur-fixed-box" class="col-xs-3">
+    <div id="chaffeur-fixed-box" class="col-md-3">
         <div id="fixed-box" class="fixed-box">
             <div class="fixed-box-heading">
                 Order information
