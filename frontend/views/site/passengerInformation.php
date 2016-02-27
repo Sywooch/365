@@ -98,20 +98,20 @@ use yii\widgets\ActiveForm;
         <div class="row">
            <div class="cpanel-item">
                <div class="row">
-                    <div class="col-md-3">
+                    <div class="col-xs-12 col-md-3">
                         <label for='childseat'>Add child seats
                         <input type="checkbox" id='childseat' class='cpanel-input'/></label>
                     </div>
-                   <div class='col-md-2'> + <span id='childseat-price'></span> <?= $sign ?> each</div>
+                   <div class='col-xs-12 col-md-2'> + <span id='childseat-price'></span> <?= $sign ?> each</div>
                </div>
            </div>
         </div>
            
            <div class="row">
                <div class="cpanel-item">
-                   <div class="col-md-1"></div>
-                   <div class="col-md-1 description-childseat-panel">Chair<br>9-18kg</div>
-                    <div class="col-md-3">
+                   <div class="col-xs-12 col-md-1"></div>
+                   <div class="col-xs-12 col-md-1 description-childseat-panel">Chair<br>9-18kg</div>
+                    <div class="col-xs-12 col-md-3">
                         <?=$form->field($model, 'seat')->dropdownList(['1'=>1, '2'=>2, '3'=>3],
                             ['prompt'=>'Amount','id'=>'childseat-amount-dropdown', 'class'=>'ui dropdown childseat']
                         )->label(false);?>
@@ -137,9 +137,9 @@ use yii\widgets\ActiveForm;
         <div class="row">
            <div class="cpanel-item"></div>
        </div>
-        <div class="row">
+<!--        <div class="row">
            <div class="cpanel-item"></div>
-       </div>
+       </div>-->
 
         <div class="row">
             <div class="cpanel-item">

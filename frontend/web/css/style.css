@@ -851,9 +851,9 @@ input[type=checkbox]{
 .greeting{
     
    width: 87%;
-position: absolute;
-bottom: -29px;
-right: 19px;
+    position: absolute;
+    bottom: -29px;
+    right: 19px;
 }
 
 #greeting-sign{
@@ -867,9 +867,9 @@ right: 19px;
 }
 
 .online-payment{
-        background: transparent url("images/visa1.png") no-repeat scroll 10px -4px;
-        height: 73px;
-        background-size: 82px;
+    background: transparent url("images/visa1.png") no-repeat scroll 10px -4px;
+    height: 73px;
+    background-size: 82px;
 }
 
 
@@ -976,5 +976,9 @@ right: 19px;
 
 #driver-bday .menu {
     z-index: 9999;
+}
+
+#greeting-row {
+    display: none;
 }
 
