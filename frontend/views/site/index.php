@@ -14,14 +14,14 @@ $this->title = 'Transfer365 - Transfer service in Azerbaijan';
 <div class="container-fluid steps-wrap">
     <div class="row steps">
         <div class="col-xs-4 col-md-4 step step-active">
-            <span id="step1">Destination</span>
+            <span id="step1"><?=Yii::t('yii', 'Destination')?></span>
         </div>
         <div class="col-xs-4 col-md-4 step step-inactive">
-            <span id="step2">Passenger information</span>
+            <span id="step2"><?=Yii::t('yii', 'Passenger information')?></span>
             <div class="rounded-border"></div>
         </div>
         <div class=" col-xs-4 col-md-4 step step-inactive">
-        <span id="step3">Confirmation</span>
+        <span id="step3"><?=Yii::t('yii', 'Confirmation')?></span>
         <div class="rounded-border"></div>
         </div>
     </div>
@@ -43,7 +43,7 @@ $this->title = 'Transfer365 - Transfer service in Azerbaijan';
             <div>
                 <label for="transfer-radio">
                     <input id="transfer-radio" class='transfer-active' type="radio"  data-priceajax = 'priceT'  name="service" checked=true />
-                    Transfer
+                    <?=Yii::t('yii', 'Transfer')?>
                 </label>
             </div>
         </div>
@@ -52,7 +52,7 @@ $this->title = 'Transfer365 - Transfer service in Azerbaijan';
         <div class="col-md-12">
             <label for="chaffeur-radio">
                 <input id="chaffeur-radio" type="radio" data-priceajax = 'priceC' name="service" />
-                Chaffeur Service
+                <?=Yii::t('yii', 'Chauffeur service')?>
             </label>
         </div>
     </div>
@@ -64,36 +64,36 @@ $this->title = 'Transfer365 - Transfer service in Azerbaijan';
                     <div class="chaffeur" id="chaffeur">
                         <div id="input-from-chaffeur" class="col-md-4">
                             <label for="from">
-                            <span>From</span>
+                            <span><?=Yii::t('yii', 'From')?></span>
                                    <?= Html::activeInput('text', $rentmodel, 'from', ['id'=>"pac-input-from-chaffeur",'class' => 'controls chaff-pickup-address' ,
-            'autofocus' => 'true', 'placeholder'=>'Baku, Azerbaijan']) ?>
+            'autofocus' => 'true', 'placeholder'=>Yii::t('yii', 'Baku, Azerbaijan')]) ?>
                             <?= Html::activeHiddenInput($model, 'chauffeurDestPlaceId', ['id'=>'chaffeur-dest-placeid']) ?>
                             </label>
                         </div>
                         <div id="input-date-chaffeur" class="col-md-4">
                             <label for="chaffeur-time-from">
-                                <span>Date</span> 
+                                <span><?=Yii::t('yii', 'Date')?></span> 
                                   
                                     
-                                    <?= Html::activeInput('text', $rentmodel, 'pickdate', ['class' => 'chauffeur-datepicker' ,'id'=>'chaffeur-time-from' ,'placeholder' => 'dd/mm/yy']) ?>
+                                    <?= Html::activeInput('text', $rentmodel, 'pickdate', ['class' => 'chauffeur-datepicker' ,'id'=>'chaffeur-time-from' ,'placeholder' => Yii::t("yii","dd/mm/yy")]) ?>
                             </label>
                         </div>
                         <div id="input-days-chaffeur" class="col-md-2">
                             <div class="ui selection dropdown chauffeurDays">
                                 <input id="days" name="days" type="hidden">
                                     <i class="dropdown icon"></i>
-                                    <div class="default text">Days</div>
+                                    <div class="default text"><?=Yii::t('yii', 'Days')?></div>
                                     <div class="menu">
-                                      <div class="item" data-value="1">1 day</div>
-                                      <div class="item" data-value="2">2 days</div>
-                                      <div class="item" data-value="3">3 days</div>
-                                      <div class="item" data-value="4">4 days</div>
-                                      <div class="item" data-value="5">5 days</div>
-                                      <div class="item" data-value="6">6 days</div>
-                                      <div class="item" data-value="7">7 days</div>
-                                      <div class="item" data-value="8">8 days</div>
-                                      <div class="item" data-value="9">9 days</div>
-                                      <div class="item" data-value="10">10 days</div>
+                                      <div class="item" data-value="1">1 <?=Yii::t('yii', 'Days')?></div>
+                                      <div class="item" data-value="2">2 <?=Yii::t('yii', 'Days')?></div>
+                                      <div class="item" data-value="3">3 <?=Yii::t('yii', 'Days')?></div>
+                                      <div class="item" data-value="4">4 <?=Yii::t('yii', 'Days')?></div>
+                                      <div class="item" data-value="5">5 <?=Yii::t('yii', 'Days')?></div>
+                                      <div class="item" data-value="6">6 <?=Yii::t('yii', 'Days')?></div>
+                                      <div class="item" data-value="7">7 <?=Yii::t('yii', 'Days')?></div>
+                                      <div class="item" data-value="8">8 <?=Yii::t('yii', 'Days')?></div>
+                                      <div class="item" data-value="9">9 <?=Yii::t('yii', 'Days')?></div>
+                                      <div class="item" data-value="10">10 <?=Yii::t('yii', 'Days')?></div>
                                     </div>
                               </div>
                         </div>
@@ -102,11 +102,11 @@ $this->title = 'Transfer365 - Transfer service in Azerbaijan';
 <?= Html::beginForm(['site/form'], 'get', ['enctype' => 'multipart/form-data', 'id'=>'tform']) ?>
                         <div class="transfer" id="transfer">
     <div class="col-xs-12 col-md-4 input-from">
-    <label for="from"><span>From</span></label>
+    <label for="from"><span><?=Yii::t('yii', 'From')?></span></label>
 
 
         <?= Html::activeInput('text', $model, 'from', ['id'=>'from' ,'class' => 'controls add-dest-address' ,
-            'autofocus' => 'true', 'placeholder'=>'Heydar Aliyev International Airport (Terminal 1), Azerbaijan']) ?>
+            'autofocus' => 'true', 'placeholder'=>Yii::t('yii', 'Heydar Aliyev International Airport (Terminal 1), Azerbaijan')]) ?>
         <?= Html::activeHiddenInput($model, 'fplaceid', ['id'=>'fromLatLng']) ?>
         <?= Html::activeHiddenInput($model, 'tplaceid', ['id'=>'toLatLng']) ?>
 
@@ -115,20 +115,20 @@ $this->title = 'Transfer365 - Transfer service in Azerbaijan';
                                 <span id="swap-icon"><img src="/uploads/Flat.png"</span>
                         </div>
     <div class="col-xs-12 col-md-4 input-to">
-            <label for="to"><span>To</span></label>
+            <label for="to"><span><?=Yii::t('yii', 'To')?></span></label>
 
 
     <?= Html::activeInput('text', $model, 'to', ['id'=>'to','class' => 'controls add-dest-address' ,
-         'disabled' => false, 'placeholder'=>'Baku, Azerbaijan']) ?>
+         'disabled' => false, 'placeholder'=>Yii::t('yii', 'Baku, Azerbaijan')]) ?>
 
 
                         </div>
                         <div class="col-md-3">
-                            <div class="row placeholder">placeholder</div>
-                            <div class="row placeholder">placeholder</div>
-
-                            <input type="checkbox" id="return" name="return-check"/>
-                            <label for="return"><span>Return</span></label>
+                                <div class="row placeholder">placeholder</div>
+                                <div class="row placeholder">placeholder</div>
+                                
+                                <input type="checkbox" id="return" name="return-check"/>
+                                <label for="return"><span><?=Yii::t('yii', 'Return')?></span></label>
 
                                 
                         </div>

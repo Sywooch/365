@@ -12,15 +12,15 @@ use yii\widgets\ActiveForm;
 ?>
 <div class="cpanel">
     <div class="cpanel-heading">
-        <h4>Passengers data</h4>
+        <h4><?= Yii::t('yii', 'Passengers data') ?></h4>
     </div>
         
                 <div class="cpanel-section">
                 <div class="row">
                     <div class="cpanel-item">
-                        <div class="col-md-2">
+                        <div class="col-md-3">
                             <label for="pass-name">
-                                    First name
+                                    <?= Yii::t('yii', 'First name')?>
                             </label>
                         </div>
                         <div class="col-md-4">
@@ -35,9 +35,9 @@ use yii\widgets\ActiveForm;
                 </div>
                 <div class="row">
                     <div class="cpanel-item">
-                        <div class="col-md-2">
+                        <div class="col-md-3">
                                 <label for="pass-lastname">
-                                        Last name
+                                        <?= Yii::t('yii', 'Surname')?>
                                 </label>
                         </div>
                         <div class="col-md-4">
@@ -53,9 +53,9 @@ use yii\widgets\ActiveForm;
                 </div>
                 <div class="row">
                         <div class="cpanel-item">
-                                <div class="col-md-2">
+                                <div class="col-md-3">
                                         <label for="phone-number">
-                                                Phone number
+                                            <?= Yii::t('yii', 'Phone number')?>
                                         </label>
                                 </div>
                                 <div class="col-md-4">
@@ -67,9 +67,9 @@ use yii\widgets\ActiveForm;
                 </div>
                 <div class="row">
                         <div class="cpanel-item">
-                                <div class="col-md-2">
+                                <div class="col-md-3">
                                         <label for="email">
-                                                E-mail address
+                                            <?= Yii::t('yii', 'Email address')?>
                                         </label>
                                 </div>
                                 <div class="col-md-4">
@@ -98,25 +98,31 @@ use yii\widgets\ActiveForm;
         <div class="row">
            <div class="cpanel-item">
                <div class="row">
-                    <div class="col-xs-12 col-md-3">
-                        <label for='childseat'>Add child seats
+                    <div class="col-md-4">
+                        <label for='childseat'><?= Yii::t('yii', 'Add child seats')?>
                         <input type="checkbox" id='childseat' class='cpanel-input'/></label>
+                        
+                       
                     </div>
-                   <div class='col-xs-12 col-md-2'> + <span id='childseat-price'></span> <?= $sign ?> each</div>
+                   <div class='col-md-2'> + <span id='childseat-price'></span> <?= $sign ?> <?=Yii::t('yii', 'each')?></div>
                </div>
            </div>
         </div>
            
            <div class="row">
                <div class="cpanel-item">
-                   <div class="col-xs-12 col-md-1"></div>
-                   <div class="col-xs-12 col-md-1 description-childseat-panel">Chair<br>9-18kg</div>
-                    <div class="col-xs-12 col-md-3">
+                   <div class="col-md-2 description-childseat-panel"><?= Yii::t('yii', 'Chair') ?><br><?= Yii::t('yii','9-18kg') ?></div>
+                    <div class="col-md-3">
                         <?=$form->field($model, 'seat')->dropdownList(['1'=>1, '2'=>2, '3'=>3],
-                            ['prompt'=>'Amount','id'=>'childseat-amount-dropdown', 'class'=>'ui dropdown childseat']
+                            ['prompt'=>Yii::t('yii', 'Amount'),'id'=>'childseat-amount-dropdown', 'class'=>'ui dropdown childseat']
                         )->label(false);?>
+<!--                        <select id="childseat-amount-dropdown" class="ui dropdown childseat">
+                          <option value="">Amount</option>
+                          <option value="1">1</option>
+                          <option value="2">2</option>
+                          <option value="3">3</option>
+                        </select>-->
                     </div>
-                   
                </div>
            </div>
         
@@ -130,6 +136,7 @@ use yii\widgets\ActiveForm;
                 
             </div>
         </div>
+        
                 <?php endif ?>   
        <div class="row">
            <div class="cpanel-item"></div>
@@ -137,30 +144,30 @@ use yii\widgets\ActiveForm;
         <div class="row">
            <div class="cpanel-item"></div>
        </div>
-<!--        <div class="row">
+        <div class="row">
            <div class="cpanel-item"></div>
-       </div>-->
+       </div>
 
         <div class="row">
             <div class="cpanel-item">
                 <div class="row">
                     <div class="col-md-2">
                         <label for="notes">
-                                Notes
+                            <?= Yii::t('yii', 'Notes')?>    
                         </label>
                     </div>
                     <div class="col-md-4 notes-field">
 
                     <?= $form->field($model, 'notes')->textArea(['id' => 'notes', 
                         'class' => 'cpanel-input textarea' ,'rows' => '10',
-                        'cols' => '10', 'placeholder' => 'Any important information',
+                        'cols' => '10', 'placeholder' => Yii::t('yii', 'Any important information'),
                         'label'=>''])->label(false) ?>
                     </div>  
                 </div>
             </div>
         </div>
        
-<div id="greeting-row" class="row">
+        <div id="greeting-row" class="row">
             <div class="cpanel-item">
                 <div class="col-md-6">
                         <!--<div class="pseudo-link passenger"><span id="add-passenger">Add another passenger information</span></div>-->
@@ -168,12 +175,13 @@ use yii\widgets\ActiveForm;
                 <div class="col-md-6">
                                 
                     <div class="col-md-12">
-                    <?= $form->field($model, 'gsign')->textArea(['id' => 'greeting-sign', 'placeholder' => 'By default first name and last name of the passenger', 'rows'=>4, 'cols'=>10])->label(false) ?>
+                    <?= $form->field($model, 'gsign')->textArea(['id' => 'greeting-sign', 'placeholder' => Yii::t('yii', 'By default first name and surname of the passenger'), 'rows'=>4, 'cols'=>10])->label(false) ?>
                     </div>
                     <img class="greeting" src="/uploads/23.png"/>
                 </div>
                 
             </div>
         </div>
-        </div>
+</div>
+        
 </div>	

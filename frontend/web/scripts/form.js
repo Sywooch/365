@@ -3,6 +3,7 @@ $(document).ready(function(){
     var myDate = new Date("now");
     var months = ["January", "February", "March", "April", "May", "June",
             "July", "August", "September", "October", "November", "December"];
+            
     
     
     
@@ -45,9 +46,26 @@ $(document).ready(function(){
         minDate: 0,
 
         onSelect: function(e){
-            console.log(this.className);
+            console.log(this);
             var full_date = '';
             var selected_date = $(this).datepicker("getDate");
+            
+            if (document.getElementById('rentorder-pickdate')){
+                var selected = $('#rentorder-pickdate').datepicker("getDate");
+                var timeControls = document.getElementsByClassName('time-control')
+            
+            for (var i = 0; i < timeControls.length; i++){
+                var d = new Date(selected)
+                d.setDate(d.getDate() + i)
+                var day = d.getDate()
+                var month = d.getMonth()
+                var year = d.getFullYear()
+                
+                $(timeControls[i]).find('.date').text(day + '/' + month + '/' + year)
+                
+                
+            }
+            }
             var day = selected_date.getDate();
             var month = months[selected_date.getMonth()];
             var year = selected_date.getFullYear();

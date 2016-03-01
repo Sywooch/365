@@ -16,6 +16,7 @@ use common\models\Autocat;
 use common\models\Auto;
 use common\models\Transferorder;
 use common\models\Rentorder;
+use common\models\Content;
 use common\models\Rentime;
 use common\models\Driverequest;
 use yii\helpers\BaseJson;
@@ -183,7 +184,8 @@ class SiteController extends Controller
      */
     public function actionAbout()
     {
-        return $this->render('about');
+        $content = Content::find()->where(['action' => 'about'])->andWhere(['lang' => Yii::$app->language])->asArray()->all();
+        return $this->render('about',['content' => $content]);
     }
 
     /**
@@ -414,8 +416,9 @@ echo $model->amount.'<br>';
                 if($kmsums > 35){
                     $qiymet = $amount['cent']*$rate*($kmsums-35)+$amount['priceT']*$rate;               
                     $qiymet = intval($qiymet);
+                } else {
+                    $qiymet = null;
                 }
-                
                
                 if($model->validate()){
                 $model->save();
@@ -434,7 +437,7 @@ echo $model->amount.'<br>';
                 }
                 $z = 0;
                 $model->amount=intval($amountC*$rate);
-                if($kmsums > 35){
+                if($qiymet != null){
                     $model->amount = $model->amount+$qiymet;
                 }
                 $model->amount = $model->amount.$z.$z;
@@ -577,13 +580,14 @@ if ($request->isAjax) {
             if($model->status == null){
                 if($xml->RC == 000 and $xml->code == 0){
                     $model->status = '000';
+//                    $model->rrn = $xml->rrn;
                     $model->save(false);
                     if($xml->$a == 'transfer'){
                     require(__DIR__ . '/../views/site/mail.php');
                     }elseif($xml->$a == 'ch'){
                         require(__DIR__ . '/../views/site/mailc.php');
                     }
-                    $rrn = $xml->rrn;
+                    
                                      $email = \Yii::$app->mailer->compose()
                                     ->setFrom('support@transfer365.az')
                                     ->setTo(['support@transfer365.az','t4lex999@gmail.com','eldaraliyev93@gmail.com'])   
@@ -612,10 +616,16 @@ if ($request->isAjax) {
             //$model =  Transferorder::find()->where(['reference' => $reference])->one();
             //return $this->render('summary',['model' => $model,'xml' => $xml]); 
         }
+
+        public function actionCancel($rrn){
+            
+        }
         
         public function actionCorporate()
     {
-        return $this->render('corporate');
+        $content = Content::find()->where(['action' => 'corporate'])->andWhere(['lang' => Yii::$app->language])->asArray()->all();
+        return $this->render('corporate',['content' => $content]);
+        
     }
     
 

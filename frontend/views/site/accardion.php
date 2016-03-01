@@ -31,12 +31,12 @@ if(isset($_GET['currency'])){
     $rate['0'] = 1;
 }
 ?>
+    <?php $name = 'name_'.Yii::$app->language; ?>
 
             <?php foreach($auto as $cats): ?>
 
  <?php  $say =  count($cats['autos']);?>
             <button class="col-xs-12 car-class-main" name="button" type="button">
-                
 
             <div class="row">
                     <div class="col-sm-3 col-xs-6 col-md-2 car-button-image">
@@ -46,10 +46,14 @@ if(isset($_GET['currency'])){
                             <img alt="Transfer and chauffeur service in baku <?=$cats['autos'][$say-1]['name']?>" src="/uploads/<?=$cats['autos'][$say-1]['photo']?>" />
                         <?php endif; ?>
 
+                        
+                        
+                            
+
                     </div>
                     <div class="col-sm-2 col-xs-6 col-md-2 car-button-classname">
-                            <?= $cats['name_en'] ?><br>
-                            MAX <?=Html::encode($cats['autos'][$say-1]['maxpas'])?> <?=Icon::show('user',[],Icon::FA)?>
+                            <?= $cats[$name] ?><br>
+                            <?=Yii::t('yii', 'MAX')?> <?=Html::encode($cats['autos'][$say-1]['maxpas'])?> <?=Icon::show('user',[],Icon::FA)?>
                     </div>
                     <div class="col-sm-2 col-md-2 car-button-features">
                         <img src="uploads/wifi.png"/>
@@ -60,12 +64,23 @@ if(isset($_GET['currency'])){
                          data-coefficient="<?= $cats['autos']['0']['cent']*$rate['0']?>"
                          class="col-sm-5 col-xs-12 car-class-min-price">
                         <div class="prices-transfer">
-                            from <?= $sign[$s]?> <span><?= intval($cats['autos']['0'][$_GET['request']]*$rate['0']) ?></span>
+                            <?php if (Yii::$app->language == 'az'): ?>
+                            <?= $sign[$s]?> <span><?= intval($cats['autos']['0'][$_GET['request']]*$rate['0'])?></span> <?=Yii::t('yii', 'from')?>
+                            <?php else: ?>
+                                    <?=Yii::t('yii', 'from')?> <?= $sign[$s]?> <span><?= intval($cats['autos']['0'][$_GET['request']]*$rate['0'])?></span>
+                            <?php endif ?>
                         </div>
                         <div class="prices-chauffeur">
-                            <span class="daily-rent"><span id="ch-full-main">Full day (8 hours) from </span> </span><?= $sign[$s]?> <span class="pricefull"><?= intval($cats['autos']['0'][$_GET['request']]*$rate['0']) ?></span><br>
-                            <span class="half-day"><span id="ch-half-main">Half day (4 hours) from </span> </span><?= $sign[$s]?>
-                            <span class="pricehalf"><?= intval($cats['autos']['0'][$_GET['request']]*$rate['0'] / 2 * 1.2) ?></span><br>
+                            <?php if (Yii::$app->language == 'az'): ?>
+                                <span class="daily-rent"><span id="ch-full-main"><?=Yii::t('yii', 'Full day (8 hours)')?></span> </span><?= $sign[$s]?> <span class="pricefull"><?= intval($cats['autos']['0'][$_GET['request']]*$rate['0']) ?></span> <?=Yii::t('yii', 'from')?><br>
+                                <span class="half-day"><span id="ch-half-main"><?=Yii::t('yii', 'Half day (4 hours)')?></span> </span> <?= $sign[$s]?> 
+                                <span class="pricehalf"><?=intval($cats['autos']['0'][$_GET['request']]*$rate['0'] / 2 * 1.2)?></span> <?=Yii::t('yii', 'from')?><br>
+                            <?php else: ?>
+                                <span class="daily-rent"><span id="ch-full-main"><?=Yii::t('yii', 'Full day (8 hours)')?></span> </span><?=Yii::t('yii', 'from')?> <?= $sign[$s]?> <span class="pricefull"><?= intval($cats['autos']['0'][$_GET['request']]*$rate['0']) ?></span><br>
+                                <span class="half-day"><span id="ch-half-main"><?=Yii::t('yii', 'Half day (4 hours)')?></span> </span><?=Yii::t('yii', 'from')?> <?= $sign[$s]?>
+                                <span class="pricehalf"><?=intval($cats['autos']['0'][$_GET['request']]*$rate['0'] / 2 * 1.2)?></span><br>
+                            <?php endif ?>
+                            
                             
                         </div>
                         <?php 

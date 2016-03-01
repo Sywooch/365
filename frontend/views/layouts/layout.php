@@ -49,7 +49,7 @@ BootstrapDateTimePickerAsset::register($this);
 
                             <div class="row">
                                 <div id="text-above-phone" class="col-md-12">
-                                    круглосуточная поддержка
+                                    <?=Yii::t('yii', '24/7 customer')?> <?=Yii::t('yii', 'support')?>
                                 </div>
                             </div>
                         <div class="row">
@@ -72,7 +72,7 @@ BootstrapDateTimePickerAsset::register($this);
 
                 <div class="row">
                     <div class="col-xs-12 col-md-7 head-description">
-                            Онлайн-бронирование трансфера  
+                            <?=Yii::t('yii','Online transfer booking')?>  
                     </div>
                     <div class="col-xs-8 col-md-3 language-picker-wrap">
                         <?= \lajax\languagepicker\widgets\LanguagePicker::widget([
@@ -122,12 +122,12 @@ BootstrapDateTimePickerAsset::register($this);
                         <div class="col-xs-12 col-sm-6 col-lg-3">
                             <div class="row"><a class="footer-link" href="/site/about">
                                     <div class="col-xs-12">
-                                        About
+                                        <?=Yii::t('yii','About')?> 
                                     </div>
                                     </a></div>
                             <div class="row"><a class="footer-link" href="/site/corporate">
                                     <div class="col-xs-12">
-                                        For corporate customers
+                                        <?=Yii::t('yii','For corporate customers')?> 
                                     </div>
                                     </a></div>
                         </div>

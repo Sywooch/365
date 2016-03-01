@@ -11,25 +11,25 @@ use yii\widgets\ActiveForm;
 
 <div class="cpanel-section">
     <fieldset>
-        <legend id="route">Return</legend>
+        <legend id="route"><?= Yii::t('yii', 'Return')?></legend>
         <div class="row">
             <div class="cpanel-item">
                 <div class="col-xs-12 col-md-3">
-                    <label for="date-flight">Date and time of pickup</label>
+                    <label for="date-flight"><?= Yii::t('yii', 'Date and time of pick up')?></label>
                 </div>
                 <div class="col-xs-12 col-md-3">
                     <?= $form->field($model, 'rdate')->textInput(['id' => 'date-pickup-return-panel',
                         'class' => 'cpanel-input date-picker return' ,
-                        'placeholder' => 'dd/mm/yy'])->label(false) ?>
+                        'placeholder' => Yii::t('yii', 'dd/mm/yy')])->label(false) ?>
                 </div>
                 <div class="col-xs-12 col-md-2">
                     <?= $form->field($model, 'rtime')->textInput(['id' => 'time-pickup-return-panel',
                         'class' => 'cpanel-input time-picker return' ,
-                        'placeholder' => 'HH:mm'])->label(false) ?>
+                        'placeholder' => Yii::t('yii', 'hh:mm')])->label(false) ?>
                 </div>
                 <div class="col-xs-12 col-md-3">
                 <div class="description">
-                    local time
+                    <?= Yii::t('yii', 'Local time') ?>
                 </div>
             </div>
             </div>

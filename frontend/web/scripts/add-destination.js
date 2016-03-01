@@ -19,8 +19,7 @@ window.onload = function () {
                 }
                     
                 }
-                
-                
+
                 targetDiv.className = "cpanel-item new-destination"; //show div
             }else if(e.target.className == "fa-lg fa fa-times-circle"){ //if clicked on "close" hide div
                 

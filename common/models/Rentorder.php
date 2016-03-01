@@ -30,9 +30,10 @@ class Rentorder extends \yii\db\ActiveRecord
     
     public $pickdate;
    // public $enddate;
-    public $time_start = array();
+    public $time_start;
     public $time_end;
     public $fplaceid;
+    
     /**
      * @inheritdoc
      */
@@ -47,10 +48,13 @@ class Rentorder extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['pickuptime', 'car', 'amount','date','time'], 'integer'],
-            [['created_at', 'updated_at', 'lastname', 'firstname', 'email', 'phone', 'notes', 'from', 'address', 'endtime','time_start','time_end','pickdate'], 'string', 'max' => 45],
+            [['pickuptime', 'car', 'amount','endtime'], 'integer'],
+            [['pickuptime','car','time_end','time_start','lastname','firstname'],'required'],
+            [['created_at', 'updated_at', 'lastname', 'firstname', 'email', 'phone', 'notes', 'from', 'address'], 'string', 'max' => 100],
+            [['time_start','time_end','pickdate'],'safe'],
             [['gsign'], 'string', 'max' => 100],
-            [['fplaceid'], 'string']
+            [[ 'status'], 'string'],
+            [['fplaceid'], 'string'],
         ];
     }
 
@@ -83,6 +87,11 @@ class Rentorder extends \yii\db\ActiveRecord
      */
     public function getCar0()
     {
-        return $this->hasOne(Auto::className(), ['id' => 'car']);
+        return $this->hasMany(Auto::className(), ['id' => 'car']);
+    }
+    
+    public function getTime()
+    {
+        return $this->hasMany(Rentime::className(), ['rentid' => 'id']);
     }
 }

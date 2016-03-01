@@ -161,8 +161,6 @@ function Autocomplete(){
       console.log('we are in index')
       var boundsChaffeur = new google.maps.LatLng(40.391802, 49.866707)
       var optionsChaffeur = {
-          location: boundsChaffeur,
-          rankBy: google.maps.places.RankBy.DISTANCE,
           componentRestrictions: {country: 'az'}
       }
       
@@ -220,49 +218,25 @@ function Autocomplete(){
             })
         }
       
-      for (var i = 0; i < inputs.length; i++){
-          var autocomplete = new google.maps.places.Autocomplete(inputs.item(i), options)
+      var from = $('#from');
+      var to = $('#to');
+      
+      var fromAutocomplete = new google.maps.places.Autocomplete(from, options);
+      var toAutocomplete = new google.maps.places.Autocomplete(to, options);
+      
+      fromAutocomplete.addListener('place_changed', function(){
+          var place = fromAutocomplete.getPlace();
+          origin = {'placeId': place.place_id};
           
-          autocomplete.addListener('place_changed', function(){
-                hideCarClassContainer();
-                console.log('place_changed')
-                var place = this.getPlace()
-                
-                if (index == 0) {
-                    transferFromValid = true;
-                }else if (index == 1) {
-                    transferToValid = true;
-                }
-                
-                console.log(transferFromValid);
-                console.log(transferToValid);
-                
-                if (arrayOfInputs.indexOf(inputs.item(index)) == 0){
-                    origin = {'placeId': place.place_id};
-                    
-                    console.log(place.place_id)
-                    
-                    var coordinates_lat = place.geometry.location.lat()
-                    var coordinates_lng = place.geometry.location.lng()
-                    
-                    coordinates_lat = coordinates_lat.toString()
-                    coordinates_lng = coordinates_lng.toString()
-                    $('#fromLatLng').val(coordinates_lat + ',' + coordinates_lng)
-                }else if(arrayOfInputs.indexOf(inputs.item(index)) == 1){
-                    destination = {'placeId': place.place_id};
-                    
-                    var coordinates_lat = place.geometry.location.lat()
-                    var coordinates_lng = place.geometry.location.lng()
-                    
-                    coordinates_lat = coordinates_lat.toString()
-                    coordinates_lng = coordinates_lng.toString()
-                    $('#toLatLng').val(coordinates_lat + ',' + coordinates_lng)
-                }
-
-                route(origin, destination)
-            
-        });
-      }
+          route(origin, destination);
+      });
+      
+      toAutocomplete.addListener('place_changed', function(){
+          var place = fromAutocomplete.getPlace();
+          destination = {'placeId': place.place_id};
+          
+          route(origin, destination);
+      });
 
       returnCheckBox.addEventListener('change', function (){
         hideCarClassContainer();
@@ -583,7 +557,6 @@ if(document.getElementById('chaffeurForm')){
                 }
             }            
             $('#price').text(Math.round(displayPrice))
-            $('.button-box-title > span').text(Math.round(displayPrice));
         }
         
         function addIndex(){
@@ -747,6 +720,7 @@ if(document.getElementById('chaffeurForm')){
   
   //function updates summary price in right fixed box
   function updatePriceInFixedBox(distance){
+      console.log(childseatsPrice)
       
       var priceInFixedBox = document.getElementById('fixed-box-price');
       var buttonBoxBottomSpan = $('.button-box-title span');

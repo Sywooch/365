@@ -5,28 +5,28 @@
 ?>
 <div class="cpanel-section">
     <fieldset>
-        <legend id="route">Route</legend>
+        <legend id="route"><?= Yii::t('yii', 'Route')?></legend>
         <div class="row">
             <div class="row cpanel-item">
                 <div class="col-xs-12 col-md-3">
-                    <label for="date-flight">Date and time of pickup</label>
+                    <label for="date-flight"><?= Yii::t('yii', 'Date and time of pick up')?></label>
                 </div>
                 <div class="col-xs-12 col-md-3">
                     
                     <?= $form->field($model, 'date')->textInput(['id' => 'date-pickup',
                         'class' => 'cpanel-input date-picker',
                         'autocomplete'=>'false'
-                        ,'placeholder' => 'dd/mm/yy'])->label(false) ?>
+                        ,'placeholder' => Yii::t('yii', 'dd/mm/yy')])->label(false) ?>
                 </div>
                 <div class="col-xs-12 col-md-2">
         
                     <?= $form->field($model, 'time')->textInput(['id' => 'time-pickup',
                         'class' => 'cpanel-input time-picker',
-                        'autocomplete'=>'false','placeholder' => 'HH:mm'])->label(false) ?>
+                        'autocomplete'=>'false','placeholder' => Yii::t('yii', 'hh:mm')])->label(false) ?>
                 </div>
                 <div class="col-xs-12 col-md-3">
                 <div class="description">
-                    local time
+                    <?= Yii::t('yii', 'Local time')?>
                 </div>
             </div>
             </div>
@@ -36,7 +36,7 @@
     <div class="cpanel-item">
         <div class="row">
             <div class="col-xs-12 col-md-3" >
-                <label for="specify-address">Pick up address</label>
+                <label for="specify-address"><?= Yii::t('yii','Pick up address') ?></label>
             </div>
             <div class="col-xs-12 col-md-9 location">
                 <?= Yii::$app->request->get("Transferorder")["from"]?>
@@ -49,11 +49,11 @@
                     <span><?= Icon::show('home', ['class'=>'fa-2x'], Icon::FA);?></span>
 
                     <?= $form->field($model, 'address')->textInput(['id' => 
-                        'pickup-address', 'class' => 'cpanel-input' ,'placeholder' => 'Specify address (i.e str, house etc.)'])->label(false) ?>
+                        'pickup-address', 'class' => 'cpanel-input' ,'placeholder' => Yii::t('yii', 'Specify adress (I.e str,house etc.)')])->label(false) ?>
                 </div>
             </div>
             <div class="col-xs-12 col-md-4">
-                <p class="description"> If you don't know the exact address, leave the field empty </p>
+                <p class="description"> <?= Yii::t('yii','If you don\'t know the exact address, leave the field empty')?> </p>
             </div>
         </div>
     </div>
@@ -63,13 +63,13 @@
     <div class="cpanel-item">
         <div class="row">
             <div class="col-xs-12 col-md-3" style="text-align: right">
-                <label for="destination_address">Destination address</label>
+                <label for="destination_address"><?= Yii::t('yii','Destination address')?></label>
             </div>
             <div class="col-xs-12 col-md-9 location">
                 <?= $form->field($model, 'from')->HiddenInput(['id'=>'from','value' => Yii::$app->request->get('Transferorder')['from']])->label(false) ?>
                 <?= $form->field($model, 'to')->HiddenInput(['id'=>'to','value' => Yii::$app->request->get('Transferorder')['to']])->label(false) ?>
 
-                <div class="col-xs-12" id="destination-in-form"><?= Yii::$app->request->get("Transferorder")["to"]; ?></div>
+                <div id="destination-in-form"><?= Yii::$app->request->get("Transferorder")["to"]; ?></div>
             </div>
             
         </div>
@@ -80,11 +80,11 @@
                     <span><?= Icon::show('home', ['class'=>'fa-2x'], Icon::FA);?></span>
 
                     <?= $form->field($model, 'address')->textInput(['id' => 
-                        'pickup-address', 'class' => 'cpanel-input' ,'placeholder' => 'Specify address (i.e str, house etc.)'])->label(false) ?>
+                        'pickup-address', 'class' => 'cpanel-input' ,'placeholder' => Yii::t('yii', 'Specify adress (I.e str,house etc.)')])->label(false) ?>
                 </div>
             </div>
             <div class="col-xs-12 col-md-4">
-                <p class="description"> If you don't know the exact address, leave the field empty </p>
+                <p class="description"> <?= Yii::t('yii','If you don\'t know the exact address, leave the field empty')?></p>
             </div>
         </div>
         
@@ -99,12 +99,8 @@
             <?= $this->render('addDestination', ['model'=>$model, 'form'=>$form, 'id'=>'anotherd1', 'aaddress'=>'aaddress1'])?>
             <div id="last"><?= $this->render('addDestination', ['model'=>$model, 'form'=>$form, 'id'=>'anotherd2', 'aaddress'=>'aaddress2'])?></div>
 
-            <div class="row">
-                <div class="cpanel-item">
-            <div class="col-md-4">
-                <div id="add" class=" pseudo-link cpanel-item">Add another destination</div>
-            </div>
-                </div>
+            <div style="display: inline-block;">
+                <div id="add" class=" pseudo-link" style="display: inline-block;"><?= Yii::t('yii', 'Add another destination')?></div>
             </div>
 
         </div> 
@@ -114,7 +110,7 @@
 <div class="row">
     <div class="cpanel-item">
 
-        <div class="col-md-2 return-checkbox">
+        <div class="col-md-3 return-checkbox">
             <?= $form->field($model, 'return')->checkbox(['id' => 'return-form',
                  'class' => 'cpanel-input'])->label(false); ?>
         </div>

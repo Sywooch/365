@@ -25,15 +25,15 @@ use common\models\Transferorder;
 <div class="container-fluid steps-wrap">
     <div class="row steps">
         <div class="col-xs-4 col-md-4 step step-complete">
-            <span id="step1">Destination</span>
+            <span id="step1"><?= Yii::t('yii', 'Destination') ?></span>
             
         </div>
         <div class="col-xs-4 col-md-4 step step-complete">
-            <span id="step2">Passenger information</span>
+            <span id="step2"><?= Yii::t('yii', 'Passenger information') ?></span>
             <div class="rounded-border"></div>
         </div>
         <div class=" col-xs-4 col-md-4 step step-active">
-            <span id="step3">Confirmation</span>
+            <span id="step3"><?= Yii::t('yii', 'Confirmation') ?></span>
             <div class="rounded-border"></div>
         </div>
     </div>
@@ -41,8 +41,8 @@ use common\models\Transferorder;
 
 <div id="confirmation" class="container">
     <div class="row">
-        <h1>Confirmation</h1>
-        <h2>Review information below before proceeding to payment.</h2>
+        <h1><?= Yii::t('yii', 'Confirmation') ?></h1>
+        <h2><?= Yii::t('yii', 'Review information below before proceeding to payment') ?></h2>
     </div>
 </div>
 
@@ -57,8 +57,8 @@ use common\models\Transferorder;
             <div id="map"></div>
         </div>
         <div class="col-md-6">
-            <div class="row"><h3>Order summary</h3></div>
-            <div class="row"><h4>Destinations</h4></div>
+            <div class="row"><h3><?= Yii::t('yii', 'Order summary') ?></h3></div>
+            <div class="row"><h4><?= Yii::t('yii', 'Destinations') ?></h4></div>
             <ol>
                 <?php 
                     foreach($unvanlar as $unvan):
@@ -70,35 +70,35 @@ use common\models\Transferorder;
                 <?php endforeach; ?>
          
             </ol>
-            <div class="row"><h3>Tariff</h3></div>
+            <div class="row"><h3><?= Yii::t('yii', 'Tariff') ?></h3></div>
             <ul>
-                <li><div class="row">Pickup at: <strong><?=date("Y F d - H:i",$model->pickuptime)?></strong></div></li>
-                <li><div class="row">Car: <strong><?= $model->autos['0']['name']?></strong></div></li>
+                <li><div class="row"><?= Yii::t('yii', 'Pickup at') ?>: <strong><?=date("Y F d - H:i",$model->pickuptime)?></strong></div></li>
+                <li><div class="row"><?= Yii::t('yii', 'Car') ?>: <strong><?= $model->autos['0']['name']?></strong></div></li>
                 <?php if (!empty($model->seat)):?>
-                    <li><div class="row">Child seats: <?= $model->seat?></div></li>
+                    <li><div class="row"><?= Yii::t('yii', 'Child seats') ?>: <?= $model->seat?></div></li>
                 <?php endif ?>
-                <li><div id="total-distance" class="row">Total distance:
-                    <strong><span><?= Yii::$app->request->get('distance') ?></span> km</strong> 
-                    <span class='description'>*distance with waypoints</span></div></li>
-                <li><div id="estimated-time" class="row">Estimated time of the trip:
-                        <strong><span id='hours'></span> hour(s) <span id='minutes'></span> minute(s)</strong>
-                     <span class='description'>*time with waypoints</span></div></li>
-                <li><div id="price" class="row">Price: <strong><span><?= $amount = substr($model->amount, 0, -2) ?></span> AZN</strong></div>
+                <li><div id="total-distance" class="row"><?= Yii::t('yii', 'Total distance') ?>:
+                    <strong><span><?= Yii::$app->request->get('distance') ?></span><?= Yii::t('yii', 'km') ?> </strong> 
+                    <span class='description'>*<?= Yii::t('yii', 'distance with waypoints') ?></span></div></li>
+                <li><div id="estimated-time" class="row"><?= Yii::t('yii', 'Estimated time of the trip') ?>:
+                        <strong><span id='hours'></span> <?= Yii::t('yii', 'hour(s)') ?> <span id='minutes'></span> <?= Yii::t('yii', 'minute(s)') ?></strong>
+                     <span class='description'>*<?= Yii::t('yii', 'time with waypoints') ?></span></div></li>
+                <li><div id="price" class="row"><?= Yii::t('yii', 'Price') ?>: <strong><span><?= $amount = substr($model->amount, 0, -2) ?></span><?= Yii::t('yii', 'AZN') ?> </strong></div>
             </ul>
             
             
-            <div class="row"><h3>Customer information</h3></div>
+            <div class="row"><h3><?= Yii::t('yii', 'Customer information') ?></h3></div>
             <ul>
-                <li><div class="row">Customer: <strong><?=$model->firstname?> <?=$model->lastname?></strong></div></li>
-                <li><div class="row">Tel: <strong><?=$model->phone?></strong></div></li>
-                <li><div class="row">Email: <strong><?=$model->email?></strong></div></li>
+                <li><div class="row"><?= Yii::t('yii', 'Customer') ?>: <strong><?=$model->firstname?> <?=$model->lastname?></strong></div></li>
+                <li><div class="row"><?= Yii::t('yii', 'Tel') ?>: <strong><?=$model->phone?></strong></div></li>
+                <li><div class="row"><?= Yii::t('yii', 'Email') ?>: <strong><?=$model->email?></strong></div></li>
                 <li>
                     <?php if (!empty($model->gsign)):?>
-                <div class="row">Greeting sign: <strong><?=$model->gsign?></strong></div>
+                <div class="row"><?= Yii::t('yii', 'Greeting sign') ?>: <strong><?=$model->gsign?></strong></div>
             <?php endif ?>
                 </li>
                 <li><?php if (!empty($model->notes)):?>
-                <div class="row">Notes: <?=$model->notes?></div>
+                <div class="row"><?= Yii::t('yii', 'Notes') ?>: <?=$model->notes?></div>
             <?php endif ?></li>
             </ul>
         </div>
@@ -158,7 +158,7 @@ use common\models\Transferorder;
                     </div>
                     <div class="row">
                         <div class="col-md-12">
-                            <?= Html::a('<button>Go To Payment</button>', ['site/confirm', 'id'=>$model->id, 'mode'=>'transfer' ]) ?>
+                            <?= Html::a('<button>'.Yii::t('yii', 'Go To Payment').'</button>', ['site/confirm', 'id'=>$model->id, 'mode'=>'transfer' ]) ?>
                         </div>
                     </div>
 

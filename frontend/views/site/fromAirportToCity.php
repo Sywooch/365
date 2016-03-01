@@ -6,22 +6,22 @@
 
 <div class="cpanel-section">
     <fieldset>
-        <h3 id="route">Route</h3>
+        <h3 id="route"><?= Yii::t('yii', 'Route')?></h3>
         <div class="row">
             <div class="row cpanel-item">
                 
                 <div class="col-md-3">
-                    <label for="flight-number">Flight number</label>
+                    <label for="flight-number"><?=Yii::t('yii', 'Flight number')?></label>
                 </div>
                 <div class="col-md-3">
                     <?= $form->field($model, 'flightnumber')->textInput(['id' =>
                         'flight-number', 'class' => 'cpanel-input',
-                        'placehodler' => 'Enter flight number'])->label(false) ?>
+                        'placehodler' => Yii::t('yii', 'Enter flight number')])->label(false) ?>
 
                 </div>
                 <div class="col-md-6">
                     <div class="description">
-                        as specified in your flight ticket
+                        <?=Yii::t('yii', 'As specified on your flight ticket')?>
                     </div>
                 </div>
             </div>
@@ -31,23 +31,23 @@
         <div class="row cpanel-item">
             
                 <div class="col-xs-12 col-md-3">
-                        <label for="date-arrival">Arrival time</label>
+                        <label for="date-arrival"><?= Yii::t('yii', 'Arrival time')?></label>
                 </div>
                 <div class="col-xs-12 col-md-3">
                     <?= $form->field($model, 'date')->textInput(['id' => 
                         'date-arrival', 'class' => 'cpanel-input date-picker' ,
                         'autocomplete'=>'false',
-                        'placeholder' => 'dd/mm/yy'])->label(false) ?>
+                        'placeholder' => Yii::t('yii', 'dd/mm/yy')])->label(false) ?>
                 </div>
                 <div class="col-xs-12 col-md-2">     
                     <?= $form->field($model, 'time')->textInput(['id' => 
                         'time-arrival', 'class' => 'cpanel-input time-picker' ,
                         'autocomplete'=>'false',
-                        'placeholder' => 'HH:mm'])->label(false) ?>
+                        'placeholder' => Yii::t('yii', 'hh:mm')])->label(false) ?>
                 </div>
                 <div class="col-xs-12 col-md-3">
                     <div class="description">
-                        local time
+                        <?= Yii::t('yii', 'Local time')?>
                     </div>
                 </div>
             
@@ -63,7 +63,7 @@
             ,'value' => Yii::$app->request->get('Transferorder')['from']])->label(false) ?>
         <div class="row">
             <div class="col-xs-12 col-md-3">
-                <label for="specify-address">Destination address</label>
+                <label for="specify-address"><?= Yii::t('yii','Destination address')?></label>
             </div>
             <div class="col-xs-12 col-md-9 location"><?= Yii::$app->request->get('Transferorder')['to']?></div>
         </div>
@@ -74,11 +74,11 @@
                 <div class="inner-addon">
                     <span><?= Icon::show('home', ['class'=>'fa-2x'], Icon::FA);?></span>
                     <?= $form->field($model, 'address')->textInput(['id' => 'specify-address', 
-                        'class' => 'cpanel-input' ,'placeholder' => 'Specify address (i.e str, house etc.)'])->label(false) ?>
+                        'class' => 'cpanel-input' ,'placeholder' => Yii::t('yii', 'Specify adress (I.e str,house etc.)')])->label(false) ?>
                 </div>
             </div>
-            <div class="col-md-4">
-                <p class="description"> If you don't know the exact address, leave the field empty </p>
+            <div class="col-xs-12 col-md-4">
+                <p class="description"> <?= Yii::t('yii','If you don\'t know the exact address, leave the field empty')?> </p>
             </div>
         </div>
 
@@ -98,12 +98,8 @@
         <div id="last"><?= $this->render('addDestination', ['model'=>$model,
             'form'=>$form, 'id'=>'anotherd2', 'aaddress'=>'aaddress2'])?></div>
 
-            <div class="row">
-                <div class="cpanel-item">
-            <div class="col-md-4">
-                <div id="add" class=" pseudo-link cpanel-item">Add another destination</div>
-            </div>
-                </div>
+            <div style="display: inline-block;">
+                <div id="add" class=" pseudo-link" style="display: inline-block;"><?= Yii::t('yii', 'Add another destination')?></div>
             </div>
         
     </div> 
@@ -113,7 +109,7 @@
     <div class="row">
         <div class="cpanel-item">
             
-            <div class="col-md-2 return-checkbox">
+            <div class="col-md-3 return-checkbox">
                 <?= $form->field($model, 'return')->checkbox(['id' => 'return-form',
                      'class' => 'cpanel-input'])->label(false); ?>
             </div>

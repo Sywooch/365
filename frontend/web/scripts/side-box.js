@@ -6,20 +6,15 @@ $(document).ready(function (){
     var parentContainer = document.querySelector('#parent-container');
  
     parentContainer.addEventListener("input", updateSideBox, false);
-    
-    
+
     function updateSideBox(e){
         var sourceInput = document.querySelector('#' + e.target.id);
         var placeOnBoxId = '#' + e.target.id + '-fixed';
         var placeOnBox = document.querySelector(placeOnBoxId);
-        
-        
-   
+
         $(placeOnBox).text(sourceInput.value);
     };
-    
-   
-	
+
 	//greeting sign
 	var firstNameInput = document.getElementById("pass-name");
 	var lastNameInput = document.getElementById("pass-lastname");
@@ -85,36 +80,12 @@ $(document).ready(function (){
         $('#childseat').on('change', function(){
             checkSeatAndUpdateBox();
         });
-        
-       
-       
+
     }
         }
-        
-    
-//        //update additional destinations
-//        var inputs = document.getElementsByClassName('side-dests')
-//        var arrayOfInputs = []
-//        
-//        for (var i = 0; i < inputs.length; i++){
-//            arrayOfInputs.push(inputs.item(i))
-//        }
-//        
-//        for (var i = 0; i < inputs.length; i++){
-//            $(inputs[i]).on('keypress change', function(e) {
-//                if (arrayOfInputs.indexOf(e.target) == 0) {
-//                  $('#dest1 span').text(e.target.value)
-//                } else if (arrayOfInputs.indexOf(e.target) == 1) {
-//                  $('#dest2 span').text(e.target.value)
-//                } else if (arrayOfInputs.indexOf(e.target) == 2) {
-//                  $('#dest3 span').text(e.target.value)
-//                }
-//        })}
-        
-      
-        
+
         //fixed side box position on scrolling
-        var rightSideBox = document.getElementById('fixed-box');
+        var rightSideBox = document.getElementsByClassName('fixed-box')[0];
 
         //function sets position attribute of the 'box' to 'fixed'
         function fixBox(box){

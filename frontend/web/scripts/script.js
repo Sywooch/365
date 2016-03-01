@@ -51,13 +51,13 @@ $(document).ready(function() {
     function setStepsText(){
         var viewportSize = checkViewportSize($(this).width());
         if (viewportSize > 1200){
-            $('#step1').text('Step 1: Choose destination');
-            $('#step2').text('Step 2: Input passenger information');
-            $('#step3').text('Step 3: Confirmation');
+//            $('#step1').text('Destination');
+//            $('#step2').text('Passenger information');
+//            $('#step3').text('Confirmation');
         }else{
-            $('#step1').text('Destination');
-            $('#step2').text('Passenger information');
-            $('#step3').text('Confirmation');
+//            $('#step1').text('Destination');
+//            $('#step2').text('Passenger information');
+//            $('#step3').text('Confirmation');
         }
         
        
@@ -74,26 +74,21 @@ $(document).ready(function() {
     jQuery.fn.exists = function(){return this.length>0;}; //function to check if element exists
 	
     $.getScript("destination_fields_swap_and_disable.js");
-        
-    
-    /* main page car buttons accordion*/
-      //jquery ui accordion
-/*$.get( "/site/accardion/",{request:'priceT'}, function( data ) {
-            
-    $( "#ajaxaccardion" ).append( data );
-    $('#accordion').accordion({
-            heightStyle: "content",
-            collapsible: true,
-            active: false,
-            icons: false,
-          
-           
-            
-    });
-        });*/
-        
 
 function makeRequest(currency, tactive, form){
+    
+    
+    //hacks. just had to clear these field when request goes to avoid
+    //representational inconsitencies. (i.e. i am a dumbfuck and don't know
+    //how to make things better
+    hideCarClassContainer();
+    
+    $('#pac-input-from-chaffeur').val('')
+    
+    $('.add-dest-address').each(function(){
+        $('.add-dest-address').val('')
+    })
+    
 	var request =$.ajax({
      url: "/site/accardion/",
      cache: false,
@@ -151,7 +146,6 @@ function makeRequest(currency, tactive, form){
    });
 }
 
-
 $('#curr-menu').on('click', function(e){
     console.log(e.target)
     console.log($(this).children('a'))
@@ -189,15 +183,6 @@ $('.service-choice').on('click', function(e){
             makeRequest(activecurrency, 'priceC', 'cform')
 	}
 })
-
-
-
-
-
-
-
-
-
 
 /********start page load********/
 var activecurrency = document.querySelector('.selected');

@@ -14,7 +14,7 @@ FormAsset::register($this);
 InternationalTelephoneAsset::register($this);
 
 
-$this->title = 'Order transfer from Airport to Baku, Azerbaijan';
+$this->title = Yii::t('yii','Order transfer from Airport to Baku, Azerbaijan');
 
 ?>
 
@@ -23,15 +23,15 @@ $this->title = 'Order transfer from Airport to Baku, Azerbaijan';
 <div id="form" class="container-fluid steps-wrap">
     <div class="row steps">
         <div class="col-xs-4 col-md-4 step step-complete">
-            <span id="step1">Destination</span>
+            <span id="step1"><?=Yii::t('yii', 'Destination')?></span>
             
         </div>
         <div class="col-xs-4 col-md-4 step step-active">
-            <span id="step2">Passenger information</span>
+            <span id="step2"><?=Yii::t('yii', 'Passenger information')?></span>
             <div class="rounded-border"></div>
         </div>
         <div class=" col-xs-4 col-md-4 step step-inactive">
-            <span id="step3">Confirmation</span>
+            <span id="step3"><?=Yii::t('yii', 'Confirmation')?></span>
             <div class="rounded-border"></div>
         </div>
     </div>
@@ -87,7 +87,7 @@ $this->title = 'Order transfer from Airport to Baku, Azerbaijan';
         
 
                 <div class="cpanel-footer">
-                    Free cancellation of the trip in an 12 hours before the start 
+                    <?=Yii::t('yii', 'Free cancelation of the service 12 hours in advance')?>
                 </div>
             </div>
 						
@@ -98,12 +98,12 @@ $this->title = 'Order transfer from Airport to Baku, Azerbaijan';
     <div id="transfer-fixed-box" class="col-md-3">
         <div id="fixed-box" class="fixed-box">
             <div class="fixed-box-heading">
-                Order information
+                <?=Yii::t('yii','Order information')?>
             </div>
             <div class="fixed-box-body">
                 <div class="fixed-box-section">
                     <div class="fixed-box-section-heading">
-                        Place and time of pick up
+                        <?=Yii::t('yii','Place and time of pick up')?>
                     </div>
                     <div class="fixed-box-section-body">
                             <div class="fb-section-line"><?= Yii::$app->request->get('Transferorder')['from'] ?>
@@ -123,7 +123,7 @@ $this->title = 'Order transfer from Airport to Baku, Azerbaijan';
                 </div>
                 <div class="fixed-box-section">
                     <div class="fixed-box-section-heading">
-                            Destination
+                            <?=Yii::t('yii','Destination')?>
                     </div>
                     <div class="fixed-box-section-body">
                         <div class="fb-section-line" id="destination-fixed"><?= Yii::$app->request->get('Transferorder')['to'] ?></div>
@@ -135,7 +135,7 @@ $this->title = 'Order transfer from Airport to Baku, Azerbaijan';
                 <div class="fixed-box-section">
                     <div class="additionals-wrap">
                         <div class="fixed-box-section-heading">
-                            Additional destinations
+                            <?=Yii::t('yii','Additional destinations')?>
                         </div>
                         <div class="fixed-box-section-body">
                             <div class="fb-section-line" id="dest1"><span></span></div>
@@ -147,22 +147,24 @@ $this->title = 'Order transfer from Airport to Baku, Azerbaijan';
                 </div>
                 <div class="fixed-box-section">
                     <div class="fixed-box-section-heading">
-                            Transfer type
+                            <?=Yii::t('yii','Transfer type')?>
                     </div>
                     <div class="fixed-box-section-body">
 <!--                            <div class="fb-section-line">Tarrif <span id="tariff-fixed">Economy</span></div>
                             <div class="fb-section-line">1-4 passengers,up to 3 lagguage places</div>
                             <div class="fb-section-line">Passengers: <span id="pass-num-fixed"></span></div>-->
-                        <div class="fb-section-line" id="child-seat-fixed">Child seat: <span>yes</span></div>
+                        <div class="fb-section-line" id="child-seat-fixed"><?=Yii::t('yii','Child seats')?>: <span><?=Yii::t('yii','yes')?></span></div>
                     </div>
                 </div>
                 <div id="contacts-fixed" class="fixed-box-section">
                     <div class="fixed-box-section-heading">
-                            Contact information
+                            <?=Yii::t('yii','Contact information')?>
                     </div>
                     <div class="fixed-box-section-body">
                             <div class="fb-section-line">
                                     <span id="pass-name-fixed"></span>
+                            </div>
+                            <div class="fb-section-line">
                                     <span id="pass-lastname-fixed"></span>
                             </div>
                             <div class="fb-section-line" id="phone-number-fixed"></div>
@@ -171,7 +173,7 @@ $this->title = 'Order transfer from Airport to Baku, Azerbaijan';
                 </div>
                     <div class="fixed-box-section">
                         <div class="fixed-box-section-heading">
-                            Return
+                            <?=Yii::t('yii','Return')?>
                         </div>
                         <div class="fixed-box-section-body">
                             <div class="fb-section-line">
@@ -183,7 +185,7 @@ $this->title = 'Order transfer from Airport to Baku, Azerbaijan';
                     </div>
                     <div id="nfixed" class="fixed-box-section">
                         <div class = "fixed-box-section-heading">
-                                Notes
+                                <?=Yii::t('yii','Notes')?>
                         </div>
                         <div class="fixed-box-section-body" id="notes-fixed">
 
@@ -193,10 +195,10 @@ $this->title = 'Order transfer from Airport to Baku, Azerbaijan';
             </div>
             <div class="fixed-box-footer">
                 <div class="fixed-box-heading">
-                        Transfer price
+                        <?=Yii::t('yii','Price')?>
                 </div>
                 <div class="fixed-box-heading">
-                    Summary
+                    <?=Yii::t('yii','Summary')?>
                     <div id='fixed-box-price' data-cent='<?= $jsondata['cent']?>'
                          data-car-price='<?= $jsondata['amount']?>' class="fixed-box-price">
                             <?= $jsondata['amount'] ?> <span><?= $jsondata['sign']?></span>
@@ -215,11 +217,11 @@ $this->title = 'Order transfer from Airport to Baku, Azerbaijan';
                 <div class="col-md-2"></div>
                 <div class="col-md-6 button-box">
                     <div class="row">
-                        <div class="col-md-12 button-box-title">Total price <span><?= $jsondata['amount'] ?></span></div>
+                        <div class="col-md-12 button-box-title"><?= Yii::t('yii', 'Total price')?> <span><?= $jsondata['amount'] ?></span></div>
                     </div>
                     <div class="row">
                         <div class="col-md-12">
-                            <?= Html::SubmitButton('Confirm'); ?>
+                            <?= Html::SubmitButton(Yii::t('yii', 'Confirm')); ?>
                         </div>
                     </div>
 

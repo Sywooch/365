@@ -248,13 +248,7 @@ li ul button:hover{
         margin-top: 13px;
         left: 30px;
     }
-    
-    
-    
-    
-    
-   
-    
+
     .car-class .car-image img{
         width: 130px;
         position: relative;
@@ -275,6 +269,11 @@ li ul button:hover{
     .car-button-image img{
         position: relative;
         left: 45px;
+    }
+    
+    .car-price .prices-chauffeur{
+        position: relative;
+        left: 30px;
     }
 }
 

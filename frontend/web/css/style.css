@@ -93,7 +93,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#6d0019', end
     color: #FFF;
 }
 
-.footer-link:hover {
+.footer-link:hover, .footer-link:focus {
     color: #fff;
     text-decoration: underline;
 }
@@ -110,7 +110,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#6d0019', end
 
 
 #return{
-    margin-right: 5px;
+    margin-right: 4px;
     float: left;
 }
 
@@ -243,7 +243,7 @@ ul:first-child {
 }
 
 .head-description {
-	margin-top: 15px;
+	margin-top: 7px;
 	margin-bottom: 15px;
 	color: #8F948B;
 	font-size: 20px;
@@ -288,7 +288,7 @@ ul:first-child {
 /* passenger form*/
 #destination-in-form{
     /*padding-top: 8px;*/
-    height: 100%;
+    /*height: 100%;*/
     font-size: 16px;
 }
 
@@ -362,7 +362,7 @@ ul:first-child {
 }
 
 .cpanel-input{
-	width:100%;
+	width: 100%;
 	padding-left: 5px;
 	height: 40px;
 	border: 1px solid #c6c9c5;
@@ -440,6 +440,7 @@ ul:first-child {
     margin-top: 4px;
     line-height: 16px;
     color: #6E6E6E;
+    text-align: right;
 }
 
 .inner-addon span{
@@ -565,6 +566,7 @@ ul:first-child {
 
 .fixed-box-section{
 	margin-bottom: 10px;
+        display:block;
 }
 
 .fixed-box-section-heading{
@@ -775,9 +777,8 @@ ul:first-child {
 
 .clean-car{
    background-image: url("images/car.png");
-   background-size: 140px 140px;
    background-repeat: no-repeat;
-   background-position: -12px -42px;
+   background-position: -26px -42px;
    height: 67px;    
 }
 
